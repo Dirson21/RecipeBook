@@ -1,0 +1,57 @@
+.header {
+    position: absolute;
+    width: 1200px;
+    height: 38px;
+    left: 120px;
+    top: 40px;
+   
+}
+.logo {
+    position: absolute;
+    width: 99px;
+    height: 29px;
+    top:4px;
+    bottom: 5px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 29px;
+
+    color: #FDB100;
+
+}
+.menu-list {
+    position: absolute;
+    width: 344px;
+    height: 22px;
+    display: flex;
+    flex-direction: row;
+    left: 179px;
+}
+
+.list-item {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    color: #9196A1;
+}
+.main-item {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #3A3C41;
+}
+
+.login {
+    position: absolute;
+    width: 112px;
+    height: 38px;
+    left: 1208px;
+    top: 40px;
+}
