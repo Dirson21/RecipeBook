@@ -4,9 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './recipe-book/main-page/main-page.component';
-import { RecipeBookRoutingModule } from './recipe-book/recipe-book-routing.module';
 
 import { RecipeBookModule } from './recipe-book/recipe-book.module';
+
+
+
 
 
 @NgModule({
@@ -17,8 +19,6 @@ import { RecipeBookModule } from './recipe-book/recipe-book.module';
     BrowserModule,
     AppRoutingModule,
     RecipeBookModule,
-    BrowserAnimationsModule,
-    RecipeBookRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
