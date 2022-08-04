@@ -1,0 +1,479 @@
+mat-card {
+    position: relative;
+    width: 1422px;
+    height: 2719px;
+    background: #FEFEFB;
+    padding-bottom: 0px;
+
+}
+
+.app-header {
+    position: absolute;
+    left: -120px;
+}
+
+.header {
+    position: absolute;
+    width: 1320px;
+    height: 800px;
+    left: 120px;
+    top: 0px;
+}
+
+.header-content {
+    position: absolute;
+    width: 688px;
+    height: 350px;
+    top: 211px;
+  
+}
+.header-title {
+
+    position: absolute;
+    width: 688px;
+    height: 176px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 72px;
+    line-height: 88px;
+    color: #25292D;
+}
+
+.header-subtitle{
+    position: absolute;
+    width: 500px;
+    height: 56px;
+    top: 192px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    color: #4A525A;
+}
+
+.btn-started {
+  
+    position: absolute;
+    left: 0px;
+    top: 290px;
+
+    width: 278px;
+    height: 60px;
+    background: #FDB100;
+    border-radius: 16px;
+
+
+}
+
+.plus-add {
+    position: absolute;
+    left: 34px;
+    top: 18px;
+}
+
+.btn-add-text {
+    position: absolute;
+    left: 76px;
+    top: 16px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+/* identical to box height, or 156% */
+    color: #FFFFFF;
+}
+
+.btn-login {
+    box-sizing: border-box;
+    position: absolute;
+    left: 302px;
+    top: 290px;
+    width: 216px;
+    height: 60px;
+    border: 1px solid #FDB100;
+    border-radius: 16px;
+}
+
+.header-image {
+    position: absolute;
+    width: 602px;
+    height: 800px;
+    left: 718px;
+    top: 0px;
+    
+    background: url(src\assets\img\RecipeExample.png), #F0F0F0;
+    border-radius: 0px 0px 0px 200px;
+}
+
+.sort-tag {
+    position: absolute;
+    width: 1200px;
+    height: 459px;
+    left: 120px;
+    top: 913px;
+    
+}
+.headline {
+    position: absolute;
+    width: 811px;
+    height: 146px;
+    left: 0px;
+    top: 0px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+}
+
+.headline-title {
+    position: absolute;
+    width: 811px;
+    height: 62px;
+
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 62px;
+    
+    color: #25292D;
+}
+
+.headline-subtitle {
+
+    position: absolute;
+    width: 700px;
+    height: 68px;
+    left: 0px;
+    top: 78px;
+
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+
+    color: #4A525A;
+}
+
+.list-tag {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top:188px;
+    width: 1200px;
+}
+
+mat-list-item.list-tag-item {
+    position: relative;
+    margin-right: 29px;
+    width: 278px;
+    height: 271px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 16px 72px rgba(34, 39, 47, 0.05);
+    border-radius: 24px;
+}
+
+.list-tag-item-ico {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top:24px;
+    left: 24px;
+
+    background: #FFEFCC;
+    border-radius: 12px;
+}
+
+.item-svg {
+    position: absolute;
+    height: 24px;
+    left: 14px;
+    top: 13px;
+
+}
+
+
+.list-tag-title {
+    position: absolute;
+    width: 207px;
+    height: 30px;
+    left: 24px;
+    top: 98px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+
+    color: #25292D;
+}
+
+.list-tag-subtitle {
+    position: absolute;
+    width: 230px;
+    height: 95px;
+    left: 24px;
+    top: 144px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+
+    color: #4A525A;
+}
+
+.recipe-day {
+    position: absolute;
+    width: 1129px;
+    height: 543px;
+    left: 120px;
+    top: 1529px;
+}
+
+.recipe-day-img {
+    position: absolute;
+    width: 543px;
+    height: 543px;
+
+    background:  #F0F0F0;
+    border-radius: 72px 0px;
+} 
+
+.recipe-day-content {
+    position: absolute;
+    width: 523.8px;
+    height: 390.5px;
+    left: 616px;
+    top: 51px;
+}
+
+.recipe-day-content-logo-text {
+    position: absolute;
+    width: 100.51px;
+    height: 35.04px;
+}
+
+.recipe-day-content-logo-elips {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    left: 9.8px;
+    top: 14.5px;
+
+    border-radius: 50%;
+    background: #FDB100;
+}
+
+.recipe-day-content-logo-svg {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    left: 15px;
+    top: 15px;
+}
+
+.recipe-day-content-title {
+    position: absolute;
+    width: 513px;
+    height: 120px;
+    left: 10.8px;
+    top: 126.5px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 60px;
+    /* or 143% */
+    text-transform: capitalize;
+    color: #25292D;
+}
+
+.recipe-day-content-subtitle {
+    position: absolute;
+    width: 513px;
+    height: 128px;
+    left: 10.8px;
+    top: 262.5px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    /* or 178% */
+    font-feature-settings: 'case' on;
+    color: #4A525A;
+}
+
+.recipe-day-like {
+    position: absolute;
+    width: 59px;
+    height: 28px;
+    left: 955px;
+    top: 0px;
+}
+
+.recipe-day-like-btn {
+    height: 24px;
+    opacity: 1;
+    width: 24px; 
+}
+
+.recipe-day-like-text {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    left: 31px;
+    top: 0px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    /* identical to box height, or 175% */
+    color: #25292D;
+}
+
+.recipe-day-time {
+    position: absolute;
+    width: 109px;
+    height: 28px;
+    left: 1042px;
+    top: 0px;
+}
+.recipe-day-time-text {
+    position: absolute;
+    width: 78px;
+    height: 28px;
+    left: 31px;
+    top: 0px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    /* identical to box height, or 175% */
+    color: #25292D;
+}
+
+.search-recipe {
+    position: absolute;
+    width: 884px;
+    height: 278px;
+    left: 278px;
+    top: 2222px;
+}
+
+.search-recipe-title {
+    position: absolute;
+    width: 372px;
+    height: 51px;
+    left: 256px;
+    top: 0px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 51px;
+    text-align: center;
+
+    color: #25292D;
+}
+
+.search-recipe-subtitle {
+    position: absolute;
+    width: 700px;
+    height: 32px;
+    left: 92px;
+    top: 67px;
+
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+    /* identical to box height, or 178% */
+
+    text-align: center;
+    font-feature-settings: 'case' on;
+    color: #4A525A;
+}
+
+.search-recipe-input {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 716px;
+    height: 73px;
+    left: 0px;
+    top: 163px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 8px 42px rgba(34, 39, 47, 0.04);
+    border-radius: 16px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-transform: capitalize;
+
+    padding: 0 32px;
+}
+.search-recipe-btn {
+    position: absolute;
+    width: 152px;
+    height: 73px;
+    left: 732px;
+    top: 163px;
+
+    background: #FDB100;
+    border-radius: 16px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+}
+
+.search-recipe-tag-list {
+    position: absolute;
+    height: 18px;
+    left: 0px;
+    top: 240px;
+    display: flex;
+    flex-direction: row;
+}
+mat-list-item.search-recipe-tag-item {
+    height: 18px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 18px;
+    /* identical to box height, or 112% */
+    
+    display: flex;
+    align-items: center;
+    
+    color: #808080;
+}
+
+
+
+
+

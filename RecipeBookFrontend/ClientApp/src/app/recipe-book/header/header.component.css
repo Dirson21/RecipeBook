@@ -10,9 +10,9 @@
     position: absolute;
     width: 99px;
     height: 29px;
-    top:4px;
-    bottom: 5px;
-
+    left: 120px;
+    top: 44px;
+    
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 700;
@@ -26,12 +26,20 @@
     position: absolute;
     width: 344px;
     height: 22px;
+    left: 299px;
+    top: 44px;
+
     display: flex;
     flex-direction: row;
-    left: 179px;
 }
 
+.mat-nav-list .mat-list-item {
+    height: 22px;
+  }
+
 .list-item {
+
+    margin-right: 40px;
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 400;
@@ -40,6 +48,8 @@
     color: #9196A1;
 }
 .main-item {
+    margin-right: 40px;
+
     font-family: 'Montserrat';
     font-style: normal;
     font-weight: 600;
@@ -53,5 +63,31 @@
     width: 112px;
     height: 38px;
     left: 1208px;
-    top: 40px;
+    top: 48px;
+
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FDB100;
+}
+
+
+.vector {
+    position: absolute;
+    height: 16px;
+    top: 11px;
+    left: 11px;
+    
+}
+.elipse {
+    position: absolute;
+    width: 38px;
+}
+.text-login {
+    position: absolute;
+    left: 52px;
+    top: 8px;
+
 }
