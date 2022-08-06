@@ -2,8 +2,7 @@ mat-card-footer {
     position: absolute;
     width: 1470px;
     height: 113px;
-    left: 0px;
-    top: 2606px;
+    
     background: #FBF9F4;
 }
 
@@ -14,8 +13,7 @@ mat-card-footer {
     left: 120px;
     top: 37px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+   
     font-weight: 700;
     font-size: 32px;
     line-height: 39px;
@@ -25,13 +23,12 @@ mat-card-footer {
 
 .copyright {
     position: absolute;
-    width: 151px;
+    width: 155px;
     height: 24px;
     left: 1170px;
     top: 45px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+    
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;

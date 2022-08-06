@@ -33,8 +33,7 @@ mat-card {
     width: 688px;
     height: 176px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+
     font-weight: 700;
     font-size: 72px;
     line-height: 88px;
@@ -46,9 +45,8 @@ mat-card {
     width: 500px;
     height: 56px;
     top: 192px;
+    
 
-    font-family: 'Montserrat';
-    font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 28px;
@@ -80,8 +78,7 @@ mat-card {
     left: 76px;
     top: 16px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+
     font-weight: 600;
     font-size: 18px;
     line-height: 28px;
@@ -126,8 +123,6 @@ mat-card {
     left: 0px;
     top: 0px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
 }
 
 .headline-title {
@@ -198,13 +193,12 @@ mat-list-item.list-tag-item {
 
 .list-tag-title {
     position: absolute;
-    width: 207px;
+    width: 218px;
     height: 30px;
     left: 24px;
     top: 98px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
@@ -219,8 +213,7 @@ mat-list-item.list-tag-item {
     left: 24px;
     top: 144px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+
     font-weight: 400;
     font-size: 18px;
     line-height: 30px;
@@ -244,6 +237,22 @@ mat-list-item.list-tag-item {
     background:  #F0F0F0;
     border-radius: 72px 0px;
 } 
+
+.recipe-day-author {
+    position: absolute;
+    width: 108px;
+    height: 32px;
+    left: 0px;
+    top: 473px;
+
+    background: #FFFFFF;
+
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 28px;
+    color: #FDB100;
+    text-align: center;
+}
 
 .recipe-day-content {
     position: absolute;
@@ -285,8 +294,7 @@ mat-list-item.list-tag-item {
     left: 10.8px;
     top: 126.5px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+
     font-weight: 700;
     font-size: 42px;
     line-height: 60px;
@@ -302,8 +310,6 @@ mat-list-item.list-tag-item {
     left: 10.8px;
     top: 262.5px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 32px;
@@ -333,8 +339,6 @@ mat-list-item.list-tag-item {
     left: 31px;
     top: 0px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
@@ -356,8 +360,6 @@ mat-list-item.list-tag-item {
     left: 31px;
     top: 0px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
     font-weight: 400;
     font-size: 16px;
     line-height: 28px;
@@ -380,8 +382,7 @@ mat-list-item.list-tag-item {
     left: 256px;
     top: 0px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+
     font-weight: 700;
     font-size: 42px;
     line-height: 51px;
@@ -397,8 +398,7 @@ mat-list-item.list-tag-item {
     left: 92px;
     top: 67px;
 
-    font-family: 'Mulish';
-    font-style: normal;
+
     font-weight: 400;
     font-size: 18px;
     line-height: 32px;
@@ -422,8 +422,7 @@ mat-list-item.list-tag-item {
     box-shadow: 0px 8px 42px rgba(34, 39, 47, 0.04);
     border-radius: 16px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
@@ -441,8 +440,7 @@ mat-list-item.list-tag-item {
     background: #FDB100;
     border-radius: 16px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
@@ -460,8 +458,7 @@ mat-list-item.list-tag-item {
 mat-list-item.search-recipe-tag-item {
     height: 18px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
+
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
@@ -471,6 +468,12 @@ mat-list-item.search-recipe-tag-item {
     align-items: center;
     
     color: #808080;
+}
+
+app-footer {
+    position: absolute;
+    left: 0px;
+    bottom: 115px;
 }
 
 

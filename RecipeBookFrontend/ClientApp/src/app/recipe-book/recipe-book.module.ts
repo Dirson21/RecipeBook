@@ -10,13 +10,19 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon'
 import {MatInputModule} from '@angular/material/input';
 import { FooterComponent } from './footer/footer.component';
+import { RecipePageComponent } from './recipe-page/recipe-page.component';
+import {  RouterModule } from '@angular/router';
+import { RecipeBookRoutingModule } from './recipe-book-routing.module';
+import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 
 
 @NgModule({
   declarations: [
     MainPageComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RecipePageComponent,
+    RecipeItemComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +32,11 @@ import { FooterComponent } from './footer/footer.component';
     MatIconModule,
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
-    MatInputModule
+    MatInputModule,
+    RouterModule,
+    RecipeBookRoutingModule,
+    
+  
   ]
 })
 export class RecipeBookModule { }

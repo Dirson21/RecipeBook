@@ -1,7 +1,7 @@
 .header {
-    position: absolute;
     width: 1200px;
     height: 38px;
+    position: absolute;
     left: 120px;
     top: 40px;
    
@@ -13,8 +13,6 @@
     left: 120px;
     top: 44px;
     
-    font-family: 'Montserrat';
-    font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 29px;
@@ -23,6 +21,7 @@
 
 }
 .menu-list {
+   
     position: absolute;
     width: 344px;
     height: 22px;
@@ -39,38 +38,40 @@
 
 .list-item {
 
+  
+ 
     margin-right: 40px;
-    font-family: 'Montserrat';
-    font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     color: #9196A1;
 }
-.main-item {
+/* .main-item {
     margin-right: 40px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
-    color: #3A3C41;
-}
+    color:  #9196A1;
+} */
 
 .login {
     position: absolute;
-    width: 112px;
+    width: 280px;
     height: 38px;
     left: 1208px;
     top: 48px;
+ 
 
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    color: #FDB100;
+}
+
+.entered-login {
+    position: absolute;
+    width: 280px;
+    height: 38px;
+    left: 1040px;
+    top: 48px;
+   
 }
 
 
@@ -90,4 +91,36 @@
     left: 52px;
     top: 8px;
 
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FDB100;
+
+}
+
+.active-link {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #3A3C41;
+}
+
+.line {
+    position: absolute;
+    width: 19px;
+    height: 0px;
+    left: 232px;
+    top: 18px;
+
+    border: 1px solid rgba(253, 177, 0, 0.72);
+    transform: rotate(90deg);
+}
+
+.exit-button {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    left: 256px;
+    top: 5px;
+    
 }
