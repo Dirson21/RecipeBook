@@ -1,7 +1,25 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { RouterModule, Routes } from '@angular/router';
+import { RecipePageComponent } from './recipe-page/recipe-page.component';
+import { MainPageComponent } from './main-page/main-page.component';
 
+const routes: Routes = [
+  {
+    path: "recipe-book",
+    component:MainPageComponent
+  },
+  {
+    path: "recipe",
+    component: RecipePageComponent
+  },
+  {
+    path: "**",
+    component:MainPageComponent
+  }
+
+]
 
 
 @NgModule({
@@ -9,7 +27,10 @@ import { CommonModule } from '@angular/common';
     
   ],
   imports: [
-    CommonModule
+    RouterModule.forRoot(routes)
+  ],
+  exports: [
+    RouterModule
   ]
 })
 export class RecipeBookRoutingModule { }
