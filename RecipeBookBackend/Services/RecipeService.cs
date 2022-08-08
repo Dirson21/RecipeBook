@@ -12,7 +12,7 @@ namespace RecipeBookBackend.Services
                 Id = 1,
                 Name = "Клубничная панна-котта",
                 Description = "Десерт, который невероятно легко и быстро готовится. Советую подавать его порционно в красивых бокалах, украсив взбитыми сливками, свежими ягодами и мятой",
-                Image = "assets/img/RecipeExample.png",
+                Image = "assets\\img\\pana-kota.png",
                 CookingTime = 35,
                 CountPerson = 5
             };

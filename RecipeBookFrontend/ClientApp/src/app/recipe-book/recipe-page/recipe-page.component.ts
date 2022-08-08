@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { IRecipe } from '../shared/recipe.interface';
+import { RecipeService } from '../shared/recipe.service';
 
 @Component({
   selector: 'app-recipe-page',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecipePageComponent implements OnInit {
 
-  constructor() { }
+  public recipes: IRecipe[] = []
+
+  constructor(private recipeService:RecipeService) { 
+    this.getRecipes();
+  
+  }
 
   ngOnInit(): void {
+  }
+
+  public getRecipes()
+  {
+    this.recipeService.getRecipes().subscribe(s => {
+      this.recipes = Object.assign(s)
+    });
   }
 
 }

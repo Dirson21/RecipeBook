@@ -64,11 +64,11 @@
 
 
     <div class="recipe-view">
-        <mat-list class="recipe-list">
-            <app-recipe-item class="recipe-list-item" ></app-recipe-item>
-            <app-recipe-item class="recipe-list-item" ></app-recipe-item>
-            <app-recipe-item class="recipe-list-item" ></app-recipe-item>
-            <app-recipe-item class="recipe-list-item" ></app-recipe-item>
+        <mat-list *ngIf="recipes.length > 0" class="recipe-list">
+            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
+            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
+            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
+            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
         </mat-list>
 
         <button mat-raised-button class="recipe-load-btn">Загрузить еще</button>

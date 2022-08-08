@@ -23,26 +23,26 @@
              </button>
         </div>
 
-        <mat-card-title class="recipe-content-title">Клубничная Панна-Котта</mat-card-title>
-        <mat-card-subtitle class="recipe-content-subtitle">Десерт, который невероятно легко и быстро готовится. Советую подавать его порционно в красивых бокалах, украсив взбитыми сливками, свежими ягодами и мятой</mat-card-subtitle>
+        <mat-card-title class="recipe-content-title">{{recipe.name}}</mat-card-title>
+        <mat-card-subtitle class="recipe-content-subtitle">{{recipe.description}}</mat-card-subtitle>
 
         <div class="recipe-content-additional-info">
             <div class="cooking-time">
                 <div class="additional-text">Время приготовления: </div>
-                <div class="additional-number">35 минут</div>
+                <div class="additional-number">{{recipe.cookingTime}} минут</div>
                 <svg-icon src="assets\img\recipe-item-ico\timer.svg" class="additional-svg"></svg-icon>
             </div>
 
             <div class="count-person">
                 <div class="additional-text">Рецепт на: </div>
-                <div class="additional-number">5 персон</div>
+                <div class="additional-number">{{recipe.countPerson}} персон</div>
                 <svg-icon src="assets\img\recipe-item-ico\people_outline.svg" class="additional-svg"></svg-icon>
             </div>
 
         </div>
     </div>
 
-    <img src="assets\img\pana-kota.png" class="recipe-image">
+    <img [src]="recipe.image" class="recipe-image">
     <div class="recipe-author">@glazest</div>
 
 </mat-list-item>

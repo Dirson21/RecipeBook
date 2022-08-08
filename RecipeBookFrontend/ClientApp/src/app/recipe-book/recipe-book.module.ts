@@ -14,6 +14,8 @@ import { RecipePageComponent } from './recipe-page/recipe-page.component';
 import {  RouterModule } from '@angular/router';
 import { RecipeBookRoutingModule } from './recipe-book-routing.module';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
+import { RecipeService } from './shared/recipe.service';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -35,8 +37,12 @@ import { RecipeItemComponent } from './recipe-item/recipe-item.component';
     MatInputModule,
     RouterModule,
     RecipeBookRoutingModule,
+    BrowserModule
     
   
+  ],
+  providers: [
+    RecipeService
   ]
 })
 export class RecipeBookModule { }
