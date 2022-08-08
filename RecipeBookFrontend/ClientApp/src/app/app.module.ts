@@ -12,6 +12,7 @@ import { RecipeBookModule } from './recipe-book/recipe-book.module';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,6 @@ import { RecipeBookModule } from './recipe-book/recipe-book.module';
     AppRoutingModule,
     RecipeBookModule,
     BrowserAnimationsModule,
-    RecipeBookRoutingModule,
     CommonModule
   ],
   providers: [],
