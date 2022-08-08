@@ -7,9 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Dto\" />
-    <Folder Include="Infrastucture\" />
-    <Folder Include="Services\" />
+    <Compile Remove="Infrastucture\**" />
+    <Content Remove="Infrastucture\**" />
+    <EmbeddedResource Remove="Infrastucture\**" />
+    <None Remove="Infrastucture\**" />
   </ItemGroup>
 
 </Project>
