@@ -13,6 +13,6 @@ namespace Domain
         public string Name { get; set; }
         public string Image { get; set; }
 
-        List<Recipe> Recipes { get; set; }
+        public List<Recipe> Recipes { get; set; }
     }
 }

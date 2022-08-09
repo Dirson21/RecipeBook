@@ -11,9 +11,9 @@ namespace Dto
         public int CookingTime { get; set; }
         public int CountPerson { get; set; }
 
-        List<IngridientDto> Ingridients { get; set; }
-        List<TagDto> Tags { get; set; }
-        List<CookingStepDto> CookingSteps { get; set; }
+        public List<IngridientDto> Ingridients { get; set; }
+        public List<TagDto> Tags { get; set; }
+        public List<CookingStepDto> CookingSteps { get; set; }
 
     }
 }

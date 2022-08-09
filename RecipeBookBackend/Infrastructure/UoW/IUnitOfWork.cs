@@ -8,6 +8,6 @@ namespace Infrastructure.UoW
 {
     public interface IUnitOfWork
     {
-        void Commit();
+        int Commit();
     }
 }

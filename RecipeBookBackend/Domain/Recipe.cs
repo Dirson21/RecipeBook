@@ -10,9 +10,9 @@
         public int CookingTime { get; set; }
         public int CountPerson { get; set; }
 
-        List<Ingridient> Ingridients { get; set; }
-        List<Tag> Tags { get; set; }
-        List<CookingStep> CookingSteps { get; set; }
+        public List<Ingridient> Ingridients { get; set; }
+        public  List<Tag> Tags { get; set; }
+        public List<CookingStep> CookingSteps { get; set; }
 
 
     }

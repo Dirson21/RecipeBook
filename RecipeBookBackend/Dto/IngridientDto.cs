@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public int RecipeId { get; set; }
 
-        RecipeDto Recipe { get; set; }
+        public RecipeDto Recipe { get; set; }
     }
 }

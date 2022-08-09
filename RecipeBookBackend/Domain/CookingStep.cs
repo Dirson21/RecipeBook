@@ -13,6 +13,6 @@ namespace Domain
         public int RecipeId { get; set; }
         public string Description { get; set; }
 
-        Recipe Recipe { get; set; }
+        public Recipe Recipe { get; set; }
     }
 }
