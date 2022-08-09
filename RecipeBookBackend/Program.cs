@@ -1,5 +1,5 @@
 
-using RecipeBookBackend.Services;
+using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +15,8 @@ builder.Services.AddScoped<IRecipeService, RecipeService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseStaticFiles();
 
 app.UseAuthorization();
 

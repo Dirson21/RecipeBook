@@ -1,7 +1,6 @@
-﻿using RecipeBookBackend.Domain;
-using RecipeBookBackend.Dto;
+﻿using Dto;
 
-namespace RecipeBookBackend.Services
+namespace Services
 {
     public class RecipeService : IRecipeService
     {

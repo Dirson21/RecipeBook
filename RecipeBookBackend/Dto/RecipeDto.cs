@@ -1,6 +1,6 @@
-﻿using RecipeBookBackend.Domain;
+﻿
 
-namespace RecipeBookBackend.Dto
+namespace Dto
 {
     public class RecipeDto
     {
@@ -10,7 +10,10 @@ namespace RecipeBookBackend.Dto
         public string Description { get; set; }
         public int CookingTime { get; set; }
         public int CountPerson { get; set; }
-        List<Ingridient> Ingridients { get; set; }
+
+        List<IngridientDto> Ingridients { get; set; }
+        List<TagDto> Tags { get; set; }
+        List<CookingStepDto> CookingSteps { get; set; }
 
     }
 }

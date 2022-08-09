@@ -1,4 +1,4 @@
-﻿namespace RecipeBookBackend.Domain
+﻿namespace  Domain
 {
 
     public class Recipe
@@ -9,7 +9,10 @@
         public string Description { get; set; }
         public int CookingTime { get; set; }
         public int CountPerson { get; set; }
+
         List<Ingridient> Ingridients { get; set; }
+        List<Tag> Tags { get; set; }
+        List<CookingStep> CookingSteps { get; set; }
 
 
     }

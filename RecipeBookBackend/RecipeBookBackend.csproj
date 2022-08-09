@@ -7,10 +7,34 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Domain\**" />
+    <Compile Remove="Dto\**" />
+    <Compile Remove="Infrastructure\**" />
     <Compile Remove="Infrastucture\**" />
+    <Compile Remove="Services\**" />
+    <Content Remove="Domain\**" />
+    <Content Remove="Dto\**" />
+    <Content Remove="Infrastructure\**" />
     <Content Remove="Infrastucture\**" />
+    <Content Remove="Services\**" />
+    <EmbeddedResource Remove="Domain\**" />
+    <EmbeddedResource Remove="Dto\**" />
+    <EmbeddedResource Remove="Infrastructure\**" />
     <EmbeddedResource Remove="Infrastucture\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Domain\**" />
+    <None Remove="Dto\**" />
+    <None Remove="Infrastructure\**" />
     <None Remove="Infrastucture\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="Services\Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Data\Recipe\" />
   </ItemGroup>
 
 </Project>

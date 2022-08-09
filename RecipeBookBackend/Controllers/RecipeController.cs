@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RecipeBookBackend.Services;
+using Services;
 
 namespace RecipeBookBackend.Controllers
 {

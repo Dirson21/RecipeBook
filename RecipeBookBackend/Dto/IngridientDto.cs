@@ -1,4 +1,4 @@
-﻿namespace RecipeBookBackend.Dto
+﻿namespace Dto
 {
     public class IngridientDto
     {
