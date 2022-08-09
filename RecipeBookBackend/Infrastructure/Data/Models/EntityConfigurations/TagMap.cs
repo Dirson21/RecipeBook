@@ -23,6 +23,8 @@ namespace Infrastructure.Data.Models.EntityConfigurations
 
             builder.Property(x => x.Image);
 
+            builder.Property(x => x.Description);
+
         }
     }
 }

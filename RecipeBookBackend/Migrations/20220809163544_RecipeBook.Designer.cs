@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RecipeBookBackend.Migrations
 {
     [DbContext(typeof(RecipeBookDbContext))]
-    [Migration("20220809153721_RecipeBook")]
+    [Migration("20220809163544_RecipeBook")]
     partial class RecipeBook
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,7 +125,7 @@ namespace RecipeBookBackend.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Tags");
+                    b.ToTable("Tag");
                 });
 
             modelBuilder.Entity("RecipeTag", b =>

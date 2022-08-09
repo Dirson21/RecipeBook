@@ -26,7 +26,7 @@ namespace RecipeBookBackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tags",
+                name: "Tag",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -36,7 +36,7 @@ namespace RecipeBookBackend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tags", x => x.Id);
+                    table.PrimaryKey("PK_Tag", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -97,9 +97,9 @@ namespace RecipeBookBackend.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_RecipeTag_Tags_TagsId",
+                        name: "FK_RecipeTag_Tag_TagsId",
                         column: x => x.TagsId,
-                        principalTable: "Tags",
+                        principalTable: "Tag",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -126,8 +126,8 @@ namespace RecipeBookBackend.Migrations
                 column: "TagsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tags_Name",
-                table: "Tags",
+                name: "IX_Tag_Name",
+                table: "Tag",
                 column: "Name",
                 unique: true);
         }
@@ -147,7 +147,7 @@ namespace RecipeBookBackend.Migrations
                 name: "Recipe");
 
             migrationBuilder.DropTable(
-                name: "Tags");
+                name: "Tag");
         }
     }
 }

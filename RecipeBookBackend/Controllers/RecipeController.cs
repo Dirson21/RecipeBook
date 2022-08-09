@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Dto;
+using Microsoft.AspNetCore.Mvc;
 using Services;
 
 namespace RecipeBookBackend.Controllers
@@ -28,6 +29,18 @@ namespace RecipeBookBackend.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult AddRecipe ([FromBody] RecipeDto recipeDto)
+        {
+            try
+            {
+                return Ok(_recipeService.CreateRecipe(recipeDto));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
         
     }
 }

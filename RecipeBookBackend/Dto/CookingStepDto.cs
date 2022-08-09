@@ -13,6 +13,6 @@ namespace Dto
         public int RecipeId { get; set; }
         public string Description { get; set; }
 
-         public RecipeDto Recipe { get; set; }
+        
     }
 }

@@ -23,7 +23,7 @@ namespace Services.Converters
                 Image = recipe.Image,
                 CookingSteps = recipe.CookingSteps?.ConvertAll(c => c.ConvertToCookingStepDto()),
                 Ingridients = recipe.Ingridients?.ConvertAll(c => c.ConvertToIngridientDto()),
-                Tags = recipe.Tags?.ConvertAll(c => c.ConvertToTagDto())
+                
             };
         }
         public static Recipe ConvertToRecipe(this RecipeDto recipeDto)
@@ -38,7 +38,7 @@ namespace Services.Converters
                 Image = recipeDto.Image,
                 CookingSteps = recipeDto?.CookingSteps.ConvertAll(c => c.ConvertToCookingStep()),
                 Ingridients = recipeDto?.Ingridients.ConvertAll(c => c.ConvertToIngridient()),
-                Tags = recipeDto?.Tags.ConvertAll(c => c.ConvertToTag())
+              
             };
 
         }

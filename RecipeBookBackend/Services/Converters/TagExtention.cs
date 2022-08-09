@@ -17,6 +17,7 @@ namespace Services.Converters
                 Id = tag.Id,
                 Name = tag.Name,
                 Image = tag.Image,
+                Description = tag.Description,
                 Recipes = tag.Recipes?.ConvertAll(recipe => recipe.ConvertToRecipeDto())
             };
         }
@@ -28,6 +29,7 @@ namespace Services.Converters
                 Id = tagDto.Id,
                 Name = tagDto.Name,
                 Image = tagDto.Image,
+                Description= tagDto.Description,
                 Recipes = tagDto.Recipes?.ConvertAll(recipe => recipe.ConvertToRecipe())
             };
         }

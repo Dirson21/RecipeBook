@@ -20,7 +20,7 @@ namespace Infrastructure.Data
 
         public DbSet<Recipe> Recipe { get; set; }
         public DbSet<Ingridient> Ingridient { get; set; }
-        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Tag> Tag { get; set; }
         public DbSet<CookingStep> CookingStep { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)

@@ -30,7 +30,7 @@ namespace Infrastructure.Data.RecipeModel
 
         public List<Recipe> GetAll()
         {
-            return _dbContext.Recipe.Include(x => x.CookingSteps).Include(x => x.Ingridients).Include(x => x.Tags).OrderBy(x => x.Id).ToList();
+            return _dbContext.Recipe.OrderBy(x => x.Id).Include(x => x.CookingSteps).Include(x => x.Ingridients).Include(x => x.Tags).ToList();
         }
         public List<Recipe> GetAll(int start, int count)
         {
