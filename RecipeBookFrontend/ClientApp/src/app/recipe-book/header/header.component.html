@@ -4,20 +4,32 @@
    
 
     <mat-nav-list class="menu-list">
-        <mat-list-item class="main-item">
+    
+        <mat-list-item class="list-item" routerLink="/recipe-book"  routerLinkActive="active-link" >   
             Главная
-        </mat-list-item>
-        <mat-list-item class="list-item">
+        </mat-list-item>      
+        <mat-list-item class="list-item" routerLink="/recipe"  routerLinkActive="active-link">
             Рецепты
         </mat-list-item>
         <mat-list-item class="list-item">
             Избранное
         </mat-list-item>
     </mat-nav-list>
-    <div class="login"> 
+
+    <div *ngIf="accountName ==''" class="login"> 
         <img src="assets\img\Ellipse4.png" class="elipse">
         <img src="assets\img\Vector.png" class = "vector">
         <div class="text-login">Войти</div>
+    
     </div>
+
+    <div *ngIf="accountName !=''" class="entered-login"> 
+        <img src="assets\img\Ellipse4.png" class="elipse">
+        <img src="assets\img\Vector.png" class = "vector">
+        <div class="text-login">Привет, {{accountName}}</div>
+        <div class="line"></div>
+        <button class="exit-button" mat-icon-button>  <svg-icon src="assets\img\exit_to_app.svg"></svg-icon>  </button> 
+    </div>
+
    
 </mat-card-header>

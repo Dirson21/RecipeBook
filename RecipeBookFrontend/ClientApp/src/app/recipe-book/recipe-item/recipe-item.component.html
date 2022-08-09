@@ -1,0 +1,48 @@
+
+<mat-list-item>
+
+    <div class="recipe-content">
+
+        <mat-list class="recipe-tag-list">
+            <mat-list-item class="recipe-tag-item">Десерты</mat-list-item>
+            <mat-list-item class="recipe-tag-item">Клубника</mat-list-item>
+            <mat-list-item class="recipe-tag-item">Сливки</mat-list-item>
+
+        </mat-list>
+
+        <div class="recipe-action">
+
+            <button mat-raised-button class="favorite-btn">
+                <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\star.svg"></svg-icon>
+                <div class="favorite-btn-text">10</div>
+            </button>
+           
+             <button mat-raised-button class="like-btn">
+                <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\like.svg"></svg-icon>
+                <div class="favorite-btn-text">10</div>
+             </button>
+        </div>
+
+        <mat-card-title class="recipe-content-title">{{recipe.name}}</mat-card-title>
+        <mat-card-subtitle class="recipe-content-subtitle">{{recipe.description}}</mat-card-subtitle>
+
+        <div class="recipe-content-additional-info">
+            <div class="cooking-time">
+                <div class="additional-text">Время приготовления: </div>
+                <div class="additional-number">{{recipe.cookingTime}} минут</div>
+                <svg-icon src="assets\img\recipe-item-ico\timer.svg" class="additional-svg"></svg-icon>
+            </div>
+
+            <div class="count-person">
+                <div class="additional-text">Рецепт на: </div>
+                <div class="additional-number">{{recipe.countPerson}} персон</div>
+                <svg-icon src="assets\img\recipe-item-ico\people_outline.svg" class="additional-svg"></svg-icon>
+            </div>
+
+        </div>
+    </div>
+
+    <img [src]="recipe.image" class="recipe-image">
+    <div class="recipe-author">@glazest</div>
+
+</mat-list-item>

@@ -4,8 +4,9 @@ import { MainPageComponent } from './recipe-book/main-page/main-page.component';
 
 const routes: Routes = [
   {
-    path: "**",
-    component: MainPageComponent
+    path: "",
+    redirectTo: "/recipe-book",
+    pathMatch: 'full'
   }
 
 ];

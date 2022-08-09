@@ -1,0 +1,218 @@
+
+
+.recipe-image {
+    position: absolute;
+    width: 430px;
+    height: 430px;
+    left: 0px;
+    top: 0px;
+
+    background: #F0F0F0;
+    border-radius: 72px 0px;
+}
+.recipe-author {
+    position: absolute;
+    width: 108px;
+    height: 32px;
+    left: 0px;
+    top: 360px;
+
+    background: #FFFFFF;
+
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 28px;
+    color: #FDB100;
+}
+
+.recipe-content {
+    position: absolute;
+    width: 916px;
+    height: 430px;
+    left: 284px;
+    top: 0px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 16px 72px rgba(34, 39, 47, 0.05);
+    border-radius: 24px;
+}
+
+.recipe-tag-list {
+    position: absolute;
+
+    height: 25px;
+    left: 195px;
+    top: 49px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.recipe-tag-item {
+
+    margin-right: 5px;
+    height: 25px;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 30px;
+
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #F29E1F;
+
+    background: #ffb30046;
+
+    border-radius: 5px;
+}
+
+.recipe-action {
+    position: absolute;
+    width: 229px;
+    height: 50px;
+    left: 657px;
+    top: 36px;
+}
+
+.favorite-btn {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 107px;
+    height: 50px;
+    left: 0px;
+    top: 0px;
+
+    border: 1px solid #FDB100;
+    border-radius: 16px;
+}
+
+.favorite-btn-svg {
+    position: absolute;
+    left: 26px;
+    top: 12px;
+    width: 24px;
+    height: 24px;
+}
+.favorite-btn-text {
+    position: absolute;
+  
+    height: 28px;
+    left: 60px;
+    top: 12px;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    /* identical to box height, or 156% */
+    text-align: center;
+    color: #FDB100;
+}
+
+.like-btn {
+    box-sizing: border-box;
+
+    position: absolute;
+    width: 107px;
+    height: 50px;
+    left: 122px;
+    top: 0px;
+    border: 1px solid #FDB100;
+    border-radius: 16px;
+}
+
+.recipe-content-title {
+    position: absolute;
+    width: 693px;
+    height: 30px;
+    left: 199px;
+    top: 120px;
+
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+
+    text-transform: capitalize;
+
+    color: #25292D;
+}
+
+.recipe-content-subtitle {
+    position: absolute;
+    width: 571px;
+    height: 95px;
+    left: 199px;
+    top: 166px;
+
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    /* or 167% */
+    color: #4A525A;
+
+}
+
+.recipe-content-additional-info {
+    position: absolute;
+    width: 459px;
+    height: 64px;
+    left: 199px;
+    top: 301px;
+}
+
+.cooking-time {
+    position: absolute;
+    width: 236px;
+    height: 64px;
+    left: 0px;
+    top: 0px;
+}
+
+.additional-text {
+    position: absolute;
+    width: 168px;
+    height: 28px;
+    left: 70px;
+    top: 3px;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 28px;
+    /* identical to box height, or 200% */
+    color: #25292D;
+    opacity: 0.5;
+}
+
+.additional-number {
+    position: absolute;
+    height: 28px;
+    left: 70px;
+    top: 26px;
+
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    /* identical to box height, or 175% */
+
+    color: #25292D;
+}
+
+.count-person {
+    position: absolute;
+    width: 152px;
+    height: 64px;
+    left: 307px;
+    top: 0px;
+}
+
+
+
+
+
+
+
+
+
