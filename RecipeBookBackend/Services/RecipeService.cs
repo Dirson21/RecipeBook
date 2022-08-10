@@ -1,6 +1,6 @@
 ﻿using Dto;
 using Infrastructure.Data;
-using Infrastructure.Data.RecipeModel;
+using Infrastructure.Data.Models;
 using Domain;
 using Services.Converters;
 
@@ -17,23 +17,36 @@ namespace Services
             _recipeRepository = recipeRepository;
         }
 
-        public int CreateRecipe(RecipeDto recipe)
+        public int CreateRecipe(RecipeDto recipeDto)
         {
-            int id = _recipeRepository.Create(recipe.ConvertToRecipe());
+            Recipe recipe = _recipeRepository.Create(recipeDto.ConvertToRecipe());
             _dbContext.Commit();
-            return id;
+            return recipe.Id;
         }
 
-        public void DeleteRecipe(RecipeDto recipe)
+        public void DeleteRecipe(int recipeId)
         {
-            _recipeRepository.Delete(recipe.ConvertToRecipe());
+            Recipe recipe = _recipeRepository.GetById(recipeId);
+            if (recipe == null)
+            {
+                throw new Exception("Данного рецепта не существует");
+            }
+
+
+            _recipeRepository.Delete(recipe);
             _dbContext.Commit();
         }
 
         public RecipeDto GetRecipeById(int id)
         {
 
-            return _recipeRepository.GetById(id).ConvertToRecipeDto();
+            Recipe recipe = _recipeRepository.GetById(id);
+            if (recipe == null)
+            {
+                throw new Exception("Данного рецепта не существует");
+            }
+            return recipe.ConvertToRecipeDto();
+
         }
 
         public RecipeDto GetRecipeByName(string name)
@@ -61,9 +74,15 @@ namespace Services
             return _recipeRepository.GetAll(start, count).ConvertAll(c => c.ConvertToRecipeDto());
         }
 
-        public int UpdateRecipe(RecipeDto recipe)
+        public int UpdateRecipe(int recipeId)
         {
-            int id = _recipeRepository.Update(recipe.ConvertToRecipe());
+            Recipe recipe = _recipeRepository.GetById(recipeId);
+            if (recipe == null)
+            {
+                throw new Exception("Данного рецепта не существует");
+            }
+
+            int id = _recipeRepository.Update(recipe);
             _dbContext.Commit();
             return id;
         }

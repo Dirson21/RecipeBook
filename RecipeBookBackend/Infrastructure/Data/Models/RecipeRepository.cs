@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Data.RecipeModel
+namespace Infrastructure.Data.Models
 {
     public class RecipeRepository : IRecipeRepository
     {
@@ -18,9 +18,9 @@ namespace Infrastructure.Data.RecipeModel
             _dbContext = dbContext;
         }
 
-        public int Create(Recipe recipe)
+        public Recipe Create(Recipe recipe)
         {
-            return _dbContext.Recipe.Add(recipe).Entity.Id;
+            return _dbContext.Recipe.Add(recipe).Entity;
         }
 
         public void Delete(Recipe recipe)
@@ -34,7 +34,7 @@ namespace Infrastructure.Data.RecipeModel
         }
         public List<Recipe> GetAll(int start, int count)
         {
-            return _dbContext.Recipe.Include(x => x.CookingSteps).Include(x => x.Ingridients).Include(x => x.Tags).OrderBy(x => x.Id).Skip(start).Take(count).ToList();
+            return _dbContext.Recipe.OrderBy(x => x.Id).Skip(start).Take(count).Include(x => x.CookingSteps).Include(x => x.Ingridients).Include(x => x.Tags).ToList();
         }
 
         public Recipe GetById(int id)

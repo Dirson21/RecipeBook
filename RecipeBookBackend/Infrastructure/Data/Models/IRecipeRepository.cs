@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Data.RecipeModel
+namespace Infrastructure.Data.Models
 {
     public interface IRecipeRepository
     {
@@ -13,7 +13,7 @@ namespace Infrastructure.Data.RecipeModel
         List<Recipe> GetAll(int start, int count);
         Recipe GetById(int id);
         Recipe GetByName(string name);
-        int Create  (Recipe recipe);
+        Recipe Create  (Recipe recipe);
         int Update (Recipe recipe);
         void Delete (Recipe recipe);
     }

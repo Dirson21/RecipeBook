@@ -36,6 +36,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Data\Recipe\" />
+    <Folder Include="wwwroot\Data\Tag\" />
   </ItemGroup>
 
   <ItemGroup>

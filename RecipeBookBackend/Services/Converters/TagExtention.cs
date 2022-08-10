@@ -12,6 +12,11 @@ namespace Services.Converters
     {
         public static TagDto ConvertToTagDto (this Tag tag)
         {
+            foreach (var recipe in tag.Recipes)
+            {
+                recipe.Tags = new List<Tag>();
+            }
+            
             return new TagDto
             {
                 Id = tag.Id,

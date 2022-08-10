@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore.Design;
 
 using Infrastructure.Data;
 using Services;
-using Infrastructure.Data.RecipeModel;
+using Infrastructure.Data.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,9 @@ builder.Services.AddDbContext<RecipeBookDbContext>(c =>
 
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
+
+builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<ITagService, TagService>();
 
 
 

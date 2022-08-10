@@ -13,6 +13,13 @@ namespace Services.Converters
     {
         public static RecipeDto ConvertToRecipeDto(this Recipe recipe)
         {
+            //Убираем свзяь, чтобы избежать циклов
+            foreach( var tag in  recipe.Tags)
+            {
+                tag.Recipes = new List<Recipe>();
+            }
+
+
             return new RecipeDto
             {
                 Id = recipe.Id,
@@ -23,6 +30,7 @@ namespace Services.Converters
                 Image = recipe.Image,
                 CookingSteps = recipe.CookingSteps?.ConvertAll(c => c.ConvertToCookingStepDto()),
                 Ingridients = recipe.Ingridients?.ConvertAll(c => c.ConvertToIngridientDto()),
+                Tags = recipe.Tags?.ConvertAll(c => c.ConvertToTagDto())
                 
             };
         }
@@ -38,6 +46,7 @@ namespace Services.Converters
                 Image = recipeDto.Image,
                 CookingSteps = recipeDto?.CookingSteps.ConvertAll(c => c.ConvertToCookingStep()),
                 Ingridients = recipeDto?.Ingridients.ConvertAll(c => c.ConvertToIngridient()),
+                Tags = recipeDto?.Tags.ConvertAll(c => c.ConvertToTag())
               
             };
 

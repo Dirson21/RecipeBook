@@ -10,8 +10,8 @@ namespace Services
         RecipeDto GetRecipeByName(string name);
 
         int CreateRecipe(RecipeDto recipe);
-        int UpdateRecipe(RecipeDto recipe);
-        void DeleteRecipe(RecipeDto recipe);
+        int UpdateRecipe(int recipeId);
+        void DeleteRecipe(int recipeId);
 
 
     }

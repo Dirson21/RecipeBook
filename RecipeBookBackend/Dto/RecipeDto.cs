@@ -11,9 +11,9 @@ namespace Dto
         public int CookingTime { get; set; }
         public int CountPerson { get; set; }
 
-        public List<IngridientDto> Ingridients { get; set; }
+        public List<IngridientDto> Ingridients { get; set; } = new List<IngridientDto>();
         public List<TagDto> Tags { get; set; } = new List<TagDto>();
-        public List<CookingStepDto> CookingSteps { get; set; }
+        public List<CookingStepDto> CookingSteps { get; set; } = new List<CookingStepDto>();
 
     }
 }
