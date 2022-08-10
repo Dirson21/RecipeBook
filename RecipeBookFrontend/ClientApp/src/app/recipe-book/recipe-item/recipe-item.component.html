@@ -4,10 +4,8 @@
     <div class="recipe-content">
 
         <mat-list class="recipe-tag-list">
-            <mat-list-item class="recipe-tag-item">Десерты</mat-list-item>
-            <mat-list-item class="recipe-tag-item">Клубника</mat-list-item>
-            <mat-list-item class="recipe-tag-item">Сливки</mat-list-item>
-
+            <mat-list-item class="recipe-tag-item" *ngFor="let tag of recipe.tags">{{tag.name}}</mat-list-item>
+    
         </mat-list>
 
         <div class="recipe-action">
@@ -42,7 +40,7 @@
         </div>
     </div>
 
-    <img [src]="recipe.image" class="recipe-image">
+    <img src="http://localhost:5220/data/recipe/{{recipe.image}}" class="recipe-image">
     <div class="recipe-author">@glazest</div>
 
 </mat-list-item>

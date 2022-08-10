@@ -11,8 +11,10 @@ export class RecipePageComponent implements OnInit {
 
   public recipes: IRecipe[] = []
 
+  private start:number = 0;
+
   constructor(private recipeService:RecipeService) { 
-    this.getRecipes();
+    this.getRecipesRange(4);
   
   }
 
@@ -24,6 +26,16 @@ export class RecipePageComponent implements OnInit {
     this.recipeService.getRecipes().subscribe(s => {
       this.recipes = Object.assign(s)
     });
+  }
+
+  public getRecipesRange(count:number) {
+    
+    this.recipeService.getRecipesRange(this.start, count).subscribe(s=> {
+      
+      this.start += s.length;
+      this.recipes = this.recipes.concat(s);
+    })
+    
   }
 
 }

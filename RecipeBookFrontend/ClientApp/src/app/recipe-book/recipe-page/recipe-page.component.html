@@ -1,7 +1,8 @@
 
-
 <mat-card>
     <app-header [accountName]="'Татьяна'"></app-header>
+
+    
 
     <div class="recipe-header">
     
@@ -65,18 +66,30 @@
 
     <div class="recipe-view">
         <mat-list *ngIf="recipes.length > 0" class="recipe-list">
-            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
-            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
-            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
-            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
+
+            <app-recipe-item class="recipe-list-item" *ngFor="let recipe of recipes"  [recipe]="recipe"></app-recipe-item>
         </mat-list>
 
-        <button mat-raised-button class="recipe-load-btn">Загрузить еще</button>
+        <button mat-raised-button class="recipe-load-btn"(click)="getRecipesRange(4)" >Загрузить еще</button>
     </div>
 
-    <svg-icon src="assets\img\waves\wave1.svg"></svg-icon>
-    <svg-icon src="assets\img\waves\wave2.svg"></svg-icon>
+    <div class="waves">
+        <div class= "wave1">
+            <svg-icon  src="assets\img\waves\wave1.svg"></svg-icon>
+        </div>
+        <div class="wave2">
+            <svg-icon class= "wave2" src="assets\img\waves\wave2.svg"></svg-icon>
+        </div>
+    </div>
+ 
+    <!-- <svg-icon class= "wave2" src="assets\img\waves\wave2.svg"></svg-icon> -->
 
-    <app-footer></app-footer>
+
+    
+    <div class="footer">
+        <app-footer></app-footer>
+    </div>
+
+    
 
 </mat-card>

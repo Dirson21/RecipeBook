@@ -1,6 +1,6 @@
 mat-card-footer {
-    position: absolute;
-    width: 1470px;
+    position: relative;
+    width: 1455px;
     height: 113px;
     
     background: #FBF9F4;

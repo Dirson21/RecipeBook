@@ -1,5 +1,5 @@
 import { IRecipe } from "./recipe.interface";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
@@ -13,6 +13,11 @@ export class RecipeService {
 
     public getRecipes (): Observable<IRecipe[]> {
         return this.httpClient.get<IRecipe[]>(this.apiUrl);
+    }
+    public getRecipesRange (start:number, count:number): Observable<IRecipe[]> {
+        return this.httpClient.get<IRecipe[]>(`${this.apiUrl}/range`, {
+            params: new HttpParams().set("start", start).set("count", count)
+        });
     }
     
 }
