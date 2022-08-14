@@ -14,6 +14,8 @@ import { MainPageComponent } from './recipe-book/main-page/main-page.component';
 import { RecipeBookModule } from './recipe-book/recipe-book.module';
 
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './recipe-book/footer/footer.component';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 
 
 
@@ -23,7 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     MatCardModule,
@@ -35,7 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     MatIconModule,
     HttpClientModule,
-    AngularSvgIconModule.forRoot()
+    AngularSvgIconModule.forRoot(),
+    MatButtonModule
 
   ],
   providers: [],

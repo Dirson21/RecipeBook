@@ -5,6 +5,9 @@ mat-card {
     background: #FEFEFB;
     padding-bottom: 0px;
 
+    z-index: -2;
+     
+
 }
 
 .app-header {

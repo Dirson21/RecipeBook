@@ -1,7 +1,7 @@
 mat-card {
     position: relative;
-  
-    
+ 
+    z-index: 0;
     width: 1422px;
     /* min-height: 2853px; */
    
@@ -234,18 +234,22 @@ mat-list-item.search-recipe-tag-item {
 
 .recipe-view {
 
+    z-index: 2;
     position: relative;
     margin-top: 80px;
     margin-left: 120px;
+ 
     
     
 }
 
 .recipe-load-btn {
     box-sizing: border-box;
+    z-index: 2;
     
     position: relative;
     margin-top: 65px;
+    margin-bottom: 108px;
     width: 309px;
     height: 60px;
     left: 446px;
@@ -263,7 +267,7 @@ mat-list-item.search-recipe-tag-item {
     text-align: center;
 
     color: #FDB100;
-} */
+} 
 
 .waves {
     position: absolute;
@@ -273,8 +277,9 @@ mat-list-item.search-recipe-tag-item {
 }
 
 .wave1 {
-   
+    
     position: relative;
+    z-index: -1;
     top: 0px;
    
 }
@@ -282,9 +287,6 @@ mat-list-item.search-recipe-tag-item {
 .wave2 {
     
     position: relative;
+    z-index: -1;
     
 }
-
-
-
-
