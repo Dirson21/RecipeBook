@@ -21,7 +21,7 @@ import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
   declarations: [
     MainPageComponent,
-    HeaderComponent,
+
     FooterComponent,
     RecipePageComponent,
     RecipeItemComponent
