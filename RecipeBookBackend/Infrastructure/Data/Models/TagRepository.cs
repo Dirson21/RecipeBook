@@ -50,6 +50,11 @@ namespace Infrastructure.Data.Models
             return _dbContext.Tag.FirstOrDefault(x => x.Id == tagId);
         }
 
+        public Tag GetByName(string name)
+        {
+            return _dbContext.Tag.FirstOrDefault(x => x.Name == name);
+        }
+
         public int Update(Tag tag)
         {
             return _dbContext.Tag.Update(tag).Entity.Id;

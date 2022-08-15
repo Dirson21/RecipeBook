@@ -1,5 +1,5 @@
 ﻿using Domain;
-using Dto;
+using Services.Dto;
 using Infrastructure.Data;
 using Infrastructure.Data.Models;
 using Services.Converters;
@@ -42,23 +42,9 @@ namespace Services
             _dbContext.Commit();
         }
 
-        public int CreateTag(TagDto tagDto)
+        public TagDto getTagByName(string name)
         {
-            Tag tag = _tagRepository.Create(tagDto.ConvertToTag());
-            _dbContext.Commit();
-            return tag.Id;
-
-        }
-
-        public void DeleteTag(int tagId)
-        {
-            Tag tag = _tagRepository.GetById(tagId);
-            if (tag == null)
-            {
-                throw new Exception("Данного тега не существует)");
-            }
-            _tagRepository.Delete(tag);
-            _dbContext.Commit();
+            return _tagRepository.GetByName(name).ConvertToTagDto();
         }
 
         public List<TagDto> getTags()
@@ -71,9 +57,5 @@ namespace Services
             return _tagRepository.GetAll(start, count).ConvertAll(x => x.ConvertToTagDto());
         }
 
-        public int UpdateTag(TagDto tagDto)
-        {
-            return _tagRepository.Update(tagDto.ConvertToTag());
-        }
     }
 }

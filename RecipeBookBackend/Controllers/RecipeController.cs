@@ -1,4 +1,5 @@
-﻿using Dto;
+﻿using Services.Dto;
+
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -14,6 +15,7 @@ namespace RecipeBookBackend.Controllers
         public RecipeController(IRecipeService recipeService)
         {
             _recipeService = recipeService;
+            
         }
 
         [HttpGet]

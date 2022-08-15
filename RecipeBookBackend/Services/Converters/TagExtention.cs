@@ -1,5 +1,5 @@
 ﻿using Domain;
-using Dto;
+using Services.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +12,6 @@ namespace Services.Converters
     {
         public static TagDto ConvertToTagDto (this Tag tag)
         {
-            foreach (var recipe in tag.Recipes)
-            {
-                recipe.Tags = new List<Tag>();
-            }
             
             return new TagDto
             {
@@ -23,7 +19,6 @@ namespace Services.Converters
                 Name = tag.Name,
                 Image = tag.Image,
                 Description = tag.Description,
-                Recipes = tag.Recipes?.ConvertAll(recipe => recipe.ConvertToRecipeDto())
             };
         }
 
@@ -35,7 +30,6 @@ namespace Services.Converters
                 Name = tagDto.Name,
                 Image = tagDto.Image,
                 Description= tagDto.Description,
-                Recipes = tagDto.Recipes?.ConvertAll(recipe => recipe.ConvertToRecipe())
             };
         }
     }

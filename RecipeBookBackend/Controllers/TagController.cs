@@ -1,4 +1,4 @@
-﻿using Dto;
+﻿using Services.Dto;
 using Microsoft.AspNetCore.Mvc;
 using Services;
 
@@ -45,34 +45,6 @@ namespace RecipeBookBackend.Controllers
                 return BadRequest(ex.Message);
             }
 
-        }
-
-        [HttpPost]
-        public IActionResult AddTag([FromBody] TagDto tag)
-        {
-            try
-            {
-                return Ok(_tagService.CreateTag(tag));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
-        [HttpDelete]
-        [Route ("{tagId}")]
-        public IActionResult DeleteTag(int tagId)
-        {
-            try
-            {
-                _tagService.DeleteTag(tagId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
         }
     }
 }

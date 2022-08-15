@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Design;
 using Infrastructure.Data;
 using Services;
 using Infrastructure.Data.Models;
-
+using Services.Converters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +32,8 @@ builder.Services.AddScoped<IRecipeService, RecipeService>();
 
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<ITagService, TagService>();
+
+
 
 
 

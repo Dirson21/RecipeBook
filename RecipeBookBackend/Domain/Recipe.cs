@@ -11,7 +11,7 @@
         public int CountPerson { get; set; }
 
         public List<Ingridient> Ingridients { get; set; }
-        public  List<Tag> Tags { get; set; }
+        public  List<Tag> Tags { get; set; } = new List<Tag>();
         public List<CookingStep> CookingSteps { get; set; }
 
 

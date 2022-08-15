@@ -14,6 +14,8 @@ namespace Infrastructure.Data.Models
 
         Tag GetById(int tagId);
 
+        Tag GetByName(string name);
+
         int AddRecipeToTag(Tag tag, Recipe recipe);
         
         Tag Create (Tag tag);
