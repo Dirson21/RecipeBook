@@ -1,82 +1,89 @@
 
-
 <mat-card>
-    <app-header [accountName]="'Татьяна'"></app-header>
+     
+    <div class="header-space"></div>
+    <div class="main-content">
+      
+        <div class="recipe-header">
+        
+            <mat-card-title class="recipe-header-title">Рецепты</mat-card-title>
+            <button mat-raised-button class="btn-started">
+                <img src="assets\img\add.png" class="plus-add"> <div class="btn-add-text">Добавить рецепт</div>
+            </button>
 
-    <div class="recipe-header">
-    
-        <mat-card-title class="recipe-header-title">Рецепты</mat-card-title>
-        <button mat-raised-button class="btn-started">
-            <img src="assets\img\add.png" class="plus-add"> <div class="btn-add-text">Добавить рецепт</div>
-        </button>
+            <mat-list class="recipe-header-tags-list">
+                <mat-list-item class="recipe-header-tags-item">
+                    <div class="recipe-header-tags-item-ico">
+                        <svg-icon src="assets\img\tags-ico\ic-menu.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
+                    </div>
+                    <mat-card-title class="recipe-header-tags-item-title">Простые блюда</mat-card-title>
+                </mat-list-item>
 
-        <mat-list class="recipe-header-tags-list">
-            <mat-list-item class="recipe-header-tags-item">
-                <div class="recipe-header-tags-item-ico">
-                    <svg-icon src="assets\img\tags-ico\ic-menu.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
-                 </div>
-                <mat-card-title class="recipe-header-tags-item-title">Простые блюда</mat-card-title>
-            </mat-list-item>
+                <mat-list-item class="recipe-header-tags-item">
+                    <div class="recipe-header-tags-item-ico">
+                        <svg-icon src="assets\img\tags-ico\ic-cook.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
+                    </div>
+                    <mat-card-title class="recipe-header-tags-item-title">Детское</mat-card-title>
+                </mat-list-item>
 
-            <mat-list-item class="recipe-header-tags-item">
-                <div class="recipe-header-tags-item-ico">
-                    <svg-icon src="assets\img\tags-ico\ic-cook.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
-                 </div>
-                <mat-card-title class="recipe-header-tags-item-title">Детское</mat-card-title>
-            </mat-list-item>
+                <mat-list-item class="recipe-header-tags-item">
+                    <div class="recipe-header-tags-item-ico">
+                        <svg-icon src="assets\img\tags-ico\ic-chef.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
+                    </div>
+                    <mat-card-title class="recipe-header-tags-item-title">От шеф-поваров</mat-card-title>
+                </mat-list-item>
 
-            <mat-list-item class="recipe-header-tags-item">
-                <div class="recipe-header-tags-item-ico">
-                    <svg-icon src="assets\img\tags-ico\ic-chef.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
-                 </div>
-                <mat-card-title class="recipe-header-tags-item-title">От шеф-поваров</mat-card-title>
-            </mat-list-item>
-
-            <mat-list-item class="recipe-header-tags-item">
-                <div class="recipe-header-tags-item-ico">
-                    <svg-icon src="assets\img\tags-ico\ic-party.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
-                 </div>
-                <mat-card-title class="recipe-header-tags-item-title">На праздник</mat-card-title>
-            </mat-list-item>
-        </mat-list>
-    </div>
-
-
-    <div class="search-recipe">
-
-        <mat-card-title class="search-recipe-title">Поиск рецепта</mat-card-title>
-        <mat-card-actions>
-            <form>
-                <mat-form-field class="search-recipe-input">
-                    <input matInput placeholder="Название Блюда...">
-                </mat-form-field>
-            </form>
-            <button mat-raised-button class="search-recipe-btn">Поиск</button>
-            <mat-list class="search-recipe-tag-list">
-                <mat-list-item class="search-recipe-tag-item">Мясо</mat-list-item>
-                <mat-list-item class="search-recipe-tag-item">Деликатесы</mat-list-item>
-                <mat-list-item class="search-recipe-tag-item">Пироги</mat-list-item>
-                <mat-list-item class="search-recipe-tag-item">Рыба</mat-list-item>
-
+                <mat-list-item class="recipe-header-tags-item">
+                    <div class="recipe-header-tags-item-ico">
+                        <svg-icon src="assets\img\tags-ico\ic-party.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
+                    </div>
+                    <mat-card-title class="recipe-header-tags-item-title">На праздник</mat-card-title>
+                </mat-list-item>
             </mat-list>
-        </mat-card-actions>
+        </div>
     </div>
+    
 
 
-    <div class="recipe-view">
-        <mat-list *ngIf="recipes.length > 0" class="recipe-list">
-            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
-            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
-            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
-            <app-recipe-item class="recipe-list-item" [recipe]="recipes[0]"></app-recipe-item>
-        </mat-list>
+        <div class="search-recipe">
 
-        <button mat-raised-button class="recipe-load-btn">Загрузить еще</button>
-    </div>
+            <mat-card-title class="search-recipe-title">Поиск рецепта</mat-card-title>
+            <mat-card-actions>
+                <form>
+                    <mat-form-field class="search-recipe-input">
+                        <input matInput placeholder="Название Блюда...">
+                    </mat-form-field>
+                </form>
+                <button mat-raised-button class="search-recipe-btn">Поиск</button>
+                <mat-list class="search-recipe-tag-list">
+                    <mat-list-item class="search-recipe-tag-item">Мясо</mat-list-item>
+                    <mat-list-item class="search-recipe-tag-item">Деликатесы</mat-list-item>
+                    <mat-list-item class="search-recipe-tag-item">Пироги</mat-list-item>
+                    <mat-list-item class="search-recipe-tag-item">Рыба</mat-list-item>
 
-    <svg-icon src="assets\img\waves\wave1.svg"></svg-icon>
-    <svg-icon src="assets\img\waves\wave2.svg"></svg-icon>
+                </mat-list>
+            </mat-card-actions>
+        </div>
 
-    <app-footer></app-footer>
+
+        <div class="recipe-view">
+            <mat-list *ngIf="recipes.length > 0" class="recipe-list">
+
+                <app-recipe-item class="recipe-list-item" *ngFor="let recipe of recipes"  [recipe]="recipe"></app-recipe-item>
+            </mat-list>
+
+            <button mat-raised-button class="recipe-load-btn"(click)="getRecipesRange(4)" >Загрузить еще</button>
+        </div> 
+           
+        <div class="waves">
+            <div class= "wave1">
+                <svg-icon  src="assets\img\waves\wave1.svg"></svg-icon>
+            </div>
+            <div class="wave2">
+                <svg-icon class= "wave2" src="assets\img\waves\wave2.svg"></svg-icon>
+            </div>
+        </div>
+
+    
 
 </mat-card>

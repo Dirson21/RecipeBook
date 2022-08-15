@@ -1,0 +1,11 @@
+app-header {
+    position: absolute;
+    z-index: 2;
+    left: 15px;
+}
+app-footer {
+    z-index: 2;
+}
+
+
+

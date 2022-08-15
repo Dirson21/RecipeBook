@@ -5,6 +5,9 @@ mat-card {
     background: #FEFEFB;
     padding-bottom: 0px;
 
+    z-index: -2;
+     
+
 }
 
 .app-header {
@@ -471,9 +474,9 @@ mat-list-item.search-recipe-tag-item {
 }
 
 app-footer {
-    position: absolute;
+    position: relative;
     left: 0px;
-    bottom: 115px;
+    bottom: 210px;
 }
 
 

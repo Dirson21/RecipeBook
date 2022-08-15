@@ -1,5 +1,4 @@
 
-
 .recipe-image {
     position: absolute;
     width: 430px;
@@ -47,10 +46,13 @@
 
     display: flex;
     flex-direction: row;
+  
 }
 
 .recipe-tag-item {
-
+    display: inline-block;
+    white-space: nowrap;
+   
     margin-right: 5px;
     height: 25px;
 
@@ -147,6 +149,8 @@
     left: 199px;
     top: 166px;
 
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-weight: 400;
     font-size: 18px;
     line-height: 30px;

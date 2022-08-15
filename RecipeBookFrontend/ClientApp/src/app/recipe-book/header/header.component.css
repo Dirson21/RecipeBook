@@ -1,11 +1,8 @@
-.header {
-    width: 1200px;
-    height: 38px;
-    position: absolute;
-    left: 120px;
-    top: 40px;
-   
+mat-card-header {
+    position: relative;
+
 }
+
 .logo {
     position: absolute;
     width: 99px;
@@ -46,14 +43,7 @@
     line-height: 22px;
     color: #9196A1;
 }
-/* .main-item {
-    margin-right: 40px;
 
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    color:  #9196A1;
-} */
 
 .login {
     position: absolute;

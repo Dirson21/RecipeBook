@@ -1,4 +1,4 @@
-﻿namespace RecipeBookBackend.Dto
+﻿namespace Dto
 {
     public class IngridientDto
     {
@@ -6,6 +6,6 @@
         public string Name { get; set; }
         public int RecipeId { get; set; }
 
-        RecipeDto Recipe { get; set; }
+       
     }
 }
