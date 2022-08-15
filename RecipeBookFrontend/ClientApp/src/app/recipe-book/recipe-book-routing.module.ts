@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { RecipePageComponent } from './recipe-page/recipe-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
+import { AddRecipePageComponent } from './add-recipe-page/add-recipe-page.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: "recipe",
     component: RecipePageComponent
+  },
+  {
+    path: "add-recipe",
+    component: AddRecipePageComponent
   },
   {
     path: "**",

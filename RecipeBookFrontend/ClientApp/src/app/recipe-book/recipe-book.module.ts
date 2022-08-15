@@ -16,13 +16,17 @@ import { RecipeBookRoutingModule } from './recipe-book-routing.module';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { RecipeService } from './shared/recipe.service';
 import { BrowserModule } from '@angular/platform-browser';
+import { AddRecipePageComponent } from './add-recipe-page/add-recipe-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
   declarations: [
     MainPageComponent,
     RecipePageComponent,
-    RecipeItemComponent
+    RecipeItemComponent,
+    AddRecipePageComponent
   ],
   imports: [
     CommonModule,
@@ -35,8 +39,10 @@ import { BrowserModule } from '@angular/platform-browser';
     MatInputModule,
     RouterModule,
     RecipeBookRoutingModule,
-    BrowserModule
-    
+    BrowserModule,
+    ReactiveFormsModule,
+    MatSelectModule
+
   
   ],
   providers: [

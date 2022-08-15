@@ -1,0 +1,124 @@
+<mat-card>
+    
+    <div class="back">
+    <a  routerLink="/recipe">
+        <svg-icon class="back-svg" src="assets\img\keyboard_backspace.svg"></svg-icon>
+        Назад
+    </a>
+    </div>  
+
+    <div class="add-recipe">
+        <form>
+        <div class="add-recipe-block-title">
+            <mat-card-title class="add-recipe-title">Добавить новый рецепт</mat-card-title>
+            <button mat-raised-button class="add-recipe-button">Опубликовать</button>
+        </div>
+
+        <div class="recipe-info-block">
+            <div class="recipe-info-image-drop">
+                <input  type="file"  class="image-upload" multiple>
+                <div class="recipe-info-image-drop-zone">
+                    <svg-icon class="upload-svg" src="assets\img\bi_cloud-download.svg"></svg-icon>
+                    <p class="upload-text">Загрузите фото готового блюда</p>
+                </div>
+                <img class="image-preview">
+            </div>
+           
+             <div class="recipe-info">
+                <mat-form-field  class="recipe-info-input">
+                    <input matInput placeholder="Название рецепта">
+                </mat-form-field>
+                <mat-form-field class="recipe-info-description">
+                    <textarea matInput placeholder="Краткое описание рецепта (150 символов)"></textarea>
+                </mat-form-field>
+               
+                <mat-form-field class="recipe-info-input">
+                    <input matInput placeholder="Добавить теги">
+                </mat-form-field>
+
+                <div class="recipe-info-input-block">
+                    <div class="recipe-info-block-info">
+                        <mat-form-field  class="recipe-info-block-info-select">
+                            <mat-label>Время готовки</mat-label>
+                            <mat-select >
+                                <mat-option *ngFor="let num of minutes" [value]="num">{{num}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        Минут
+                    </div> 
+
+                    <div class="recipe-info-block-info">
+                        <mat-form-field  class="recipe-info-block-info-select">
+                            <mat-label>Порций в блюде</mat-label>
+                            <mat-select >
+                                <mat-option>1</mat-option>
+                                <mat-option>2</mat-option>
+                                <mat-option>3</mat-option>
+                                <mat-option>4</mat-option>
+                                <mat-option>5</mat-option>
+                                <mat-option>6</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        Персон
+                    </div>
+                </div>
+            </div>          
+        </div>
+
+        <div class="flex-ingridient-step">
+
+            <div class="ingridient-block">
+                <mat-card-title class="ingridient-block-title">Ингридиенты</mat-card-title>
+
+                <div>
+                    <button mat-icon-button class="close-btn">  <svg-icon class="close-btn-svg" src="assets\img\close.svg"></svg-icon></button>
+
+                    <div class="ingridient-block-info">
+                        <mat-form-field class="ingridient-input-header">
+                            <input matInput placeholder="Заголовок для ингридиентов">
+                        </mat-form-field>
+                        <mat-form-field class="ingridient-input-product">
+                            <textarea class="ingridient-input-product-text" matInput placeholder="Список продуктов для категории"></textarea>
+                        </mat-form-field>
+                    </div>
+                    <button mat-raised-button class="ingridient-add-header">
+                        <svg-icon class="ingridient-add-header-svg" src="assets\img\add.svg"></svg-icon>
+                        <div class="ingridient-add-header-text">Добавить заголовок</div>
+                    </button>
+                </div>
+            </div>
+
+            <div class="step-block">
+
+                <mat-list class="step-list">
+                    <mat-list-item class="step-item">
+                    <div>
+                        <mat-card-title class="step-block-title">Шаг 1</mat-card-title>
+                        <button mat-icon-button class="close-step-btn">  <svg-icon class="close-btn-svg" src="assets\img\close.svg"></svg-icon></button>
+                        
+                        <mat-form-field class="step-input">
+                            <textarea matInput class="step-input-text" placeholder="Описание шага"></textarea>
+                        </mat-form-field>
+                    </div>
+                    </mat-list-item>
+                </mat-list>
+               
+
+                <button mat-raised-button class="step-add">
+                    <svg-icon class="ingridient-add-header-svg" src="assets\img\add.svg"></svg-icon>
+                    <div class="ingridient-add-header-text">Добавить шаг</div>
+                </button>
+                
+
+            </div>
+        </div>
+
+        </form>
+    </div>
+
+    <div class= "wave1">
+        <svg-icon  src="assets\img\waves\wave1.svg"></svg-icon>
+    </div>
+
+
+</mat-card>
