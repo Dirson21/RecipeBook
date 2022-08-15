@@ -10,11 +10,9 @@ namespace Services
     public interface ITagService
     {
         List<TagDto> getTags();
-        List<TagDto> getTags(int start, int count);
 
         TagDto getTagByName(string name);
 
-        void AddRecipeToTag(int tagId, int recipeId);
 
 
     }

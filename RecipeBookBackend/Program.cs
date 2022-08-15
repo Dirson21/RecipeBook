@@ -5,6 +5,7 @@ using Infrastructure.Data;
 using Services;
 using Infrastructure.Data.Models;
 using Services.Converters;
+using Domain.Repositoy;
 
 var builder = WebApplication.CreateBuilder(args);
 

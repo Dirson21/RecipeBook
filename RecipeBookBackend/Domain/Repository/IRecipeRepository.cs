@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Data.Models
+namespace Domain.Repositoy
 {
     public interface IRecipeRepository
     {

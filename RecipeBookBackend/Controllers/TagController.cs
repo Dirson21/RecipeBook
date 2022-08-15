@@ -28,23 +28,5 @@ namespace RecipeBookBackend.Controllers
                 return  BadRequest(ex.Message);
             }
        }
-
-        
-
-        [HttpPut]
-        public IActionResult AddRecipeToTag([FromForm]int tagId, [FromForm] int recipeId)
-        {
-           
-            try
-            {
-                _tagService.AddRecipeToTag(tagId, recipeId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-        }
     }
 }
