@@ -405,3 +405,16 @@ mat-list-item.step-item {
     height: 800.67px;       
 
 }
+
+.image-preview {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 430px;
+    height: 430px;
+    border-radius: 72px 0px;
+    
+
+}
+
+
