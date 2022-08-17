@@ -282,13 +282,11 @@ mat-list-item.search-recipe-tag-item {
     position: relative;
     z-index: -1;
     top: 0px;
-    overflow: hidden;   
 }
 
 .wave2 {
     
     position: relative;
     z-index: -1;
-    overflow: hidden;
     
 }
