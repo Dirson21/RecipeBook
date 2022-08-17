@@ -1,16 +1,16 @@
 ﻿using Domain;
 using Domain.Repositoy;
 using Infrastructure.Data.Models;
-using Services.Dto;
+using Application.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Converters
+namespace Application.Converters
 {
-    public class RecipeConverter
+    public class RecipeConverter: IRecipeConverter
     {
         private readonly ITagRepository _tagRepositry;
 
@@ -44,7 +44,7 @@ namespace Services.Converters
             recipe.CountPerson = recipeDto.CountPerson;
             recipe.Image = recipeDto.Image;
             recipe.CookingSteps = recipeDto.CookingSteps?.ConvertAll(c => c.ConvertToCookingStep());
-            recipe.Ingredients = recipeDto.Ingridients?.ConvertAll(c => c.ConvertToIngridient());
+            recipe.IngredientHeaders = recipeDto.IngredientHeaders?.ConvertAll(c => c.ConvertToIngridientHeader());
             return recipe;
         }
     }

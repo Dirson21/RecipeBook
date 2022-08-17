@@ -1,6 +1,7 @@
 ﻿using Domain;
+using Domain.UoW;
 using Infrastructure.Data.Models.EntityConfigurations;
-using Infrastructure.UoW;
+
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,9 +20,11 @@ namespace Infrastructure.Data
         }
 
         public DbSet<Recipe> Recipe { get; set; }
-        public DbSet<Ingredient> Ingridient { get; set; }
+        public DbSet<Ingredient> Ingredient { get; set; }
         public DbSet<Tag> Tag { get; set; }
         public DbSet<CookingStep> CookingStep { get; set; }
+
+        public DbSet<IngredientHeader> IngredientHeader { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -30,6 +33,8 @@ namespace Infrastructure.Data
             builder.ApplyConfiguration(new IngredientMap());
             builder.ApplyConfiguration(new CookingStepMap());
             builder.ApplyConfiguration(new TagMap());
+            builder.ApplyConfiguration(new IngredientHeaderMap());
+           
         }
 
         public int Commit()

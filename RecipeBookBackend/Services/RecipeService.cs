@@ -1,30 +1,30 @@
-﻿using Services.Dto;
+﻿using Application.Dto;
 using Infrastructure.Data;
 using Infrastructure.Data.Models;
 using Domain;
-using Services.Converters;
+using Application.Converters;
 using Domain.Repositoy;
+using Domain.UoW;
 
-namespace Services
+namespace Application
 {
     public class RecipeService : IRecipeService
     {
-        private readonly RecipeBookDbContext _dbContext;
+        private readonly IUnitOfWork _UnitOfWork;
         private readonly IRecipeRepository _recipeRepository;
-        private readonly ITagRepository _tagRepository;
+        private readonly IRecipeConverter _recipeConverter;
 
-        public RecipeService(RecipeBookDbContext dbContext, IRecipeRepository recipeRepository,  ITagRepository tagRepository)
+        public RecipeService(IUnitOfWork unitOfWork, IRecipeRepository recipeRepository,  IRecipeConverter recipeConverter)
         {
-            _dbContext = dbContext;
+            _UnitOfWork = unitOfWork;
             _recipeRepository = recipeRepository;
-            _tagRepository = tagRepository;
+            _recipeConverter = recipeConverter;
         }
 
         public int CreateRecipe(RecipeDto recipeDto)
         {
-            RecipeConverter converter = new RecipeConverter(_tagRepository); 
-            Recipe recipe = _recipeRepository.Create(converter.ConvertToRecipe(recipeDto));
-            _dbContext.Commit();
+            Recipe recipe = _recipeRepository.Create(_recipeConverter.ConvertToRecipe(recipeDto));
+            _UnitOfWork.Commit();
             return recipe.Id;
         }
 
@@ -38,7 +38,7 @@ namespace Services
 
 
             _recipeRepository.Delete(recipe);
-            _dbContext.Commit();
+            _UnitOfWork.Commit();
         }
 
         public RecipeDto GetRecipeById(int id)
@@ -87,7 +87,7 @@ namespace Services
             }
 
             int id = _recipeRepository.Update(recipe);
-            _dbContext.Commit();
+            _UnitOfWork.Commit();
             return id;
         }
     }

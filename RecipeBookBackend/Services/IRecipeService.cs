@@ -1,6 +1,6 @@
-﻿using Services.Dto;
+﻿using Application.Dto;
 
-namespace Services
+namespace Application
 {
     public interface IRecipeService
     {

@@ -1,17 +1,17 @@
-﻿using Services.Dto;
+﻿using Application.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services
+namespace Application
 {
     public interface ITagService
     {
-        List<TagDto> getTags();
+        List<TagDto> GetTags();
 
-        TagDto getTagByName(string name);
+        TagDto GetTagByName(string name);
 
 
 

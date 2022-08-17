@@ -1,12 +1,12 @@
 ﻿using Domain;
-using Services.Dto;
+using Application.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Converters
+namespace Application.Converters
 {
     public static class RecipeExtention
     {
@@ -21,7 +21,7 @@ namespace Services.Converters
                 CountPerson = recipe.CountPerson,
                 Image = recipe.Image,
                 CookingSteps = recipe.CookingSteps?.ConvertAll(c => c.ConvertToCookingStepDto()),
-                Ingridients = recipe.Ingredients?.ConvertAll(c => c.ConvertToIngridientDto()),
+                IngredientHeaders = recipe.IngredientHeaders?.ConvertAll(c => c.ConvertToIngridientHeaderDto()),
                 Tags = recipe.Tags?.ConvertAll(c => c.ConvertToTagDto())
                 
             };

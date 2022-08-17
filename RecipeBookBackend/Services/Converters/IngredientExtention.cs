@@ -1,31 +1,31 @@
 ﻿using Domain;
-using Services.Dto;
+using Application.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Converters
+namespace Application.Converters
 {
-    public static class IngridientExtention
+    public static class IngredientExtention
     {
-        public static IngridientDto ConvertToIngridientDto(this Ingredient ingridient)
+        public static IngredientDto ConvertToIngridientDto(this Ingredient ingridient)
         {
-            return new IngridientDto
+            return new IngredientDto
             {
                 Id = ingridient.Id,
                 Name = ingridient.Name,
-                RecipeId = ingridient.RecipeId
+                RecipeId = ingridient.IngridientHeaderId
             };
         }
-        public static Ingredient ConvertToIngridient(this IngridientDto ingridientDto)
+        public static Ingredient ConvertToIngridient(this IngredientDto ingridientDto)
         {
             return new Ingredient
             {
                 Id = ingridientDto.Id,
                 Name = ingridientDto.Name,
-                RecipeId = ingridientDto.RecipeId
+                
             };
         }
     }

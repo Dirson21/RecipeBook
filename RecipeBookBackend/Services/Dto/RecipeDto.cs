@@ -1,7 +1,7 @@
 ﻿
 
 
-namespace Services.Dto
+namespace Application.Dto
 {
     public class RecipeDto
     {
@@ -12,7 +12,7 @@ namespace Services.Dto
         public int CookingTime { get; set; }
         public int CountPerson { get; set; }
 
-        public List<IngridientDto> Ingridients { get; set; } = new List<IngridientDto>();
+        public List<IngredientHeaderDto> IngredientHeaders { get; set; } = new List<IngredientHeaderDto>();
         public List<TagDto> Tags { get; set; } = new List<TagDto>();
         public List<CookingStepDto> CookingSteps { get; set; } = new List<CookingStepDto>();
 

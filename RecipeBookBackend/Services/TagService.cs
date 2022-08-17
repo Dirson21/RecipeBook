@@ -1,8 +1,8 @@
 ﻿using Domain;
-using Services.Dto;
+using Application.Dto;
 using Infrastructure.Data;
 using Infrastructure.Data.Models;
-using Services.Converters;
+using Application.Converters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Domain.Repositoy;
 
-namespace Services
+namespace Application
 {
     public class TagService : ITagService
     {
@@ -24,12 +24,12 @@ namespace Services
             _dbContext = dbContext;
         }
 
-        public TagDto getTagByName(string name)
+        public TagDto GetTagByName(string name)
         {
             return _tagRepository.GetByName(name).ConvertToTagDto();
         }
 
-        public List<TagDto> getTags()
+        public List<TagDto> GetTags()
         {
             return _tagRepository.GetAll().ConvertAll(x => x.ConvertToTagDto());
         }

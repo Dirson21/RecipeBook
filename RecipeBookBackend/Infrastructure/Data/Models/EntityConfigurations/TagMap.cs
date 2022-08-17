@@ -21,10 +21,6 @@ namespace Infrastructure.Data.Models.EntityConfigurations
             builder.Property(x => x.Name);
             builder.HasIndex(x => x.Name).IsUnique();
 
-            builder.Property(x => x.Image);
-
-            builder.Property(x => x.Description);
-
         }
     }
 }

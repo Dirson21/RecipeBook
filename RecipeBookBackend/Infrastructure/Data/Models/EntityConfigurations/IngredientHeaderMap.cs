@@ -9,19 +9,17 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data.Models.EntityConfigurations
 {
-    public class IngredientMap : IEntityTypeConfiguration<Ingredient>
+    public class IngredientHeaderMap : IEntityTypeConfiguration<IngredientHeader>
     {
-        public void Configure(EntityTypeBuilder<Ingredient> builder)
+        public void Configure(EntityTypeBuilder<IngredientHeader> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-           
 
-            builder.Property(x => x.Name).IsRequired();
+            builder.Property(x => x.Name);
 
-            builder.Property(x => x.IngridientHeaderId);
-            builder.HasOne(x => x.IngredientHeader).WithMany(x => x.Ingredients).OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.IngridientHeaderId);
-
+            builder.Property(x => x.RecipeId);
+            builder.HasOne(x => x.Recipe).WithMany(x => x.IngredientHeaders).OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.RecipeId);
         }
     }
 }

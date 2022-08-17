@@ -1,12 +1,12 @@
 ﻿using Domain;
-using Services.Dto;
+using Application.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.Converters
+namespace Application.Converters
 {
     public static class TagExtention
     {
@@ -16,9 +16,7 @@ namespace Services.Converters
             return new TagDto
             {
                 Id = tag.Id,
-                Name = tag.Name,
-                Image = tag.Image,
-                Description = tag.Description,
+                Name = tag.Name
             };
         }
 
@@ -27,9 +25,7 @@ namespace Services.Converters
             return new Tag
             {
                 Id = tagDto.Id,
-                Name = tagDto.Name,
-                Image = tagDto.Image,
-                Description= tagDto.Description,
+                Name = tagDto.Name
             };
         }
     }
