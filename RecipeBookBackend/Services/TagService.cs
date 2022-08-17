@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Repositoy;
+using Domain.UoW;
 
 namespace Application
 {
@@ -16,12 +17,12 @@ namespace Application
     {
 
         private readonly ITagRepository _tagRepository;
-        private readonly RecipeBookDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public TagService(ITagRepository tagRepository, RecipeBookDbContext dbContext)
+        public TagService(ITagRepository tagRepository, IUnitOfWork unitOfWork)
         {
             _tagRepository = tagRepository;
-            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public TagDto GetTagByName(string name)

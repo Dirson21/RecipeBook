@@ -10,13 +10,14 @@ namespace Application
 {
     public class RecipeService : IRecipeService
     {
-        private readonly IUnitOfWork _UnitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+
         private readonly IRecipeRepository _recipeRepository;
         private readonly IRecipeConverter _recipeConverter;
 
         public RecipeService(IUnitOfWork unitOfWork, IRecipeRepository recipeRepository,  IRecipeConverter recipeConverter)
         {
-            _UnitOfWork = unitOfWork;
+            _unitOfWork = unitOfWork;
             _recipeRepository = recipeRepository;
             _recipeConverter = recipeConverter;
         }
@@ -24,7 +25,7 @@ namespace Application
         public int CreateRecipe(RecipeDto recipeDto)
         {
             Recipe recipe = _recipeRepository.Create(_recipeConverter.ConvertToRecipe(recipeDto));
-            _UnitOfWork.Commit();
+            _unitOfWork.Commit();
             return recipe.Id;
         }
 
@@ -38,7 +39,7 @@ namespace Application
 
 
             _recipeRepository.Delete(recipe);
-            _UnitOfWork.Commit();
+            _unitOfWork.Commit();
         }
 
         public RecipeDto GetRecipeById(int id)
@@ -87,7 +88,7 @@ namespace Application
             }
 
             int id = _recipeRepository.Update(recipe);
-            _UnitOfWork.Commit();
+            _unitOfWork.Commit();
             return id;
         }
     }

@@ -15,7 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<RecipeBookDbContext>(c =>
+builder.Services.AddDbContext<IUnitOfWork,RecipeBookDbContext>(c =>
 {
     try
     {
@@ -29,13 +29,15 @@ builder.Services.AddDbContext<RecipeBookDbContext>(c =>
 
 });
 
+
+
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
 builder.Services.AddScoped<IRecipeService, RecipeService>();
 
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<ITagService, TagService>();
 
-builder.Services.AddScoped<IUnitOfWork, RecipeBookDbContext>();
+/*builder.Services.AddScoped<IUnitOfWork, RecipeBookDbContext>();*/
 
 builder.Services.AddScoped<IRecipeConverter, RecipeConverter>();
 

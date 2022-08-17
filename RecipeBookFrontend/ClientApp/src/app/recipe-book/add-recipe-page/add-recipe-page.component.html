@@ -67,7 +67,7 @@
             <div class="ingridient-block" formArrayName="ingridients">
                 <mat-card-title class="ingridient-block-title">Ингридиенты</mat-card-title>
                
-                <div *ngFor="let ingridientForm  of ingridients.controls; let i = index">
+                <div *ngFor="let ingridientForm  of ingridientForms.controls; let i = index">
                     <button *ngIf="i > 0" mat-icon-button class="close-btn" (click)="removeIngridientHeader(i)">  <svg-icon class="close-btn-svg" src="assets\img\close.svg"></svg-icon></button>
 
                     <div class="ingridient-block-info" [formGroup]="getIngridientForm(i)">
@@ -91,7 +91,7 @@
             <div class="step-block">
 
                 <mat-list class="step-list" formArrayName="steps">
-                    <mat-list-item  class="step-item" *ngFor="let step of steps.controls; let i = index">
+                    <mat-list-item  class="step-item" *ngFor="let step of stepForms.controls; let i = index">
                     <div [formGroup]="getStepForm(i)">
                         <mat-card-title class="step-block-title">Шаг {{i+1}}</mat-card-title>
                         <button *ngIf="i > 0" mat-icon-button class="close-step-btn" (click)="removeStep(i)">  <svg-icon class="close-btn-svg" src="assets\img\close.svg"></svg-icon></button>

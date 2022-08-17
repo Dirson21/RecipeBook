@@ -2,7 +2,8 @@ import { Component, IterableDiffers, OnInit } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observer } from 'rxjs';
 import { ICookingStep } from '../shared/cookingStep.interface';
-import { IIngridient } from '../shared/ingridient.interface';
+import { IIngredientHeader } from '../shared/ingredient-header.interface';
+import { IIngredient } from '../shared/ingredient.interface';
 import { IRecipe } from '../shared/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 import { ITag } from '../shared/tag.interface';
@@ -61,10 +62,10 @@ export class AddRecipePageComponent implements OnInit {
   }
 
   public addStep() {
-    this.steps.push(this.initStepForm())
+    this.stepForms.push(this.initStepForm())
   }
   public removeStep(i: number) {
-    this.steps.removeAt(i)
+    this.stepForms.removeAt(i)
   }
 
 
@@ -84,29 +85,30 @@ export class AddRecipePageComponent implements OnInit {
     return this.form.get("recipeCountPerson")!
   }
 
-  get ingridients() {
+  get ingridientForms() {
     return this.form.controls["ingridients"] as FormArray;
   }
 
-  get steps() {
+
+  get stepForms() {
     return this.form.controls["steps"] as FormArray
   }
 
 
   public getStepForm(i: number) {
-    return this.steps.at(i) as FormGroup;
+    return this.stepForms.at(i) as FormGroup;
   }
 
   public getIngridientForm(i: number) {
-    return this.ingridients.at(i) as FormGroup
+    return this.ingridientForms.at(i) as FormGroup
   }
 
   public addIngridientHeader() {
-    this.ingridients.push(this.initIngridientForm())
+    this.ingridientForms.push(this.initIngridientForm())
   }
 
   public removeIngridientHeader(i: number) {
-    this.ingridients.removeAt(i)
+    this.ingridientForms.removeAt(i)
   }
 
 
@@ -140,26 +142,38 @@ export class AddRecipePageComponent implements OnInit {
     return tags;
   }
 
-  private getIngridientFromRaw(tagsRaw: string): IIngridient[] {
-    let ingridients: IIngridient[] = [];
+  private getIngredientFromRaw(tagsRaw: string): IIngredient[] {
+    let ingredients: IIngredient[] = [];
 
     tagsRaw.split("\n").forEach((value:string) => {
-        ingridients.push({id:0, name:value, recipeId: 0})
+        ingredients.push({id:0, name:value, recipeId: 0})
     });
-    return ingridients;
+    return ingredients;
   }
 
   private getCookingStepsFromControls():ICookingStep[] {
     let cookingStep: ICookingStep[] = [];
-    this.steps.controls.forEach((control, index) => {
+    this.stepForms.controls.forEach((control, index) => {
       cookingStep.push({
           id: 0,
           recipeId:0,
           stepNumber: index + 1,
-          description: control.value
+          description: control.get("stepDescription")?.value
       })
     })
     return cookingStep;
+  }
+
+  private getIngredientHeaderFromControls(): IIngredientHeader[] {
+    let ingredientHeaders: IIngredientHeader[] = []
+    this.ingridientForms.controls.forEach((control, index) => {
+      ingredientHeaders.push({
+        id: 0,
+        name: control.get("ingridientHeader")?.value,
+        ingredients: this.getIngredientFromRaw(control.get("ingridientProduct")?.value)
+      })
+    })
+    return ingredientHeaders;
   }
 
   public addRecipe() {
@@ -174,12 +188,12 @@ export class AddRecipePageComponent implements OnInit {
       countPerson: this.recipeCountPersonControl.value,
       tags: this.getTagFromRaw(this.recipeTagsControl.value),
       cookingSteps: this.getCookingStepsFromControls(),
-      ingridients: []
+      ingredientHeaders: this.getIngredientHeaderFromControls()
     };
 
     console.log(recipe);
 
-    this.recipeService.addRecipe(recipe).subscribe((id: number) => {
+    this.recipeService.addRecipe(recipe).subscribe((id) => {
         console.log(id);
 
     })
