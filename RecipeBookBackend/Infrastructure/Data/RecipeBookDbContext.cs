@@ -19,7 +19,7 @@ namespace Infrastructure.Data
         }
 
         public DbSet<Recipe> Recipe { get; set; }
-        public DbSet<Ingridient> Ingridient { get; set; }
+        public DbSet<Ingredient> Ingridient { get; set; }
         public DbSet<Tag> Tag { get; set; }
         public DbSet<CookingStep> CookingStep { get; set; }
         
@@ -27,7 +27,7 @@ namespace Infrastructure.Data
         {
             base.OnModelCreating(builder);
             builder.ApplyConfiguration(new RecipeMap());
-            builder.ApplyConfiguration(new IngridientMap());
+            builder.ApplyConfiguration(new IngredientMap());
             builder.ApplyConfiguration(new CookingStepMap());
             builder.ApplyConfiguration(new TagMap());
         }

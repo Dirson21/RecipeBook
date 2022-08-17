@@ -44,7 +44,7 @@ namespace Services.Converters
             recipe.CountPerson = recipeDto.CountPerson;
             recipe.Image = recipeDto.Image;
             recipe.CookingSteps = recipeDto.CookingSteps?.ConvertAll(c => c.ConvertToCookingStep());
-            recipe.Ingridients = recipeDto.Ingridients?.ConvertAll(c => c.ConvertToIngridient());
+            recipe.Ingredients = recipeDto.Ingridients?.ConvertAll(c => c.ConvertToIngridient());
             return recipe;
         }
     }

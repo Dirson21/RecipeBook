@@ -31,21 +31,21 @@ namespace Infrastructure.Data.Models
 
         public List<Recipe> GetAll()
         {
-            return _dbContext.Recipe.OrderBy(x => x.Id).Include(x => x.CookingSteps).Include(x => x.Ingridients).Include(x => x.Tags).ToList();
+            return _dbContext.Recipe.OrderBy(x => x.Id).Include(x => x.CookingSteps).Include(x => x.Ingredients).Include(x => x.Tags).ToList();
         }
         public List<Recipe> GetAll(int start, int count)
         {
-            return _dbContext.Recipe.OrderBy(x => x.Id).Skip(start).Take(count).Include(x => x.CookingSteps).Include(x => x.Ingridients).Include(x => x.Tags).ToList();
+            return _dbContext.Recipe.OrderBy(x => x.Id).Skip(start).Take(count).Include(x => x.CookingSteps).Include(x => x.Ingredients).Include(x => x.Tags).ToList();
         }
 
         public Recipe GetById(int id)
         {
-            return _dbContext.Recipe.Include(x => x.CookingSteps).Include(x => x.Ingridients).Include(x => x.Tags).FirstOrDefault(x => x.Id == id);
+            return _dbContext.Recipe.Include(x => x.CookingSteps).Include(x => x.Ingredients).Include(x => x.Tags).FirstOrDefault(x => x.Id == id);
         }
 
         public Recipe GetByName(string name)
         {
-           return _dbContext.Recipe.Include(x => x.CookingSteps).Include(x => x.Ingridients).Include(x => x.Tags).FirstOrDefault(x => x.Name == name);
+           return _dbContext.Recipe.Include(x => x.CookingSteps).Include(x => x.Ingredients).Include(x => x.Tags).FirstOrDefault(x => x.Name == name);
         }
 
         public int Update(Recipe recipe)

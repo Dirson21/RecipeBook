@@ -10,7 +10,7 @@ namespace Services.Converters
 {
     public static class IngridientExtention
     {
-        public static IngridientDto ConvertToIngridientDto(this Ingridient ingridient)
+        public static IngridientDto ConvertToIngridientDto(this Ingredient ingridient)
         {
             return new IngridientDto
             {
@@ -19,9 +19,9 @@ namespace Services.Converters
                 RecipeId = ingridient.RecipeId
             };
         }
-        public static Ingridient ConvertToIngridient(this IngridientDto ingridientDto)
+        public static Ingredient ConvertToIngridient(this IngridientDto ingridientDto)
         {
-            return new Ingridient
+            return new Ingredient
             {
                 Id = ingridientDto.Id,
                 Name = ingridientDto.Name,

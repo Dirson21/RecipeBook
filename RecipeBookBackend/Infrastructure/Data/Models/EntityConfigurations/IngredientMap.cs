@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data.Models.EntityConfigurations
 {
-    public class IngridientMap : IEntityTypeConfiguration<Ingridient>
+    public class IngredientMap : IEntityTypeConfiguration<Ingredient>
     {
-        public void Configure(EntityTypeBuilder<Ingridient> builder)
+        public void Configure(EntityTypeBuilder<Ingredient> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.HasOne(x => x.Recipe).WithMany(x => x.Ingridients).OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.RecipeId);
+            builder.HasOne(x => x.Recipe).WithMany(x => x.Ingredients).OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.RecipeId);
 
             builder.Property(x => x.Name).IsRequired();
 

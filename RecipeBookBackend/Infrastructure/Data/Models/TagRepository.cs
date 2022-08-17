@@ -22,7 +22,7 @@ namespace Infrastructure.Data.Models
 
         public List<Tag> GetAll()
         {
-            return _dbContext.Tag.OrderBy(x => x.Id).Include(x => x.Recipes).ThenInclude(x => x.Ingridients)
+            return _dbContext.Tag.OrderBy(x => x.Id).Include(x => x.Recipes).ThenInclude(x => x.Ingredients)
                     .Include(x => x.Recipes).ThenInclude(x => x.CookingSteps).ToList();
         }
 
