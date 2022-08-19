@@ -2,13 +2,17 @@ mat-card-header {
     position: relative;
 
 }
+::ng-deep .mat-card-header-text {
+    /* CSS styles go here */
+    margin: 0px; 
+}
 
 .logo {
-    position: absolute;
+    position: relative;
     width: 99px;
     height: 29px;
-    left: 120px;
-    top: 44px;
+    margin-left: 120px;
+    margin-top: 44px;
     
     font-weight: 700;
     font-size: 24px;
@@ -18,13 +22,12 @@ mat-card-header {
 
 }
 .menu-list {
-   
-    position: absolute;
-    width: 344px;
-    height: 22px;
-    left: 299px;
-    top: 44px;
 
+    position: relative;
+  
+    height: 22px;
+    margin-left: 80px;
+    margin-top: 44px;
     display: flex;
     flex-direction: row;
 }
@@ -36,7 +39,7 @@ mat-card-header {
 .list-item {
 
   
- 
+    position: relative;
     margin-right: 40px;
     font-weight: 400;
     font-size: 18px;
@@ -44,43 +47,37 @@ mat-card-header {
     color: #9196A1;
 }
 
+.list-item:last-child {
+    margin-right: 0px;
+}
 
 .login {
-    position: absolute;
+    
+    position: relative;
     width: 280px;
     height: 38px;
-    left: 1208px;
-    top: 48px;
  
 
 }
 
 .entered-login {
-    position: absolute;
-    width: 280px;
+    margin-top: 40px;
+    margin-left: 304px;
+    position: relative;
+    /* width: 280px; */
     height: 38px;
-    left: 1040px;
-    top: 48px;
-   
+
 }
 
 
-.vector {
-    position: absolute;
-    height: 16px;
-    top: 11px;
-    left: 11px;
-    
-}
-.elipse {
-    position: absolute;
-    width: 38px;
+.login-svg {
+    position: relative;
 }
 .text-login {
-    position: absolute;
-    left: 52px;
-    top: 8px;
-
+    position: relative;
+    display: inline-block;
+    bottom:10px;
+    margin-left: 14px;
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
@@ -96,21 +93,24 @@ mat-card-header {
 }
 
 .line {
-    position: absolute;
+    display: inline-block;
+    position: relative;
     width: 19px;
-    height: 0px;
-    left: 232px;
-    top: 18px;
+    bottom:15px;
+    margin-left: 10px;
+    margin-right: 10px;
 
     border: 1px solid rgba(253, 177, 0, 0.72);
     transform: rotate(90deg);
 }
 
 .exit-button {
-    position: absolute;
+    display: inline-block;
+    position: relative;
     width: 24px;
     height: 24px;
-    left: 256px;
-    top: 5px;
+    bottom: 5px;
+    
+
     
 }

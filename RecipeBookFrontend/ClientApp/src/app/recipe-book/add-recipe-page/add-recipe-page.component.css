@@ -6,11 +6,10 @@ mat-card {
     padding-bottom: 0px;
 }
 
-
 .back {
     z-index: 1;
     position: relative;
-    margin-top: 127px!important;
+    margin-top: 49px;
     margin-left: 120px;
    
 
