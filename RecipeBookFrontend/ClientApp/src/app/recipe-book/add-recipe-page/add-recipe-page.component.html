@@ -16,7 +16,7 @@
 
         <div class="recipe-info-block">
             <div class="recipe-info-image-drop">
-                <input  accept="image/png, image/jpeg" type="file"  id="imagePreview" class="image-upload" >
+                <input  accept="image/png, image/jpeg" type="file" (change)="onFileChanged($event)" id="imagePreview" class="image-upload" >
                 <div class="recipe-info-image-drop-zone">
                     <svg-icon class="upload-svg" src="assets\img\bi_cloud-download.svg"></svg-icon>
                     <p class="upload-text">Загрузите фото готового блюда</p>
@@ -116,8 +116,6 @@
         </form>
     </div>
 
-    <div class= "wave1">
-        <svg-icon  src="assets\img\waves\wave1.svg"></svg-icon>
-    </div>
+ 
 
 

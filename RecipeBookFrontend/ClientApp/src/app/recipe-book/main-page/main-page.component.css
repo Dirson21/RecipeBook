@@ -16,11 +16,11 @@ mat-card {
 }
 
 .header {
-    position: absolute;
+    position: relative;
     width: 1320px;
     height: 800px;
     left: 120px;
-    top: 0px;
+    top: -120px;
 }
 
 .header-content {
@@ -112,11 +112,12 @@ mat-card {
 }
 
 .sort-tag {
-    position: absolute;
+    position: relative;
     width: 1200px;
     height: 459px;
-    left: 120px;
-    top: 913px;
+    margin-left: 120px;
+    /* left: 120px;
+    top: 913px; */
     
 }
 .headline {
@@ -225,11 +226,14 @@ mat-list-item.list-tag-item {
 }
 
 .recipe-day {
-    position: absolute;
+    position: relative;
     width: 1129px;
     height: 543px;
-    left: 120px;
-    top: 1529px;
+    margin-left: 120px;
+    z-index: 2;
+    margin-top: 157px;
+    /* left: 120px;
+    top: 1529px; */
 }
 
 .recipe-day-img {
@@ -371,11 +375,14 @@ mat-list-item.list-tag-item {
 }
 
 .search-recipe {
-    position: absolute;
+    position: relative;
     width: 884px;
     height: 278px;
-    left: 278px;
-    top: 2222px;
+    margin-left: 278px;
+    margin-top: 150px;
+    margin-bottom: 106px;
+    /* left: 278px;
+    top: 2222px; */
 }
 
 .search-recipe-title {
