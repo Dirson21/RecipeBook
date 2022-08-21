@@ -35,7 +35,17 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Data\Recipe\" />
+    <Folder Include="wwwroot\Data\Recipe\10\" />
+    <Folder Include="wwwroot\Data\Recipe\11\" />
+    <Folder Include="wwwroot\Data\Recipe\12\" />
+    <Folder Include="wwwroot\Data\Recipe\1\" />
+    <Folder Include="wwwroot\Data\Recipe\2\" />
+    <Folder Include="wwwroot\Data\Recipe\3\" />
+    <Folder Include="wwwroot\Data\Recipe\4\" />
+    <Folder Include="wwwroot\Data\Recipe\5\" />
+    <Folder Include="wwwroot\Data\Recipe\6\" />
+    <Folder Include="wwwroot\Data\Recipe\7\" />
+    <Folder Include="wwwroot\Data\Recipe\9\" />
     <Folder Include="wwwroot\Data\Tag\" />
   </ItemGroup>
 

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{0020D352-52CD-451D-83B7-5841A2EFE19E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RecipeBookFrontend", "RecipeBookFrontend\RecipeBookFrontend.csproj", "{EACA9F48-0D53-4113-B030-957E484B0F81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0020D352-52CD-451D-83B7-5841A2EFE19E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0020D352-52CD-451D-83B7-5841A2EFE19E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0020D352-52CD-451D-83B7-5841A2EFE19E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EACA9F48-0D53-4113-B030-957E484B0F81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EACA9F48-0D53-4113-B030-957E484B0F81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EACA9F48-0D53-4113-B030-957E484B0F81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EACA9F48-0D53-4113-B030-957E484B0F81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

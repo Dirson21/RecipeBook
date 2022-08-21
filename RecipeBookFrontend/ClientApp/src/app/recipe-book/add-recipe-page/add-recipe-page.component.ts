@@ -50,7 +50,7 @@ export class AddRecipePageComponent implements OnInit {
       ]),
       cookingSteps: this.fb.array([
         this.initStepForm()
-      ])
+      ]),
     })
    
   }
@@ -208,6 +208,7 @@ export class AddRecipePageComponent implements OnInit {
 
         this.recipeService.addRecipeImage(id, image).subscribe();
         console.log(id);
+        location.href = location.href;
 
     })
 
