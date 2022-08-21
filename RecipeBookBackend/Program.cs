@@ -7,6 +7,7 @@ using Infrastructure.Data.Models;
 using Application.Converters;
 using Domain.Repositoy;
 using Domain.UoW;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,9 +38,11 @@ builder.Services.AddScoped<IRecipeService, RecipeService>();
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<ITagService, TagService>();
 
-/*builder.Services.AddScoped<IUnitOfWork, RecipeBookDbContext>();*/
-
 builder.Services.AddScoped<IRecipeConverter, RecipeConverter>();
+
+builder.Services.AddScoped<IImageService, ImageService>();
+
+
 
 
 

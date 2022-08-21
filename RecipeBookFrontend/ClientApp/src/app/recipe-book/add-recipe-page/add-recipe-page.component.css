@@ -170,6 +170,16 @@ mat-card {
     border-radius: 16px;
 }
 
+.recipe-info-input-over {
+    overflow-y: scroll;
+}
+
+.tag-chip-list {
+    max-width: 647px;
+    max-height: 50px;
+
+}
+
 .recipe-info-input:first-of-type {
     margin-top: 50px;
 }

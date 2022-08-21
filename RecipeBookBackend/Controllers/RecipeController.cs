@@ -11,11 +11,12 @@ namespace RecipeBookBackend.Controllers
     public class RecipeController: ControllerBase
     {
         private readonly IRecipeService _recipeService;
+        private readonly IImageService _imageService;
 
-        public RecipeController(IRecipeService recipeService)
+        public RecipeController(IRecipeService recipeService, IImageService imageService)
         {
             _recipeService = recipeService;
-            
+            _imageService = imageService;
         }
 
         [HttpGet]
@@ -79,6 +80,22 @@ namespace RecipeBookBackend.Controllers
             try
             {
                 _recipeService.DeleteRecipe(recipeId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Route("image")]
+
+        public IActionResult addRecipeImage([FromForm] int recipeId, [FromForm] IFormFile image)
+        {
+            try
+            {
+                _imageService.addRecipeImage(recipeId, image);
                 return Ok();
             }
             catch (Exception ex)
