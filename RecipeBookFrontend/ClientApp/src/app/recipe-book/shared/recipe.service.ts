@@ -19,5 +19,8 @@ export class RecipeService {
             params: new HttpParams().set("start", start).set("count", count)
         });
     }
+    public addRecipe(recipe:IRecipe):Observable<number> {
+        return this.httpClient.post<number>(this.apiUrl, recipe);
+    }
     
 }

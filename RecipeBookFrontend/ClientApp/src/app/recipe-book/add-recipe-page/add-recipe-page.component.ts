@@ -1,5 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, IterableDiffers, OnInit } from '@angular/core';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observer } from 'rxjs';
+import { ICookingStep } from '../shared/cookingStep.interface';
+import { IIngredientHeader } from '../shared/ingredient-header.interface';
+import { IIngredient } from '../shared/ingredient.interface';
+import { IRecipe } from '../shared/recipe.interface';
+import { RecipeService } from '../shared/recipe.service';
+import { ITag } from '../shared/tag.interface';
 
 
 @Component({
@@ -9,17 +16,191 @@ import { FormGroup } from '@angular/forms';
 })
 export class AddRecipePageComponent implements OnInit {
 
-  minutes: number[] = [
+  minutesSelect: number[] = [
    10, 20, 30, 40, 50, 60, 70
   ];
 
-  constructor() { }
+  countPersonSelect: number[] = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 15, 20
+   ];
 
-  formGroup!: FormGroup
-  imageSrc!: string;
+  
+  constructor(private fb: FormBuilder, private recipeService:RecipeService) { }
+
+  form!: FormGroup
+
 
   ngOnInit(): void {
+    this.form = this.fb.group({
+      recipeName: ['', [Validators.required]],
+      recipeDescription: ['', [Validators.required, Validators.maxLength(150)]],
+      recipeTags: ['', [Validators.required]],
+      recipeCookingTime: ['', [Validators.required]],
+      recipeCountPerson: ['', [Validators.required]],
+      ingridients: this.fb.array([
+        this.initIngridientForm()
+      ]),
+      steps: this.fb.array([
+        this.initStepForm()
+      ])
+    })
+   
   }
 
+
+  public initIngridientForm():FormGroup {
+    return this.fb.group({
+      ingridientHeader: ['', [Validators.required]],
+      ingridientProduct: ['', [Validators.required]]
+    });
+  }
+
+  public initStepForm():FormGroup {
+    return this.fb.group({
+      stepDescription: ['', [Validators.required]],
+    });
+  }
+
+  public addStep() {
+    this.stepForms.push(this.initStepForm())
+  }
+  public removeStep(i: number) {
+    this.stepForms.removeAt(i)
+  }
+
+
+  get recipeNameControl (): AbstractControl {
+    return this.form.get("recipeName")!
+  }
+  get recipeDescriptionControl (): AbstractControl {
+    return this.form.get("recipeDescription")!
+  }
+  get recipeTagsControl (): AbstractControl {
+    return this.form.get("recipeTags")!
+  }
+  get recipeCookingTimeControl (): AbstractControl {
+    return this.form.get("recipeCookingTime")!
+  }
+  get recipeCountPersonControl (): AbstractControl {
+    return this.form.get("recipeCountPerson")!
+  }
+
+  get ingridientForms() {
+    return this.form.controls["ingridients"] as FormArray;
+  }
+
+
+  get stepForms() {
+    return this.form.controls["steps"] as FormArray
+  }
+
+
+  public getStepForm(i: number) {
+    return this.stepForms.at(i) as FormGroup;
+  }
+
+  public getIngridientForm(i: number) {
+    return this.ingridientForms.at(i) as FormGroup
+  }
+
+  public addIngridientHeader() {
+    this.ingridientForms.push(this.initIngridientForm())
+  }
+
+  public removeIngridientHeader(i: number) {
+    this.ingridientForms.removeAt(i)
+  }
+
+
+
+  public onFileChanged(event:any ) {
+      console.log(event);
+
+      let files: FileList = event.target.files; 
+      console.log(files)
+      if (files.length == 0) return;
+
+      let recipeImage: HTMLImageElement  = document.getElementById("recipeImg") as  HTMLImageElement;
+      let reader: FileReader = new FileReader();
+      reader.readAsDataURL(files[0]);
+      reader.onload = (_event) => {
+        recipeImage.src = reader.result as string;
+        recipeImage.classList.add("image-preview");
+      
+      } 
+    }
+
  
+
+
+  private getTagFromRaw(tagsRaw: string): ITag[] {
+    let tags: ITag[] = [];
+
+    tagsRaw.split(" ").forEach((value:string) => {
+        tags.push({id:0, name:value})
+    });
+    return tags;
+  }
+
+  private getIngredientFromRaw(tagsRaw: string): IIngredient[] {
+    let ingredients: IIngredient[] = [];
+
+    tagsRaw.split("\n").forEach((value:string) => {
+        ingredients.push({id:0, name:value, recipeId: 0})
+    });
+    return ingredients;
+  }
+
+  private getCookingStepsFromControls():ICookingStep[] {
+    let cookingStep: ICookingStep[] = [];
+    this.stepForms.controls.forEach((control, index) => {
+      cookingStep.push({
+          id: 0,
+          recipeId:0,
+          stepNumber: index + 1,
+          description: control.get("stepDescription")?.value
+      })
+    })
+    return cookingStep;
+  }
+
+  private getIngredientHeaderFromControls(): IIngredientHeader[] {
+    let ingredientHeaders: IIngredientHeader[] = []
+    this.ingridientForms.controls.forEach((control, index) => {
+      ingredientHeaders.push({
+        id: 0,
+        name: control.get("ingridientHeader")?.value,
+        ingredients: this.getIngredientFromRaw(control.get("ingridientProduct")?.value)
+      })
+    })
+    return ingredientHeaders;
+  }
+
+  public addRecipe() {
+    if (this.form.invalid) return;
+
+    let recipe: IRecipe = {
+      id: 0,
+      name: this.recipeNameControl.value,
+      description: this.recipeDescriptionControl.value,
+      image: "",
+      cookingTime: this.recipeCookingTimeControl.value,
+      countPerson: this.recipeCountPersonControl.value,
+      tags: this.getTagFromRaw(this.recipeTagsControl.value),
+      cookingSteps: this.getCookingStepsFromControls(),
+      ingredientHeaders: this.getIngredientHeaderFromControls()
+    };
+
+    console.log(recipe);
+
+    this.recipeService.addRecipe(recipe).subscribe((id) => {
+        console.log(id);
+
+    })
+
+
+  }
+
+
+
 }

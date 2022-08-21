@@ -1,5 +1,6 @@
 import { ICookingStep } from "./cookingStep.interface"
-import { IIngridient } from "./ingridient.interface"
+import { IIngredientHeader } from "./ingredient-header.interface"
+import { IIngredient } from "./ingredient.interface"
 import { ITag } from "./tag.interface"
 
 export interface IRecipe {
@@ -10,7 +11,7 @@ export interface IRecipe {
     cookingTime: number,
     countPerson:number,
 
-    ingridients: IIngridient[]
+    ingredientHeaders: IIngredientHeader[]
     tags: ITag[],
     cookingSteps: ICookingStep[] 
 

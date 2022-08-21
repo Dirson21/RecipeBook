@@ -1,7 +1,7 @@
-﻿using Services.Dto;
+﻿using Application.Dto;
 
 using Microsoft.AspNetCore.Mvc;
-using Services;
+using Application;
 
 namespace RecipeBookBackend.Controllers
 {
