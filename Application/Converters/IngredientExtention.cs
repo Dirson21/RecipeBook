@@ -16,7 +16,7 @@ namespace Application.Converters
             {
                 Id = ingridient.Id,
                 Name = ingridient.Name,
-                RecipeId = ingridient.IngridientHeaderId
+                IngredientHeaderId = ingridient.IngredientHeaderId
             };
         }
         public static Ingredient ConvertToIngridient(this IngredientDto ingridientDto)
@@ -25,7 +25,8 @@ namespace Application.Converters
             {
                 Id = ingridientDto.Id,
                 Name = ingridientDto.Name,
-                
+                IngredientHeaderId = ingridientDto.IngredientHeaderId
+
             };
         }
     }

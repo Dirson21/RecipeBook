@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 using Infrastructure.Data;
 using Application;
@@ -43,12 +44,16 @@ builder.Services.AddScoped<IRecipeConverter, RecipeConverter>();
 builder.Services.AddScoped<IImageService, ImageService>();
 
 
-
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie();
 
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseStaticFiles();
 

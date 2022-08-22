@@ -19,8 +19,8 @@ namespace Infrastructure.Data.Models.EntityConfigurations
 
             builder.Property(x => x.Name).IsRequired();
 
-            builder.Property(x => x.IngridientHeaderId);
-            builder.HasOne(x => x.IngredientHeader).WithMany(x => x.Ingredients).OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.IngridientHeaderId);
+            builder.Property(x => x.IngredientHeaderId);
+            builder.HasOne(x => x.IngredientHeader).WithMany(x => x.Ingredients).OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.IngredientHeaderId);
 
         }
     }

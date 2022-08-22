@@ -9,23 +9,20 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data.Models.EntityConfigurations
 {
-    public class RecipeMap : IEntityTypeConfiguration<Recipe>
+    public class UserMap : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<Recipe> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
-            builder.Property(x => x.Name);
+            builder.Property(x => x.Login);
+            builder.HasIndex(x => x.Login).IsUnique();
 
-            builder.Property(x => x.Image);
-
+            builder.Property(x => x.Password);
             builder.Property(x => x.Description);
-
-            builder.Property(x => x.CookingTime);
-
-            builder.Property(x => x.CountPerson);
-
+            builder.Property(x => x.Name);
+           
         }
     }
 }
