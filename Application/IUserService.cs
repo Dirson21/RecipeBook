@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,9 @@ namespace Application
     {
         public Guid Registration(RegistrationFormDto registrationForm);
 
-        public void login();
+        public TokenView Login(LoginFormDto loginForm);
+
+        public UserAccount GetUserById(string id);
 
     }
 }

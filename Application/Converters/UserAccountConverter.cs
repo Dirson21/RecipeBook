@@ -18,6 +18,7 @@ namespace Application.Converters
             UserAccount userAccount = new UserAccount();
             userAccount.Login = registrationForm.Login;
             userAccount.UserName = registrationForm.Login;
+            userAccount.EmailConfirmed = true;
             return userAccount;
         }
     }

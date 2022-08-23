@@ -1,5 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 using Infrastructure.Data;
 using Application;
@@ -10,6 +15,9 @@ using Domain.UoW;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Domain;
 using Domain.Repository;
+using RecipeBookBackend;
+using Application.Options;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,7 +54,9 @@ builder.Services.AddScoped<IImageService, ImageService>();
 
 builder.Services.AddDefaultIdentity<UserAccount>(options => 
 {
-    
+    options.SignIn.RequireConfirmedEmail = false;
+    options.SignIn.RequireConfirmedPhoneNumber = false;
+  
     options.Password.RequiredLength = 5;   // минимальная длина
     options.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
     options.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
@@ -62,6 +72,35 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IUserAccountConverter, UserAccountConverter>();
 
+builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
+
+Console.WriteLine(builder.Configuration["TokenKey"]);
+
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"]));
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            // указывает, будет ли валидироваться издатель при валидации токена
+            ValidateIssuer = true,
+            // строка, представляющая издателя
+            ValidIssuer = AuthOptions.ISSUER,
+            // будет ли валидироваться потребитель токена
+            ValidateAudience = true,
+            // установка потребителя токена
+            ValidAudience = AuthOptions.AUDIENCE,
+            // будет ли валидироваться время существования
+            ValidateLifetime = true,
+            // установка ключа безопасности
+            IssuerSigningKey = key,
+            // валидация ключа безопасности
+            ValidateIssuerSigningKey = true,
+        };
+    });
+
+
+builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
