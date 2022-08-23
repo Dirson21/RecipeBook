@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 using Infrastructure.Data;
 using Application;
@@ -9,6 +8,7 @@ using Application.Converters;
 using Domain.Repositoy;
 using Domain.UoW;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,9 +43,8 @@ builder.Services.AddScoped<IRecipeConverter, RecipeConverter>();
 
 builder.Services.AddScoped<IImageService, ImageService>();
 
-
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie();
+builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
+        .AddEntityFrameworkStores<RecipeBookDbContext>();
 
 
 var app = builder.Build();
@@ -56,8 +55,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.UseStaticFiles();
-
-app.UseAuthorization();
 
 app.MapControllers();
 

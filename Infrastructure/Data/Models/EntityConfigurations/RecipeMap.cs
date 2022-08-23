@@ -26,6 +26,12 @@ namespace Infrastructure.Data.Models.EntityConfigurations
 
             builder.Property(x => x.CountPerson);
 
+            builder.Property(x => x.UserAccountId);
+
+            builder.HasOne(x => x.UserAccount).WithMany(x => x.UserRecipes).OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.UserAccountId);
+
+  
+
         }
     }
 }

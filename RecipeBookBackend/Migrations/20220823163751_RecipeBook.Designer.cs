@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RecipeBookBackend.Migrations
 {
     [DbContext(typeof(RecipeBookDbContext))]
-    partial class RecipeBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220823163751_RecipeBook")]
+    partial class RecipeBook
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -401,7 +403,7 @@ namespace RecipeBookBackend.Migrations
                     b.HasOne("Domain.UserAccount", "UserAccount")
                         .WithMany("UserRecipes")
                         .HasForeignKey("UserAccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("UserAccount");

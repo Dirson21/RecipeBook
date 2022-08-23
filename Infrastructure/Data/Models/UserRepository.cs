@@ -17,14 +17,6 @@ namespace Infrastructure.Data.Models
             _dbContext = dbContext;
         }
 
-        public User GetByLogin(string login)
-        {
-            return _dbContext.User.FirstOrDefault(x => x.Login == login);
-        }
-
-        public User Create(User user)
-        {
-            return _dbContext.User.Add(user).Entity;
-        }
+       
     }
 }

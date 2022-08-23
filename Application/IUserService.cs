@@ -9,11 +9,7 @@ namespace Application
 {
     public interface IUserService
     {
-        UserDto Login(string login, string password);
-
-        UserDto Logout();
-
-        string Registration(UserDto user);
+       
 
     }
 }
