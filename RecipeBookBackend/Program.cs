@@ -9,6 +9,7 @@ using Domain.Repositoy;
 using Domain.UoW;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Domain;
+using Domain.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,8 +44,23 @@ builder.Services.AddScoped<IRecipeConverter, RecipeConverter>();
 
 builder.Services.AddScoped<IImageService, ImageService>();
 
-builder.Services.AddDefaultIdentity<UserAccount>(options => options.SignIn.RequireConfirmedAccount = true)
-        .AddEntityFrameworkStores<RecipeBookDbContext>();
+builder.Services.AddDefaultIdentity<UserAccount>(options => 
+{
+    
+    options.Password.RequiredLength = 5;   // минимальная длина
+    options.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
+    options.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
+    options.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
+    options.Password.RequireDigit = false; // требуются ли цифры
+    options.SignIn.RequireConfirmedAccount = true; 
+
+}).AddEntityFrameworkStores<RecipeBookDbContext>();
+
+builder.Services.AddScoped<IUserService, UserService>();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IUserAccountConverter, UserAccountConverter>();
 
 
 var app = builder.Build();

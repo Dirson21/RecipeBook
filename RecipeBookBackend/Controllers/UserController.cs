@@ -1,4 +1,5 @@
-﻿using Application.Dto;
+﻿using Application;
+using Application.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace RecipeBookBackend.Controllers
@@ -7,13 +8,20 @@ namespace RecipeBookBackend.Controllers
     [Route("api/[controller]")]
     public class UserController: ControllerBase
     {
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Registration([FromBody] UserDto userDto)
+
+        public IActionResult Registration([FromBody] RegistrationFormDto registrationForm)
         {
             try
             {
-                return Ok(userDto);
+                return Ok(_userService.Registration(registrationForm));
             }
             catch (Exception ex)
             {
@@ -23,7 +31,7 @@ namespace RecipeBookBackend.Controllers
 
         [HttpPost]
         [Route("login")]
-        [ValidateAntiForgeryToken]
+
         public IActionResult Login([FromForm] string login, [FromForm] string password)
         {
             try

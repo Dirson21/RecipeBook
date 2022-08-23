@@ -9,7 +9,9 @@ namespace Application
 {
     public interface IUserService
     {
-       
+        public Guid Registration(RegistrationFormDto registrationForm);
+
+        public void login();
 
     }
 }

@@ -17,6 +17,14 @@ namespace Infrastructure.Data.Models
             _dbContext = dbContext;
         }
 
-       
+        public UserAccount Create(UserAccount user)
+        {
+            return _dbContext.Users.Add(user).Entity;
+        }
+
+        public UserAccount GetByLogin(string login)
+        {
+            return _dbContext.Users.FirstOrDefault(x => x.Login == login);
+        }
     }
 }

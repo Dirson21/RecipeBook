@@ -14,6 +14,8 @@ namespace Infrastructure.Data.Models.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<UserAccount> builder)
         {
+            builder.Property(x => x.Description).HasDefaultValue("");
+            builder.Property(x => x.Login).HasDefaultValue("");
 
         }
     }

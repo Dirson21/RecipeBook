@@ -8,6 +8,7 @@ namespace Domain.Repository
 {
     public interface IUserRepository
     {
-       
+        public UserAccount Create(UserAccount user);
+        public UserAccount GetByLogin(string login);
     }
 }

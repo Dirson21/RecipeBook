@@ -12,20 +12,51 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Domain.Repository;
 
 namespace Application
 {
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly UserManager<UserAccount> _userManager;
+        private readonly SignInManager<UserAccount> _signInManager;
+        private readonly IUserAccountConverter _userConverter;
 
-        public UserService(IUnitOfWork unitOfWork, UserRepository userRepository)
+
+        public UserService(IUnitOfWork unitOfWork, IUserRepository userRepository, UserManager<UserAccount> userManager, SignInManager<UserAccount> signInManager, IUserAccountConverter userConverter)
         {
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _userConverter = userConverter;
         }
 
-  
+        public void login()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Guid Registration(RegistrationFormDto registrationForm)
+        {
+            if (registrationForm.Password != registrationForm.ConfirmPassword)
+            {
+                throw new Exception("Пароли не совпадают");
+            }
+            
+
+            UserAccount user = _userConverter.RegistrationFormToUserAccount(registrationForm);
+           
+            var result = _userManager.CreateAsync(user, registrationForm.Password).GetAwaiter().GetResult();
+            if (!result.Succeeded)
+            {
+                throw new Exception(result.Errors.First().Description);
+            }
+
+            return user.Id;
+        }
     }
 }

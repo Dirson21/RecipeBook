@@ -20,23 +20,36 @@ namespace Application
 
         public void addRecipeImage(int recipeId, IFormFile image)
         {
+            Recipe recipe = _recipeRepository.GetById(recipeId);
+            if (recipe == null)
+            {
+                throw new Exception("Данного рецепта не существует");
+            }
+
             int month = DateTime.Now.Month;
             string path = $"{_rootPath}\\{month}\\";
-            string filename;
+            string filename = "";
 
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);
             }
 
-            while (true)
+            bool isfilename = false;
+            for (int i = 0; i < 10; i++)
             {
                 filename = Path.ChangeExtension(Path.GetRandomFileName(), ".png");
                 if (!File.Exists(path + filename))
                 {
+                    isfilename = true;
                     break;
                 }
             }
+            if (!isfilename)
+            {
+                throw new Exception("Что-то пошло не так :(");
+            }
+
 
             using (FileStream fileStream = File.Create(path + filename))
             {
@@ -44,11 +57,6 @@ namespace Application
                 fileStream.Flush();
             }
 
-            Recipe recipe = _recipeRepository.GetById(recipeId);
-            if (recipe == null)
-            {
-                throw new Exception("Данного рецепта не существует");
-            }
 
             recipe.Image = $"{month}\\{filename}";
             _recipeRepository.Update(recipe);
