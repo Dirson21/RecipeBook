@@ -19,6 +19,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AddRecipePageComponent } from './add-recipe-page/add-recipe-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import {MatChipsModule} from '@angular/material/chips'
 
 
 @NgModule({
@@ -41,8 +42,8 @@ import {MatSelectModule} from '@angular/material/select';
     RecipeBookRoutingModule,
     BrowserModule,
     ReactiveFormsModule,
-    MatSelectModule
-
+    MatSelectModule,
+    MatChipsModule
   
   ],
   providers: [

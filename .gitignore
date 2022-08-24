@@ -405,3 +405,4 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+/RecipeBookFrontend/ClientApp/.angular/cache/14.1.0

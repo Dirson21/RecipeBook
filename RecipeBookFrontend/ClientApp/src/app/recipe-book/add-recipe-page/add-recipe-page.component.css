@@ -6,11 +6,10 @@ mat-card {
     padding-bottom: 0px;
 }
 
-
 .back {
     z-index: 1;
     position: relative;
-    margin-top: 127px!important;
+    margin-top: 49px;
     margin-left: 120px;
    
 
@@ -169,6 +168,16 @@ mat-card {
    
     border: 1px solid rgba(145, 150, 161, 0.4);
     border-radius: 16px;
+}
+
+.recipe-info-input-over {
+    overflow-y: scroll;
+}
+
+.tag-chip-list {
+    max-width: 647px;
+    max-height: 50px;
+
 }
 
 .recipe-info-input:first-of-type {

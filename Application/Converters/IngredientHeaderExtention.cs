@@ -26,7 +26,9 @@ namespace Application.Converters
             {
                 Id = ingridientHeaderDto.Id,
                 Name = ingridientHeaderDto.Name,
-                Ingredients = ingridientHeaderDto.Ingredients.ConvertAll(x => x.ConvertToIngridient())
+                Ingredients = ingridientHeaderDto.Ingredients.ConvertAll(x => x.ConvertToIngridient()),
+                RecipeId = ingridientHeaderDto.RecipeId
+                
 
             };
         }

@@ -8,17 +8,18 @@ mat-card {
     background: #FEFEFB;
 }
 
-.header-space{
+/* .header-space{
     position: relative;
     height: 160px;
    
     
 
-}
+} */
 .main-content{
     
     margin-left: 120px;
     position: relative;
+    margin-top: 82px;
 
  }
 

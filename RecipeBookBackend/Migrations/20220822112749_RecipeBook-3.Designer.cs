@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RecipeBookBackend.Migrations
 {
     [DbContext(typeof(RecipeBookDbContext))]
-    partial class RecipeBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220822112749_RecipeBook-3")]
+    partial class RecipeBook3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +57,7 @@ namespace RecipeBookBackend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("IngredientHeaderId")
+                    b.Property<int>("IngridientHeaderId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -64,7 +66,7 @@ namespace RecipeBookBackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IngredientHeaderId");
+                    b.HasIndex("IngridientHeaderId");
 
                     b.ToTable("Ingredient");
                 });
@@ -202,7 +204,7 @@ namespace RecipeBookBackend.Migrations
                 {
                     b.HasOne("Domain.IngredientHeader", "IngredientHeader")
                         .WithMany("Ingredients")
-                        .HasForeignKey("IngredientHeaderId")
+                        .HasForeignKey("IngridientHeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

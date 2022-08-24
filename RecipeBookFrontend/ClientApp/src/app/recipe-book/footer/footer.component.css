@@ -1,19 +1,20 @@
 mat-card-footer {
     position: relative;
-    width: 1473px;
+    
     height: 113px;
-   
+    margin: 0px;
     background: #FBF9F4;
+
 }
 
 .logo {
-    position: absolute;
+    position: relative;
     width: 132px;
     height: 39px;
-    left: 120px;
-    top: 37px;
-
    
+    display: inline-block;
+    margin-left: 120px;
+    margin-top: 37px;
     font-weight: 700;
     font-size: 32px;
     line-height: 39px;
@@ -22,13 +23,12 @@ mat-card-footer {
 }
 
 .copyright {
-    position: absolute;
+    position: relative;
+    display: inline-block;
     width: 155px;
     height: 24px;
-    left: 1170px;
-    top: 45px;
 
-    
+    margin-left: 918px;
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;

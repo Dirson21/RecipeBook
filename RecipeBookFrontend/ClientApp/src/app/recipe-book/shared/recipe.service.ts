@@ -22,5 +22,11 @@ export class RecipeService {
     public addRecipe(recipe:IRecipe):Observable<number> {
         return this.httpClient.post<number>(this.apiUrl, recipe);
     }
+    public addRecipeImage(recipeId: number, image:File): Observable<null> { 
+        const formData:FormData = new FormData();
+        formData.append("recipeId", recipeId.toString());
+        formData.append("image", image);
+        return this.httpClient.put<null>(`${this.apiUrl}/image`, formData);
+    }
     
 }

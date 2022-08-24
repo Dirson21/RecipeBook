@@ -23,8 +23,9 @@ namespace Infrastructure.Data
         public DbSet<Ingredient> Ingredient { get; set; }
         public DbSet<Tag> Tag { get; set; }
         public DbSet<CookingStep> CookingStep { get; set; }
-
         public DbSet<IngredientHeader> IngredientHeader { get; set; }
+        public DbSet<User> User { get; set; }   
+
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -34,6 +35,7 @@ namespace Infrastructure.Data
             builder.ApplyConfiguration(new CookingStepMap());
             builder.ApplyConfiguration(new TagMap());
             builder.ApplyConfiguration(new IngredientHeaderMap());
+            builder.ApplyConfiguration(new UserMap());
            
         }
 
