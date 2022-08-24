@@ -62,7 +62,7 @@ builder.Services.AddDefaultIdentity<UserAccount>(options =>
     options.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
     options.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
     options.Password.RequireDigit = false; // требуются ли цифры
-    options.SignIn.RequireConfirmedAccount = true; 
+    options.SignIn.RequireConfirmedAccount = false; 
 
 }).AddEntityFrameworkStores<RecipeBookDbContext>();
 

@@ -12,5 +12,6 @@ namespace Application.Dto
         public string Login { get; set; }
 
         public string Id { get; set; }
+
     }
 }

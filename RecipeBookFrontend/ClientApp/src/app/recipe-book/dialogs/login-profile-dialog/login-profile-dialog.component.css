@@ -1,0 +1,88 @@
+.close-icon {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    margin-left: 650px;
+    margin-top: 22px;
+
+
+}
+
+
+.dialog-title {
+    position: relative;
+    margin-top: 14px;
+    margin-left: 60px;
+
+    width: 515px;
+    height: 30px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    /* identical to box height, or 125% */
+    color: #25292D;
+}
+
+.dialog-subtitle {
+    position: relative;
+    margin-top: 30px;
+    margin-left: 60px;
+
+    width: 577px;
+    height: 56px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 28px;
+    /* or 156% */
+
+    font-feature-settings: 'case' on;
+
+    color: #4A525A;
+
+}
+
+.button-field {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    margin-left: 60px;
+}
+
+.login-button {
+    position: relative;
+    margin-right: 24px;
+    width: 278px;
+    height: 60px;
+
+    background: #FDB100;
+    border-radius: 16px;
+  
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    /* identical to box height, or 156% */
+
+    color: #FFFFFF;
+}
+
+.reg-button {
+    box-sizing: border-box;
+
+    position: relative;
+    width: 278px;
+    height: 60px;
+
+    border: 1px solid #FDB100;
+    border-radius: 16px;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    /* identical to box height, or 156% */
+
+    text-align: center;
+
+    color: #FDB100;
+}
+

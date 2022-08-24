@@ -16,7 +16,7 @@ namespace Application.Converters
         public UserAccount RegistrationFormToUserAccount(RegistrationFormDto registrationForm)
         {
             UserAccount userAccount = new UserAccount();
-            userAccount.Login = registrationForm.Login;
+            userAccount.Login = registrationForm.Name;
             userAccount.UserName = registrationForm.Login;
             userAccount.EmailConfirmed = true;
             return userAccount;

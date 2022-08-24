@@ -204,6 +204,8 @@ export class AddRecipePageComponent implements OnInit {
 
     console.log(recipe);
 
+    
+
     this.recipeService.addRecipe(recipe).subscribe((id) => {
 
         this.recipeService.addRecipeImage(id, image).subscribe();

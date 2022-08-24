@@ -17,7 +17,7 @@ const routes: Routes = [
   },
   {
     path: "add-recipe",
-    component: AddRecipePageComponent
+    component: AddRecipePageComponent,
   },
   {
     path: "**",
