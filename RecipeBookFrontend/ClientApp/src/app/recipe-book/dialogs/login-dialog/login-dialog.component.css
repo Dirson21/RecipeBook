@@ -41,7 +41,6 @@
     /* identical to box height, or 156% */
 
     text-align: center;
-
     color: #FDB100;
 }
 
@@ -76,7 +75,7 @@
 .login-link {
     position: relative;
     margin-left:231px;
-   
+
     width: 237px;
     height: 26px;
     border-bottom: 1px dashed #FDB100;;
@@ -85,9 +84,6 @@
     font-size: 18px;
     line-height: 28px;
     /* or 156% */
-   
-
-
     color: #FDB100;
 }
 

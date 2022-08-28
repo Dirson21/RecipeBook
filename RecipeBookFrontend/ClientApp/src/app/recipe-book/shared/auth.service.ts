@@ -11,9 +11,9 @@ import * as moment from "moment";
 
 export class AuthService {
 
-    jwtHelper!:JwtHelperService;
+    jwtHelper!: JwtHelperService;
 
-    constructor () {
+    constructor() {
         this.jwtHelper = new JwtHelperService();
     }
 
@@ -21,11 +21,11 @@ export class AuthService {
         localStorage.setItem("id_token", authResult.jwtToken)
         localStorage.setItem("id_user", authResult.id)
         localStorage.setItem("login", authResult.login)
-       
-        
+
+
     }
 
-    public getLogin():string|null {
+    public getLogin(): string | null {
         return localStorage.getItem("login");
     }
 
@@ -37,21 +37,16 @@ export class AuthService {
 
     public isLoggedIn() {
         const jwtToken = localStorage.getItem("id_token");
-      
-        if (jwtToken)
-        {
+
+        if (jwtToken) {
             const currentDate = new Date()
             const tokenDate = this.jwtHelper.getTokenExpirationDate(jwtToken);
             if (tokenDate) {
                 return currentDate.getTime() < tokenDate.getTime()
             }
-                
+
         }
         return false
-       
-    }
 
-  
-    
-    
+    }
 }

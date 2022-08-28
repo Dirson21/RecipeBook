@@ -1,24 +1,20 @@
-
 .reg-title {
     position: relative;
     margin-left: 60px;
     margin-top: 60px;
     margin-bottom: 47px;
-
     
     width: 515px;
     height: 30px;
-
 
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
     /* identical to box height, or 125% */
-
     text-transform: capitalize;
-
     color: #25292D;
 }
+
 .login-input {
     box-sizing: border-box;
 
@@ -41,8 +37,6 @@
     margin-left: 60px;
 }
 
-
-
 .password-input {
     height: 78px;
     box-sizing: border-box;
@@ -54,7 +48,6 @@
     margin-right: 24px;
     border: 1px solid rgba(145, 150, 161, 0.4);
     border-radius: 16px;
- 
 }
 
 .button-field {
@@ -64,6 +57,7 @@
     margin-bottom: 40px;
     margin-left: 60px;
 }
+
 .reg-button {
     position: relative;
     margin-right: 22px;
@@ -79,6 +73,7 @@
     /* identical to box height, or 156% */
     color: #FFFFFF;
 }
+
 .cansel-button {
     box-sizing: border-box;
     position: relative;
@@ -91,7 +86,6 @@
     font-size: 18px;
     line-height: 28px;
     /* identical to box height, or 156% */
-
     text-align: center;
 
     color: #FDB100;
@@ -108,8 +102,6 @@
     font-size: 18px;
     line-height: 28px;
     /* or 156% */
-
-
     color: #FDB100;
 }
 

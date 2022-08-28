@@ -2,11 +2,12 @@ app-header {
     position: relative;
     z-index: 2;
 }
+
 app-footer {
     position: relative;
     z-index: 2;
     width: 1440px;
-   
+
 }
 
 mat-card {
@@ -15,15 +16,10 @@ mat-card {
     background: #FEFEFB;
     padding: 0px;
     overflow: hidden;
- 
-    
-
-
-
 }
 
 
- mat-card::before {
+mat-card::before {
     display: block;
     position: absolute;
     content: '';
@@ -32,7 +28,7 @@ mat-card {
     height: max-content;
     height: 905.67px;
     z-index: 0;
-    top: 250px;
+    top: 350px;
 
 }
 
@@ -52,9 +48,7 @@ mat-card::after {
     z-index: 0;
     top: 1400px;
 }
- 
 
-
-
-
-
+::ng-deep .mat-form-field-underline {
+    display: none;
+}

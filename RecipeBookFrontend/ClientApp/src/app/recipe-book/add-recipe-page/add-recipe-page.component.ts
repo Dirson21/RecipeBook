@@ -11,8 +11,6 @@ import { ITag } from '../shared/tag.interface';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 
-
-
 @Component({
   selector: 'app-add-recipe-page',
   templateUrl: './add-recipe-page.component.html',
@@ -30,18 +28,16 @@ export class AddRecipePageComponent implements OnInit {
 
   readonly separatorKeysCodes = [ENTER] as const;
 
-  
   constructor(private fb: FormBuilder, private recipeService:RecipeService) {
 
   }
 
   form!: FormGroup
 
-
   ngOnInit(): void {
     this.form = this.fb.group({
       name: ['', [Validators.required]],
-      description: ['', [Validators.required, Validators.maxLength(150)]],
+      description: ['', [Validators.required]],
       tags: this.fb.array([], Validators.required),
       cookingTime: ['', [Validators.required]],
       countPerson: ['', [Validators.required]],
@@ -52,7 +48,6 @@ export class AddRecipePageComponent implements OnInit {
         this.initStepForm()
       ]),
     })
-   
   }
 
   public initTagForm(name: string): FormGroup {
@@ -77,6 +72,7 @@ export class AddRecipePageComponent implements OnInit {
   public addStep() {
     this.stepForms.push(this.initStepForm())
   }
+
   public removeStep(i: number) {
     this.stepForms.removeAt(i)
   }
@@ -94,7 +90,6 @@ export class AddRecipePageComponent implements OnInit {
   public removeTag(i: number): void {
       this.tagForms.removeAt(i);
   }
-
 
   get ingredientForms() {
     return this.form.controls["ingredientHeaders"] as FormArray;
@@ -119,6 +114,7 @@ export class AddRecipePageComponent implements OnInit {
   public getTagForm(i: number) {
     return this.tagForms.at(i) as FormGroup
   }
+
   public addIngredientHeader() {
     this.ingredientForms.push(this.initIngridientForm())
   }
@@ -126,8 +122,6 @@ export class AddRecipePageComponent implements OnInit {
   public removeIngridientHeader(i: number) {
     this.ingredientForms.removeAt(i)
   }
-
-
 
   public onFileChanged(event:any ) {
     console.log(event);
@@ -142,7 +136,6 @@ export class AddRecipePageComponent implements OnInit {
       reader.onload = (_event) => {
       recipeImage.src = reader.result as string;
       recipeImage.classList.add("image-preview");
-      
     } 
   }
 
@@ -190,7 +183,6 @@ export class AddRecipePageComponent implements OnInit {
   }
 
   public addRecipe() {
-    
     const image: File|null = this.getRecipeImage();
     if (image == null) return;
     if (this.form.invalid) return;
@@ -203,20 +195,12 @@ export class AddRecipePageComponent implements OnInit {
     recipe.cookingSteps = this.getCookingStepsFromControls()
 
     console.log(recipe);
-
     
-
     this.recipeService.addRecipe(recipe).subscribe((id) => {
 
         this.recipeService.addRecipeImage(id, image).subscribe();
         console.log(id);
         location.href = location.href;
-
     })
-
-
   }
-
-
-
 }

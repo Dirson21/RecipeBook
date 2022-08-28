@@ -11,31 +11,30 @@ export class RecipePageComponent implements OnInit {
 
   public recipes: IRecipe[] = []
 
-  private start:number = 0;
+  private start: number = 0;
 
-  constructor(private recipeService:RecipeService) { 
+  constructor(private recipeService: RecipeService) {
     this.getRecipesRange(4);
-  
+
   }
 
   ngOnInit(): void {
   }
 
-  public getRecipes()
-  {
+  public getRecipes() {
     this.recipeService.getRecipes().subscribe(s => {
       this.recipes = Object.assign(s)
     });
   }
 
-  public getRecipesRange(count:number) {
-    
-    this.recipeService.getRecipesRange(this.start, count).subscribe(s=> {
-      
+  public getRecipesRange(count: number) {
+
+    this.recipeService.getRecipesRange(this.start, count).subscribe(s => {
+
       this.start += s.length;
       this.recipes = this.recipes.concat(s);
     })
-    
+
   }
 
 }

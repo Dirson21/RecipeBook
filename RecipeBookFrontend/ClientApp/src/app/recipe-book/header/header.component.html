@@ -5,21 +5,26 @@
 
     <mat-nav-list class="menu-list">
     
-        <mat-list-item class="list-item" routerLink="/recipe-book"  routerLinkActive="active-link" >   
-            Главная
-        </mat-list-item>      
-        <mat-list-item class="list-item" routerLink="/recipe"  routerLinkActive="active-link">
-            Рецепты
-        </mat-list-item>
-        <mat-list-item class="list-item">
-            Избранное
-        </mat-list-item>
+        <a routerLink="/recipe-book"  routerLinkActive="active-link" class="list-item"> 
+            <mat-list-item >
+                Главная
+            </mat-list-item>
+        </a>
+        <a class="list-item" routerLink="/recipe"  routerLinkActive="active-link">
+            <mat-list-item>
+                Рецепты
+            </mat-list-item>
+        </a>
+        <a class="list-item">
+            <mat-list-item>
+                Избранное
+            </mat-list-item>
+        </a>
     </mat-nav-list>
 
     <div *ngIf="!authService.isLoggedIn()" class="login"> 
         <svg-icon src="assets\img\login.svg" class="login-svg"></svg-icon>
-        <div class="text-login">Войти</div>
-    
+        <div class="text-login">Войти</div>   
     </div>
 
     <div *ngIf="authService.isLoggedIn()" class="entered-login"> 

@@ -9,6 +9,7 @@
     background: #F0F0F0;
     border-radius: 72px 0px;
 }
+
 .recipe-author {
     position: absolute;
     width: 108px;
@@ -46,7 +47,6 @@
 
     display: flex;
     flex-direction: row;
-  
 }
 
 .recipe-tag-item {
@@ -67,7 +67,6 @@
     color: #F29E1F;
 
     background: #ffb30046;
-
     border-radius: 5px;
 }
 
@@ -87,7 +86,6 @@
     height: 50px;
     left: 0px;
     top: 0px;
-
     border: 1px solid #FDB100;
     border-radius: 16px;
 }
@@ -99,6 +97,7 @@
     width: 24px;
     height: 24px;
 }
+
 .favorite-btn-text {
     position: absolute;
   
@@ -156,7 +155,6 @@
     line-height: 30px;
     /* or 167% */
     color: #4A525A;
-
 }
 
 .recipe-content-additional-info {
@@ -200,7 +198,6 @@
     font-size: 16px;
     line-height: 28px;
     /* identical to box height, or 175% */
-
     color: #25292D;
 }
 
@@ -211,12 +208,3 @@
     left: 307px;
     top: 0px;
 }
-
-
-
-
-
-
-
-
-

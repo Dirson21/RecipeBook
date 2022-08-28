@@ -10,19 +10,13 @@ import { UserAccountService } from '../shared/userAccount.service';
 })
 export class HeaderComponent implements OnInit {
 
-
-
   constructor(private userAccountService:UserAccountService, public authService: AuthService) { }
 
   ngOnInit(): void {
-  
   }
 
   public logout() {
     this.authService.logout();
   }
-
-
-
 
 }

@@ -4,10 +4,7 @@
     height: 24px;
     margin-left: 650px;
     margin-top: 22px;
-
-
 }
-
 
 .dialog-title {
     position: relative;
@@ -80,9 +77,7 @@
     font-size: 18px;
     line-height: 28px;
     /* identical to box height, or 156% */
-
     text-align: center;
-
     color: #FDB100;
 }
 

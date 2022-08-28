@@ -9,7 +9,7 @@ import { AddRecipePageComponent } from './add-recipe-page/add-recipe-page.compon
 const routes: Routes = [
   {
     path: "recipe-book",
-    component:MainPageComponent
+    component: MainPageComponent
   },
   {
     path: "recipe",
@@ -21,7 +21,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    component:MainPageComponent
+    component: MainPageComponent
   }
 
 ]
@@ -29,7 +29,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    
+
   ],
   imports: [
     RouterModule.forRoot(routes)
