@@ -10,7 +10,6 @@ namespace Application.Dto
     {
         public string JwtToken { get; set; }
         public string Login { get; set; }
-
         public string Id { get; set; }
 
     }

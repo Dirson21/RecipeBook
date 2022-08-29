@@ -12,8 +12,10 @@ export class DialogHelper {
   constructor(private dialog: MatDialog) {
     this.dialogConfig = new MatDialogConfig();
     this.dialogConfig.disableClose = true;
-    this.dialogConfig.autoFocus = true;
+    this.dialogConfig.autoFocus = false;
     this.dialogConfig.restoreFocus = false;
+    
+    
 
   }
 

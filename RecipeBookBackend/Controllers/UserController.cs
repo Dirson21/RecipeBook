@@ -2,6 +2,7 @@
 using Application.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using RecipeBookBackend.Filters;
 
 namespace RecipeBookBackend.Controllers
 {
@@ -17,7 +18,7 @@ namespace RecipeBookBackend.Controllers
         }
 
         [HttpPost]
-
+        [ValidateModel]
         public IActionResult Registration([FromBody] RegistrationFormDto registrationForm)
         {
             try
@@ -30,11 +31,13 @@ namespace RecipeBookBackend.Controllers
             }
         }
 
+
         [HttpPost]
         [Route("login")]
-
+        [ValidateModel]
         public IActionResult Login([FromBody] LoginFormDto loginForm)
         {
+
             try
             {
                 return Ok(_userService.Login(loginForm));

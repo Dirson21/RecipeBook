@@ -16,7 +16,7 @@ const routes: Routes = [
     component: RecipePageComponent
   },
   {
-    path: "add-recipe",
+    path: "recipe/add-recipe",
     component: AddRecipePageComponent,
   },
   {

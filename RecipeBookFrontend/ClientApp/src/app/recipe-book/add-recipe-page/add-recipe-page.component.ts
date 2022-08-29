@@ -1,4 +1,4 @@
-import { Component, Input, IterableDiffers, OnInit } from '@angular/core';
+import { Component, Input, IterableDiffers, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipEvent } from '@angular/material/chips';
 import { Observer } from 'rxjs';
@@ -14,7 +14,8 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 @Component({
   selector: 'app-add-recipe-page',
   templateUrl: './add-recipe-page.component.html',
-  styleUrls: ['./add-recipe-page.component.css']
+  styleUrls: ['./add-recipe-page.component.css'],
+
 })
 export class AddRecipePageComponent implements OnInit {
 

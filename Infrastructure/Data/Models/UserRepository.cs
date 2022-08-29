@@ -24,7 +24,7 @@ namespace Infrastructure.Data.Models
 
         public UserAccount GetByLogin(string login)
         {
-            return _dbContext.Users.FirstOrDefault(x => x.Login == login);
+            return _dbContext.Users.FirstOrDefault(x => x.Name == login);
         }
     }
 }

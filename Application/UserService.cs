@@ -62,18 +62,16 @@ namespace Application
             if (user == null)
             {
          
-                throw new Exception("Данного пользователя не существует");
+                throw new Exception("Неверный логин или пароль");
             }
            
-           
-            
             var authResult = _signInManager.CheckPasswordSignInAsync(user, loginForm.Password, false).GetAwaiter().GetResult();
 
 
             if (!authResult.Succeeded)
             {
                
-                throw new Exception("Неверный пароль");
+                throw new Exception("Неверный логин или пароль");
             }
 
             TokenView tokenView = new TokenView
@@ -88,11 +86,6 @@ namespace Application
 
         public Guid Registration(RegistrationFormDto registrationForm)
         {
-            if (registrationForm.Password != registrationForm.ConfirmPassword)
-            {
-                throw new Exception("Пароли не совпадают");
-            }
-            
 
             UserAccount user = _userConverter.RegistrationFormToUserAccount(registrationForm);
 

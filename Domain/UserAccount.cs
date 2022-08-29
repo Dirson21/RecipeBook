@@ -10,7 +10,7 @@ namespace Domain
 {
     public class UserAccount : IdentityUser<Guid>
     {
-        public string Login { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
 
         public List<Recipe> UserRecipes { get; set; } = new List<Recipe>();
