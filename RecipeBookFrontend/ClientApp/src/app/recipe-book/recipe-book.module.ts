@@ -6,7 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import {MatListModule} from '@angular/material/list';
 import {MatButtonModule} from '@angular/material/button';
 import { AngularSvgIconModule } from 'angular-svg-icon';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon'
 import {MatInputModule} from '@angular/material/input';
 
@@ -19,15 +19,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AddRecipePageComponent } from './add-recipe-page/add-recipe-page.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
-import {MatChipsModule} from '@angular/material/chips'
-
+import {MatChipsModule} from '@angular/material/chips';
+import { RegistrationDialogComponent } from './dialogs/registration-dialog/registration-dialog.component'
+import {MatDialogModule} from '@angular/material/dialog'
+import { UserAccountService } from './shared/userAccount.service';
+import { LoginProfileDialogComponent } from './dialogs/login-profile-dialog/login-profile-dialog.component';
+import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.component';
+import { AuthService } from './shared/auth.service';
+import { AuthInterceptor } from './shared/auth-interceptor';
 
 @NgModule({
   declarations: [
     MainPageComponent,
     RecipePageComponent,
     RecipeItemComponent,
-    AddRecipePageComponent
+    AddRecipePageComponent,
+    RegistrationDialogComponent,
+    LoginProfileDialogComponent,
+    LoginDialogComponent
   ],
   imports: [
     CommonModule,
@@ -43,11 +52,16 @@ import {MatChipsModule} from '@angular/material/chips'
     BrowserModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatChipsModule
+    MatChipsModule,
+    MatDialogModule,
+    
   
   ],
   providers: [
-    RecipeService
+    RecipeService,
+    UserAccountService,
+    AuthService,
+
   ]
 })
 export class RecipeBookModule { }

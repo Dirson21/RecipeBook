@@ -1,4 +1,5 @@
 ﻿using Application.Dto;
+using Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,11 @@ namespace Application
 {
     public interface IUserService
     {
-        UserDto Login(string login, string password);
+        public Guid Registration(RegistrationFormDto registrationForm);
 
-        UserDto Logout();
+        public TokenView Login(LoginFormDto loginForm);
 
-        string Registration(UserDto user);
+        public UserAccount GetUserById(string id);
 
     }
 }

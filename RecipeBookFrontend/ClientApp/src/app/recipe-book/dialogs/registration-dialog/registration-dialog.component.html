@@ -1,0 +1,37 @@
+
+    <mat-card-title mat-dialog-title class="reg-title">Регистрация</mat-card-title>
+    <form [formGroup]="form">
+        <mat-form-field class="login-input">
+            <input matInput placeholder="Имя" formControlName="name">
+        </mat-form-field>
+
+        <mat-form-field class="login-input">
+            <input matInput placeholder="Логин" formControlName="login">
+        </mat-form-field>
+
+        <div class="password-field">
+            <mat-form-field  class="password-input">
+                <input  #message type="password" class matInput placeholder="Пароль" formControlName="password"> 
+                <mat-hint class="hint" align="start">Минимум 8 символов</mat-hint> 
+                <mat-hint class="hint" align="end">{{message.value.length}}/8</mat-hint>      
+            </mat-form-field>
+           
+           
+
+            <mat-form-field class="password-input">
+                <input  class="input-font" type="password" matInput placeholder="Повторите пароль" formControlName="confirmPassword">
+            </mat-form-field>
+        </div>
+
+        <div class="button-field">
+            <button mat-raised-button (click)="registrationUser()" [disabled]="form.invalid" class="reg-button">Зарегистрироваться</button>
+            <button mat-raised-button (click)="closeDialog()" class="cansel-button">Отмена</button>
+        </div>
+
+        <a routerLink (click)="choiseLogin()" class="login-link">У меня уже есть аккаунт</a>
+
+        
+        
+
+    </form>
+

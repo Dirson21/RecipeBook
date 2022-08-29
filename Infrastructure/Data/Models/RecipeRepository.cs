@@ -21,6 +21,12 @@ namespace Infrastructure.Data.Models
 
         public Recipe Create(Recipe recipe)
         {
+   
+
+            recipe.UserAccountId = Guid.Parse("78EF7038-2D2C-4E08-46CA-08DA852874AF");
+
+
+
             return _dbContext.Recipe.Add(recipe).Entity;
         }
 

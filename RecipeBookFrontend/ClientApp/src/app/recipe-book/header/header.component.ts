@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '../shared/auth.service';
+import { UserAccountService } from '../shared/userAccount.service';
 
 
 @Component({
@@ -9,10 +11,18 @@ import { Component, Input, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
 
-  @Input() accountName: string = "";
-  constructor() { }
+
+  constructor(private userAccountService:UserAccountService, public authService: AuthService) { }
 
   ngOnInit(): void {
+  
   }
+
+  public logout() {
+    this.authService.logout();
+  }
+
+
+
 
 }

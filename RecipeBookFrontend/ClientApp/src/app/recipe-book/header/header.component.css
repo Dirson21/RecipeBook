@@ -54,6 +54,8 @@ mat-card-header {
 .login {
     
     position: relative;
+    margin-top: 40px;
+    margin-left: 500px;
     width: 280px;
     height: 38px;
  

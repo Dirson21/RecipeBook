@@ -10,9 +10,18 @@
         public int CookingTime { get; set; }
         public int CountPerson { get; set; }
 
+        public Guid UserAccountId { get; set; }
+
+        public UserAccount UserAccount { get; set; }
+
+       
+        
         public List<IngredientHeader> IngredientHeaders { get; set; }
         public  List<Tag> Tags { get; set; } = new List<Tag>();
         public List<CookingStep> CookingSteps { get; set; }
+
+       
+
 
 
     }

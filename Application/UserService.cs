@@ -12,63 +12,98 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Domain.Repository;
+using System.IdentityModel.Tokens.Jwt;
+using Application.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Net;
+using Microsoft.Rest;
 
 namespace Application
 {
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly UserRepository _userRepository;
+        private readonly IUserRepository _userRepository;
+        private readonly UserManager<UserAccount> _userManager;
+        private readonly SignInManager<UserAccount> _signInManager;
+        private readonly IUserAccountConverter _userConverter;
+        private readonly IJwtGenerator _jwtGenerator;
 
-        public UserService(IUnitOfWork unitOfWork, UserRepository userRepository)
+
+        public UserService(IUnitOfWork unitOfWork, IUserRepository userRepository, UserManager<UserAccount> userManager,
+            SignInManager<UserAccount> signInManager, IUserAccountConverter userConverter, IJwtGenerator jwtGenerator)
         {
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _userConverter = userConverter;
+            _jwtGenerator = jwtGenerator;
         }
 
-        public UserDto Login(string login, string password)
+        public UserAccount GetUserById(string id)
         {
-            User user = _userRepository.GetByLogin(login);
+            var user = _userManager.FindByIdAsync(id).GetAwaiter().GetResult();
+            
             if (user == null)
             {
-                throw new Exception("Неверный логин");
+                throw new Exception("Пользователя не существует");
             }
-            if (user.Password != password)
+            return user;
+        }
+
+        public TokenView Login(LoginFormDto loginForm)
+        {
+
+            UserAccount user = _userManager.FindByNameAsync(loginForm.Login).GetAwaiter().GetResult();
+           
+            if (user == null)
             {
+         
+                throw new Exception("Данного пользователя не существует");
+            }
+           
+           
+            
+            var authResult = _signInManager.CheckPasswordSignInAsync(user, loginForm.Password, false).GetAwaiter().GetResult();
+
+
+            if (!authResult.Succeeded)
+            {
+               
                 throw new Exception("Неверный пароль");
             }
 
-            List<Claim> claims = new List<Claim>
+            TokenView tokenView = new TokenView
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login)
+                JwtToken = _jwtGenerator.CreateToken(user),
+                Login = user.UserName,
+                Id =  user.Id.ToString(),
             };
 
-            ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            return tokenView;
+        }
+
+        public Guid Registration(RegistrationFormDto registrationForm)
+        {
+            if (registrationForm.Password != registrationForm.ConfirmPassword)
+            {
+                throw new Exception("Пароли не совпадают");
+            }
+            
+
+            UserAccount user = _userConverter.RegistrationFormToUserAccount(registrationForm);
 
            
-
-            throw new NotImplementedException();
-        }
-
-        public UserDto Logout()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string Registration(UserDto userDto)
-        {
-            User checkUser = _userRepository.GetByLogin(userDto.Login);
-            if (checkUser != null)
+            var result = _userManager.CreateAsync(user, registrationForm.Password).GetAwaiter().GetResult();
+            if (!result.Succeeded)
             {
-                throw new Exception("Данный пользователь уже существует");
+                throw new Exception(result.Errors.First().Description);
             }
 
-            User user = _userRepository.Create(userDto.ConvertToIngridient());
-
-            _unitOfWork.Commit();
-
-            return user.Id.ToString();
-
+            return user.Id;
         }
     }
 }

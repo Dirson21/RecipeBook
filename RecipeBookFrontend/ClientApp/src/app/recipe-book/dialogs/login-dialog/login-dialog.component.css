@@ -1,0 +1,93 @@
+.button-field {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    margin-top: 10px;
+    margin-left: 60px;
+    margin-bottom: 40px;
+}
+
+.login-button {
+    position: relative;
+  
+    width: 278px;
+    height: 60px;
+   
+    margin-right: 22px;
+    background: #FDB100;
+    border-radius: 16px;
+  
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    /* identical to box height, or 156% */
+
+    color: #FFFFFF;
+}
+
+.cancel-button {
+    box-sizing: border-box;
+
+    position: relative;
+    width: 278px;
+    height: 60px;
+
+    border: 1px solid #FDB100;
+    border-radius: 16px;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    /* identical to box height, or 156% */
+
+    text-align: center;
+
+    color: #FDB100;
+}
+
+.dialog-title {
+    position: relative;
+    width: 515px;
+    height: 30px;
+    margin-bottom:49px;
+    margin-left: 62px;
+    margin-top: 60px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+    /* identical to box height, or 125% */
+    text-transform: capitalize;
+    color: #25292D;
+}
+
+.dialog-input {
+    box-sizing: border-box;
+    margin-left: 60px;
+    position: relative;
+    margin-bottom: 20px;
+    width: 580px;
+    height: 50px;
+    padding: 0 32px;
+
+    border: 1px solid rgba(145, 150, 161, 0.4);
+    border-radius: 16px;
+}
+
+.login-link {
+    position: relative;
+    margin-left:231px;
+   
+    width: 237px;
+    height: 26px;
+    border-bottom: 1px dashed #FDB100;;
+
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    /* or 156% */
+   
+
+
+    color: #FDB100;
+}
+
