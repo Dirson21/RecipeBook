@@ -21,6 +21,7 @@ export class AuthService {
         localStorage.setItem("id_token", authResult.jwtToken)
         localStorage.setItem("id_user", authResult.id)
         localStorage.setItem("login", authResult.login)
+        localStorage.setItem("name", authResult.name)
 
 
     }
@@ -29,10 +30,15 @@ export class AuthService {
         return localStorage.getItem("login");
     }
 
+    public getName(): string|null {
+        return localStorage.getItem("name");
+    }
+
     public logout() {
         localStorage.removeItem("id_token");
         localStorage.removeItem("id_user");
         localStorage.removeItem("login")
+        localStorage.removeItem("name")
     }
 
     public isLoggedIn() {

@@ -5,7 +5,7 @@
 
 
 
-<mat-card-title mat-dialog-title class="reg-title">Регистрация</mat-card-title>
+<mat-card-title  class="reg-title">Регистрация</mat-card-title>
 
 <form [formGroup]="form">
 
@@ -37,6 +37,6 @@
         <button mat-raised-button (click)="closeDialog()" class="cansel-button">Отмена</button>
     </div>
 
-     <a routerLink (click)="choiseLogin()" class="login-link">У меня уже есть аккаунт</a>
+     <a (click)="choiseLogin()" class="login-link">У меня уже есть аккаунт</a>
 </form>
 

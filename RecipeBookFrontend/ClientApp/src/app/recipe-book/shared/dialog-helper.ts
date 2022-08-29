@@ -42,6 +42,9 @@ export class DialogHelper {
       if (result == LoginProfileDialogExitStatus.registration) {
         this.showRegDialog();
       }
+      if (result == LoginProfileDialogExitStatus.login) {
+        this.showLoginDialog();
+      }
     })
   }
 

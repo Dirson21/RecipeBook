@@ -14,18 +14,40 @@ namespace Application
 
         private readonly IRecipeRepository _recipeRepository;
         private readonly IRecipeConverter _recipeConverter;
+        private readonly IJwtGenerator _jwtGenerator;
 
-        public RecipeService(IUnitOfWork unitOfWork, IRecipeRepository recipeRepository,  IRecipeConverter recipeConverter)
+        public RecipeService(IUnitOfWork unitOfWork, IRecipeRepository recipeRepository,  IRecipeConverter recipeConverter, IJwtGenerator jwtGenerator)
         {
             _unitOfWork = unitOfWork;
             _recipeRepository = recipeRepository;
             _recipeConverter = recipeConverter;
+            _jwtGenerator = jwtGenerator;
         }
 
-        public int CreateRecipe(RecipeDto recipeDto)
+        public int CreateRecipe(RecipeDto recipeDto, string authHeader)
         {
-            Recipe recipe = _recipeRepository.Create(_recipeConverter.ConvertToRecipe(recipeDto));
+            Guid userAccountId;
+
+            var authParam = authHeader.Split(" ");
+            if (authParam[0].ToLower() == "bearer")
+            {
+                string jwtToken = authParam[1];
+                userAccountId = _jwtGenerator.getNameId(jwtToken);
+                if (userAccountId == Guid.Empty)
+                {
+                    throw new Exception("Неверный токен");
+                }
+            }
+            else
+            {
+                throw new Exception("Неверный тип авторизации");
+            }
+
+            Recipe recipe = _recipeConverter.ConvertToRecipe(recipeDto);
+            recipe.UserAccountId = userAccountId;
+            recipe = _recipeRepository.Create(recipe);
             _unitOfWork.Commit();
+
             return recipe.Id;
         }
 
@@ -50,33 +72,23 @@ namespace Application
             {
                 throw new Exception("Данного рецепта не существует");
             }
-            return recipe.ConvertToRecipeDto();
+            return _recipeConverter.ConvertToRecipeDto(recipe);
 
         }
 
         public RecipeDto GetRecipeByName(string name)
         {
-            return _recipeRepository.GetByName(name).ConvertToRecipeDto();
+            return _recipeConverter.ConvertToRecipeDto(_recipeRepository.GetByName(name));
         }
 
         public List<RecipeDto> GetRecipes()
         {
-            RecipeDto recipeDto = new RecipeDto
-            {
-                Id = 1,
-                Name = "Клубничная панна-котта",
-                Description = "Десерт, который невероятно легко и быстро готовится. Советую подавать его порционно в красивых бокалах, украсив взбитыми сливками, свежими ягодами и мятой",
-                Image = "assets\\img\\pana-kota.png",
-                CookingTime = 35,
-                CountPerson = 5
-            };
-
-            return _recipeRepository.GetAll().ConvertAll(c => c.ConvertToRecipeDto());
+            return _recipeRepository.GetAll().ConvertAll(c => _recipeConverter.ConvertToRecipeDto(c));
         }
 
         public List<RecipeDto> GetRecipes(int start, int count)
         {
-            return _recipeRepository.GetAll(start, count).ConvertAll(c => c.ConvertToRecipeDto());
+            return _recipeRepository.GetAll(start, count).ConvertAll(c => _recipeConverter.ConvertToRecipeDto(c));
         }
 
         public int UpdateRecipe(int recipeId)

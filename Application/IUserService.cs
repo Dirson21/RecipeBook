@@ -14,7 +14,7 @@ namespace Application
 
         public TokenView Login(LoginFormDto loginForm);
 
-        public UserAccount GetUserById(string id);
+        public UserAccountDto GetUserById(string id);
 
     }
 }

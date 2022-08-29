@@ -2,7 +2,7 @@ import { Component, Input, IterableDiffers, OnInit, ViewEncapsulation } from '@a
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipEvent } from '@angular/material/chips';
 import { Observer } from 'rxjs';
-import { ICookingStep } from '../shared/cookingStep.interface';
+import { ICookingStep } from '../shared/cooking-step.interface';
 import { IIngredientHeader } from '../shared/ingredient-header.interface';
 import { IIngredient } from '../shared/ingredient.interface';
 import { IRecipe } from '../shared/recipe.interface';

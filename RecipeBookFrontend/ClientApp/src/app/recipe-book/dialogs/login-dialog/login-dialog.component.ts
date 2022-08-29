@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../shared/auth.service';
 import { ILoginForm } from '../../shared/forms/loginForm.interface';
-import { UserAccountService } from '../../shared/userAccount.service';
+import { UserAccountService } from '../../shared/user-account.service';
 
 
 export enum LoginDialogExitState {

@@ -9,7 +9,7 @@ namespace Application
         RecipeDto GetRecipeById(int id);
         RecipeDto GetRecipeByName(string name);
 
-        int CreateRecipe(RecipeDto recipe);
+        int CreateRecipe(RecipeDto recipe, string authHeader);
         int UpdateRecipe(int recipeId);
         void DeleteRecipe(int recipeId);
 

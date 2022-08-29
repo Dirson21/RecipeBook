@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, AbstractControlOptions, ValidationErrors, ValidatorFn, AbstractControlDirective } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IRegistrationForm } from '../../shared/forms/registrationForm.interface';
-import { UserAccountService } from '../../shared/userAccount.service';
+import { UserAccountService } from '../../shared/user-account.service';
 
 
 export const passwordConfirmingValidator: ValidatorFn = (control: AbstractControl):

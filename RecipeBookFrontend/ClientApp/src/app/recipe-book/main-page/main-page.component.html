@@ -6,10 +6,10 @@
     <div class="header-content">
         <mat-card-title class="header-title">Готовь и делись рецептами</mat-card-title>
         <mat-card-subtitle class="header-subtitle">Никаких кулинарных книг и блокнотов! Храни все любимые рецепты в одном месте.</mat-card-subtitle>
-        <button mat-raised-button class="btn-started">
+        <button routerLink="/recipe/add-recipe" mat-raised-button class="btn-started">
             <img src="assets\img\add.png" class="plus-add"> <div class="btn-add-text">Добавить рецепт</div>
         </button>
-        <button mat-raised-button class="btn-login" (click)="onLoginButton()">Войти</button>
+        <button *ngIf="!authService.isLoggedIn()" mat-raised-button class="btn-login" (click)="onLoginButton()">Войти</button>
     </div>
 </div>
 

@@ -21,11 +21,6 @@ namespace Infrastructure.Data.Models
 
         public Recipe Create(Recipe recipe)
         {
-   
-
-            recipe.UserAccountId = Guid.Parse("78EF7038-2D2C-4E08-46CA-08DA852874AF");
-
-
 
             return _dbContext.Recipe.Add(recipe).Entity;
         }
@@ -37,21 +32,25 @@ namespace Infrastructure.Data.Models
 
         public List<Recipe> GetAll()
         {
-            return _dbContext.Recipe.AsSplitQuery().OrderBy(x => x.Id).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients).Include(x => x.Tags).ToList();
+            return _dbContext.Recipe.AsSplitQuery().OrderBy(x => x.Id).Include(x => x.CookingSteps)
+                .Include(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount).ToList();
         }
         public List<Recipe> GetAll(int start, int count)
         {
-            return _dbContext.Recipe.AsSplitQuery().OrderBy(x => x.Id).Skip(start).Take(count).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients).Include(x => x.Tags).ToList();
+            return _dbContext.Recipe.AsSplitQuery().OrderBy(x => x.Id).Skip(start).Take(count).Include(x => x.CookingSteps)
+                .Include(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount).ToList();
         }
 
         public Recipe GetById(int id)
         {
-            return _dbContext.Recipe.AsSplitQuery().Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients).Include(x => x.Tags).FirstOrDefault(x => x.Id == id);
+            return _dbContext.Recipe.AsSplitQuery().Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
+                ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount).FirstOrDefault(x => x.Id == id);
         }
 
         public Recipe GetByName(string name)
         {
-           return _dbContext.Recipe.AsSplitQuery().Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients).Include(x => x.Tags).FirstOrDefault(x => x.Name == name);
+           return _dbContext.Recipe.AsSplitQuery().Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
+                ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount).FirstOrDefault(x => x.Name == name);
         }
 
         public int Update(Recipe recipe)

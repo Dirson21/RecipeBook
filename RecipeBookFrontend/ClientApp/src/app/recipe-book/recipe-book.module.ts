@@ -22,12 +22,13 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
 import { RegistrationDialogComponent } from './dialogs/registration-dialog/registration-dialog.component'
 import { MatDialogModule } from '@angular/material/dialog'
-import { UserAccountService } from './shared/userAccount.service';
+import { UserAccountService } from './shared/user-account.service';
 import { LoginProfileDialogComponent } from './dialogs/login-profile-dialog/login-profile-dialog.component';
 import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.component';
 import { AuthService } from './shared/auth.service';
 import { AuthInterceptor } from './shared/auth-interceptor';
 import { DialogHelper } from './shared/dialog-helper';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { DialogHelper } from './shared/dialog-helper';
     UserAccountService,
     AuthService,
     DialogHelper,
+    AuthGuard,
   ]
 })
 export class RecipeBookModule { }

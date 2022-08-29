@@ -16,5 +16,9 @@ namespace Application.Dto
         public List<TagDto> Tags { get; set; } = new List<TagDto>();
         public List<CookingStepDto> CookingSteps { get; set; } = new List<CookingStepDto>();
 
+        public UserAccountDto UserAccount { get; set; } = new UserAccountDto();
+
+       
+
     }
 }

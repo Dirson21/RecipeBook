@@ -2,7 +2,7 @@
     <svg-icon src="assets\img\close.svg"></svg-icon>
  </button>
 
-<mat-card-title mat-dialog-title class="dialog-title">Войти</mat-card-title>
+<mat-card-title class="dialog-title">Войти</mat-card-title>
 
 <form [formGroup]="form">
     <mat-form-field class="dialog-input">
@@ -17,6 +17,6 @@
         <button (click)="login()" mat-raised-button class="login-button">Войти</button>
         <button (click)="cancel()" mat-raised-button class="cancel-button">Отмена</button>
     </div>
-    <a routerLink (click)="choiceReg()" class="login-link">У меня еще нет аккаунта</a>
+    <a  (click)="choiceReg()" class="login-link">У меня еще нет аккаунта</a>
 
 </form>

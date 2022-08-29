@@ -16,7 +16,7 @@ namespace RecipeBookBackend.Filters
         {
             List<IdentityError> errors = new List<IdentityError>();
 
-            if (!string.IsNullOrEmpty(password) || password.Length < RequiredLength)
+            if (string.IsNullOrEmpty(password) || password.Length < RequiredLength)
             {
                 errors.Add(new IdentityError
                 {

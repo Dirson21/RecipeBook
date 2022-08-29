@@ -11,5 +11,6 @@ namespace Application.Converters
     public interface IRecipeConverter
     {
         public Recipe ConvertToRecipe(RecipeDto recipeDto);
+        public RecipeDto ConvertToRecipeDto( Recipe recipe);
     }
 }

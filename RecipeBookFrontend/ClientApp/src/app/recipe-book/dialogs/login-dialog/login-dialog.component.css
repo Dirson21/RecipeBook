@@ -76,6 +76,7 @@
     position: relative;
     margin-left:231px;
     text-decoration: none;
+    cursor: pointer;
 
     width: 237px;
     height: 26px;
