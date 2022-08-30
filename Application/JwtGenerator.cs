@@ -40,23 +40,5 @@ namespace Application
 
 			return tokenHandler.WriteToken(token);
 		}
-
-        public Guid getNameId(string token)
-        {
-
-			var tokenHandler = new JwtSecurityTokenHandler();
-
-			var jwt =  tokenHandler.ReadJwtToken(token);
-
-			foreach(var claim in jwt.Claims)
-            {
-				if (claim.Type == JwtRegisteredClaimNames.NameId)
-                {
-					return Guid.Parse(claim.Value);
-                }
-            }
-
-			return Guid.Empty;
-		}
     }
 }

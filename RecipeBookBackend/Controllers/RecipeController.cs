@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Application;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace RecipeBookBackend.Controllers
 {
@@ -63,12 +64,14 @@ namespace RecipeBookBackend.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddRecipe ([FromBody] RecipeDto recipeDto, [FromHeader(Name = "Authorization")] string authHeader)
+        public IActionResult AddRecipe ([FromBody] RecipeDto recipeDto)
         {
             try
             {
-                
-                return Ok(_recipeService.CreateRecipe(recipeDto, authHeader));
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Parse(nameIdentifier.Value);
+
+                return Ok(_recipeService.CreateRecipe(recipeDto, userId));
             }
             catch (Exception ex)
             {

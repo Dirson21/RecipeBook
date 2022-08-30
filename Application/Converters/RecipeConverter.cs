@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Builders;
 
 namespace Application.Converters
 {
@@ -14,30 +15,18 @@ namespace Application.Converters
     {
         private readonly ITagRepository _tagRepositry;
         private readonly IUserAccountConverter _userAccountConverter;
+        private readonly ITagBuilder _tagBuilder;
 
-        public RecipeConverter(ITagRepository tagRepository, IUserAccountConverter userAccountConverter)
+        public RecipeConverter(ITagRepository tagRepository, IUserAccountConverter userAccountConverter, ITagBuilder tagBuilder)
         {
             _tagRepositry = tagRepository;
             _userAccountConverter = userAccountConverter;
+            _tagBuilder = tagBuilder;
         }
         public Recipe ConvertToRecipe(RecipeDto recipeDto)
         {
             Recipe recipe = new Recipe();
-            if (recipeDto.Tags != null)
-            {
-                foreach (var tagDto in recipeDto.Tags)
-                {
-                    Tag tag = _tagRepositry.GetByName(tagDto.Name);
-                    if (tag != null)
-                    {
-                        recipe.Tags.Add(tag);
-                    }
-                    else
-                    {
-                        recipe.Tags.Add(tagDto.ConvertToTag());
-                    }
-                }
-            }
+            recipe.Tags = _tagBuilder.buildFromTagDto(recipeDto.Tags);
 
             recipe.Id = recipeDto.Id;
             recipe.Name = recipeDto.Name;

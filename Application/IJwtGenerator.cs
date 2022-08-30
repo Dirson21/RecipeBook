@@ -11,7 +11,5 @@ namespace Application
     {
         string CreateToken(UserAccount user);
 
-        Guid getNameId(string token);
-
     }
 }

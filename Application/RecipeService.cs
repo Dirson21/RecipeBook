@@ -24,27 +24,11 @@ namespace Application
             _jwtGenerator = jwtGenerator;
         }
 
-        public int CreateRecipe(RecipeDto recipeDto, string authHeader)
+        public int CreateRecipe(RecipeDto recipeDto, Guid recipeId)
         {
-            Guid userAccountId;
-
-            var authParam = authHeader.Split(" ");
-            if (authParam[0].ToLower() == "bearer")
-            {
-                string jwtToken = authParam[1];
-                userAccountId = _jwtGenerator.getNameId(jwtToken);
-                if (userAccountId == Guid.Empty)
-                {
-                    throw new Exception("Неверный токен");
-                }
-            }
-            else
-            {
-                throw new Exception("Неверный тип авторизации");
-            }
 
             Recipe recipe = _recipeConverter.ConvertToRecipe(recipeDto);
-            recipe.UserAccountId = userAccountId;
+            recipe.UserAccountId = recipeId;
             recipe = _recipeRepository.Create(recipe);
             _unitOfWork.Commit();
 
@@ -103,5 +87,6 @@ namespace Application
             _unitOfWork.Commit();
             return id;
         }
+
     }
 }

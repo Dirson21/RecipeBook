@@ -20,6 +20,7 @@ using Application.Options;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using RecipeBookBackend.Filters;
+using Application.Builders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -76,6 +77,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IUserAccountConverter, UserAccountConverter>();
+builder.Services.AddScoped<ITagBuilder, TagBuilder>();
 
 builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
 
