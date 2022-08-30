@@ -1,7 +1,7 @@
 mat-card-header {
     position: relative;
-
 }
+
 ::ng-deep .mat-card-header-text {
     /* CSS styles go here */
     margin: 0px; 
@@ -9,8 +9,8 @@ mat-card-header {
 
 .logo {
     position: relative;
-    width: 99px;
-    height: 29px;
+    min-width: 99px;
+    min-height: 29px;
     margin-left: 120px;
     margin-top: 44px;
     
@@ -19,32 +19,44 @@ mat-card-header {
     line-height: 29px;
 
     color: #FDB100;
-
 }
-.menu-list {
 
+.menu-list {
     position: relative;
-  
+    width: 344px;
+    padding: 0;
     height: 22px;
     margin-left: 80px;
-    margin-top: 44px;
+    margin-top: 48px;
     display: flex;
     flex-direction: row;
+
+}
+
+.mat-nav-list .active-link .mat-list-item  {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #3A3C41;
+    padding: 0;
 }
 
 .mat-nav-list .mat-list-item {
     height: 22px;
-  }
-
-.list-item {
-
-  
-    position: relative;
-    margin-right: 40px;
+    
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     color: #9196A1;
+}
+
+:host /deep/ .mat-list-item-content {
+    padding: 0!important;
+}
+
+.list-item {
+    position: relative;
+    margin-right: 40px;
 }
 
 .list-item:last-child {
@@ -52,25 +64,22 @@ mat-card-header {
 }
 
 .login {
-    
+    cursor: pointer;
     position: relative;
+    margin-left: 565px;
     margin-top: 40px;
-    margin-left: 500px;
     width: 280px;
     height: 38px;
- 
-
 }
 
 .entered-login {
     margin-top: 40px;
-    margin-left: 304px;
+    margin-left: 398px;
     position: relative;
     /* width: 280px; */
     height: 38px;
 
 }
-
 
 .login-svg {
     position: relative;
@@ -84,14 +93,6 @@ mat-card-header {
     font-size: 18px;
     line-height: 22px;
     color: #FDB100;
-
-}
-
-.active-link {
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    color: #3A3C41;
 }
 
 .line {
@@ -112,7 +113,4 @@ mat-card-header {
     width: 24px;
     height: 24px;
     bottom: 5px;
-    
-
-    
 }

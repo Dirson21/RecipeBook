@@ -2,23 +2,8 @@
 using Application.Converters;
 using Domain;
 using Domain.UoW;
-using Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Domain.Repository;
-using System.IdentityModel.Tokens.Jwt;
-using Application.Options;
-using Microsoft.IdentityModel.Tokens;
-using System.Net;
-using Microsoft.Rest;
 
 namespace Application
 {
@@ -43,7 +28,7 @@ namespace Application
             _jwtGenerator = jwtGenerator;
         }
 
-        public UserAccount GetUserById(string id)
+        public UserAccountDto GetUserById(string id)
         {
             var user = _userManager.FindByIdAsync(id).GetAwaiter().GetResult();
             
@@ -51,7 +36,8 @@ namespace Application
             {
                 throw new Exception("Пользователя не существует");
             }
-            return user;
+
+            return _userConverter.ConvertToUserAccountDto(user);
         }
 
         public TokenView Login(LoginFormDto loginForm)
@@ -62,18 +48,16 @@ namespace Application
             if (user == null)
             {
          
-                throw new Exception("Данного пользователя не существует");
+                throw new Exception("Неверный логин или пароль");
             }
            
-           
-            
             var authResult = _signInManager.CheckPasswordSignInAsync(user, loginForm.Password, false).GetAwaiter().GetResult();
 
 
             if (!authResult.Succeeded)
             {
                
-                throw new Exception("Неверный пароль");
+                throw new Exception("Неверный логин или пароль");
             }
 
             TokenView tokenView = new TokenView
@@ -81,6 +65,7 @@ namespace Application
                 JwtToken = _jwtGenerator.CreateToken(user),
                 Login = user.UserName,
                 Id =  user.Id.ToString(),
+                Name = user.Name
             };
 
             return tokenView;
@@ -88,11 +73,6 @@ namespace Application
 
         public Guid Registration(RegistrationFormDto registrationForm)
         {
-            if (registrationForm.Password != registrationForm.ConfirmPassword)
-            {
-                throw new Exception("Пароли не совпадают");
-            }
-            
 
             UserAccount user = _userConverter.RegistrationFormToUserAccount(registrationForm);
 

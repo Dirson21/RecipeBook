@@ -7,6 +7,7 @@ import { ILoginForm } from "./forms/loginForm.interface";
 import { ITokenView } from "./forms/token-view.interface";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import * as moment from "moment";
+import { IUserAccount } from "./user-account.interface";
 
 
 @Injectable()
@@ -25,6 +26,10 @@ export class UserAccountService {
 
     public login(loginForm: ILoginForm): Observable <ITokenView> {
         return this.httpClient.post<ITokenView>(`${this.apiUrl}/login`, loginForm)
+    }
+
+    public getUserById(id:string): Observable<IUserAccount> {
+        return this.httpClient.get<IUserAccount>(`${this.apiUrl}/${id}`);
     }
     
 }

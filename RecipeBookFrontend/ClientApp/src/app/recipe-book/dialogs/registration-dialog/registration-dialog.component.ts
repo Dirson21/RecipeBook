@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, AbstractControlOptions, ValidationErrors, ValidatorFn, AbstractControlDirective } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { IRegistrationForm } from '../../shared/forms/registrationForm.interface';
-import { UserAccountService } from '../../shared/userAccount.service';
+import { UserAccountService } from '../../shared/user-account.service';
 
 
 export const passwordConfirmingValidator: ValidatorFn = (control: AbstractControl):
@@ -14,8 +14,6 @@ export const passwordConfirmingValidator: ValidatorFn = (control: AbstractContro
       }
       return {confirmError: true}
     }
-
-
 
 export enum RegistrationDialogExitStatus{
     SuccessRegistrtation = 1,
@@ -38,51 +36,41 @@ export class RegistrationDialogComponent implements OnInit {
 
   error:string = "";
 
-
-  
-
   ngOnInit(): void {
     const opt : AbstractControlOptions = {
       validators: passwordConfirmingValidator
     }
     
-    
-    
-
     this.form = this.fb.group({
       login: ["", Validators.required],
       name: ["", Validators.required],
      
       password: ["", [Validators.required, Validators.minLength(8)]],
       confirmPassword: ["", [Validators.required]]
-
     }, opt)
-
-
   }
 
   public registrationUser() {
 
-      if (this.form.invalid) return;
+    if (this.form.invalid) return;
 
-      let registrationForm: IRegistrationForm;
+    let registrationForm: IRegistrationForm;
 
-      registrationForm = Object.assign({}, this.form.value);
+    registrationForm = Object.assign({}, this.form.value);
       
 
-      console.log(registrationForm);
-      this.userAccountService.registration(registrationForm).subscribe(result => {
-        console.log(result)
-        this.dialogRef.close(RegistrationDialogExitStatus.SuccessRegistrtation);
+    console.log(registrationForm);
+    this.userAccountService.registration(registrationForm).subscribe(result => {
+      console.log(result)
+      this.dialogRef.close(RegistrationDialogExitStatus.SuccessRegistrtation);
 
-      },(error) => {
+    },(error) => {
 
-        console.log(error.error);
-      }, () => {
+      console.log(error.error);
+      },
+    () => {
 
-      })
-    
-
+    })  
   }
 
   public closeDialog() {

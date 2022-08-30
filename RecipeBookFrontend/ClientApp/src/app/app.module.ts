@@ -10,17 +10,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './recipe-book/header/header.component';
 import { MainPageComponent } from './recipe-book/main-page/main-page.component';
-
 import { RecipeBookModule } from './recipe-book/recipe-book.module';
-
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FooterComponent } from './recipe-book/footer/footer.component';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { AuthInterceptor } from './recipe-book/shared/auth-interceptor';
-
-
-
-
 
 
 @NgModule({

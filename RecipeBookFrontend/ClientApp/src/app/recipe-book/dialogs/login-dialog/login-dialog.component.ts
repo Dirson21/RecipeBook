@@ -3,13 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../shared/auth.service';
 import { ILoginForm } from '../../shared/forms/loginForm.interface';
-import { UserAccountService } from '../../shared/userAccount.service';
+import { UserAccountService } from '../../shared/user-account.service';
 
 
 export enum LoginDialogExitState {
     successLogin = 1,
-    choiseReg,
-    cansel
+    choiceReg,
+    cancel
 }
 
 @Component({
@@ -28,16 +28,12 @@ export class LoginDialogComponent implements OnInit {
 
   form!:FormGroup
 
-
-  
   ngOnInit(): void {
     this.form = this.fb.group({
       login: ['', Validators.required],
       password: ['', Validators.required]
     })
   }
-
-
 
   public login() {
       if (this.form.invalid) return;
@@ -53,14 +49,12 @@ export class LoginDialogComponent implements OnInit {
 
   }
 
-  public cansel() {
-      this.dialogRef.close(LoginDialogExitState.cansel)
+  public cancel() {
+      this.dialogRef.close(LoginDialogExitState.cancel)
   }
 
-  public choiseReg() {
-      this.dialogRef.close(LoginDialogExitState.choiseReg);
+  public choiceReg() {
+      this.dialogRef.close(LoginDialogExitState.choiceReg);
   }
-
-
 
 }

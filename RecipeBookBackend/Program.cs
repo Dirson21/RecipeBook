@@ -18,6 +18,9 @@ using Domain.Repository;
 using RecipeBookBackend;
 using Application.Options;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using RecipeBookBackend.Filters;
+using Application.Builders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -57,7 +60,7 @@ builder.Services.AddDefaultIdentity<UserAccount>(options =>
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedPhoneNumber = false;
   
-    options.Password.RequiredLength = 5;   // минимальная длина
+       
     options.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
     options.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
     options.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
@@ -66,11 +69,15 @@ builder.Services.AddDefaultIdentity<UserAccount>(options =>
 
 }).AddEntityFrameworkStores<RecipeBookDbContext>();
 
+builder.Services.AddTransient<IPasswordValidator<UserAccount>,
+    UserPasswordValidator>(serv => new UserPasswordValidator(8));
+
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IUserAccountConverter, UserAccountConverter>();
+builder.Services.AddScoped<ITagBuilder, TagBuilder>();
 
 builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
 

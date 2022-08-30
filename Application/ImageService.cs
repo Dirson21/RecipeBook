@@ -25,9 +25,9 @@ namespace Application
             {
                 throw new Exception("Данного рецепта не существует");
             }
-
+            int year = DateTime.Now.Year;
             int month = DateTime.Now.Month;
-            string path = $"{_rootPath}\\{month}\\";
+            string path = $"{_rootPath}\\{year}\\{month}\\";
             string filename = "";
 
             if (!Directory.Exists(path))
@@ -58,7 +58,7 @@ namespace Application
             }
 
 
-            recipe.Image = $"{month}\\{filename}";
+            recipe.Image = $"{year}\\{month}\\{filename}";
             _recipeRepository.Update(recipe);
             _unitOfWork.Commit();
         }

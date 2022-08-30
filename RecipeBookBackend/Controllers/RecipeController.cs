@@ -2,6 +2,8 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Application;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace RecipeBookBackend.Controllers
 {
@@ -61,11 +63,15 @@ namespace RecipeBookBackend.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult AddRecipe ([FromBody] RecipeDto recipeDto)
         {
             try
             {
-                return Ok(_recipeService.CreateRecipe(recipeDto));
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Parse(nameIdentifier.Value);
+
+                return Ok(_recipeService.CreateRecipe(recipeDto, userId));
             }
             catch (Exception ex)
             {
@@ -75,6 +81,7 @@ namespace RecipeBookBackend.Controllers
 
         [HttpDelete]
         [Route("{recipeId}")]
+        [Authorize]
         public IActionResult DeleteRecipe(int recipeId)
         {
             try

@@ -41,7 +41,6 @@
     /* identical to box height, or 156% */
 
     text-align: center;
-
     color: #FDB100;
 }
 
@@ -51,7 +50,7 @@
     height: 30px;
     margin-bottom:49px;
     margin-left: 62px;
-    margin-top: 60px;
+    margin-top: 16px;
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
@@ -76,7 +75,9 @@
 .login-link {
     position: relative;
     margin-left:231px;
-   
+    text-decoration: none;
+    cursor: pointer;
+
     width: 237px;
     height: 26px;
     border-bottom: 1px dashed #FDB100;;
@@ -85,9 +86,16 @@
     font-size: 18px;
     line-height: 28px;
     /* or 156% */
-   
-
-
     color: #FDB100;
 }
+
+.close-icon {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    margin-left: 650px;
+    margin-top: 22px;
+}
+
+
 

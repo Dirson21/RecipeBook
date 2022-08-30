@@ -5,23 +5,28 @@ import { RouterModule, Routes } from '@angular/router';
 import { RecipePageComponent } from './recipe-page/recipe-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AddRecipePageComponent } from './add-recipe-page/add-recipe-page.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
     path: "recipe-book",
-    component:MainPageComponent
+    component: MainPageComponent
   },
   {
     path: "recipe",
-    component: RecipePageComponent
+    component: RecipePageComponent,
   },
   {
-    path: "add-recipe",
+    path: "recipe/add-recipe",
     component: AddRecipePageComponent,
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard]
+    
+
   },
   {
     path: "**",
-    component:MainPageComponent
+    component: MainPageComponent
   }
 
 ]
@@ -29,7 +34,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    
+
   ],
   imports: [
     RouterModule.forRoot(routes)
