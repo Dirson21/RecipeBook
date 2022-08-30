@@ -11,6 +11,7 @@ export class RecipeItemComponent implements OnInit {
   constructor() { }
 
   @Input() recipe!: IRecipe
+  @Input() isRecipeTitle: boolean = true;
 
   ngOnInit(): void {
   }

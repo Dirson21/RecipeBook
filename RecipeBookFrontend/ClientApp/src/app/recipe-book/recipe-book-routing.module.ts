@@ -6,6 +6,7 @@ import { RecipePageComponent } from './recipe-page/recipe-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { AddRecipePageComponent } from './add-recipe-page/add-recipe-page.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { RecipeInfoPageComponent } from './recipe-info-page/recipe-info-page.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
     canActivateChild: [AuthGuard]
     
 
+  },
+  {
+    path: "recipe/:id",
+    component: RecipeInfoPageComponent
   },
   {
     path: "**",

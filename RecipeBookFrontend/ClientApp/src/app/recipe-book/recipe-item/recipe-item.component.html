@@ -1,46 +1,46 @@
+<div class="recipe-block">
 
-<mat-list-item>
+<div class="recipe-content">
 
-    <div class="recipe-content">
+    <mat-list class="recipe-tag-list">
+        <mat-list-item class="recipe-tag-item" *ngFor="let tag of recipe.tags">{{tag.name}}</mat-list-item>
 
-        <mat-list class="recipe-tag-list">
-            <mat-list-item class="recipe-tag-item" *ngFor="let tag of recipe.tags">{{tag.name}}</mat-list-item>
-    
-        </mat-list>
+    </mat-list>
 
-        <div class="recipe-action">
+    <div class="recipe-action">
 
-            <button mat-raised-button class="favorite-btn">
-                <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\star.svg"></svg-icon>
-                <div class="favorite-btn-text">10</div>
-            </button>
-           
-             <button mat-raised-button class="like-btn">
-                <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\like.svg"></svg-icon>
-                <div class="favorite-btn-text">10</div>
-             </button>
-        </div>
+        <button mat-raised-button class="favorite-btn">
+            <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\star.svg"></svg-icon>
+            <div class="favorite-btn-text">10</div>
+        </button>
 
-        <mat-card-title class="recipe-content-title">{{recipe.name}}</mat-card-title>
-        <mat-card-subtitle class="recipe-content-subtitle">{{recipe.description}}</mat-card-subtitle>
-
-        <div class="recipe-content-additional-info">
-            <div class="cooking-time">
-                <div class="additional-text">Время приготовления: </div>
-                <div class="additional-number">{{recipe.cookingTime}} минут</div>
-                <svg-icon src="assets\img\recipe-item-ico\timer.svg" class="additional-svg"></svg-icon>
-            </div>
-
-            <div class="count-person">
-                <div class="additional-text">Рецепт на: </div>
-                <div class="additional-number">{{recipe.countPerson}} персон</div>
-                <svg-icon src="assets\img\recipe-item-ico\people_outline.svg" class="additional-svg"></svg-icon>
-            </div>
-
-        </div>
+        <button mat-raised-button class="like-btn">
+            <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\like.svg"></svg-icon>
+            <div class="favorite-btn-text">10</div>
+        </button>
     </div>
 
-    <img src="http://localhost:5220/data/recipe/{{recipe.image}}" class="recipe-image">
-    <div class="recipe-author">@{{recipe.userAccount.login}}</div>
+    <mat-card-title *ngIf="isRecipeTitle" class="recipe-content-title">{{recipe.name}}</mat-card-title>
+    <mat-card-subtitle  class="recipe-content-subtitle">{{recipe.description}}
+    </mat-card-subtitle>
 
-</mat-list-item>
+    <div class="recipe-content-additional-info">
+        <div class="cooking-time">
+            <div class="additional-text">Время приготовления: </div>
+            <div class="additional-number">{{recipe.cookingTime}} минут</div>
+            <svg-icon src="assets\img\recipe-item-ico\timer.svg" class="additional-svg"></svg-icon>
+        </div>
+
+        <div class="count-person">
+            <div class="additional-text">Рецепт на: </div>
+            <div class="additional-number">{{recipe.countPerson}} персон</div>
+            <svg-icon src="assets\img\recipe-item-ico\people_outline.svg" class="additional-svg"></svg-icon>
+        </div>
+
+    </div>
+</div>
+
+<img [routerLink]="['/recipe', recipe.id]" src="http://localhost:5220/data/recipe/{{recipe.image}}"
+    class="recipe-image">
+<div class="recipe-author">@{{recipe.userAccount.login}}</div>
+</div>

@@ -29,6 +29,7 @@ import { AuthService } from './shared/auth.service';
 import { AuthInterceptor } from './shared/auth-interceptor';
 import { DialogHelper } from './shared/dialog-helper';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { RecipeInfoPageComponent } from './recipe-info-page/recipe-info-page.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { AuthGuard } from './shared/guards/auth.guard';
     AddRecipePageComponent,
     RegistrationDialogComponent,
     LoginProfileDialogComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    RecipeInfoPageComponent
   ],
   imports: [
     CommonModule,
