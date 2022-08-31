@@ -18,6 +18,7 @@ export class MainPageComponent implements OnInit {
   constructor(public dialogHelper: DialogHelper, public authService: AuthService, private router:Router) { }
 
   ngOnInit(): void {
+  
   }
 
   public onLoginButton() {

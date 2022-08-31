@@ -44,7 +44,7 @@ namespace Application.Converters
                 Id = userAccount.Id,
                 Login = userAccount.UserName,
                 Name = userAccount.Name,
-                Description = userAccount.Description
+                Description = userAccount.Description == null ? "" : userAccount.Description
             };
 
             return userDto;

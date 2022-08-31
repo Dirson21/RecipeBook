@@ -10,7 +10,7 @@ namespace Application
         RecipeDto GetRecipeByName(string name);
 
         int CreateRecipe(RecipeDto recipeDto, Guid recipeId);
-        int UpdateRecipe(int recipeId);
+        int UpdateRecipe(RecipeDto recipeDto);
         void DeleteRecipe(int recipeId);
 
 

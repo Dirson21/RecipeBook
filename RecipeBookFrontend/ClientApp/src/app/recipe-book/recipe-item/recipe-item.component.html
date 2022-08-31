@@ -42,5 +42,5 @@
 
 <img [routerLink]="['/recipe', recipe.id]" src="http://localhost:5220/data/recipe/{{recipe.image}}"
     class="recipe-image">
-<div class="recipe-author">@{{recipe.userAccount.login}}</div>
+<div class="recipe-author">@{{recipe.userAccount!.login}}</div>
 </div>

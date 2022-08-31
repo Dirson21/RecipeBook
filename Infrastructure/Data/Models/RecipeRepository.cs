@@ -53,9 +53,9 @@ namespace Infrastructure.Data.Models
                 ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount).FirstOrDefault(x => x.Name == name);
         }
 
-        public int Update(Recipe recipe)
+        public Recipe Update(Recipe recipe)
         {
-            return _dbContext.Recipe.Update(recipe).Entity.Id;
+            return _dbContext.Recipe.Update(recipe).Entity;
         }
 
     }

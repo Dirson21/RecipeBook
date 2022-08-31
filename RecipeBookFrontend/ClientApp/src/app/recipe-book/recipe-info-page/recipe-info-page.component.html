@@ -7,10 +7,10 @@
 <div class="main-content" *ngIf="recipe">
     <div class="block-flex-row">
         <mat-card-title class="recipe-name">{{recipe.name}}</mat-card-title>
-        <button mat-raised-button class="delete-button">
+        <button (click)="onDeleteButton()" *ngIf="isLoggedUser()" mat-raised-button class="delete-button">
             <svg-icon class="delete-button-svg" src="assets\img\ic_outline-delete.svg"></svg-icon>
         </button>
-        <button mat-raised-button class="update-button">
+        <button routerLink="update" *ngIf="isLoggedUser()" mat-raised-button class="update-button">
             <div class="update-button-field">
                 <svg-icon class="update-button-svg" src="assets\img\edit.svg"></svg-icon>
                 <span class="update-button-text">Редактировать</span>

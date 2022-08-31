@@ -36,4 +36,12 @@ export class RecipeService {
         return this.httpClient.put<null>(`${this.apiUrl}/image`, formData);
     }
 
+    public deleteRecipe(id: number) : Observable<null> {
+        return this.httpClient.delete<null>(`${this.apiUrl}/${id}`);
+    }
+
+    public updateRecipe(recipe: IRecipe): Observable<null> {
+        return this.httpClient.put<null>(`${this.apiUrl}/${recipe.id}`, recipe)
+    }
+
 }

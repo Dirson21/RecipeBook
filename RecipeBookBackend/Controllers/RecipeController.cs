@@ -4,13 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Application;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using RecipeBookBackend.Filters;
 
 namespace RecipeBookBackend.Controllers
 {
 
     [ApiController]
     [Route("api/[controller]")]
-    public class RecipeController: ControllerBase
+    public class RecipeController : ControllerBase
     {
         private readonly IRecipeService _recipeService;
         private readonly IImageService _imageService;
@@ -22,7 +23,7 @@ namespace RecipeBookBackend.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetRecipes ()
+        public IActionResult GetRecipes()
         {
             try
             {
@@ -64,7 +65,7 @@ namespace RecipeBookBackend.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult AddRecipe ([FromBody] RecipeDto recipeDto)
+        public IActionResult AddRecipe([FromBody] RecipeDto recipeDto)
         {
             try
             {
@@ -96,11 +97,12 @@ namespace RecipeBookBackend.Controllers
         }
 
         [HttpPut]
+        [Authorize]
         [Route("image")]
 
-        public IActionResult addRecipeImage([FromForm] int recipeId, [FromForm] IFormFile image)
+        public IActionResult AddRecipeImage([FromForm] int recipeId, [FromForm] IFormFile image)
         {
-            
+
             try
             {
                 _imageService.addRecipeImage(recipeId, image);
@@ -109,6 +111,28 @@ namespace RecipeBookBackend.Controllers
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut]
+        [Authorize]
+        [Route("{recipeId}")]
+        public IActionResult UpdateRecipe([FromBody] RecipeDto recipeDto)
+        {
+            try
+            {
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Parse(nameIdentifier.Value);
+                if ( recipeDto.UserAccount.Id != userId)
+                {
+                    throw new Exception("Неверный пользователь");
+                }
+
+                return Ok(_recipeService.UpdateRecipe(recipeDto));
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
             }
         }
         

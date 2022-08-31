@@ -75,17 +75,27 @@ namespace Application
             return _recipeRepository.GetAll(start, count).ConvertAll(c => _recipeConverter.ConvertToRecipeDto(c));
         }
 
-        public int UpdateRecipe(int recipeId)
+        public int UpdateRecipe(RecipeDto recipeDto)
         {
-            Recipe recipe = _recipeRepository.GetById(recipeId);
+            Recipe recipe = _recipeRepository.GetById(recipeDto.Id);
             if (recipe == null)
             {
                 throw new Exception("Данного рецепта не существует");
             }
 
-            int id = _recipeRepository.Update(recipe);
+            Recipe recipeFromDto = _recipeConverter.ConvertToRecipe(recipeDto);
+
+            recipe.Name = recipeFromDto.Name;
+            recipe.Description = recipeFromDto.Description;
+            recipe.Tags = recipeFromDto.Tags;
+            recipe.CookingTime = recipeFromDto.CookingTime;
+            recipe.CountPerson = recipeFromDto.CountPerson;
+            recipe.IngredientHeaders = recipeFromDto.IngredientHeaders;
+            recipe.CookingSteps = recipeFromDto.CookingSteps;
+
+            _recipeRepository.Update(recipe);
             _unitOfWork.Commit();
-            return id;
+            return recipe.Id;
         }
 
     }

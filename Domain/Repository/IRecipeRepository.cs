@@ -14,7 +14,7 @@ namespace Domain.Repositoy
         Recipe GetById(int id);
         Recipe GetByName(string name);
         Recipe Create  (Recipe recipe);
-        int Update (Recipe recipe);
+        Recipe Update (Recipe recipe);
         void Delete (Recipe recipe);
     }
 }

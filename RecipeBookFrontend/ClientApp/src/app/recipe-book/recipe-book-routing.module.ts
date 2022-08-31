@@ -30,6 +30,10 @@ const routes: Routes = [
     component: RecipeInfoPageComponent
   },
   {
+    path: "recipe/:id/update",
+    component: AddRecipePageComponent
+  },
+  {
     path: "**",
     component: MainPageComponent
   }

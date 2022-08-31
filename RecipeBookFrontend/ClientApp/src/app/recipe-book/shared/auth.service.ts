@@ -30,7 +30,7 @@ export class AuthService {
         return localStorage.getItem("login");
     }
 
-    public getName(): string|null {
+    public getName(): string | null {
         return localStorage.getItem("name");
     }
 
@@ -53,6 +53,17 @@ export class AuthService {
 
         }
         return false
+
+    }
+
+    public isLoggedUser(userId: string) {
+        const jwtToken = localStorage.getItem("id_token");
+        
+        if (jwtToken && this.isLoggedIn()) {
+            const jwtDecode = this.jwtHelper.decodeToken(jwtToken)
+            return jwtDecode["nameid"] == userId;
+        }
+        return false;
 
     }
 }
