@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, delay } from 'rxjs';
 
 @Injectable()
 export class PreloadService {
 
   private _loading = new BehaviorSubject<boolean>(false);
 
-  public readonly loading = this._loading.asObservable();
+  public readonly loading = this._loading.asObservable().pipe(delay(1));
 
   constructor() {
 

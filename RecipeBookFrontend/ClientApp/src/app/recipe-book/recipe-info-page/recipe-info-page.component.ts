@@ -12,7 +12,6 @@ import { RecipeService } from '../shared/recipe.service';
 export class RecipeInfoPageComponent implements OnInit {
 
   recipe!:IRecipe
-
   constructor(private route:ActivatedRoute, private recipeService: RecipeService) { }
 
   ngOnInit(): void {
@@ -23,7 +22,7 @@ export class RecipeInfoPageComponent implements OnInit {
       this.recipeService.getRecipe(+id).subscribe(recipe => {
           this.recipe = Object.assign({}, recipe);
           console.log(recipe)
-      })
+      } )
     })
   }
 
