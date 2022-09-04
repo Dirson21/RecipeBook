@@ -44,4 +44,20 @@ export class RecipeService {
         return this.httpClient.put<null>(`${this.apiUrl}/${recipe.id}`, recipe)
     }
 
+    public likeRecipe(recipe:IRecipe): Observable<null> {
+        return this.httpClient.post<null>(`${this.apiUrl}/like/${recipe.id}`, null)
+    }
+
+    public favoriteRecipe(recipe:IRecipe): Observable<null> {
+        return this.httpClient.post<null>(`${this.apiUrl}/favorite/${recipe.id}`, null)
+    }
+
+    public removeLikeRecipe(recipe:IRecipe): Observable<null> {
+        return this.httpClient.delete<null>(`${this.apiUrl}/like/${recipe.id}`)
+    }
+
+    public removeFavoriteRecipe(recipe:IRecipe): Observable<null> {
+        return this.httpClient.delete<null>(`${this.apiUrl}/favorite/${recipe.id}`)
+    }
+
 }

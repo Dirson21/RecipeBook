@@ -19,7 +19,7 @@ namespace Application.Builders
             _tagRepository = tagRepository;
         }
 
-        public List<Tag> buildFromTagDto(List<TagDto> tags)
+        public List<Tag> BuildFromTagDto(List<TagDto> tags)
         {
             var result = new List<Tag>();
             

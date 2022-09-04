@@ -1,5 +1,6 @@
 ﻿using Application.Dto;
 using Domain;
+using Domain.Repositoy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace Application.Builders
 {
-    public interface ITagBuilder
+    public interface IRecipeActionBuilder
     {
-        List<Tag> BuildFromTagDto(List<TagDto> tags);
+        public RecipeDto BuildActionRecipe(Recipe recipe, Guid userAccountId = new Guid());
     }
 }

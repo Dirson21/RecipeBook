@@ -9,15 +9,26 @@
 
     <div class="recipe-action">
 
-        <button mat-raised-button class="favorite-btn">
-            <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\star.svg"></svg-icon>
-            <div class="favorite-btn-text">10</div>
+        <button (click)="removeFavorite()" *ngIf="recipe.isFavorite" mat-raised-button class="favorite-btn">          
+            <svg-icon  class="favorite-btn-svg" src="assets\img\recipe-item-ico\star.svg"></svg-icon>
+            <div class="favorite-btn-text">{{recipe.countFavorite}}</div>
         </button>
 
-        <button mat-raised-button class="like-btn">
-            <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\like.svg"></svg-icon>
-            <div class="favorite-btn-text">10</div>
+        <button (click)="favorite()" *ngIf="!recipe.isFavorite" mat-raised-button class="favorite-btn">           
+            <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\empty-star.svg"></svg-icon>
+            <div class="favorite-btn-text">{{recipe.countFavorite}}</div>
         </button>
+
+        <button (click)="removeLike()" *ngIf="recipe.isLike" mat-raised-button class="like-btn">
+            <svg-icon *ngIf="recipe.isLike" class="favorite-btn-svg" src="assets\img\recipe-item-ico\like.svg"></svg-icon>
+            <div class="favorite-btn-text">{{recipe.countLike}}</div>
+        </button>
+
+        <button (click)="like()" *ngIf="!recipe.isLike" mat-raised-button class="like-btn">
+            <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\empty-like.svg"></svg-icon>
+            <div class="favorite-btn-text">{{recipe.countLike}}</div>
+        </button>
+        
     </div>
 
     <mat-card-title *ngIf="isRecipeTitle" class="recipe-content-title">{{recipe.name}}</mat-card-title>

@@ -5,13 +5,13 @@ import { filter, Observable, Observer } from 'rxjs';
 import { ICookingStep } from '../shared/cooking-step.interface';
 import { IIngredientHeader } from '../shared/ingredient-header.interface';
 import { IIngredient } from '../shared/ingredient.interface';
-import { IRecipe } from '../shared/recipe.interface';
+import { emptyRecipe, IRecipe } from '../shared/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 import { ITag } from '../shared/tag.interface';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ICON_REGISTRY_PROVIDER } from '@angular/material/icon';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 @Component({
@@ -32,9 +32,25 @@ export class AddRecipePageComponent implements OnInit {
 
   readonly separatorKeysCodes = [ENTER] as const;
 
-  constructor(private fb: FormBuilder, private recipeService: RecipeService, private route: ActivatedRoute) {
+  mySubscription;
+  
+  constructor(private fb: FormBuilder, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.mySubscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+         // Trick the Router into believing it's last link wasn't previously loaded
+         this.router.navigated = false;
+      }
+    }); 
 
   }
+
+  ngOnDestroy(){
+    if (this.mySubscription) {
+      this.mySubscription.unsubscribe();
+    }
+  }
+
   recipe!: IRecipe
 
 
@@ -68,7 +84,7 @@ export class AddRecipePageComponent implements OnInit {
       })
     }
 
-    this.recipe = this.recipeEmpty();
+    this.recipe = emptyRecipe();
     this.recipe.cookingSteps.push({ id: 0, stepNumber: 0, description: "", recipeId: 0 })
     this.recipe.ingredientHeaders.push({ id: 0, name: "", ingredients: [] })
    
@@ -94,6 +110,7 @@ export class AddRecipePageComponent implements OnInit {
 
       cookingSteps: this.initStepFormArray(recipe.cookingSteps),
     })
+
   }
 
   public initTagFormArray(tags: ITag[]) {
@@ -224,7 +241,7 @@ export class AddRecipePageComponent implements OnInit {
   private getIngredientFromRaw(tagsRaw: string): IIngredient[] {
     let ingredients: IIngredient[] = [];
 
-    tagsRaw.split("\n").forEach((value: string) => {
+    tagsRaw.trim().split("\n").filter(s => s.length > 0).forEach((value: string) => {
       ingredients.push({ id: 0, name: value, recipeId: 0 })
     });
     return ingredients;
@@ -273,7 +290,9 @@ export class AddRecipePageComponent implements OnInit {
 
       this.recipeService.addRecipeImage(id, image).subscribe(() => {
         console.log(id);
-        location.href = location.href;
+        this.router.navigate([this.router.url])
+    
+       
       });
 
     })
@@ -286,56 +305,31 @@ export class AddRecipePageComponent implements OnInit {
     if (this.form.invalid) return;
     let recipe: IRecipe;
 
-    recipe = Object.assign({}, this.form.value);
-    recipe.id = this.recipe.id;
-    recipe.image = this.recipe.image;
-    recipe.userAccount = this.recipe.userAccount;
+    recipe = Object.assign(this.recipe, this.form.value);
+    console.log(recipe);
 
     recipe.ingredientHeaders = this.getIngredientHeaderFromControls();
 
     recipe.cookingSteps = this.getCookingStepsFromControls()
-    console.log(image);
-    console.log(recipe);
+
 
 
     this.recipeService.updateRecipe(recipe).subscribe({
       next: () => {
         if (image) {
           this.recipeService.addRecipeImage(recipe.id, image).subscribe(() => {
-            location.href = location.href;
+            this.recipe = recipe;
+            this.initForm(this.recipe);
           });
         }
         else {
-          location.href = location.href;
+          this.recipe = recipe;
+          this.initForm(this.recipe);
         }
       }
     })
 
 
-  }
-
-
-
-  private recipeEmpty(): IRecipe {
-    let recipe = {
-      id: 0,
-      name: "",
-      description: "",
-      tags: [],
-      cookingSteps: [],
-      countPerson: 0,
-      image: "",
-      cookingTime: 0,
-      ingredientHeaders: [],
-      userAccount: {
-        id: "",
-        login: "",
-        description: "",
-        name: ""
-      }
-    }
-
-    return recipe;
   }
 
 }

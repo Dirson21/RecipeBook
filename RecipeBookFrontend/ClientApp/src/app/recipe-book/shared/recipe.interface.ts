@@ -8,12 +8,45 @@ export interface IRecipe {
     id: number,
     name: string,
     image: string,
-    description:string,
+    description: string,
     cookingTime: number,
-    countPerson:number,
+    countPerson: number,
+
+    countLike: number,
+    countFavorite: number,
+    isLike: boolean,
+    isFavorite: boolean
 
     ingredientHeaders: IIngredientHeader[]
     tags: ITag[],
     cookingSteps: ICookingStep[],
     userAccount: IUserAccount
 }
+
+export const emptyRecipe = (): IRecipe => ({
+    id: 0,
+    name: "",
+    description: "",
+    tags: [],
+    cookingSteps: [],
+    countPerson: 0,
+    image: "",
+    cookingTime: 0,
+    ingredientHeaders: [],
+    userAccount: {
+        id: "",
+        login: "",
+        description: "",
+        name: ""
+    },
+    countLike: 0,
+    countFavorite: 0,
+    isLike: false,
+    isFavorite: false
+
+
+});
+
+export const recipeInit = <T extends Partial<IRecipe>>(initialValues: T): IRecipe & T => {
+    return Object.assign(emptyRecipe(), initialValues);
+};

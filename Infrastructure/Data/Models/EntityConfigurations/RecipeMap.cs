@@ -30,6 +30,10 @@ namespace Infrastructure.Data.Models.EntityConfigurations
 
             builder.HasOne(x => x.UserAccount).WithMany(x => x.UserRecipes).OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.UserAccountId);
 
+            builder.HasMany(x => x.UserLikes).WithMany(x => x.RecipeLikes).UsingEntity(j => j.ToTable("RecipeLike"));
+
+            builder.HasMany(x => x.UserFavorites).WithMany(x => x.RecipeFavorites).UsingEntity(j => j.ToTable("RecipeFavorite"));
+
   
 
         }

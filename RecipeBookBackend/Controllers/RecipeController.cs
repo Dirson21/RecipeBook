@@ -16,6 +16,7 @@ namespace RecipeBookBackend.Controllers
         private readonly IRecipeService _recipeService;
         private readonly IImageService _imageService;
 
+
         public RecipeController(IRecipeService recipeService, IImageService imageService)
         {
             _recipeService = recipeService;
@@ -27,7 +28,14 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                return Ok(_recipeService.GetRecipes());
+                Claim nameIdentifier = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Empty;
+                if (nameIdentifier != null)
+                {
+                     userId = Guid.Parse(nameIdentifier.Value);
+                }
+                
+                return Ok(_recipeService.GetRecipes(userId));
             }
             catch (Exception ex)
             {
@@ -41,7 +49,13 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                return Ok(_recipeService.GetRecipeById(recipeId));
+                Claim nameIdentifier = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Empty;
+                if (nameIdentifier != null)
+                {
+                    userId = Guid.Parse(nameIdentifier.Value);
+                }
+                return Ok(_recipeService.GetRecipeById(recipeId, userId));
             }
             catch (Exception ex)
             {
@@ -55,7 +69,13 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                return Ok(_recipeService.GetRecipes(start, count));
+                Claim nameIdentifier = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Empty;
+                if (nameIdentifier != null)
+                {
+                    userId = Guid.Parse(nameIdentifier.Value);
+                }
+                return Ok(_recipeService.GetRecipes(start, count, userId));
             }
             catch (Exception ex)
             {
@@ -87,6 +107,15 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Parse(nameIdentifier.Value);
+                RecipeDto recipeDto = _recipeService.GetRecipeById(recipeId);
+
+                if (recipeDto.UserAccount.Id != userId)
+                {
+                    throw new Exception("Неверный пользователь");
+                }
+
                 _recipeService.DeleteRecipe(recipeId);
                 return Ok();
             }
@@ -135,6 +164,81 @@ namespace RecipeBookBackend.Controllers
                 return BadRequest(ex);
             }
         }
-        
+
+        [HttpPost]
+        [Authorize]
+        [Route("like/{recipeId}")]
+
+        public IActionResult LikeRecipe(int recipeId)
+        {
+            try
+            {
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Parse(nameIdentifier.Value);
+                _recipeService.LikeRecipe(recipeId, userId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Authorize]
+        [Route("like/{recipeId}")]
+
+        public IActionResult RemoveLikeRecipe(int recipeId)
+        {
+            try
+            {
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Parse(nameIdentifier.Value);
+                _recipeService.RemoveLikeRecipe(recipeId, userId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("favorite/{recipeId}")]
+
+        public IActionResult FavoriteRecipe(int recipeId)
+        {
+            try
+            {
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Parse(nameIdentifier.Value);
+                _recipeService.FavoriteRecipe(recipeId, userId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete]
+        [Authorize]
+        [Route("favorite/{recipeId}")]
+        public IActionResult RemoveFavoriteRecipe(int recipeId)
+        {
+            try
+            {
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Parse(nameIdentifier.Value);
+                _recipeService.RemoveFavoriteRecipe(recipeId, userId);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

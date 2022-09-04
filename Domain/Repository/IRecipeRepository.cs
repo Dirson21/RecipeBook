@@ -16,5 +16,22 @@ namespace Domain.Repositoy
         Recipe Create  (Recipe recipe);
         Recipe Update (Recipe recipe);
         void Delete (Recipe recipe);
+        void Like(Recipe recipe, UserAccount userAccount);
+        void Favorite(Recipe recipe, UserAccount userAccount);
+
+        int CountLike(Recipe recipe);
+
+        int CountFavorite(Recipe recipe);
+
+        public void RemoveLike(Recipe recipe, UserAccount userAccount);
+
+        public void RemoveFavorite(Recipe recipe, UserAccount userAccount);
+
+        public bool IsLike(Recipe recipe, UserAccount userAccount);
+
+        public bool IsFavorite(Recipe recipe, UserAccount userAccount);
+
+
+
     }
 }
