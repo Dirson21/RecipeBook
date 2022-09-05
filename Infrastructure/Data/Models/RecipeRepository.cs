@@ -52,9 +52,9 @@ namespace Infrastructure.Data.Models
 
         public Recipe GetByName(string name)
         {
-           return _dbContext.Recipe.AsSplitQuery().Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
-                ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
-                .Include(x => x.UserFavorites).Include(x => x.UserLikes).FirstOrDefault(x => x.Name == name);
+            return _dbContext.Recipe.AsSplitQuery().Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
+                 ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
+                 .Include(x => x.UserFavorites).Include(x => x.UserLikes).FirstOrDefault(x => x.Name == name);
         }
 
         public Recipe Update(Recipe recipe)
@@ -105,7 +105,5 @@ namespace Infrastructure.Data.Models
         {
             return _dbContext.Recipe.AsSingleQuery().Where(s => s.Id == recipe.Id).SelectMany(recipe => recipe.UserFavorites).Where(s => s.Id == userAccount.Id).Count() > 0;
         }
-
-
     }
 }

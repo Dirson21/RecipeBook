@@ -66,4 +66,14 @@ export class AuthService {
         return false;
 
     }
+
+    public getUserId(): string {
+        const userId = localStorage.getItem("id_user");
+        if (userId)
+        {
+            return userId
+        } 
+        return "";
+
+    }
 }

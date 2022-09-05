@@ -14,19 +14,28 @@ export class PreloadInterceptor implements HttpInterceptor
         "http://localhost:4200/api/recipe/like/" 
     ]
 
-    constructor(private loader:PreloadService) {}
+
+    constructor(private loader:PreloadService) {
+
+    }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
         if (this.blackList.find((value: string) => req.url.includes(value))) {
+
             return next.handle(req);
+            
         }
 
         this.loader.show();
         return next.handle(req).pipe(
             finalize(() => {
-                this.loader.hide();
+                if (this.loader.loading)
+                {
+                    this.loader.hide();
+                }
+    
             })
         )
     }

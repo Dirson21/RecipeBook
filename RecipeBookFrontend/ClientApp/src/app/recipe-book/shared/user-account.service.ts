@@ -31,5 +31,19 @@ export class UserAccountService {
     public getUserById(id:string): Observable<IUserAccount> {
         return this.httpClient.get<IUserAccount>(`${this.apiUrl}/${id}`);
     }
+
+    public getUserRecipes(id:string): Observable<IRecipe[]> {
+        return this.httpClient.get<IRecipe[]>(`${this.apiUrl}/${id}/recipe`)
+    }
+
+    public getUserFavoriteRecipes(id:string): Observable<IRecipe[]> {
+        return this.httpClient.get<IRecipe[]>(`${this.apiUrl}/${id}/favorite`)
+    }
+    public getUserFavoriteRecipesCount(id:string): Observable<number> {
+        return this.httpClient.get<number>(`${this.apiUrl}/${id}/favorite/count`)
+    }
+    public GetUserLikesCount(id:string): Observable<number> {
+        return this.httpClient.get<number>(`${this.apiUrl}/${id}/like/count`)
+    }
     
 }

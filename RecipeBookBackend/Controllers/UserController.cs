@@ -18,7 +18,7 @@ namespace RecipeBookBackend.Controllers
         }
 
         [HttpPost]
-        [ValidateModel]
+       
         public IActionResult Registration([FromBody] RegistrationFormDto registrationForm)
         {
             try
@@ -34,7 +34,6 @@ namespace RecipeBookBackend.Controllers
 
         [HttpPost]
         [Route("login")]
-        [ValidateModel]
         public IActionResult Login([FromBody] LoginFormDto loginForm)
         {
 
@@ -56,6 +55,67 @@ namespace RecipeBookBackend.Controllers
             try
             {
                 return Ok(_userService.GetUserById(userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Authorize]
+        [Route("{userId}/recipe")]
+        public IActionResult GetUserRecipes(string userId)
+        {
+            try
+            {
+                return Ok(_userService.GetUserRecipes(Guid.Parse(userId)));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{userId}/favorite")]
+        [Authorize]
+        public IActionResult GetUserFavoriteRecipe(string userId)
+        {
+            try
+            {
+                return Ok(_userService.GetUserFavoriteRecipes(Guid.Parse(userId)));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("{userId}/favorite/count")]
+        [Authorize]
+        public IActionResult GetUserFavoriteRecipeCount(string userId)
+        {
+            try
+            {
+                return Ok(_userService.GetUserFavoriteRecipesCount(Guid.Parse(userId)));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
+        [HttpGet]
+        [Route("{userId}/like/count")]
+        [Authorize]
+        public IActionResult GetUserLikesCount(string userId)
+        {
+            try
+            {
+                return Ok(_userService.GetUserLikesCount(Guid.Parse(userId)));
             }
             catch (Exception ex)
             {
