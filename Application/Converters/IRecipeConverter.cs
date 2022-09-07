@@ -10,9 +10,8 @@ namespace Application.Converters
 {
     public interface IRecipeConverter
     {
-        public Recipe ConvertToRecipe(RecipeDto recipeDto);
-
+ 
         public Recipe ConvertToRecipe(RecipeDto recipeDto, Recipe recipeData);
-        public RecipeDto ConvertToRecipeDto( Recipe recipe, Guid recipeOwnerId = new Guid());
+        public RecipeDto ConvertToRecipeDto( Recipe recipe, Guid recipeOwnerId);
     }
 }

@@ -11,29 +11,27 @@ namespace Infrastructure.Data.Models
 {
     public class TagRepository : ITagRepository
     {
-        private readonly RecipeBookDbContext _dbContext;
+        private readonly DbSet<Tag> _tag;
 
         public TagRepository(RecipeBookDbContext dbContext)
         {
-            _dbContext = dbContext;
+            _tag = dbContext.Set<Tag>();
         }
-
-      
 
         public List<Tag> GetAll()
         {
-            return _dbContext.Tag.OrderBy(x => x.Id).Include(x => x.Recipes).ThenInclude(x => x.IngredientHeaders)
+            return _tag.OrderBy(x => x.Id).Include(x => x.Recipes).ThenInclude(x => x.IngredientHeaders)
                     .Include(x => x.Recipes).ThenInclude(x => x.CookingSteps).ToList();
         }
 
         public Tag GetById(int tagId)
         {
-            return _dbContext.Tag.FirstOrDefault(x => x.Id == tagId);
+            return _tag.FirstOrDefault(x => x.Id == tagId);
         }
 
         public Tag GetByName(string name)
         {
-            return _dbContext.Tag.FirstOrDefault(x => x.Name == name);
+            return _tag.FirstOrDefault(x => x.Name == name);
         }
     }
 }

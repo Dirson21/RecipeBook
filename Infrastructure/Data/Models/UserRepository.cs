@@ -12,54 +12,47 @@ namespace Infrastructure.Data.Models
 {
     public class UserRepository : IUserRepository
     {
-        private readonly RecipeBookDbContext _dbContext;
+ 
+        private readonly DbSet<UserAccount> _user;
 
-        private readonly IRecipeRepository _recipeRepository;
-
-        public UserRepository(RecipeBookDbContext dbContext, IRecipeRepository recipeRepository)
+        public UserRepository(RecipeBookDbContext dbContext)
         {
-            _dbContext = dbContext;
-            _recipeRepository = recipeRepository;
+            _user = dbContext.Set<UserAccount>();
         }
 
         public UserAccount Create(UserAccount user)
         {
-            return _dbContext.Users.Add(user).Entity;
+            return _user.Add(user).Entity;
         }
 
         public UserAccount GetByLogin(string login)
         {
-            return _dbContext.Users.FirstOrDefault(x => x.Name == login);
+            return _user.FirstOrDefault(x => x.Name == login);
         }
 
         public List<Recipe> GetUserFavoriteRecipes(UserAccount user)
         {
-            return _dbContext.Users.AsSplitQuery().Where(u => u.Id == user.Id).SelectMany(u => u.RecipeFavorites).Include(x => x.CookingSteps)
+            return _user.AsSplitQuery().Where(u => u.Id == user.Id).SelectMany(u => u.RecipeFavorites).Include(x => x.CookingSteps)
                 .Include(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
                 .Include(x => x.UserFavorites).Include(x => x.UserLikes).ToList();
         }
 
         public int GetUserFavoriteRecipesCount(UserAccount user)
         {
-            return _dbContext.Users.Where(u => u.Id == user.Id).SelectMany(u => u.RecipeFavorites).Count();
+            return _user.Include(u => u.RecipeFavorites).Single(u => u.Id == user.Id).RecipeFavorites.Count();
         }
 
         public List<Recipe> GetUserRecipes(UserAccount user)
         {
-            return _dbContext.Users.AsSplitQuery().Where(u => u.Id == user.Id).SelectMany(u => u.UserRecipes).Include(x => x.CookingSteps)
-                .Include(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
-                .Include(x => x.UserFavorites).Include(x => x.UserLikes).ToList();
+            return _user.AsSplitQuery().Include(u => u.UserRecipes).ThenInclude(r => r.CookingSteps)
+                .Include(u => u.UserRecipes).ThenInclude(r => r.IngredientHeaders).ThenInclude(i => i.Ingredients)
+                .Include(u => u.UserRecipes).ThenInclude(r => r.Tags)
+                .Include(u => u.UserRecipes).ThenInclude(r => r.UserAccount).Single(u => u.Id == user.Id).UserRecipes;
         }
 
         public int GetUserLikesCount(UserAccount user)
         {
-            int count = 0;
-            foreach(var recipe in _dbContext.Users.Where(u => u.Id == user.Id).SelectMany(u => u.UserRecipes).ToList())
-            {
-                count += _recipeRepository.CountLike(recipe);
-            }
-
-            return count;
+            return _user.Include(u => u.UserRecipes).ThenInclude(r => r.UserLikes).Single(u => u.Id == user.Id).UserRecipes.Sum(x => x.UserLikes.Count());
         }
     }
 }
