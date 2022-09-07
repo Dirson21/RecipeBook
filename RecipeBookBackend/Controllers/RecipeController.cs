@@ -109,7 +109,7 @@ namespace RecipeBookBackend.Controllers
             {
                 Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
                 Guid userId = Guid.Parse(nameIdentifier.Value);
-                RecipeDto recipeDto = _recipeService.GetRecipeById(recipeId);
+                RecipeDto recipeDto = _recipeService.GetRecipeById(recipeId, userId);
 
                 if (recipeDto.UserAccount.Id != userId)
                 {
@@ -131,10 +131,19 @@ namespace RecipeBookBackend.Controllers
 
         public IActionResult AddRecipeImage([FromForm] int recipeId, [FromForm] IFormFile image)
         {
-
             try
             {
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Parse(nameIdentifier.Value);
+                RecipeDto recipeDto = _recipeService.GetRecipeById(recipeId, userId);
+
+                if (recipeDto.UserAccount.Id != userId)
+                {
+                    throw new Exception("Неверный пользователь");
+                }
+
                 _imageService.addRecipeImage(recipeId, image);
+
                 return Ok();
             }
             catch (Exception ex)

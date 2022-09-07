@@ -32,6 +32,8 @@ import { RecipeInfoPageComponent } from './recipe-info-page/recipe-info-page.com
 import { PreloadService } from './shared/preload.service';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
+import { UserOwnerGuard } from './shared/guards/user-owner-guard';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     RegistrationDialogComponent,
     LoginProfileDialogComponent,
     LoginDialogComponent,
-    RecipeInfoPageComponent
+    RecipeInfoPageComponent,
+    UserProfilePageComponent
   ],
   imports: [
     CommonModule,
@@ -70,7 +73,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AuthService,
     DialogHelper,
     AuthGuard,
-    PreloadService
+    PreloadService,
+    UserOwnerGuard
   ]
 })
 export class RecipeBookModule { }

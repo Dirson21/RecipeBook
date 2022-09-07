@@ -13,25 +13,21 @@ namespace Application.Converters
 {
     public class RecipeConverter: IRecipeConverter
     {
-        private readonly ITagRepository _tagRepositry;
         private readonly IUserAccountConverter _userAccountConverter;
         private readonly ITagBuilder _tagBuilder;
         private readonly IRecipeActionBuilder _recipeActionBuilder;
 
-        public RecipeConverter(ITagRepository tagRepository, IUserAccountConverter userAccountConverter, ITagBuilder tagBuilder, IRecipeActionBuilder recipeActionBuilder)
+        public RecipeConverter(IUserAccountConverter userAccountConverter, ITagBuilder tagBuilder, IRecipeActionBuilder recipeActionBuilder)
         {
-            _tagRepositry = tagRepository;
             _userAccountConverter = userAccountConverter;
             _tagBuilder = tagBuilder;
             _recipeActionBuilder = recipeActionBuilder;
         }
-        public Recipe ConvertToRecipe(RecipeDto recipeDto)
+
+        public Recipe ConvertToRecipe(RecipeDto recipeDto, Recipe recipe)
         {
 
-            Recipe recipe = new Recipe();
             recipe.Tags = _tagBuilder.BuildFromTagDto(recipeDto.Tags);
-
-            recipe.Id = recipeDto.Id;
             recipe.Name = recipeDto.Name;
             recipe.Description = recipeDto.Description;
             recipe.CookingTime = recipeDto.CookingTime;
@@ -39,22 +35,8 @@ namespace Application.Converters
             recipe.Image = recipeDto.Image;
             recipe.CookingSteps = recipeDto.CookingSteps?.ConvertAll(c => c.ConvertToCookingStep());
             recipe.IngredientHeaders = recipeDto.IngredientHeaders?.ConvertAll(c => c.ConvertToIngridientHeader());
-           
+
             return recipe;
-        }
-
-        public Recipe ConvertToRecipe(RecipeDto recipeDto, Recipe recipeData)
-        {
-            Recipe recipe = ConvertToRecipe(recipeDto);
-
-            recipeData.Name = recipe.Name;
-            recipeData.Description = recipe.Description;
-            recipeData.Tags = recipe.Tags;
-            recipeData.CookingTime = recipe.CookingTime;
-            recipeData.CountPerson = recipe.CountPerson;
-            recipeData.IngredientHeaders = recipe.IngredientHeaders;
-            recipeData.CookingSteps = recipe.CookingSteps;
-            return recipeData;
         }
 
         public  RecipeDto ConvertToRecipeDto(Recipe recipe, Guid recipeOwnerId = new Guid())

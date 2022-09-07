@@ -30,7 +30,7 @@ namespace Application
         public int CreateRecipe(RecipeDto recipeDto, Guid recipeId)
         {
 
-            Recipe recipe = _recipeConverter.ConvertToRecipe(recipeDto);
+            Recipe recipe = _recipeConverter.ConvertToRecipe(recipeDto, new Recipe { Id = recipeDto.Id});
             recipe.UserAccountId = recipeId;
             recipe = _recipeRepository.Create(recipe);
             _unitOfWork.Commit();

@@ -27,7 +27,7 @@
         <div class="text-login">Войти</div>   
     </div>
 
-    <div *ngIf="authService.isLoggedIn()" class="entered-login"> 
+    <div [routerLink]="['/user', authService.getUserId()]" *ngIf="authService.isLoggedIn()" class="entered-login"> 
         <svg-icon src="assets\img\login.svg" class="login-svg"></svg-icon>
         <div class="text-login">Привет, {{authService.getName()}}</div>
         <div class="line"></div>
