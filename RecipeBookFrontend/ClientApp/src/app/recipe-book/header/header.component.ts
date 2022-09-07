@@ -13,6 +13,8 @@ import { UserAccountService } from '../shared/user-account.service';
 })
 export class HeaderComponent implements OnInit {
 
+  
+
   constructor(private userAccountService:UserAccountService,
      public authService: AuthService,
       private dialogHelper: DialogHelper,
@@ -20,6 +22,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+
 
   public login() {
     this.dialogHelper.showLoginDialog();

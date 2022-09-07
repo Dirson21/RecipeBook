@@ -10,6 +10,6 @@ namespace Application.Builders
 {
     public interface ITagBuilder
     {
-        List<Tag> buildFromTagDto(List<TagDto> tags);
+        List<Tag> BuildFromTagDto(List<TagDto> tags);
     }
 }

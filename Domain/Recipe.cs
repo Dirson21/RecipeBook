@@ -18,6 +18,10 @@
         public  List<Tag> Tags { get; set; } = new List<Tag>();
         public List<CookingStep> CookingSteps { get; set; }
 
+        public virtual List<UserAccount> UserLikes { get; set; } = new List<UserAccount> { };
+        public virtual List<UserAccount> UserFavorites { get; set; } = new List<UserAccount> { };
+
+
        
 
 

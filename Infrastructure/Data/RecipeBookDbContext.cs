@@ -21,14 +21,6 @@ namespace Infrastructure.Data
 
         }
 
-        public DbSet<Recipe> Recipe { get; set; }
-        public DbSet<Ingredient> Ingredient { get; set; }
-        public DbSet<Tag> Tag { get; set; }
-        public DbSet<CookingStep> CookingStep { get; set; }
-        public DbSet<IngredientHeader> IngredientHeader { get; set; }
-     
-
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

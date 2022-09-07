@@ -26,9 +26,15 @@ import { UserAccountService } from './shared/user-account.service';
 import { LoginProfileDialogComponent } from './dialogs/login-profile-dialog/login-profile-dialog.component';
 import { LoginDialogComponent } from './dialogs/login-dialog/login-dialog.component';
 import { AuthService } from './shared/auth.service';
-import { AuthInterceptor } from './shared/auth-interceptor';
 import { DialogHelper } from './shared/dialog-helper';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { RecipeInfoPageComponent } from './recipe-info-page/recipe-info-page.component';
+import { PreloadService } from './shared/preload.service';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
+import { UserOwnerGuard } from './shared/guards/user-owner-guard';
+
 
 @NgModule({
   declarations: [
@@ -38,7 +44,9 @@ import { AuthGuard } from './shared/guards/auth.guard';
     AddRecipePageComponent,
     RegistrationDialogComponent,
     LoginProfileDialogComponent,
-    LoginDialogComponent
+    LoginDialogComponent,
+    RecipeInfoPageComponent,
+    UserProfilePageComponent
   ],
   imports: [
     CommonModule,
@@ -56,8 +64,8 @@ import { AuthGuard } from './shared/guards/auth.guard';
     MatSelectModule,
     MatChipsModule,
     MatDialogModule,
-
-
+    MatToolbarModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     RecipeService,
@@ -65,6 +73,8 @@ import { AuthGuard } from './shared/guards/auth.guard';
     AuthService,
     DialogHelper,
     AuthGuard,
+    PreloadService,
+    UserOwnerGuard
   ]
 })
 export class RecipeBookModule { }

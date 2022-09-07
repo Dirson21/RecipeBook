@@ -59,12 +59,11 @@ builder.Services.AddDefaultIdentity<UserAccount>(options =>
 {
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedPhoneNumber = false;
-  
-       
-    options.Password.RequireNonAlphanumeric = false;   // требуются ли не алфавитно-цифровые символы
-    options.Password.RequireLowercase = false; // требуются ли символы в нижнем регистре
-    options.Password.RequireUppercase = false; // требуются ли символы в верхнем регистре
-    options.Password.RequireDigit = false; // требуются ли цифры
+ 
+    options.Password.RequireNonAlphanumeric = false;   
+    options.Password.RequireLowercase = false; 
+    options.Password.RequireUppercase = false; 
+    options.Password.RequireDigit = false; 
     options.SignIn.RequireConfirmedAccount = false; 
 
 }).AddEntityFrameworkStores<RecipeBookDbContext>();
@@ -78,6 +77,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IUserAccountConverter, UserAccountConverter>();
 builder.Services.AddScoped<ITagBuilder, TagBuilder>();
+builder.Services.AddScoped<IRecipeActionBuilder, RecipeActionBuilder>();
 
 builder.Services.AddScoped<IJwtGenerator, JwtGenerator>();
 

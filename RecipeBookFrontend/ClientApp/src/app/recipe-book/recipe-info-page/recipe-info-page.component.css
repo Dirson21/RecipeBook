@@ -1,0 +1,230 @@
+.back {
+    z-index: 1;
+    position: relative;
+    margin-top: 48px;
+    margin-left: 120px;
+}
+
+.back-svg {
+    position: relative;
+    top: 5px;
+    width: 24px;
+    height: 24px;
+}
+
+.back a {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FDB100;
+
+    text-decoration: none;
+}
+
+.main-content {
+    position: relative;
+    margin-left: 120px;
+    margin-top: 5px;
+}
+
+.block-flex-row {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.recipe-name {
+    position: relative;
+    width: 811px;
+    min-height: 62px;
+
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 62px;
+    /* identical to box height, or 148% */
+
+    color: #25292D;
+
+}
+
+.delete-button {
+    position: relative;
+    margin-left: 30px;
+    box-sizing: border-box;
+    width: 60px;
+    height: 60px;
+
+    border: 1px solid rgba(145, 150, 161, 0.7);
+    border-radius: 16px;
+}
+
+.delete-button-svg {
+    position: relative;
+    margin: auto;
+    top: 5px;
+}
+
+.update-button {
+    position: relative;
+    margin-left: 18px;
+    width: 278px;
+    height: 60px;
+
+    background: #FDB100;
+    border-radius: 16px;
+}
+
+.update-button-field {
+    position: relative;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    /* identical to box height, or 156% */
+    color: #FFFFFF;
+}
+
+.update-button-svg {
+    position: relative;
+    right: 20px;
+    top: 5px;
+}
+
+.recipe-item {
+    position: relative;
+    display: block;
+    margin-top: 50px;
+}
+
+.block-ingredient-step {
+    position: relative;
+    margin-top: 40px;
+}
+
+.ingridient-title {
+    position: relative;
+    height: 30px;
+
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    /* identical to box height, or 150% */
+    text-transform: capitalize;
+    color: #FDB100;
+}
+
+.header-block {
+    position: relative;
+    margin-top: 20px;
+}
+
+.header-title {
+    height: 23px;
+    margin: 0;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 30px;
+    /* or 167% */
+
+    display: flex;
+    align-items: center;
+
+    color: #4A525A;
+}
+
+mat-list.ingredient-list {
+    position: relative;
+    margin-top: 10px;
+    padding: 0px;
+}
+
+
+mat-list-item.ingredient-item {
+    position: relative;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    padding: 0px;
+    /* or 167% */
+    color: #4A525A;
+    height: 23px;
+    margin-bottom: 5px;
+}
+
+:host .ingredient-item /deep/ .mat-list-item-content {
+    padding: 0 !important;
+}
+
+.ingridients-block {
+    width: 396px;
+
+}
+
+.step-block {
+    position: relative;
+    margin-left: 14px;
+    margin-bottom: 103px;
+}
+
+.step-item {
+    z-index: 1;
+    position: relative;
+    padding: 1px;
+    width: 790px;
+    min-height: 150px;
+    
+    background: #FFFFFF;
+    box-shadow: 0px 16px 72px rgba(34, 39, 47, 0.05);
+    border-radius: 24px;
+    margin-bottom: 20px;
+
+}
+
+.step-title {
+    position: relative;
+    margin-top: 50px;
+    width: 643px;
+    margin-left: 73px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 30px;
+
+    display: flex;
+    align-items: center;
+
+    color: #4A525A;
+
+
+}
+
+.step-subtitle {
+    position: relative;
+    width: 643px;
+    margin-left: 73px;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    margin-bottom: 50px;
+
+    color: #4A525A;
+}
+
+.step-end-text {
+    position: relative;
+    display: block;
+    width: 286px;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0;
+
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    /* identical to box height, or 125% */
+
+    text-transform: capitalize;
+
+    color: #FDB100;
+
+    opacity: 0.5;
+}

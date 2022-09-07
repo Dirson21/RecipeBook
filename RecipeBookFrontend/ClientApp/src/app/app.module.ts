@@ -14,7 +14,10 @@ import { RecipeBookModule } from './recipe-book/recipe-book.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FooterComponent } from './recipe-book/footer/footer.component';
 import { MatButton, MatButtonModule } from '@angular/material/button';
-import { AuthInterceptor } from './recipe-book/shared/auth-interceptor';
+import { AuthInterceptor } from './recipe-book/shared/interceptors/auth.interceptor';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PreloadInterceptor } from './recipe-book/shared/interceptors/preload.interceptor';
 
 
 @NgModule({
@@ -34,7 +37,9 @@ import { AuthInterceptor } from './recipe-book/shared/auth-interceptor';
     MatIconModule,
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
-    MatButtonModule
+    MatButtonModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
 
   ],
   providers: [
@@ -43,6 +48,11 @@ import { AuthInterceptor } from './recipe-book/shared/auth-interceptor';
       useClass: AuthInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: PreloadInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

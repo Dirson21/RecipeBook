@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PreloadService } from '../shared/preload.service';
 import { IRecipe } from '../shared/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 
@@ -13,7 +14,8 @@ export class RecipePageComponent implements OnInit {
 
   private start: number = 0;
 
-  constructor(private recipeService: RecipeService) {
+  constructor(private recipeService: RecipeService,
+    public loader: PreloadService) {
     this.getRecipesRange(4);
 
   }

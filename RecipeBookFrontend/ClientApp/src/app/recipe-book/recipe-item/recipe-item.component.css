@@ -1,3 +1,8 @@
+.recipe-block {
+    position: relative;
+    width: 1200px;
+    height: 430px;
+}
 
 .recipe-image {
     position: absolute;
@@ -5,6 +10,8 @@
     height: 430px;
     left: 0px;
     top: 0px;
+    cursor: pointer;
+
 
     background: #F0F0F0;
     border-radius: 72px 0px;
@@ -52,7 +59,7 @@
 .recipe-tag-item {
     display: inline-block;
     white-space: nowrap;
-   
+
     margin-right: 5px;
     height: 25px;
 
@@ -100,7 +107,7 @@
 
 .favorite-btn-text {
     position: absolute;
-  
+
     height: 28px;
     left: 60px;
     top: 12px;
@@ -131,7 +138,6 @@
     height: 30px;
     left: 199px;
     top: 120px;
-
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;

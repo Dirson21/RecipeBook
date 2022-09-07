@@ -73,6 +73,7 @@ mat-card-header {
 }
 
 .entered-login {
+    cursor: pointer;
     margin-top: 40px;
     margin-left: 398px;
     position: relative;

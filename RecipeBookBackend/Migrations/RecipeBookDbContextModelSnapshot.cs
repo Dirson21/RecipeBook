@@ -369,6 +369,36 @@ namespace RecipeBookBackend.Migrations
                     b.ToTable("RecipeTag", (string)null);
                 });
 
+            modelBuilder.Entity("RecipeUserAccount", b =>
+                {
+                    b.Property<int>("RecipeLikesId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserLikesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RecipeLikesId", "UserLikesId");
+
+                    b.HasIndex("UserLikesId");
+
+                    b.ToTable("RecipeLike", (string)null);
+                });
+
+            modelBuilder.Entity("RecipeUserAccount1", b =>
+                {
+                    b.Property<int>("RecipeFavoritesId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserFavoritesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RecipeFavoritesId", "UserFavoritesId");
+
+                    b.HasIndex("UserFavoritesId");
+
+                    b.ToTable("RecipeFavorite", (string)null);
+                });
+
             modelBuilder.Entity("Domain.CookingStep", b =>
                 {
                     b.HasOne("Domain.Recipe", "Recipe")
@@ -475,6 +505,36 @@ namespace RecipeBookBackend.Migrations
                     b.HasOne("Domain.Tag", null)
                         .WithMany()
                         .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RecipeUserAccount", b =>
+                {
+                    b.HasOne("Domain.Recipe", null)
+                        .WithMany()
+                        .HasForeignKey("RecipeLikesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.UserAccount", null)
+                        .WithMany()
+                        .HasForeignKey("UserLikesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RecipeUserAccount1", b =>
+                {
+                    b.HasOne("Domain.Recipe", null)
+                        .WithMany()
+                        .HasForeignKey("RecipeFavoritesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.UserAccount", null)
+                        .WithMany()
+                        .HasForeignKey("UserFavoritesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

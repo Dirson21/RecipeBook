@@ -14,11 +14,14 @@ namespace Application
         private readonly UserManager<UserAccount> _userManager;
         private readonly SignInManager<UserAccount> _signInManager;
         private readonly IUserAccountConverter _userConverter;
+        private readonly IRecipeConverter _recipeConverter;
         private readonly IJwtGenerator _jwtGenerator;
+       
 
 
         public UserService(IUnitOfWork unitOfWork, IUserRepository userRepository, UserManager<UserAccount> userManager,
-            SignInManager<UserAccount> signInManager, IUserAccountConverter userConverter, IJwtGenerator jwtGenerator)
+            SignInManager<UserAccount> signInManager, IUserAccountConverter userConverter, IJwtGenerator jwtGenerator,
+            IRecipeConverter recipeConverter)
         {
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
@@ -26,6 +29,7 @@ namespace Application
             _signInManager = signInManager;
             _userConverter = userConverter;
             _jwtGenerator = jwtGenerator;
+            _recipeConverter = recipeConverter;
         }
 
         public UserAccountDto GetUserById(string id)
@@ -38,6 +42,49 @@ namespace Application
             }
 
             return _userConverter.ConvertToUserAccountDto(user);
+        }
+
+        public List<RecipeDto> GetUserFavoriteRecipes(Guid userAccountId)
+        {
+            UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
+            if (user == null)
+            {
+                throw new Exception("Пользователя не существует");
+            }
+
+            return _userRepository.GetUserFavoriteRecipes(user).ConvertAll(s => _recipeConverter.ConvertToRecipeDto(s,user.Id));
+
+        }
+
+        public int GetUserFavoriteRecipesCount(Guid userAccountId)
+        {
+            UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
+            if (user == null)
+            {
+                throw new Exception("Пользователя не существует");
+            }
+            return _userRepository.GetUserFavoriteRecipesCount(user);
+        }
+
+        public int GetUserLikesCount(Guid userAccountId)
+        {
+            UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
+            if (user == null)
+            {
+                throw new Exception("Пользователя не существует");
+            }
+            return _userRepository.GetUserLikesCount(user);
+        }
+
+        public List<RecipeDto> GetUserRecipes(Guid userAccountId)
+        {
+            UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
+            if (user == null)
+            {
+                throw new Exception("Пользователя не существует");
+            }
+
+            return _userRepository.GetUserRecipes(user).ConvertAll(s => _recipeConverter.ConvertToRecipeDto(s, user.Id));
         }
 
         public TokenView Login(LoginFormDto loginForm)

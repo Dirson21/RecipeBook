@@ -4,14 +4,24 @@ namespace Application
 {
     public interface IRecipeService
     {
-        List<RecipeDto> GetRecipes();
-        List<RecipeDto> GetRecipes(int start, int count);
-        RecipeDto GetRecipeById(int id);
-        RecipeDto GetRecipeByName(string name);
+        List<RecipeDto> GetRecipes(Guid recipeOwnerId);
+        List<RecipeDto> GetRecipes(int start, int count, Guid recipeOwnerId);
+        RecipeDto GetRecipeById(int id, Guid recipeOwnerId);
+        RecipeDto GetRecipeByName(string name, Guid recipeOwnerId);
 
         int CreateRecipe(RecipeDto recipeDto, Guid recipeId);
-        int UpdateRecipe(int recipeId);
+        int UpdateRecipe(RecipeDto recipeDto);
         void DeleteRecipe(int recipeId);
+
+        void LikeRecipe(int recipeId, Guid userAccountId);
+        void RemoveLikeRecipe(int recipeId, Guid userAccountId);
+
+        void FavoriteRecipe(int recipeId, Guid userAccountId);
+
+        void RemoveFavoriteRecipe(int recipeId, Guid userAccountId);
+
+        
+
 
 
     }

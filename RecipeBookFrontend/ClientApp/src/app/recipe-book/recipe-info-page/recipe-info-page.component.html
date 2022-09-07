@@ -1,0 +1,43 @@
+<div class="back">
+    <a routerLink="/recipe">
+        <svg-icon class="back-svg" src="assets\img\keyboard_backspace.svg"></svg-icon>
+        Назад
+    </a>
+</div>
+<div class="main-content" *ngIf="recipe">
+    <div class="block-flex-row">
+        <mat-card-title class="recipe-name">{{recipe.name}}</mat-card-title>
+        <button (click)="onDeleteButton()" *ngIf="isLoggedUser()" mat-raised-button class="delete-button">
+            <svg-icon class="delete-button-svg" src="assets\img\ic_outline-delete.svg"></svg-icon>
+        </button>
+        <button routerLink="update" *ngIf="isLoggedUser()" mat-raised-button class="update-button">
+            <div class="update-button-field">
+                <svg-icon class="update-button-svg" src="assets\img\edit.svg"></svg-icon>
+                <span class="update-button-text">Редактировать</span>
+            </div>  
+        </button>
+    </div>
+    <app-recipe-item class="recipe-item" [isRecipeTitle]="false" [recipe]="recipe"></app-recipe-item>
+
+    <div class="block-flex-row block-ingredient-step">
+        <div class="ingridients-block">
+            <mat-card-title class="ingridient-title">Ингредиенты</mat-card-title>
+            <div class="header-block" *ngFor="let header of recipe.ingredientHeaders">
+                <mat-card-title class="header-title">{{header.name}}</mat-card-title>
+                <mat-list class="ingredient-list">
+                    <mat-list-item class="ingredient-item" *ngFor="let ingredient of header.ingredients">
+                        {{ingredient.name}}
+                    </mat-list-item>
+                </mat-list>
+            </div>
+        </div>
+
+        <div class="step-block">
+            <div class="step-item" *ngFor="let step of recipe.cookingSteps">
+                <mat-card-title class="step-title">Шаг {{step.stepNumber}}</mat-card-title>
+                <mat-card-subtitle class="step-subtitle">{{step.description}}</mat-card-subtitle>
+            </div>
+            <p class="step-end-text">Приятного Аппетита!</p>
+        </div>
+    </div>
+</div>
