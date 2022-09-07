@@ -20,10 +20,10 @@ namespace Application
 		{
 			_key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
 		}
+
 		public string CreateToken(UserAccount user)
         {
 			var claims = new List<Claim> { new Claim(JwtRegisteredClaimNames.NameId, user.Id.ToString()) };
-
 			var credentials = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
 			var tokenDescriptor = new SecurityTokenDescriptor
@@ -34,8 +34,8 @@ namespace Application
 				Expires = DateTime.Now.Add(TimeSpan.FromHours(2)),
 				SigningCredentials = credentials
 			};
-			var tokenHandler = new JwtSecurityTokenHandler();
 
+			var tokenHandler = new JwtSecurityTokenHandler();
 			var token = tokenHandler.CreateToken(tokenDescriptor);
 
 			return tokenHandler.WriteToken(token);

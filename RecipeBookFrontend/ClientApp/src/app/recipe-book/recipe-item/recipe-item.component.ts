@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IRecipe } from '../shared/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 
@@ -13,6 +13,8 @@ export class RecipeItemComponent implements OnInit {
 
   @Input() recipe!: IRecipe
   @Input() isRecipeTitle: boolean = true;
+  @Output() likeEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() favoriteEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   ngOnInit(): void {
   }
@@ -23,6 +25,7 @@ export class RecipeItemComponent implements OnInit {
     }})
     this.recipe.countFavorite += 1;
     this.recipe.isFavorite = true;
+    this.favoriteEvent.emit(this.recipe.isFavorite);
   }
 
   public removeFavorite() {
@@ -30,6 +33,7 @@ export class RecipeItemComponent implements OnInit {
     }})
     this.recipe.countFavorite -= 1;
     this.recipe.isFavorite = false;
+    this.favoriteEvent.emit(this.recipe.isFavorite);
   }
 
   public like () {
@@ -37,6 +41,7 @@ export class RecipeItemComponent implements OnInit {
     }});
     this.recipe.countLike += 1;
     this.recipe.isLike = true;
+    this.likeEvent.emit(this.recipe.isLike);
   }
 
   public removeLike () {
@@ -44,6 +49,7 @@ export class RecipeItemComponent implements OnInit {
     }});
     this.recipe.countLike -= 1;
     this.recipe.isLike = false;
+    this.likeEvent.emit(this.recipe.isLike);
   }
 
 

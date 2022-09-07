@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { MatInput } from '@angular/material/input';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { NavigationService } from './recipe-book/shared/navigation.service';
 import { PreloadService } from './recipe-book/shared/preload.service';
 
 @Component({
@@ -9,7 +11,7 @@ import { PreloadService } from './recipe-book/shared/preload.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private loader: PreloadService, private changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private navigationService:NavigationService, private loader: PreloadService,private router: Router, private changeDetectorRef: ChangeDetectorRef) {}
 
   title = 'ClientApp';
 
@@ -17,6 +19,8 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.loading = this.loader.loading
+
+ 
 
   }
 

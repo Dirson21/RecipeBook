@@ -31,6 +31,7 @@ export class AddRecipePageComponent implements OnInit {
   ];
 
   readonly separatorKeysCodes = [ENTER] as const;
+  readonly imgUrl = `http://localhost:4200/data/recipe`;
 
   mySubscription;
   
@@ -75,7 +76,7 @@ export class AddRecipePageComponent implements OnInit {
             },
             complete: () => {
               let recipeImage: HTMLImageElement = document.getElementById("recipeImg") as HTMLImageElement;
-              recipeImage.src = `http://localhost:4200/data/recipe/${this.recipe.image}`;
+              recipeImage.src = `${this.imgUrl}/${this.recipe.image}`;
               recipeImage.classList.add("image-preview");
               this.update = true;
             }
@@ -218,7 +219,12 @@ export class AddRecipePageComponent implements OnInit {
 
     let files: FileList = event.target.files;
     console.log(files)
-    if (files.length == 0) return;
+    if (files.length == 0){
+      let recipeImage: HTMLImageElement = document.getElementById("recipeImg") as HTMLImageElement;
+
+      return;
+    }
+
 
     let recipeImage: HTMLImageElement = document.getElementById("recipeImg") as HTMLImageElement;
     let reader: FileReader = new FileReader();

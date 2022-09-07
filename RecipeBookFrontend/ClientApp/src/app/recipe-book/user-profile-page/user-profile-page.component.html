@@ -1,31 +1,26 @@
-<div class="back">
-    <a routerLink="/recipe">
-        <svg-icon class="back-svg" src="assets\img\keyboard_backspace.svg"></svg-icon>
-        Назад
-    </a>
-</div>
+<app-back-item class="back"></app-back-item>
 
 <div *ngIf="userAccount" class="profile-block">
     <mat-card-title class="profile-title">Мой профиль</mat-card-title>
 
-    <form>
+    <form [formGroup]="form">
         <div class="user-info-block">
-            <button mat-icon-button class="edit-button">
+            <button (click)="updateUser()" mat-icon-button class="edit-button">
                 <svg-icon class="edit-svg" src="assets\img\edit-black.svg"></svg-icon>
             </button>
 
             <div class="info-flex">
                 <div class="user-main-info">
                     <mat-form-field class="info-input">
-                        <input matInput placeholder="Имя">
+                        <input matInput placeholder="Имя" formControlName="name">
                     </mat-form-field>
 
                     <mat-form-field class="info-input">
-                        <input matInput placeholder="Логин">
+                        <input [readonly]="true" matInput placeholder="Логин" formControlName="login">
                     </mat-form-field>
 
                     <mat-form-field class="info-input">
-                        <input matInput placeholder="Пароль" type="password">
+                        <input [readonly]="true" matInput placeholder="Пароль" type="password" formControlName="password">
                         <button mat-icon-button class="show-password">
                             <svg-icon class="show-svg" src="assets\img\visibility_off.svg"></svg-icon>
                         </button>
@@ -34,7 +29,7 @@
                 </div>
                 <div class="user-description-info">
                     <mat-form-field class="description-input">
-                        <textarea matInput class="description-text" placeholder="Напишите немного о себе"></textarea>
+                        <textarea matInput class="description-text" placeholder="Напишите немного о себе" formControlName="description"></textarea>
                     </mat-form-field>
                 </div>
             </div>
@@ -77,7 +72,7 @@
             </div>
         </mat-list-item>
 
-        <mat-list-item class="stat-mat-item">
+        <mat-list-item class="stat-mat-item stat-pointer" routerLink="favorite">
             <div class="stat-item">
                 <div class="stat-title">
 
@@ -101,7 +96,7 @@
     <div class="recipe-view">
         <mat-list *ngIf="recipes.length > 0" class="recipe-list">
             <mat-list-item class="recipe-list-item"  *ngFor="let recipe of recipes" >
-          <app-recipe-item  [recipe]="recipe"></app-recipe-item>
+          <app-recipe-item (favoriteEvent)="favoriteAction($event)" (likeEvent)="likeAction($event)" [recipe]="recipe"></app-recipe-item>
         </mat-list-item>
         </mat-list>
 

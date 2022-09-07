@@ -47,7 +47,7 @@ namespace Infrastructure.Data.Models
             return _user.AsSplitQuery().Include(u => u.UserRecipes).ThenInclude(r => r.CookingSteps)
                 .Include(u => u.UserRecipes).ThenInclude(r => r.IngredientHeaders).ThenInclude(i => i.Ingredients)
                 .Include(u => u.UserRecipes).ThenInclude(r => r.Tags)
-                .Include(u => u.UserRecipes).ThenInclude(r => r.UserAccount).Single(u => u.Id == user.Id).UserRecipes;
+                .Single(u => u.Id == user.Id).UserRecipes;
         }
 
         public int GetUserLikesCount(UserAccount user)

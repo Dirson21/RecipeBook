@@ -9,6 +9,7 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { RecipeInfoPageComponent } from './recipe-info-page/recipe-info-page.component';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import { UserOwnerGuard } from './shared/guards/user-owner-guard';
+import { FavoritePageComponent } from './favorite-page/favorite-page.component';
 
 const routes: Routes = [
   {
@@ -44,7 +45,12 @@ const routes: Routes = [
     canActivate: [AuthGuard, UserOwnerGuard],
     canActivateChild: [AuthGuard, UserOwnerGuard]
   },
-
+  {
+    path: "user/:id/favorite",
+    component: FavoritePageComponent,
+    canActivate: [AuthGuard, UserOwnerGuard],
+    canActivateChild: [AuthGuard, UserOwnerGuard]
+  },
   {
     path: "**",
     component: MainPageComponent
@@ -58,7 +64,7 @@ const routes: Routes = [
 
   ],
   imports: [
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})
   ],
   exports: [
     RouterModule

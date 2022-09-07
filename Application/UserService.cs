@@ -63,6 +63,7 @@ namespace Application
             {
                 throw new Exception("Пользователя не существует");
             }
+
             return _userRepository.GetUserFavoriteRecipesCount(user);
         }
 
@@ -73,6 +74,7 @@ namespace Application
             {
                 throw new Exception("Пользователя не существует");
             }
+
             return _userRepository.GetUserLikesCount(user);
         }
 
@@ -99,8 +101,6 @@ namespace Application
             }
            
             var authResult = _signInManager.CheckPasswordSignInAsync(user, loginForm.Password, false).GetAwaiter().GetResult();
-
-
             if (!authResult.Succeeded)
             {
                
@@ -123,7 +123,6 @@ namespace Application
 
             UserAccount user = _userConverter.RegistrationFormToUserAccount(registrationForm);
 
-           
             var result = _userManager.CreateAsync(user, registrationForm.Password).GetAwaiter().GetResult();
             if (!result.Succeeded)
             {
@@ -131,6 +130,19 @@ namespace Application
             }
 
             return user.Id;
+        }
+
+        public Guid UpdateUser(UserAccountDto userAccountDto)
+        {
+            UserAccount user = _userManager.FindByIdAsync(userAccountDto.Id.ToString()).GetAwaiter().GetResult();
+            if (user == null)
+            {
+                throw new Exception("Пользователя не существует");
+            }
+            var result = _userManager.UpdateAsync(_userConverter.ConvertToUserAccount(userAccountDto, user)).GetAwaiter().GetResult();
+
+            return user.Id;
+
         }
     }
 }

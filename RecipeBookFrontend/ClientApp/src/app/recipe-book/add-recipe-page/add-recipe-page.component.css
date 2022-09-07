@@ -1,28 +1,9 @@
 .back {
+    display: block;
     z-index: 1;
     position: relative;
     margin-top: 48px;
     margin-left: 120px;
-
-
-}
-
-.back-svg {
-    position: relative;
-    top: 5px;
-    width: 24px;
-    height: 24px;
-
-
-}
-
-.back a {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    color: #FDB100;
-
-    text-decoration: none;
 }
 
 .add-recipe {

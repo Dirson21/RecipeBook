@@ -32,6 +32,10 @@ export class UserAccountService {
         return this.httpClient.get<IUserAccount>(`${this.apiUrl}/${id}`);
     }
 
+    public updateUser(user:IUserAccount): Observable <string> {
+        return this.httpClient.put<string>(`${this.apiUrl}/${user.id}`, user);
+    }
+
     public getUserRecipes(id:string): Observable<IRecipe[]> {
         return this.httpClient.get<IRecipe[]>(`${this.apiUrl}/${id}/recipe`)
     }
@@ -39,9 +43,11 @@ export class UserAccountService {
     public getUserFavoriteRecipes(id:string): Observable<IRecipe[]> {
         return this.httpClient.get<IRecipe[]>(`${this.apiUrl}/${id}/favorite`)
     }
+
     public getUserFavoriteRecipesCount(id:string): Observable<number> {
         return this.httpClient.get<number>(`${this.apiUrl}/${id}/favorite/count`)
     }
+
     public GetUserLikesCount(id:string): Observable<number> {
         return this.httpClient.get<number>(`${this.apiUrl}/${id}/like/count`)
     }
