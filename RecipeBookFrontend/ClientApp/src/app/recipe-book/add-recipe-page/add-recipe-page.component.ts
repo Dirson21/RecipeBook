@@ -33,6 +33,8 @@ export class AddRecipePageComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER] as const;
   readonly imgUrl = `http://localhost:4200/data/recipe`;
 
+  recipeImage:File|undefined;
+
   mySubscription;
   
   constructor(private fb: FormBuilder, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) {
@@ -220,12 +222,10 @@ export class AddRecipePageComponent implements OnInit {
     let files: FileList = event.target.files;
     console.log(files)
     if (files.length == 0){
-      let recipeImage: HTMLImageElement = document.getElementById("recipeImg") as HTMLImageElement;
-
       return;
     }
 
-
+    this.recipeImage = files[0]
     let recipeImage: HTMLImageElement = document.getElementById("recipeImg") as HTMLImageElement;
     let reader: FileReader = new FileReader();
     reader.readAsDataURL(files[0]);
@@ -279,8 +279,8 @@ export class AddRecipePageComponent implements OnInit {
   }
 
   public addRecipe() {
-    const image: File | null = this.getRecipeImage();
-    if (image == null) return;
+    const image = this.recipeImage;
+    if (!image) return;
     if (this.form.invalid) return;
 
     let recipe: IRecipe;
@@ -305,7 +305,7 @@ export class AddRecipePageComponent implements OnInit {
   }
 
   public updateRecipe() {
-    const image: File | null = this.getRecipeImage();
+    const image = this.recipeImage;
     console.log(this.form);
 
     if (this.form.invalid) return;
