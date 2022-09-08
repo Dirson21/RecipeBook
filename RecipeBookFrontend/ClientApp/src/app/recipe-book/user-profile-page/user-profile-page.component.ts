@@ -87,6 +87,7 @@ export class UserProfilePageComponent implements OnInit {
       next: (id) => {
         console.log(id);
         this.userAccount = user;
+        this.authService.updateName(user.name);
       }
     })
   }
