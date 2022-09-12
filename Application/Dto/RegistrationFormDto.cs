@@ -13,7 +13,9 @@ namespace Application.Dto
         [Required]
         public string Login { get; set; }
 
-        [Required]
+        [DataType(DataType.Password)]
+        [StringLength(30, ErrorMessage = "Поле {0} должно иметь минимум {2} и максимум {1} символов.", MinimumLength = 8)]
+        [Display(Name = "Пароль")]
         public string Password { get; set; }
 
         [Required]

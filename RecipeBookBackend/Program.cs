@@ -71,6 +71,8 @@ builder.Services.AddDefaultIdentity<UserAccount>(options =>
 builder.Services.AddTransient<IPasswordValidator<UserAccount>,
     UserPasswordValidator>(serv => new UserPasswordValidator(8));
 
+builder.Services.AddTransient<IUserValidator<UserAccount>, UserNameValidator>();
+
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
