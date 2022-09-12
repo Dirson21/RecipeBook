@@ -9,11 +9,8 @@ import { PreloadService } from "../preload.service";
 @Injectable()
 export class PreloadInterceptor implements HttpInterceptor
 {
-    blackList: string[] = [
-        "http://localhost:4200/api/recipe/favorite/",
-        "http://localhost:4200/api/recipe/like/",
-        "http://localhost:4200/assets/",
-        "assets\\"
+    whiteList: string[] = [
+        "http://localhost:4200/api/",
     ]
 
 
@@ -24,7 +21,7 @@ export class PreloadInterceptor implements HttpInterceptor
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
 
-        if (this.blackList.find((value: string) => req.url.includes(value))) {
+        if (!this.whiteList.find((value: string) => req.url.includes(value))) {
             return next.handle(req);
             
         }
