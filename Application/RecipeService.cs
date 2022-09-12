@@ -182,5 +182,18 @@ namespace Application
 
             return recipes.Distinct().Skip(start).Take(count).ToList().ConvertAll(r => _recipeConverter.ConvertToRecipeDto(r, userAccount));
         }
+
+        public RecipeDto GetRecipeDay(Guid userAccountId)
+        {
+ 
+            Recipe recipe = _recipeRepository.GetRandom();
+
+            if (recipe == null)
+            {
+                return new RecipeDto();
+            }
+
+            return _recipeConverter.ConvertToRecipeDto(recipe, userAccountId);
+        }
     }
 }

@@ -21,6 +21,10 @@ export class RecipeService {
         });
     }
 
+    public getRecipeDay(): Observable<IRecipe> {
+        return this.httpClient.get<IRecipe>(`${this.apiUrl}/recipeDay`);
+    }
+
     public getRecipe(id: number): Observable<IRecipe> {
         return this.httpClient.get<IRecipe>(`${this.apiUrl}/${id}`);
     }

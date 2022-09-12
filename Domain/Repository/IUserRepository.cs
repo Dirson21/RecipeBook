@@ -13,7 +13,7 @@ namespace Domain.Repository
 
         public List<Recipe> GetUserRecipes(UserAccount user);
 
-
+       
         public List<Recipe> GetUserFavoriteRecipes(UserAccount user);
 
         public int GetUserFavoriteRecipesCount(UserAccount user);

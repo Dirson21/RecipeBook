@@ -110,10 +110,18 @@ namespace Infrastructure.Data.Models
                  .Include(x => x.UserFavorites).Include(x => x.UserLikes).ToList();
         }
 
-        public List<Recipe> SearchByTag(Tag tag)
+
+
+        public Recipe GetRandom()
         {
-            throw new NotImplementedException();
+
+            return _recipe.OrderBy(x => Guid.NewGuid()).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
+                 ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
+                 .Include(x => x.UserFavorites).Include(x => x.UserLikes).FirstOrDefault();
         }
+
     }
+
+
 
 }

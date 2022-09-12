@@ -34,6 +34,10 @@ export class AuthService {
         return localStorage.getItem("name");
     }
 
+    public updateName(name:string) {
+        localStorage.setItem("name", name);
+    }
+
     public logout() {
         localStorage.removeItem("id_token");
         localStorage.removeItem("id_user");

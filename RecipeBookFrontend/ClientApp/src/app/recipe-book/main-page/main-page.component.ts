@@ -8,6 +8,8 @@ import { DialogHelper } from '../shared/dialog-helper';
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { RecipeService } from '../shared/recipe.service';
+import { IRecipe } from '../shared/recipe.interface';
 
 @Component({
   selector: 'app-main-page',
@@ -16,13 +18,22 @@ import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(public dialogHelper: DialogHelper, public authService: AuthService, private router:Router, private fb: FormBuilder) { }
+  constructor(public dialogHelper: DialogHelper, public authService: AuthService, private router:Router, private fb: FormBuilder,
+    private recipeService: RecipeService) { }
 
   form!: FormGroup;
+
+  recipe!: IRecipe
 
   ngOnInit(): void {
     this.form = this.fb.group({
       search: ['']
+    })
+
+    this.recipeService.getRecipeDay().subscribe({
+      next: (recipe)=> {
+        this.recipe = Object.assign({}, recipe);
+      }
     })
   }
 

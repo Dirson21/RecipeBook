@@ -21,6 +21,8 @@ namespace Application
 
         List<RecipeDto> SearchRecipe(string search,Guid userAccountId , int start, int count);
 
+        RecipeDto GetRecipeDay(Guid _userAccountId);
+
         
 
 

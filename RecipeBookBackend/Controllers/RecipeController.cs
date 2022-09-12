@@ -83,6 +83,21 @@ namespace RecipeBookBackend.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("recipeDay")]
+        public IActionResult GetRecipeDay()
+        {
+            try
+            {
+                Guid userId = GetUserId();
+                return Ok(_recipeService.GetRecipeDay(userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost]
         [Authorize]
         public IActionResult AddRecipe([FromBody] RecipeDto recipeDto)

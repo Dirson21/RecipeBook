@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AuthService } from '../shared/auth.service';
+import { DialogHelper } from '../shared/dialog-helper';
 import { IRecipe } from '../shared/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 
@@ -9,7 +11,7 @@ import { RecipeService } from '../shared/recipe.service';
 })
 export class RecipeItemComponent implements OnInit {
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService, private authService: AuthService, private dialogHelper: DialogHelper) { }
 
   @Input() recipe!: IRecipe
   @Input() isRecipeTitle: boolean = true;
@@ -22,6 +24,11 @@ export class RecipeItemComponent implements OnInit {
 
 
   public favorite () {
+    if (!this.authService.isLoggedIn()) {
+      this.dialogHelper.showLoginDialog()
+      return
+    }
+
     this.recipeService.favoriteRecipe(this.recipe).subscribe({next: ()=> {
       this.recipe.countFavorite += 1;
       this.recipe.isFavorite = true;
@@ -31,6 +38,11 @@ export class RecipeItemComponent implements OnInit {
   }
 
   public removeFavorite() {
+    if (!this.authService.isLoggedIn()) {
+      this.dialogHelper.showLoginDialog()
+      return
+    }
+
     this.recipeService.removeFavoriteRecipe(this.recipe).subscribe({next: ()=> {
       this.recipe.countFavorite -= 1;
       this.recipe.isFavorite = false;
@@ -40,6 +52,11 @@ export class RecipeItemComponent implements OnInit {
   }
 
   public like () {
+    if (!this.authService.isLoggedIn()) {
+      this.dialogHelper.showLoginDialog()
+      return
+    }
+
     this.recipeService.likeRecipe(this.recipe).subscribe({next: () => {
       this.recipe.countLike += 1;
       this.recipe.isLike = true;
@@ -48,6 +65,11 @@ export class RecipeItemComponent implements OnInit {
   }
 
   public removeLike () {
+    if (!this.authService.isLoggedIn()) {
+      this.dialogHelper.showLoginDialog()
+      return
+    }
+
     this.recipeService.removeLikeRecipe(this.recipe).subscribe({next: () => {
       this.recipe.countLike -= 1;
       this.recipe.isLike = false;

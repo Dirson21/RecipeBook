@@ -1,4 +1,4 @@
-<div [routerLink]="['/recipe', recipe.id]" class="recipe-block">
+<div  class="recipe-block">
 
 <div class="recipe-content">
 
@@ -30,7 +30,7 @@
         </button>
         
     </div>
-
+    <div [routerLink]="['/recipe', recipe.id]">
     <mat-card-title *ngIf="isRecipeTitle" class="recipe-content-title">{{recipe.name}}</mat-card-title>
     <mat-card-subtitle  class="recipe-content-subtitle">{{recipe.description}}
     </mat-card-subtitle>
@@ -49,9 +49,10 @@
         </div>
 
     </div>
+    </div>
 </div>
 
-<img src="http://localhost:5220/data/recipe/{{recipe.image}}"
+<img [routerLink]="['/recipe', recipe.id]" src="http://localhost:5220/data/recipe/{{recipe.image}}"
     class="recipe-image">
 <div class="recipe-author">@{{recipe.userAccount!.login}}</div>
 </div>
