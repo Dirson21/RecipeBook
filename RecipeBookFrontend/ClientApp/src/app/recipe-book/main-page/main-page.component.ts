@@ -30,11 +30,7 @@ export class MainPageComponent implements OnInit {
       search: ['']
     })
 
-    this.recipeService.getRecipeDay().subscribe({
-      next: (recipe)=> {
-        this.recipe = Object.assign({}, recipe);
-      }
-    })
+   
   }
 
   get searchControl(): AbstractControl {
