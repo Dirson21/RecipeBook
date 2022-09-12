@@ -32,6 +32,9 @@ namespace Domain.Repositoy
 
         public bool IsFavorite(Recipe recipe, UserAccount userAccount);
 
+        List<Recipe> SearchByName(string name);
+        List<Recipe> SearchByTag(Tag tag);
+
 
 
 

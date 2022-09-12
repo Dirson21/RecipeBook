@@ -14,14 +14,16 @@ namespace Application
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRecipeRepository _recipeRepository;
         private readonly IRecipeConverter _recipeConverter;
+        private readonly ITagRepository _tagRepository;
         private readonly UserManager<UserAccount> _userManager;
 
-        public RecipeService(IUnitOfWork unitOfWork, IRecipeRepository recipeRepository,  IRecipeConverter recipeConverter, IJwtGenerator jwtGenerator, UserManager<UserAccount> userManager)
+        public RecipeService(IUnitOfWork unitOfWork, IRecipeRepository recipeRepository,  IRecipeConverter recipeConverter, IJwtGenerator jwtGenerator, UserManager<UserAccount> userManager, ITagRepository tagRepository)
         {
             _unitOfWork = unitOfWork;
             _recipeRepository = recipeRepository;
             _recipeConverter = recipeConverter;
             _userManager = userManager;
+            _tagRepository = tagRepository;
         }
 
         public int CreateRecipe(RecipeDto recipeDto, Guid recipeId)
@@ -164,6 +166,21 @@ namespace Application
 
             _recipeRepository.RemoveFavorite(recipe, user);
             _unitOfWork.Commit();
+        }
+
+        public List<RecipeDto> SearchRecipe(string search, Guid userAccount, int start, int count)
+        {
+            List<Recipe> recipes = new List<Recipe>();
+            Tag tag = _tagRepository.GetByName(search);
+
+            if (tag != null)
+            {
+                recipes.AddRange(tag.Recipes);
+            }
+
+            recipes.AddRange(_recipeRepository.SearchByName(search));
+
+            return recipes.Distinct().Skip(start).Take(count).ToList().ConvertAll(r => _recipeConverter.ConvertToRecipeDto(r, userAccount));
         }
     }
 }

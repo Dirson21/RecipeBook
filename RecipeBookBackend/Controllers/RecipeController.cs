@@ -28,13 +28,8 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Empty;
-                if (nameIdentifier != null)
-                {
-                     userId = Guid.Parse(nameIdentifier.Value);
-                }
-                
+                Guid userId = GetUserId();
+
                 return Ok(_recipeService.GetRecipes(userId));
             }
             catch (Exception ex)
@@ -49,12 +44,7 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Empty;
-                if (nameIdentifier != null)
-                {
-                    userId = Guid.Parse(nameIdentifier.Value);
-                }
+                Guid userId = GetUserId();
                 return Ok(_recipeService.GetRecipeById(recipeId, userId));
             }
             catch (Exception ex)
@@ -69,13 +59,24 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Empty;
-                if (nameIdentifier != null)
-                {
-                    userId = Guid.Parse(nameIdentifier.Value);
-                }
+                Guid userId = GetUserId();
                 return Ok(_recipeService.GetRecipes(start, count, userId));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("search")]
+        public IActionResult SearchRecipes([FromQuery] string search, [FromQuery] int start, [FromQuery] int count)
+        {
+            try
+            {
+                Guid userId = GetUserId();
+
+                return Ok(_recipeService.SearchRecipe(search, userId, start, count));
             }
             catch (Exception ex)
             {
@@ -89,8 +90,7 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Parse(nameIdentifier.Value);
+                Guid userId = GetUserId();
 
                 return Ok(_recipeService.CreateRecipe(recipeDto, userId));
             }
@@ -107,8 +107,7 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Parse(nameIdentifier.Value);
+                Guid userId = GetUserId();
                 RecipeDto recipeDto = _recipeService.GetRecipeById(recipeId, userId);
 
                 if (recipeDto.UserAccount.Id != userId)
@@ -133,8 +132,7 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Parse(nameIdentifier.Value);
+                Guid userId = GetUserId();
                 RecipeDto recipeDto = _recipeService.GetRecipeById(recipeId, userId);
 
                 if (recipeDto.UserAccount.Id != userId)
@@ -160,8 +158,7 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Parse(nameIdentifier.Value);
+                Guid userId = GetUserId();
                 if ( recipeDto.UserAccount.Id != userId)
                 {
                     throw new Exception("Неверный пользователь");
@@ -183,8 +180,7 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Parse(nameIdentifier.Value);
+                Guid userId = GetUserId();
                 _recipeService.LikeRecipe(recipeId, userId);
                 return Ok();
             }
@@ -202,8 +198,7 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Parse(nameIdentifier.Value);
+                Guid userId = GetUserId();
                 _recipeService.RemoveLikeRecipe(recipeId, userId);
                 return Ok();
             }
@@ -221,8 +216,7 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Parse(nameIdentifier.Value);
+                Guid userId = GetUserId();
                 _recipeService.FavoriteRecipe(recipeId, userId);
                 return Ok();
             }
@@ -239,8 +233,7 @@ namespace RecipeBookBackend.Controllers
         {
             try
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Parse(nameIdentifier.Value);
+                Guid userId = GetUserId();
                 _recipeService.RemoveFavoriteRecipe(recipeId, userId);
                 return Ok();
             }
@@ -250,5 +243,19 @@ namespace RecipeBookBackend.Controllers
             }
         }
 
+        private Guid GetUserId()
+        {
+            Claim nameIdentifier = Request.HttpContext.User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            Guid userId = Guid.Empty;
+            if (nameIdentifier != null)
+            {
+                userId = Guid.Parse(nameIdentifier.Value);
+            }
+            return userId;
+        }
+
     }
+
+
+  
 }

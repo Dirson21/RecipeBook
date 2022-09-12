@@ -93,7 +93,6 @@ namespace Infrastructure.Data.Models
             _recipe.Update(recipe);
         }
 
-
         public bool IsLike(Recipe recipe, UserAccount userAccount)
         {
             return _recipe.AsSingleQuery().Include(r => r.UserLikes).Single(r => r.Id == recipe.Id).UserLikes.FindIndex(u => u.Id == userAccount.Id) > -1;
@@ -103,5 +102,18 @@ namespace Infrastructure.Data.Models
         {
             return _recipe.AsSingleQuery().Include(r => r.UserFavorites).Single(r => r.Id == recipe.Id).UserFavorites.FindIndex(u => u.Id == userAccount.Id) > -1;
         }
+
+        public List<Recipe> SearchByName(string name)
+        {
+           return _recipe.AsSingleQuery().Where(r => EF.Functions.Like(r.Name, $"%{name}%")).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
+                 ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
+                 .Include(x => x.UserFavorites).Include(x => x.UserLikes).ToList();
+        }
+
+        public List<Recipe> SearchByTag(Tag tag)
+        {
+            throw new NotImplementedException();
+        }
     }
+
 }

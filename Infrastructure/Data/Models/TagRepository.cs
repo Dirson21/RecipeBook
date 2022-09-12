@@ -31,7 +31,8 @@ namespace Infrastructure.Data.Models
 
         public Tag GetByName(string name)
         {
-            return _tag.FirstOrDefault(x => x.Name == name);
+            return _tag.Include(s => s.Recipes).FirstOrDefault(x => x.Name == name);
         }
+
     }
 }
