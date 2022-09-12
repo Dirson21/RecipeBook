@@ -33,7 +33,7 @@ export class AddRecipePageComponent implements OnInit {
   readonly separatorKeysCodes = [ENTER] as const;
   readonly imgUrl = `http://localhost:4200/data/recipe`;
 
-  recipeImage:File|undefined;
+  recipeFileImage:File|undefined;
 
   mySubscription;
   
@@ -221,11 +221,16 @@ export class AddRecipePageComponent implements OnInit {
 
     let files: FileList = event.target.files;
     console.log(files)
+
     if (files.length == 0){
       return;
     }
 
-    this.recipeImage = files[0]
+    if (files[0].type.match(/image\/*/) == null) {
+			return;
+		}
+
+    this.recipeFileImage = files[0]
     let recipeImage: HTMLImageElement = document.getElementById("recipeImg") as HTMLImageElement;
     let reader: FileReader = new FileReader();
     reader.readAsDataURL(files[0]);
@@ -279,7 +284,7 @@ export class AddRecipePageComponent implements OnInit {
   }
 
   public addRecipe() {
-    const image = this.recipeImage;
+    const image = this.recipeFileImage;
     if (!image) return;
     if (this.form.invalid) return;
 
@@ -294,18 +299,16 @@ export class AddRecipePageComponent implements OnInit {
 
     this.recipeService.addRecipe(recipe).subscribe((id) => {
 
-      this.recipeService.addRecipeImage(id, image).subscribe(() => {
+      this.recipeService.addRecipeImage(id, image).subscribe({complete : () => {
         console.log(id);
-        this.router.navigate([this.router.url])
-    
-       
-      });
+        this.router.navigate(["/recipe", id]);
+      }});
 
     })
   }
 
   public updateRecipe() {
-    const image = this.recipeImage;
+    const image = this.recipeFileImage;
     console.log(this.form);
 
     if (this.form.invalid) return;
@@ -332,8 +335,12 @@ export class AddRecipePageComponent implements OnInit {
           this.recipe = recipe;
           this.initForm(this.recipe);
         }
+      },
+      error: ()=> {
+        this.initForm(this.recipe);
       }
-    })
+    }
+    )
 
 
   }
