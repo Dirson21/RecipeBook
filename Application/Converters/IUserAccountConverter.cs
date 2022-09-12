@@ -12,6 +12,6 @@ namespace Application.Converters
     {
         public UserAccount RegistrationFormToUserAccount(RegistrationFormDto registrationForm);
         public UserAccountDto ConvertToUserAccountDto(UserAccount userAccount);
-        public UserAccount ConvertToUserAccount(UserAccountDto userAccount);
+        public UserAccount ConvertToUserAccount(UserAccountDto userAccountDto, UserAccount userAccount);
     }
 }

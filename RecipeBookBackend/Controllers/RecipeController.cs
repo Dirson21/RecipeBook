@@ -154,6 +154,7 @@ namespace RecipeBookBackend.Controllers
 
         [HttpPut]
         [Authorize]
+        [ValidateOwnerRecipe]
         [Route("{recipeId}")]
         public IActionResult UpdateRecipe([FromBody] RecipeDto recipeDto)
         {

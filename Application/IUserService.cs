@@ -17,10 +17,14 @@ namespace Application
         public UserAccountDto GetUserById(string id);
 
         List<RecipeDto> GetUserRecipes(Guid userAccountId);
+
         List<RecipeDto> GetUserFavoriteRecipes(Guid userAccountId);
 
         public int GetUserFavoriteRecipesCount(Guid userAccountId);
+
         public int GetUserLikesCount(Guid userAccountId);
+
+        public Guid UpdateUser(UserAccountDto userAccountDto);
 
     }
 }

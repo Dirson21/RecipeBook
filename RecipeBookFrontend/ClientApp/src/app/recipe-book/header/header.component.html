@@ -15,7 +15,7 @@
                 Рецепты
             </mat-list-item>
         </a>
-        <a class="list-item">
+        <a class="list-item" routerLink="/user/{{authService.getUserId()}}/favorite"  routerLinkActive="active-link">
             <mat-list-item>
                 Избранное
             </mat-list-item>

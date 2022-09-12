@@ -34,6 +34,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import { UserOwnerGuard } from './shared/guards/user-owner-guard';
+import { FavoritePageComponent } from './favorite-page/favorite-page.component';
+import { NavigationService } from './shared/navigation.service';
+import { BackItemComponent } from './back-item/back-item.component';
 
 
 @NgModule({
@@ -46,7 +49,9 @@ import { UserOwnerGuard } from './shared/guards/user-owner-guard';
     LoginProfileDialogComponent,
     LoginDialogComponent,
     RecipeInfoPageComponent,
-    UserProfilePageComponent
+    UserProfilePageComponent,
+    FavoritePageComponent,
+    BackItemComponent
   ],
   imports: [
     CommonModule,
@@ -74,7 +79,8 @@ import { UserOwnerGuard } from './shared/guards/user-owner-guard';
     DialogHelper,
     AuthGuard,
     PreloadService,
-    UserOwnerGuard
+    UserOwnerGuard,
+    
   ]
 })
 export class RecipeBookModule { }

@@ -6,6 +6,7 @@ import { IUserAccount } from '../shared/user-account.interface';
 import { UserAccountService } from '../shared/user-account.service';
 import { switchMap } from 'rxjs';
 import { IRecipe } from '../shared/recipe.interface';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,40 +20,75 @@ export class UserProfilePageComponent implements OnInit {
   favoriteCount!: number
   likeCount!: number
 
-  constructor(private route: ActivatedRoute, private recipeService: RecipeService,
-    public authService: AuthService, public router: Router, private userAccountService: UserAccountService) {
+  form!: FormGroup
 
-      this.favoriteCount = 0;
-      this.likeCount = 0;
+  constructor(private route: ActivatedRoute, private recipeService: RecipeService,
+    public authService: AuthService, public router: Router, private userAccountService: UserAccountService,
+    private fb: FormBuilder) {
+
+    this.favoriteCount = 0;
+    this.likeCount = 0;
   }
 
   ngOnInit(): void {
 
-    
-  
     this.route.paramMap.pipe(
       switchMap(params => params.getAll('id'))
     ).subscribe(id => {
       this.userAccountService.getUserById(id).subscribe({
         next: (user) => {
           this.userAccount = Object.assign({}, user);
+          this.initForm(user)
         }
       })
       this.userAccountService.getUserRecipes(id).subscribe({
-        next: (recipes)=> {
+        next: (recipes) => {
           this.recipes = Object.assign(this.recipes, recipes)
         }
       })
       this.userAccountService.getUserFavoriteRecipesCount(id).subscribe({
-        next: (count)=> {
+        next: (count) => {
           this.favoriteCount = count;
         }
       })
       this.userAccountService.GetUserLikesCount(id).subscribe({
-        next: (count)=> {
+        next: (count) => {
           this.likeCount = count;
         }
       })
+    })
+  }
+
+  initForm(user: IUserAccount) {
+    console.log(user);
+    this.form = this.fb.group({
+      login: [user.login, [Validators.required]],
+      name: [user.name, [Validators.required]],
+      password: ['*****', [Validators.required]],
+      description: [user.description]
+
+    })
+  }
+
+  likeAction(isLike: boolean) {
+    this.likeCount = isLike ? this.likeCount + 1 : this.likeCount - 1
+  }
+
+  favoriteAction(isFavorite: boolean) {
+    this.favoriteCount = isFavorite ? this.favoriteCount + 1 : this.favoriteCount - 1
+  }
+
+  updateUser() {
+    let user: IUserAccount = Object.assign(this.userAccount, this.form.value);
+
+    console.log(user);
+
+    this.userAccountService.updateUser(user).subscribe({
+      next: (id) => {
+        console.log(id);
+        this.userAccount = user;
+        this.authService.updateName(user.name);
+      }
     })
   }
 

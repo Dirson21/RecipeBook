@@ -1,9 +1,5 @@
-<div class="back">
-    <a routerLink="/recipe">
-        <svg-icon class="back-svg" src="assets\img\keyboard_backspace.svg"></svg-icon>
-        Назад
-    </a>
-</div>
+<app-back-item class="back"></app-back-item>
+
 <div class="main-content" *ngIf="recipe">
     <div class="block-flex-row">
         <mat-card-title class="recipe-name">{{recipe.name}}</mat-card-title>

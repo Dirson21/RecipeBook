@@ -18,6 +18,7 @@ import { AuthInterceptor } from './recipe-book/shared/interceptors/auth.intercep
 import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinner, MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PreloadInterceptor } from './recipe-book/shared/interceptors/preload.interceptor';
+import { NavigationService } from './recipe-book/shared/navigation.service';
 
 
 @NgModule({
@@ -52,7 +53,9 @@ import { PreloadInterceptor } from './recipe-book/shared/interceptors/preload.in
       provide: HTTP_INTERCEPTORS,
       useClass: PreloadInterceptor,
       multi: true
-    }
+    },
+    NavigationService
+    
   ],
   bootstrap: [AppComponent]
 })

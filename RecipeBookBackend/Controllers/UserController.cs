@@ -3,6 +3,7 @@ using Application.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RecipeBookBackend.Filters;
+using System.Security.Claims;
 
 namespace RecipeBookBackend.Controllers
 {
@@ -122,5 +123,29 @@ namespace RecipeBookBackend.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        [HttpPut]
+        [Route("{userId}")]
+        [Authorize]
+        public IActionResult UpdateUser([FromBody] UserAccountDto userAccountDto)
+        {
+            try
+            {
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userId = Guid.Parse(nameIdentifier.Value);
+                if (userAccountDto.Id != userId)
+                {
+                    throw new Exception("Неверный пользователь");
+                }
+
+                return Ok(_userService.UpdateUser(userAccountDto));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
     }
 }

@@ -12,10 +12,8 @@ namespace Application
     public class RecipeService : IRecipeService
     {
         private readonly IUnitOfWork _unitOfWork;
-
         private readonly IRecipeRepository _recipeRepository;
         private readonly IRecipeConverter _recipeConverter;
-        private readonly IJwtGenerator _jwtGenerator;
         private readonly UserManager<UserAccount> _userManager;
 
         public RecipeService(IUnitOfWork unitOfWork, IRecipeRepository recipeRepository,  IRecipeConverter recipeConverter, IJwtGenerator jwtGenerator, UserManager<UserAccount> userManager)
@@ -23,7 +21,6 @@ namespace Application
             _unitOfWork = unitOfWork;
             _recipeRepository = recipeRepository;
             _recipeConverter = recipeConverter;
-            _jwtGenerator = jwtGenerator;
             _userManager = userManager;
         }
 
@@ -52,7 +49,7 @@ namespace Application
         }
 
 
-        public RecipeDto GetRecipeById(int id, Guid recipeOwnerId = new Guid())
+        public RecipeDto GetRecipeById(int id, Guid useAccountId = new Guid())
         {
 
             Recipe recipe = _recipeRepository.GetById(id);
@@ -60,11 +57,11 @@ namespace Application
             {
                 throw new Exception("Данного рецепта не существует");
             }
-            return _recipeConverter.ConvertToRecipeDto(recipe, recipeOwnerId);
+            return _recipeConverter.ConvertToRecipeDto(recipe, useAccountId);
 
         }
 
-        public RecipeDto GetRecipeByName(string name, Guid recipeOwnerId = new Guid())
+        public RecipeDto GetRecipeByName(string name, Guid userAccount = new Guid())
         {
             Recipe recipe = _recipeRepository.GetByName(name);
             if (recipe == null)
@@ -72,12 +69,12 @@ namespace Application
                 throw new Exception("Данного рецепта не существует");
             }
 
-            return _recipeConverter.ConvertToRecipeDto(recipe, recipeOwnerId);
+            return _recipeConverter.ConvertToRecipeDto(recipe, userAccount);
         }
 
-        public List<RecipeDto> GetRecipes(Guid recipeOwnerId = new Guid())
+        public List<RecipeDto> GetRecipes(Guid userAccount = new Guid())
         {
-            return _recipeRepository.GetAll().ConvertAll(c => _recipeConverter.ConvertToRecipeDto(c, recipeOwnerId));
+            return _recipeRepository.GetAll().ConvertAll(c => _recipeConverter.ConvertToRecipeDto(c, userAccount));
         }
 
         public List<RecipeDto> GetRecipes(int start, int count, Guid recipeOwnerId = new Guid())

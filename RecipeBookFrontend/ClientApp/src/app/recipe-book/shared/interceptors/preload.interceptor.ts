@@ -11,7 +11,9 @@ export class PreloadInterceptor implements HttpInterceptor
 {
     blackList: string[] = [
         "http://localhost:4200/api/recipe/favorite/",
-        "http://localhost:4200/api/recipe/like/" 
+        "http://localhost:4200/api/recipe/like/",
+        "http://localhost:4200/assets/",
+        "assets\\"
     ]
 
 
@@ -23,11 +25,11 @@ export class PreloadInterceptor implements HttpInterceptor
 
 
         if (this.blackList.find((value: string) => req.url.includes(value))) {
-
             return next.handle(req);
             
         }
 
+        console.log(req)
         this.loader.show();
         return next.handle(req).pipe(
             finalize(() => {

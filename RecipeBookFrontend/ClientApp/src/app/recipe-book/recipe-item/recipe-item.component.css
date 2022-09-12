@@ -19,10 +19,12 @@
 
 .recipe-author {
     position: absolute;
-    width: 108px;
+    /* min-width: 108px; */
     height: 32px;
     left: 0px;
     top: 360px;
+    padding-left: 10px;
+    padding-right: 10px;
 
     background: #FFFFFF;
 

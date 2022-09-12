@@ -24,19 +24,6 @@ namespace Application.Converters
             return userAccount;
         }
 
-        public UserAccount ConvertToUserAccount(UserAccountDto userAccount)
-        {
-            UserAccount user = new()
-            {
-                Id = userAccount.Id,
-                UserName = userAccount.Login,
-                Name = userAccount.Name,
-                Description = userAccount.Description
-            };
-
-            return user;
-        }
-
         public UserAccountDto ConvertToUserAccountDto(UserAccount userAccount)
         {
             UserAccountDto userDto = new()
@@ -48,6 +35,16 @@ namespace Application.Converters
             };
 
             return userDto;
+        }
+
+        public UserAccount ConvertToUserAccount(UserAccountDto userAccountDto, UserAccount userAccount)
+        {
+            userAccount.Id = userAccountDto.Id;
+            userAccount.Name = userAccountDto.Name;
+            userAccount.Description = userAccountDto.Description;
+
+            return userAccount;
+
         }
     }
 }
