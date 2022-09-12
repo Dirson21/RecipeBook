@@ -75,7 +75,6 @@ namespace RecipeBookBackend.Controllers
             try
             {
                 Guid userId = GetUserId();
-
                 return Ok(_recipeService.SearchRecipe(search, userId, start, count));
             }
             catch (Exception ex)
@@ -91,7 +90,6 @@ namespace RecipeBookBackend.Controllers
             try
             {
                 Guid userId = GetUserId();
-
                 return Ok(_recipeService.CreateRecipe(recipeDto, userId));
             }
             catch (Exception ex)

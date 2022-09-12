@@ -1,9 +1,9 @@
-<div class="recipe-block">
+<div [routerLink]="['/recipe', recipe.id]" class="recipe-block">
 
 <div class="recipe-content">
 
     <mat-list class="recipe-tag-list">
-        <mat-list-item class="recipe-tag-item" *ngFor="let tag of recipe.tags">{{tag.name}}</mat-list-item>
+        <mat-list-item  class="recipe-tag-item" *ngFor="let tag of recipe.tags" (click)="clickTag(tag.name)">{{tag.name}} </mat-list-item>
 
     </mat-list>
 
@@ -51,7 +51,7 @@
     </div>
 </div>
 
-<img [routerLink]="['/recipe', recipe.id]" src="http://localhost:5220/data/recipe/{{recipe.image}}"
+<img src="http://localhost:5220/data/recipe/{{recipe.image}}"
     class="recipe-image">
 <div class="recipe-author">@{{recipe.userAccount!.login}}</div>
 </div>

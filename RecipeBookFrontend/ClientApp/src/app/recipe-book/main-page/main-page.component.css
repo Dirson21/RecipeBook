@@ -158,6 +158,7 @@ mat-list-item.list-tag-item {
     margin-right: 29px;
     width: 278px;
     height: 271px;
+    cursor: pointer;
 
     background: #FFFFFF;
     box-shadow: 0px 16px 72px rgba(34, 39, 47, 0.05);
@@ -448,6 +449,7 @@ mat-list-item.list-tag-item {
 }
 
 mat-list-item.search-recipe-tag-item {
+    cursor: pointer;
     height: 18px;
     font-weight: 400;
     font-size: 16px;

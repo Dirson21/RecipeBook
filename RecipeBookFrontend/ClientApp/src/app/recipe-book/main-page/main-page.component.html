@@ -21,25 +21,25 @@
 
     <mat-list class="list-tag">
 
-        <mat-list-item class="list-tag-item">
+        <mat-list-item (click)="inputTag('Простые блюда')" class="list-tag-item">
             <div class="list-tag-item-ico"> <svg-icon src="assets\img\tags-ico\ic-menu.svg" class="item-svg"></svg-icon> </div>
             <mat-card-title class="list-tag-title">Простые блюда</mat-card-title>
             <mat-card-subtitle class="list-tag-subtitle">Время приготвления таких блюд не более 1 часа</mat-card-subtitle>
         </mat-list-item>
 
-        <mat-list-item class="list-tag-item">
+        <mat-list-item (click)="inputTag('Детское')" class="list-tag-item">
             <div class="list-tag-item-ico"> <svg-icon src="assets\img\tags-ico\ic-cook.svg" class="item-svg"></svg-icon> </div>
             <mat-card-title class="list-tag-title">Детское</mat-card-title>
             <mat-card-subtitle class="list-tag-subtitle">Самые полезные блюда которые можно детям любого возраста</mat-card-subtitle>
         </mat-list-item>
 
-        <mat-list-item class="list-tag-item">
+        <mat-list-item (click)="inputTag('От шеф-поваров')" class="list-tag-item">
             <div class="list-tag-item-ico"> <svg-icon src="assets\img\tags-ico\ic-chef.svg" class="item-svg"></svg-icon> </div>
             <mat-card-title class="list-tag-title">От шеф-поваров</mat-card-title>
             <mat-card-subtitle class="list-tag-subtitle">Требуют умения, времени и терпения, зато как в ресторане</mat-card-subtitle>
         </mat-list-item>
 
-        <mat-list-item class="list-tag-item">
+        <mat-list-item (click)="inputTag('На праздник')" class="list-tag-item">
             <div class="list-tag-item-ico"> <svg-icon src="assets\img\tags-ico\ic-party.svg" class="item-svg"></svg-icon> </div>
             <mat-card-title class="list-tag-title">На Праздник</mat-card-title>
             <mat-card-subtitle class="list-tag-subtitle">Чем удивить гостей, чтобы все были сыты за праздничным столом</mat-card-subtitle>
@@ -80,17 +80,17 @@
     <mat-card-title class="search-recipe-title">Поиск рецептов</mat-card-title>
     <mat-card-subtitle class="search-recipe-subtitle">Введите примерное название блюда, а мы по тегам найдем его</mat-card-subtitle>
     <mat-card-actions>
-        <form>
+        <form [formGroup]="form">
             <mat-form-field class="search-recipe-input">
-                <input matInput placeholder="Название Блюда...">
+                <input formControlName="search" matInput placeholder="Название Блюда...">
             </mat-form-field>
-        </form>
-        <button mat-raised-button class="search-recipe-btn">Поиск</button>
+        <button (click)="searchRecipe()" mat-raised-button class="search-recipe-btn">Поиск</button>
+    </form>
         <mat-list class="search-recipe-tag-list">
-            <mat-list-item class="search-recipe-tag-item">Мясо</mat-list-item>
-            <mat-list-item class="search-recipe-tag-item">Деликатесы</mat-list-item>
-            <mat-list-item class="search-recipe-tag-item">Пироги</mat-list-item>
-            <mat-list-item class="search-recipe-tag-item">Рыба</mat-list-item>
+            <mat-list-item (click)="inputTag('Мясо')" class="search-recipe-tag-item">Мясо</mat-list-item>
+            <mat-list-item (click)="inputTag('Деликатесы')"  class="search-recipe-tag-item">Деликатесы</mat-list-item>
+            <mat-list-item (click)="inputTag('Пироги')" class="search-recipe-tag-item">Пироги</mat-list-item>
+            <mat-list-item (click)="inputTag('Рыба')" class="search-recipe-tag-item">Рыба</mat-list-item>
         </mat-list>
     </mat-card-actions>
 </div>
