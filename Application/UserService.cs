@@ -126,7 +126,7 @@ namespace Application
             var result = _userManager.CreateAsync(user, registrationForm.Password).GetAwaiter().GetResult();
             if (!result.Succeeded)
             {
-                throw new Exception(result.Errors.First().Description);
+                throw new Exception(result.Errors.First().Code);
             }
 
             return user.Id;
