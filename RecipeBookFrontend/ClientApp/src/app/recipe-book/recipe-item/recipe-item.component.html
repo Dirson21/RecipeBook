@@ -1,9 +1,9 @@
-<div class="recipe-block">
+<div  class="recipe-block">
 
 <div class="recipe-content">
 
     <mat-list class="recipe-tag-list">
-        <mat-list-item class="recipe-tag-item" *ngFor="let tag of recipe.tags">{{tag.name}}</mat-list-item>
+        <mat-list-item  class="recipe-tag-item" *ngFor="let tag of recipe.tags" (click)="clickTag(tag.name)">{{tag.name}} </mat-list-item>
 
     </mat-list>
 
@@ -30,7 +30,7 @@
         </button>
         
     </div>
-
+    <div [routerLink]="['/recipe', recipe.id]">
     <mat-card-title *ngIf="isRecipeTitle" class="recipe-content-title">{{recipe.name}}</mat-card-title>
     <mat-card-subtitle  class="recipe-content-subtitle">{{recipe.description}}
     </mat-card-subtitle>
@@ -48,6 +48,7 @@
             <svg-icon src="assets\img\recipe-item-ico\people_outline.svg" class="additional-svg"></svg-icon>
         </div>
 
+    </div>
     </div>
 </div>
 

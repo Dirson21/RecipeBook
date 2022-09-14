@@ -12,6 +12,8 @@ namespace Domain.Repositoy
         List<Recipe> GetAll();
         List<Recipe> GetAll(int start, int count);
 
+        public Recipe GetRandom();
+
         Recipe GetById(int id);
         Recipe GetByName(string name);
         Recipe Create  (Recipe recipe);
@@ -31,6 +33,8 @@ namespace Domain.Repositoy
         public bool IsLike(Recipe recipe, UserAccount userAccount);
 
         public bool IsFavorite(Recipe recipe, UserAccount userAccount);
+
+        List<Recipe> SearchByName(string name);
 
 
 

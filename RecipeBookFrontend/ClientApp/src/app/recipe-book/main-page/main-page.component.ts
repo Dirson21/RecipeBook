@@ -7,6 +7,9 @@ import { LoginDialogComponent, LoginDialogExitState } from '../dialogs/login-dia
 import { DialogHelper } from '../shared/dialog-helper';
 import { AuthService } from '../shared/auth.service';
 import { Router } from '@angular/router';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { RecipeService } from '../shared/recipe.service';
+import { IRecipe } from '../shared/recipe.interface';
 
 @Component({
   selector: 'app-main-page',
@@ -15,16 +18,44 @@ import { Router } from '@angular/router';
 })
 export class MainPageComponent implements OnInit {
 
-  constructor(public dialogHelper: DialogHelper, public authService: AuthService, private router:Router) { }
+  constructor(public dialogHelper: DialogHelper, public authService: AuthService, private router:Router, private fb: FormBuilder,
+    private recipeService: RecipeService) { }
+
+  form!: FormGroup;
+
+  recipe!: IRecipe
 
   ngOnInit(): void {
-  
+    this.form = this.fb.group({
+      search: ['']
+    })
+
+   
+  }
+
+  get searchControl(): AbstractControl {
+    return this.form.get("search")!
   }
 
   public onLoginButton() {
-
-
     this.dialogHelper.showLoginDialog();
+  }
+
+  public inputTag(name:string) {
+    this.router.navigate(["/recipe"], {queryParams: {search: name}})
+  }
+
+  public searchRecipe() {
+    if (this.form.invalid) return;
+
+    let name:string = this.searchControl.value;
+
+    if (name != '') {
+      this.router.navigate(["/recipe"], {queryParams: {search: name}});
+      return;
+    }
+
+    this.router.navigate(["/recipe"]);
 
   }
 

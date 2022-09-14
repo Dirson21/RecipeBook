@@ -21,12 +21,22 @@ export class RecipeService {
         });
     }
 
+    public getRecipeDay(): Observable<IRecipe> {
+        return this.httpClient.get<IRecipe>(`${this.apiUrl}/recipeDay`);
+    }
+
     public getRecipe(id: number): Observable<IRecipe> {
         return this.httpClient.get<IRecipe>(`${this.apiUrl}/${id}`);
     }
 
     public addRecipe(recipe: IRecipe): Observable<number> {
         return this.httpClient.post<number>(this.apiUrl, recipe);
+    }
+
+    public searchRecipe(search:string, start:number, count:number) {
+        return this.httpClient.get<IRecipe[]>(`${this.apiUrl}/search`, {
+            params: new HttpParams().set("search", search).set("start", start).set("count", count)
+        });
     }
     
     public addRecipeImage(recipeId: number, image: File): Observable<null> {
