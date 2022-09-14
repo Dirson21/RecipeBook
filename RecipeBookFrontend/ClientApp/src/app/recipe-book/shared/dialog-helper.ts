@@ -57,6 +57,9 @@ export class DialogHelper {
       if (result == LoginDialogExitState.choiceReg) {
         this.showRegDialog();
       }
+      if (result == LoginDialogExitState.successLogin) {
+        window.location.reload();
+      }
     })
 
   }
