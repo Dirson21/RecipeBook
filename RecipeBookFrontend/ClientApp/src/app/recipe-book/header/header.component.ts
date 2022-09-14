@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { DialogHelper } from '../shared/dialog-helper';
 import { IUserAccount } from '../shared/user-account.interface';
@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   constructor(private userAccountService:UserAccountService,
      public authService: AuthService,
       private dialogHelper: DialogHelper,
-      private router: Router) { }
+      private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -30,7 +30,11 @@ export class HeaderComponent implements OnInit {
   }
 
   public logout() {
+
     this.router.navigate(["/"]);
+    if (this.router.url == "/recipe-book"){
+      window.location.reload();
+    }
     this.authService.logout();
   }
 

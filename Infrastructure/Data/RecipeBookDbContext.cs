@@ -30,6 +30,7 @@ namespace Infrastructure.Data
             builder.ApplyConfiguration(new TagMap());
             builder.ApplyConfiguration(new IngredientHeaderMap());
             builder.ApplyConfiguration(new UserAccountMap());
+            builder.ApplyConfiguration(new RecipeDayMap());
 
         }
 

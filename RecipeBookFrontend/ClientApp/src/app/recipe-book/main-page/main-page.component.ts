@@ -6,10 +6,11 @@ import { LoginProfileDialogComponent, LoginProfileDialogExitStatus } from '../di
 import { LoginDialogComponent, LoginDialogExitState } from '../dialogs/login-dialog/login-dialog.component';
 import { DialogHelper } from '../shared/dialog-helper';
 import { AuthService } from '../shared/auth.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { RecipeService } from '../shared/recipe.service';
 import { IRecipe } from '../shared/recipe.interface';
+
 
 @Component({
   selector: 'app-main-page',
@@ -18,8 +19,12 @@ import { IRecipe } from '../shared/recipe.interface';
 })
 export class MainPageComponent implements OnInit {
 
+ 
   constructor(public dialogHelper: DialogHelper, public authService: AuthService, private router:Router, private fb: FormBuilder,
-    private recipeService: RecipeService) { }
+    private recipeService: RecipeService) { 
+
+  }
+
 
   form!: FormGroup;
 
@@ -29,6 +34,12 @@ export class MainPageComponent implements OnInit {
     this.form = this.fb.group({
       search: ['']
     })
+
+    this.recipeService.getRecipeDay().subscribe({next: (value)=>{
+      if (value.id != 0) {
+        this.recipe = Object.assign({}, value);
+      }
+    }})
 
    
   }
@@ -57,6 +68,30 @@ export class MainPageComponent implements OnInit {
 
     this.router.navigate(["/recipe"]);
 
+  }
+
+  public like () {
+    if (!this.authService.isLoggedIn()) {
+      this.dialogHelper.showLoginDialog()
+      return
+    }
+
+    this.recipeService.likeRecipe(this.recipe).subscribe({next: () => {
+      this.recipe.countLike += 1;
+      this.recipe.isLike = true;
+    }});
+  }
+
+  public removeLike () {
+    if (!this.authService.isLoggedIn()) {
+      this.dialogHelper.showLoginDialog()
+      return
+    }
+
+    this.recipeService.removeLikeRecipe(this.recipe).subscribe({next: () => {
+      this.recipe.countLike -= 1;
+      this.recipe.isLike = false;
+    }});
   }
 
 }

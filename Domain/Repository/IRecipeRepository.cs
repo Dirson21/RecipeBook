@@ -12,7 +12,7 @@ namespace Domain.Repositoy
         List<Recipe> GetAll();
         List<Recipe> GetAll(int start, int count);
 
-        public Recipe GetRandom();
+        Recipe GetRandom();
 
         Recipe GetById(int id);
         Recipe GetByName(string name);
@@ -26,19 +26,19 @@ namespace Domain.Repositoy
 
         int CountFavorite(Recipe recipe);
 
-        public void RemoveLike(Recipe recipe, UserAccount userAccount);
+        void RemoveLike(Recipe recipe, UserAccount userAccount);
 
-        public void RemoveFavorite(Recipe recipe, UserAccount userAccount);
+        void RemoveFavorite(Recipe recipe, UserAccount userAccount);
 
-        public bool IsLike(Recipe recipe, UserAccount userAccount);
+        bool IsLike(Recipe recipe, UserAccount userAccount);
 
-        public bool IsFavorite(Recipe recipe, UserAccount userAccount);
+        bool IsFavorite(Recipe recipe, UserAccount userAccount);
 
         List<Recipe> SearchByName(string name);
 
+        RecipeDay CreateRecipeDay(Recipe recipe);
 
-
-
+        RecipeDay GetRecipeDay(DateTime date);
 
     }
 }

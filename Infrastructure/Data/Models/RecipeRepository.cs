@@ -12,10 +12,12 @@ namespace Infrastructure.Data.Models
     public class RecipeRepository : IRecipeRepository
     {
         private readonly DbSet<Recipe> _recipe;
+        private DbSet<RecipeDay> _recipeDay;
 
         public RecipeRepository(RecipeBookDbContext dbContext)
         {
             _recipe = dbContext.Set<Recipe>();
+            _recipeDay = dbContext.Set<RecipeDay>();
         }
 
         public Recipe Create(Recipe recipe)
@@ -105,21 +107,37 @@ namespace Infrastructure.Data.Models
 
         public List<Recipe> SearchByName(string name)
         {
-           return _recipe.AsSingleQuery().Where(r => EF.Functions.Like(r.Name, $"%{name}%")).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
+           return _recipe.AsSingleQuery().Where(r => r.Name.Contains(name)).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
                  ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
                  .Include(x => x.UserFavorites).Include(x => x.UserLikes).ToList();
         }
 
 
-
         public Recipe GetRandom()
         {
+            int skip = new Random().Next(0, _recipe.Count() - 1);
 
-            return _recipe.OrderBy(x => Guid.NewGuid()).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
+            return _recipe.Skip(skip).Take(1).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
                  ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
                  .Include(x => x.UserFavorites).Include(x => x.UserLikes).FirstOrDefault();
         }
 
+        public RecipeDay CreateRecipeDay(Recipe recipe)
+        {
+            RecipeDay recipeDay = new RecipeDay();
+            recipeDay.Recipe = recipe;
+
+            return _recipeDay.Add(recipeDay).Entity;
+        }
+
+        public RecipeDay GetRecipeDay(DateTime date)
+        {
+            return _recipeDay.Include(x => x.Recipe).ThenInclude(x => x.CookingSteps)
+                .Include(x => x.Recipe).ThenInclude(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients)
+                .Include(x => x.Recipe).ThenInclude(x => x.Tags)
+                .Include(x => x.Recipe).ThenInclude(x => x.UserAccount)
+                .SingleOrDefault(x => x.Date.Date == date.Date);
+        }
     }
 
 

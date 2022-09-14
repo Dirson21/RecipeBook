@@ -49,30 +49,33 @@
 </div>
 
 <div *ngIf="recipe" class="recipe-day">
-    <img src="assets\img\recipe-day.png" class="recipe-day-img">
-    <div class="recipe-day-author">@glazest</div>
+    <img [routerLink]="['/recipe', recipe.id]" src="http://localhost:5220/data/recipe/{{recipe.image}}" class="recipe-day-img">
+    <div class="recipe-day-author">{{recipe.userAccount.login}}</div>
 
-    <div class="recipe-day-content">
+    <div [routerLink]="['/recipe', recipe.id]" class="recipe-day-content">
     
         <svg-icon src="assets\img\recipe-day-ico\text.svg" class="recipe-day-content-logo-text"></svg-icon>
         <div class="recipe-day-content-logo-elips">
             <svg-icon src="assets\img\recipe-day-ico\yummy.svg" class="recipe-day-content-logo-svg"></svg-icon>          
         </div>
 
-        <mat-card-title class="recipe-day-content-title">Тыквенный супчик на кокосовом молоке</mat-card-title>
-        <mat-card-subtitle class="recipe-day-content-subtitle">Если у вас осталась тыква, и вы не знаете что с ней сделать, то это решение для вас! Ароматный, согревающий суп-пюре на кокосовом молоке. Можно даже в Пост! </mat-card-subtitle>
+        <mat-card-title class="recipe-day-content-title">{{recipe.name}}</mat-card-title>
+        <mat-card-subtitle class="recipe-day-content-subtitle">{{recipe.description}}</mat-card-subtitle>
     </div>
 
-    <div class="recipe-day-like">
-        <button  mat-icon-button  class="recipe-day-like-btn">          
+    <div class="recipe-day-like" >
+        <button (click)="like()" *ngIf="!recipe.isLike"  mat-icon-button  class="recipe-day-like-btn">          
             <svg-icon src="assets\img\recipe-day-ico\favorite_border.svg" class="recipe-day-like-ico"></svg-icon>           
         </button>
-            <div class="recipe-day-like-text" > 356</div>
+        <button (click)="removeLike()" *ngIf="recipe.isLike"  mat-icon-button  class="recipe-day-like-btn">          
+            <svg-icon src="assets\img\recipe-item-ico\like.svg" class="recipe-day-like-ico"></svg-icon>           
+        </button>
+            <div class="recipe-day-like-text" > {{recipe.countLike}}</div>
     </div>
 
     <div class="recipe-day-time">          
         <svg-icon src="assets\img\recipe-day-ico\timer.svg" class="recipe-day-time-ico"></svg-icon>           
-        <div class="recipe-day-time-text" > 35 минут</div>
+        <div class="recipe-day-time-text" > {{recipe.cookingTime}} минут</div>
     </div>
 </div>
 

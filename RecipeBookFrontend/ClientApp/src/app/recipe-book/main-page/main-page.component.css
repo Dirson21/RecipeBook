@@ -225,17 +225,18 @@ mat-list-item.list-tag-item {
     position: absolute;
     width: 543px;
     height: 543px;
-
+    cursor: pointer;
     background:  #F0F0F0;
     border-radius: 72px 0px;
 } 
 
 .recipe-day-author {
     position: absolute;
-    width: 108px;
     height: 32px;
     left: 0px;
     top: 473px;
+    padding-left: 10px;
+    padding-right: 10px;
 
     background: #FFFFFF;
 
@@ -244,6 +245,7 @@ mat-list-item.list-tag-item {
     line-height: 28px;
     color: #FDB100;
     text-align: center;
+    
 }
 
 .recipe-day-content {
