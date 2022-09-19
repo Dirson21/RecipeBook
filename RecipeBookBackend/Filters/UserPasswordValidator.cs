@@ -20,7 +20,9 @@ namespace RecipeBookBackend.Filters
             {
                 errors.Add(new IdentityError
                 {
-                    Description = $"Минимальная длина пароля равна {RequiredLength}"
+                    Description = $"Минимальная длина пароля равна {RequiredLength}",
+                    Code = "PasswordToShort"
+                    
                 });
             }
             return Task.FromResult(errors.Count == 0 ?

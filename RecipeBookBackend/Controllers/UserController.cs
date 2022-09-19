@@ -147,5 +147,30 @@ namespace RecipeBookBackend.Controllers
 
         }
 
+        [HttpPut]
+        [Route("{userId}/password")]
+        [Authorize]
+
+        public IActionResult ChangePassword(string userId, [FromForm] string newPassword)
+        {
+            try
+            {
+                Guid userIdGuid = Guid.Parse(userId);
+                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+                Guid userAuthId = Guid.Parse(nameIdentifier.Value);
+                if (userAuthId != userIdGuid)
+                {
+                    throw new Exception("Неверный пользователь");
+                }
+
+                return Ok(_userService.ChangePassword(userIdGuid, newPassword));
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
     }
 }

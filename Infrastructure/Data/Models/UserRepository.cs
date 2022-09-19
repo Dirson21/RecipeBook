@@ -39,7 +39,7 @@ namespace Infrastructure.Data.Models
 
         public int GetUserFavoriteRecipesCount(UserAccount user)
         {
-            return _user.Include(u => u.RecipeFavorites).Single(u => u.Id == user.Id).RecipeFavorites.Count();
+            return _user.Include(u => u.UserRecipes).ThenInclude(r => r.UserFavorites).Single(u => u.Id == user.Id).UserRecipes.Sum(x => x.UserFavorites.Count());
         }
 
         public List<Recipe> GetUserRecipes(UserAccount user)

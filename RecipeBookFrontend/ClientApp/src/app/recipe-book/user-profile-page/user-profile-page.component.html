@@ -5,23 +5,23 @@
 
     <form [formGroup]="form">
         <div class="user-info-block">
-            <button (click)="updateUser()" mat-icon-button class="edit-button">
+            <button (click)="changeFormState()" mat-icon-button class="edit-button">
                 <svg-icon class="edit-svg" src="assets\img\edit-black.svg"></svg-icon>
             </button>
 
             <div class="info-flex">
                 <div class="user-main-info">
                     <mat-form-field class="info-input">
-                        <input matInput placeholder="Имя" formControlName="name">
+                        <input [readonly]="isReadOnly" matInput placeholder="Имя" formControlName="name">
                     </mat-form-field>
 
                     <mat-form-field class="info-input">
-                        <input [readonly]="true" matInput placeholder="Логин" formControlName="login">
+                        <input [readonly]="isReadOnly"   matInput placeholder="Логин" formControlName="login">
                     </mat-form-field>
 
                     <mat-form-field class="info-input">
-                        <input [readonly]="true" matInput placeholder="Пароль" type="password" formControlName="password">
-                        <button mat-icon-button class="show-password">
+                        <input [readonly]="isReadOnly"   matInput placeholder="Новый пароль" [type]="isShowPassword ? 'text' : 'password'" formControlName="password">
+                        <button mat-icon-button class="show-password" (click)="changePasswordType()">
                             <svg-icon class="show-svg" src="assets\img\visibility_off.svg"></svg-icon>
                         </button>
                     </mat-form-field>
@@ -29,9 +29,12 @@
                 </div>
                 <div class="user-description-info">
                     <mat-form-field class="description-input">
-                        <textarea matInput class="description-text" placeholder="Напишите немного о себе" formControlName="description"></textarea>
+                        <textarea [readonly]="isReadOnly"  matInput class="description-text" placeholder="Напишите немного о себе" formControlName="description"></textarea>
                     </mat-form-field>
                 </div>
+            </div>
+            <div *ngIf="!isReadOnly"  class="add-recipe-block-title">
+                <button (click)="updateUser()" mat-raised-button class="add-recipe-button">Обновить</button>
             </div>
         </div>
     </form>
@@ -72,7 +75,7 @@
             </div>
         </mat-list-item>
 
-        <mat-list-item class="stat-mat-item stat-pointer" routerLink="favorite">
+        <mat-list-item class="stat-mat-item stat-pointer">
             <div class="stat-item">
                 <div class="stat-title">
 
