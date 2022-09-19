@@ -186,22 +186,15 @@ namespace Application
         public RecipeDto GetRecipeDay(Guid userAccountId)
         {
 
-            RecipeDay recipeDay = _recipeRepository.GetRecipeDay(DateTime.Now);
+            Recipe recipeDay = _recipeRepository.GetRecipeDay(DateTime.Now);
+
             if (recipeDay == null)
             {
-                Recipe recipe = _recipeRepository.GetRandom();
-                if (recipe == null)
-                {
-                    return new RecipeDto();
-                }
-
-                _recipeRepository.CreateRecipeDay(recipe);
-                _unitOfWork.Commit();
-
-                return _recipeConverter.ConvertToRecipeDto(recipe, userAccountId);
+                return new RecipeDto();
             }
 
-            return _recipeConverter.ConvertToRecipeDto(recipeDay.Recipe, userAccountId); 
+
+            return _recipeConverter.ConvertToRecipeDto(recipeDay, userAccountId); 
 
         }
     }

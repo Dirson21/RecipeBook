@@ -38,7 +38,7 @@ namespace Domain.Repositoy
 
         RecipeDay CreateRecipeDay(Recipe recipe);
 
-        RecipeDay GetRecipeDay(DateTime date);
+        Recipe GetRecipeDay(DateTime date);
 
     }
 }

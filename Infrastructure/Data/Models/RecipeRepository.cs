@@ -12,12 +12,16 @@ namespace Infrastructure.Data.Models
     public class RecipeRepository : IRecipeRepository
     {
         private readonly DbSet<Recipe> _recipe;
-        private DbSet<RecipeDay> _recipeDay;
+        private readonly DbSet<RecipeDay> _recipeDay;
+        private readonly DbSet<RecipeFavorite> _recipeFavorite;
+        private readonly DbSet<RecipeLike> _recipeLike;
 
         public RecipeRepository(RecipeBookDbContext dbContext)
         {
             _recipe = dbContext.Set<Recipe>();
             _recipeDay = dbContext.Set<RecipeDay>();
+            _recipeFavorite = dbContext.Set<RecipeFavorite>();
+            _recipeLike = dbContext.Set<RecipeLike>();
         }
 
         public Recipe Create(Recipe recipe)
@@ -117,6 +121,7 @@ namespace Infrastructure.Data.Models
         {
             int skip = new Random().Next(0, _recipe.Count() - 1);
 
+
             return _recipe.Skip(skip).Take(1).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
                  ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
                  .Include(x => x.UserFavorites).Include(x => x.UserLikes).FirstOrDefault();
@@ -130,15 +135,74 @@ namespace Infrastructure.Data.Models
             return _recipeDay.Add(recipeDay).Entity;
         }
 
-        public RecipeDay GetRecipeDay(DateTime date)
+        public Recipe GetRecipeDay(DateTime date)
         {
-            return _recipeDay.AsSplitQuery().Include(x => x.Recipe).ThenInclude(x => x.CookingSteps)
-                .Include(x => x.Recipe).ThenInclude(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients)
-                .Include(x => x.Recipe).ThenInclude(x => x.Tags)
-                .Include(x => x.Recipe).ThenInclude(x => x.UserAccount)
-                .SingleOrDefault(x => x.Date.Date == date.Date);
+            var likesOfDay = _recipeLike.Include(x => x.Recipe).Where(x => x.Date.Date == date.Date);
+            Dictionary<Recipe, int> recipeLikeCount = CountRecipeFromAction(likesOfDay);
+
+            var favoriteOfDay = _recipeFavorite.Include(x => x.Recipe).Where(x => x.Date.Date == date.Date);
+            Dictionary<Recipe, int> recipeFavoriteCount = CountRecipeFromAction(favoriteOfDay);
+
+        
+
+            Dictionary<Recipe, int> recipeRating = RecipeDayRating(recipeLikeCount, recipeFavoriteCount);
+            int maxRating = recipeRating.Count > 0? recipeRating.Max(x => x.Value): 0;
+
+
+            Recipe recipeDay = recipeRating.FirstOrDefault(x => x.Value == maxRating).Key;
+            if (recipeDay != null)
+            {
+                return _recipe.AsSplitQuery().Include(x => x.CookingSteps).Include(x => x.IngredientHeaders)
+                .ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
+                .Include(x => x.UserFavorites).Include(x => x.UserLikes)
+                .FirstOrDefault(x => x.Id == recipeDay.Id);
+            }
+
+            return null;
+
+
+        }
+
+
+        private Dictionary<Recipe, int> CountRecipeFromAction(IQueryable<RecipeLike> recipeLike)
+        {
+            Dictionary<Recipe, int> actionCount = new Dictionary<Recipe, int>();
+
+            foreach (var item in recipeLike)
+            {
+                actionCount[item.Recipe] = actionCount.GetValueOrDefault(item.Recipe, 0) + 1;
+            }
+            return actionCount;
+
+        }
+        private Dictionary<Recipe, int> CountRecipeFromAction(IQueryable<RecipeFavorite> recipeLike)
+        {
+            Dictionary<Recipe, int> actionCount = new Dictionary<Recipe, int>();
+
+            foreach (var item in recipeLike)
+            {
+                actionCount[item.Recipe] = actionCount.GetValueOrDefault(item.Recipe, 0) + 1;
+            }
+            return actionCount;
+
+        }
+
+        private Dictionary<Recipe, int> RecipeDayRating(Dictionary<Recipe, int> recipeLikeCount, Dictionary<Recipe, int> recipeFavoriteCount)
+        {
+            Dictionary<Recipe, int> res = recipeLikeCount;
+
+            foreach (var item in recipeFavoriteCount)
+            {
+                res[item.Key] = res.GetValueOrDefault(item.Key, 0) + 2;
+            }
+
+
+            return res;
         }
     }
+
+
+   
 
 
 
