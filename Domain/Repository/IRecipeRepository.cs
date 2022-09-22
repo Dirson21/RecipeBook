@@ -34,11 +34,15 @@ namespace Domain.Repositoy
 
         bool IsFavorite(Recipe recipe, UserAccount userAccount);
 
-        List<Recipe> SearchByName(string name);
+        List<Recipe> SearchByName(string name, int start, int count);
 
         RecipeDay CreateRecipeDay(Recipe recipe);
 
         Recipe GetRecipeDay(DateTime date);
+
+        List<Recipe> GetByTag(Tag tag, int start, int count);
+
+        List<Recipe> SearchByNameTag(string name, Tag tag, int start, int count);
 
     }
 }

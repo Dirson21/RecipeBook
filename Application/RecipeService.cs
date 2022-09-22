@@ -170,17 +170,13 @@ namespace Application
 
         public List<RecipeDto> SearchRecipe(string search, Guid userAccountId, int start, int count)
         {
-            List<Recipe> recipes = new List<Recipe>();
+           
             Tag tag = _tagRepository.GetByName(search);
 
-            if (tag != null)
-            {
-                recipes.AddRange(tag.Recipes);
-            }
+            List<Recipe> recipe = _recipeRepository.SearchByNameTag(search, tag, start, count);
 
-            recipes.AddRange(_recipeRepository.SearchByName(search));
 
-            return recipes.Distinct().Skip(start).Take(count).ToList().ConvertAll(r => _recipeConverter.ConvertToRecipeDto(r, userAccountId));
+            return recipe.ConvertAll(x => _recipeConverter.ConvertToRecipeDto(x, userAccountId));
         }
 
         public RecipeDto GetRecipeDay(Guid userAccountId)
