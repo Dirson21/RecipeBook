@@ -175,7 +175,6 @@ namespace Application
 
             List<Recipe> recipe = _recipeRepository.SearchByNameTag(search, tag, start, count);
 
-
             return recipe.ConvertAll(x => _recipeConverter.ConvertToRecipeDto(x, userAccountId));
         }
 

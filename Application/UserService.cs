@@ -32,27 +32,7 @@ namespace Application
             _recipeConverter = recipeConverter;
         }
 
-        public Guid ChangePassword(Guid userId, string newPassword)
-        {
-            UserAccount user = _userManager.FindByIdAsync(userId.ToString()).GetAwaiter().GetResult();
-
-           
-            if (user == null)
-            {
-                throw new Exception("Пользователя не существует");
-            }
-
-            var token = _userManager.GeneratePasswordResetTokenAsync(user).GetAwaiter().GetResult();
-
-            var result = _userManager.ResetPasswordAsync(user, token, newPassword).GetAwaiter().GetResult();
-
-            if (!result.Succeeded)
-            {
-                throw new Exception(result.Errors.First().Code);
-            }
-
-            return user.Id;
-        }
+     
 
         public UserAccountDto GetUserById(string id)
         {
@@ -166,6 +146,19 @@ namespace Application
             if (!result.Succeeded)
             {
                 throw new Exception(result.Errors.First().Code);
+            }
+
+            if (userAccountDto.newPassword.Length > 0)
+            {
+                var token = _userManager.GeneratePasswordResetTokenAsync(user).GetAwaiter().GetResult();
+
+                result = _userManager.ResetPasswordAsync(user, token, userAccountDto.newPassword).GetAwaiter().GetResult();
+
+                if (!result.Succeeded)
+                {
+                    throw new Exception("InvalidPassword");
+                }
+
             }
 
             return user.Id;

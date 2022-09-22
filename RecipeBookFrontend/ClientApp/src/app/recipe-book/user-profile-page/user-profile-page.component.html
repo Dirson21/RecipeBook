@@ -20,7 +20,7 @@
                     </mat-form-field>
 
                     <mat-form-field class="info-input">
-                        <input [readonly]="isReadOnly"   matInput placeholder="Новый пароль" [type]="isShowPassword ? 'text' : 'password'" formControlName="password">
+                        <input [readonly]="isReadOnly"   matInput placeholder="Новый пароль" [type]="isShowPassword ? 'text' : 'password'" formControlName="newPassword">
                         <button mat-icon-button class="show-password" (click)="changePasswordType()">
                             <svg-icon class="show-svg" src="assets\img\visibility_off.svg"></svg-icon>
                         </button>

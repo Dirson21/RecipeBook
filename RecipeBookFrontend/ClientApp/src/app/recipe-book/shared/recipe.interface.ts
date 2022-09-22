@@ -37,7 +37,8 @@ export const emptyRecipe = (): IRecipe => ({
         id: "",
         login: "",
         description: "",
-        name: ""
+        name: "",
+        newPassword: ""
     },
     countLike: 0,
     countFavorite: 0,
