@@ -11,6 +11,7 @@ import { RecipeService } from '../shared/recipe.service';
 })
 export class RecipeItemComponent implements OnInit {
 
+
   constructor(private recipeService: RecipeService, private authService: AuthService, private dialogHelper: DialogHelper) { }
 
   @Input() recipe!: IRecipe
@@ -25,8 +26,10 @@ export class RecipeItemComponent implements OnInit {
 
   public favorite () {
     if (!this.authService.isLoggedIn()) {
+
       this.dialogHelper.showLoginDialog()
       return
+
     }
 
     this.recipeService.favoriteRecipe(this.recipe).subscribe({next: ()=> {
@@ -34,13 +37,15 @@ export class RecipeItemComponent implements OnInit {
       this.recipe.isFavorite = true;
       this.favoriteEvent.emit(this.recipe.isFavorite);
     }})
-    
+
   }
 
   public removeFavorite() {
     if (!this.authService.isLoggedIn()) {
+
       this.dialogHelper.showLoginDialog()
       return
+
     }
 
     this.recipeService.removeFavoriteRecipe(this.recipe).subscribe({next: ()=> {
@@ -48,11 +53,12 @@ export class RecipeItemComponent implements OnInit {
       this.recipe.isFavorite = false;
       this.favoriteEvent.emit(this.recipe.isFavorite);
     }})
-    
+
   }
 
   public like () {
     if (!this.authService.isLoggedIn()) {
+
       this.dialogHelper.showLoginDialog()
       return
     }
@@ -62,12 +68,15 @@ export class RecipeItemComponent implements OnInit {
       this.recipe.isLike = true;
       this.likeEvent.emit(this.recipe.isLike);
     }});
+
   }
 
   public removeLike () {
     if (!this.authService.isLoggedIn()) {
+
       this.dialogHelper.showLoginDialog()
       return
+
     }
 
     this.recipeService.removeLikeRecipe(this.recipe).subscribe({next: () => {
@@ -75,10 +84,12 @@ export class RecipeItemComponent implements OnInit {
       this.recipe.isLike = false;
       this.likeEvent.emit(this.recipe.isLike);
     }});
+
   }
 
   public clickTag(tag:string) {
     this.clickTagEvent.emit(tag);
+
   }
 
 
