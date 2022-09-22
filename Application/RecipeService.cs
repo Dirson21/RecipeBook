@@ -168,7 +168,7 @@ namespace Application
             _unitOfWork.Commit();
         }
 
-        public List<RecipeDto> SearchRecipe(string search, Guid userAccount, int start, int count)
+        public List<RecipeDto> SearchRecipe(string search, Guid userAccountId, int start, int count)
         {
             List<Recipe> recipes = new List<Recipe>();
             Tag tag = _tagRepository.GetByName(search);
@@ -180,20 +180,22 @@ namespace Application
 
             recipes.AddRange(_recipeRepository.SearchByName(search));
 
-            return recipes.Distinct().Skip(start).Take(count).ToList().ConvertAll(r => _recipeConverter.ConvertToRecipeDto(r, userAccount));
+            return recipes.Distinct().Skip(start).Take(count).ToList().ConvertAll(r => _recipeConverter.ConvertToRecipeDto(r, userAccountId));
         }
 
         public RecipeDto GetRecipeDay(Guid userAccountId)
         {
- 
-            Recipe recipe = _recipeRepository.GetRandom();
 
-            if (recipe == null)
+            Recipe recipeDay = _recipeRepository.GetRecipeDay(DateTime.Now);
+
+            if (recipeDay == null)
             {
                 return new RecipeDto();
             }
 
-            return _recipeConverter.ConvertToRecipeDto(recipe, userAccountId);
+
+            return _recipeConverter.ConvertToRecipeDto(recipeDay, userAccountId); 
+
         }
     }
 }

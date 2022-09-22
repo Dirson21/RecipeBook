@@ -30,11 +30,32 @@ namespace Infrastructure.Data.Models.EntityConfigurations
 
             builder.HasOne(x => x.UserAccount).WithMany(x => x.UserRecipes).OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.UserAccountId);
 
-            builder.HasMany(x => x.UserLikes).WithMany(x => x.RecipeLikes).UsingEntity(j => j.ToTable("RecipeLike"));
+            builder.HasMany(x => x.UserLikes).WithMany(x => x.RecipeLikes)
+                .UsingEntity<RecipeLike>(j => j.HasOne(x => x.UserAccount).WithMany().OnDelete(DeleteBehavior.Restrict).HasForeignKey(x => x.UserAccountId),
+                                          j => j.HasOne(x => x.Recipe).WithMany().HasForeignKey(x => x.RecipeId),
+                                          j =>
+                                          {
+                                              j.Property(x => x.Date).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                                              j.Property(x => x.UserAccountId);
+                                              j.Property(x => x.RecipeId);
+                                              j.HasKey(t => new { t.RecipeId, t.UserAccountId });
+                                              j.ToTable("RecipeLike");
+                                          });
+                                        
 
-            builder.HasMany(x => x.UserFavorites).WithMany(x => x.RecipeFavorites).UsingEntity(j => j.ToTable("RecipeFavorite"));
+            builder.HasMany(x => x.UserFavorites).WithMany(x => x.RecipeFavorites)
+                .UsingEntity<RecipeFavorite>(j => j.HasOne(x => x.UserAccount).WithMany().OnDelete(DeleteBehavior.Restrict).HasForeignKey(x => x.UserAccountId),
+                                          j => j.HasOne(x => x.Recipe).WithMany().HasForeignKey(x => x.RecipeId),
+                                          j =>
+                                          {
+                                              j.Property(x => x.Date).HasDefaultValueSql("CURRENT_TIMESTAMP");
+                                              j.Property(x => x.UserAccountId);
+                                              j.Property(x => x.RecipeId);
+                                              j.HasKey(t => new { t.RecipeId, t.UserAccountId });
+                                              j.ToTable("RecipeFavorite");
+                                          });
 
-  
+
 
         }
     }

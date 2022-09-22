@@ -15,6 +15,7 @@
 
     <mat-form-field class="login-input">
         <input matInput placeholder="Логин" formControlName="login">
+        <mat-hint class="error-message" *ngIf="loginControl.hasError('notUnique')" align="start">Данный логин уже существует</mat-hint>
     </mat-form-field>
 
     <div class="password-field">

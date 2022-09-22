@@ -36,6 +36,14 @@ export class UserAccountService {
         return this.httpClient.put<string>(`${this.apiUrl}/${user.id}`, user);
     }
 
+    public changePassword(user:IUserAccount, newPassword:string): Observable <string> {
+        const formData: FormData = new FormData();
+        formData.append("newPassword", newPassword);
+
+        return this.httpClient.put<string>(`${this.apiUrl}/${user.id}/password`, formData);
+    }
+
+
     public getUserRecipes(id:string): Observable<IRecipe[]> {
         return this.httpClient.get<IRecipe[]>(`${this.apiUrl}/${id}/recipe`)
     }

@@ -59,7 +59,8 @@ builder.Services.AddDefaultIdentity<UserAccount>(options =>
 {
     options.SignIn.RequireConfirmedEmail = false;
     options.SignIn.RequireConfirmedPhoneNumber = false;
- 
+    
+    options.Password.RequiredLength = 0;
     options.Password.RequireNonAlphanumeric = false;   
     options.Password.RequireLowercase = false; 
     options.Password.RequireUppercase = false; 

@@ -6,7 +6,7 @@ import { IUserAccount } from '../shared/user-account.interface';
 import { UserAccountService } from '../shared/user-account.service';
 import { switchMap } from 'rxjs';
 import { IRecipe } from '../shared/recipe.interface';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-profile',
@@ -19,6 +19,9 @@ export class UserProfilePageComponent implements OnInit {
   recipes: IRecipe[] = []
   favoriteCount!: number
   likeCount!: number
+
+  isShowPassword:boolean = false;
+  isReadOnly:boolean = true;
 
   form!: FormGroup
 
@@ -64,10 +67,11 @@ export class UserProfilePageComponent implements OnInit {
     this.form = this.fb.group({
       login: [user.login, [Validators.required]],
       name: [user.name, [Validators.required]],
-      password: ['*****', [Validators.required]],
+      password: ['', [Validators.minLength(8)]],
       description: [user.description]
 
     })
+
   }
 
   likeAction(isLike: boolean) {
@@ -79,7 +83,14 @@ export class UserProfilePageComponent implements OnInit {
   }
 
   updateUser() {
+
+    if (this.form.invalid) {
+      return;
+    }
+
     let user: IUserAccount = Object.assign(this.userAccount, this.form.value);
+
+    let newPassword: string|undefined = this.passwordControl.value
 
     console.log(user);
 
@@ -88,8 +99,52 @@ export class UserProfilePageComponent implements OnInit {
         console.log(id);
         this.userAccount = user;
         this.authService.updateName(user.name);
+
+      },
+      error: (err) => {
+        if (err.error == "DuplicateUserName") {
+          this.loginControl.setErrors({
+            duplicateLogin: true
+          })
+        }
+      },
+      complete: () => {
+        if (newPassword && newPassword.length > 0) {
+          this.userAccountService.changePassword(user, newPassword).subscribe({
+            next: () => {
+              this.passwordControl.reset();
+              this.changeFormState();
+            },
+            error: (error) => {
+              this.passwordControl.setErrors({invalidPassword: true});
+            }
+          })
+        }
+        else {
+          this.changeFormState();
+        }
       }
-    })
+    }
+    )
+
+  }
+
+  changePasswordType()
+  {
+    this.isShowPassword = !this.isShowPassword;
+  }
+
+  get passwordControl(): AbstractControl {
+    return this.form.get("password")!
+  }
+
+  get loginControl(): AbstractControl {
+    return this.form.get("login")!
+  }
+
+  changeFormState() {
+    this.isReadOnly = !this.isReadOnly;
+
   }
 
 }

@@ -7,9 +7,9 @@ import { UserAccountService } from '../../shared/user-account.service';
 
 
 export enum LoginDialogExitState {
-    successLogin = 1,
-    choiceReg,
-    cancel
+  successLogin = 1,
+  choiceReg,
+  cancel
 }
 
 @Component({
@@ -26,7 +26,7 @@ export class LoginDialogComponent implements OnInit {
 
   }
 
-  form!:FormGroup
+  form!: FormGroup
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -36,25 +36,43 @@ export class LoginDialogComponent implements OnInit {
   }
 
   public login() {
-      if (this.form.invalid) return;
-      
-      const loginForm: ILoginForm = Object.assign({}, this.form.value)
 
-      this.userAccountService.login(loginForm).subscribe(result => {
+    Object.keys(this.form.controls).forEach(key => {
+      if (this.form.controls[key].hasError('invalidLoginOrPassword')) {
+        this.form.controls[key].setErrors({invalidLoginOrPassword: null});
+        this.form.controls[key].updateValueAndValidity();
+      }
+    })
+
+    this.form.updateValueAndValidity();
+    console.log(this.form);
+
+    if (this.form.invalid) return;
+
+    const loginForm: ILoginForm = Object.assign({}, this.form.value)
+
+    this.userAccountService.login(loginForm).subscribe({
+      next: result => {
         console.log(result);
         this.authService.setSession(result);
         console.log(this.authService.isLoggedIn());
         this.dialogRef.close(LoginDialogExitState.successLogin)
-      })
+      },
+      error: (error) => {
+        Object.keys(this.form.controls).forEach(key => {
+          this.form.controls[key].setErrors({'invalidLoginOrPassword': true});
+        })
+      }
+    })
 
   }
 
   public cancel() {
-      this.dialogRef.close(LoginDialogExitState.cancel)
+    this.dialogRef.close(LoginDialogExitState.cancel)
   }
 
   public choiceReg() {
-      this.dialogRef.close(LoginDialogExitState.choiceReg);
+    this.dialogRef.close(LoginDialogExitState.choiceReg);
   }
 
 }

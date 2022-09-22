@@ -32,6 +32,28 @@ namespace Application
             _recipeConverter = recipeConverter;
         }
 
+        public Guid ChangePassword(Guid userId, string newPassword)
+        {
+            UserAccount user = _userManager.FindByIdAsync(userId.ToString()).GetAwaiter().GetResult();
+
+           
+            if (user == null)
+            {
+                throw new Exception("Пользователя не существует");
+            }
+
+            var token = _userManager.GeneratePasswordResetTokenAsync(user).GetAwaiter().GetResult();
+
+            var result = _userManager.ResetPasswordAsync(user, token, newPassword).GetAwaiter().GetResult();
+
+            if (!result.Succeeded)
+            {
+                throw new Exception(result.Errors.First().Code);
+            }
+
+            return user.Id;
+        }
+
         public UserAccountDto GetUserById(string id)
         {
             var user = _userManager.FindByIdAsync(id).GetAwaiter().GetResult();
@@ -126,7 +148,7 @@ namespace Application
             var result = _userManager.CreateAsync(user, registrationForm.Password).GetAwaiter().GetResult();
             if (!result.Succeeded)
             {
-                throw new Exception(result.Errors.First().Description);
+                throw new Exception(result.Errors.First().Code);
             }
 
             return user.Id;
@@ -140,6 +162,11 @@ namespace Application
                 throw new Exception("Пользователя не существует");
             }
             var result = _userManager.UpdateAsync(_userConverter.ConvertToUserAccount(userAccountDto, user)).GetAwaiter().GetResult();
+
+            if (!result.Succeeded)
+            {
+                throw new Exception(result.Errors.First().Code);
+            }
 
             return user.Id;
 

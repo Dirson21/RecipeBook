@@ -4,6 +4,7 @@ using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace RecipeBookBackend.Migrations
 {
     [DbContext(typeof(RecipeBookDbContext))]
-    partial class RecipeBookDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220914164107_recipeDay")]
+    partial class recipeDay
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,46 +149,6 @@ namespace RecipeBookBackend.Migrations
                         .IsUnique();
 
                     b.ToTable("RecipeDay");
-                });
-
-            modelBuilder.Entity("Domain.RecipeFavorite", b =>
-                {
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("UserAccountId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Date")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.HasKey("RecipeId", "UserAccountId");
-
-                    b.HasIndex("UserAccountId");
-
-                    b.ToTable("RecipeFavorite", (string)null);
-                });
-
-            modelBuilder.Entity("Domain.RecipeLike", b =>
-                {
-                    b.Property<int>("RecipeId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("UserAccountId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Date")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-                    b.HasKey("RecipeId", "UserAccountId");
-
-                    b.HasIndex("UserAccountId");
-
-                    b.ToTable("RecipeLike", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Tag", b =>
@@ -431,6 +393,36 @@ namespace RecipeBookBackend.Migrations
                     b.ToTable("RecipeTag", (string)null);
                 });
 
+            modelBuilder.Entity("RecipeUserAccount", b =>
+                {
+                    b.Property<int>("RecipeLikesId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserLikesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RecipeLikesId", "UserLikesId");
+
+                    b.HasIndex("UserLikesId");
+
+                    b.ToTable("RecipeLike", (string)null);
+                });
+
+            modelBuilder.Entity("RecipeUserAccount1", b =>
+                {
+                    b.Property<int>("RecipeFavoritesId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("UserFavoritesId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("RecipeFavoritesId", "UserFavoritesId");
+
+                    b.HasIndex("UserFavoritesId");
+
+                    b.ToTable("RecipeFavorite", (string)null);
+                });
+
             modelBuilder.Entity("Domain.CookingStep", b =>
                 {
                     b.HasOne("Domain.Recipe", "Recipe")
@@ -484,44 +476,6 @@ namespace RecipeBookBackend.Migrations
                         .IsRequired();
 
                     b.Navigation("Recipe");
-                });
-
-            modelBuilder.Entity("Domain.RecipeFavorite", b =>
-                {
-                    b.HasOne("Domain.Recipe", "Recipe")
-                        .WithMany()
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.UserAccount", "UserAccount")
-                        .WithMany()
-                        .HasForeignKey("UserAccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
-
-                    b.Navigation("UserAccount");
-                });
-
-            modelBuilder.Entity("Domain.RecipeLike", b =>
-                {
-                    b.HasOne("Domain.Recipe", "Recipe")
-                        .WithMany()
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Domain.UserAccount", "UserAccount")
-                        .WithMany()
-                        .HasForeignKey("UserAccountId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Recipe");
-
-                    b.Navigation("UserAccount");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
@@ -586,6 +540,36 @@ namespace RecipeBookBackend.Migrations
                     b.HasOne("Domain.Tag", null)
                         .WithMany()
                         .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RecipeUserAccount", b =>
+                {
+                    b.HasOne("Domain.Recipe", null)
+                        .WithMany()
+                        .HasForeignKey("RecipeLikesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.UserAccount", null)
+                        .WithMany()
+                        .HasForeignKey("UserLikesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RecipeUserAccount1", b =>
+                {
+                    b.HasOne("Domain.Recipe", null)
+                        .WithMany()
+                        .HasForeignKey("RecipeFavoritesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.UserAccount", null)
+                        .WithMany()
+                        .HasForeignKey("UserFavoritesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

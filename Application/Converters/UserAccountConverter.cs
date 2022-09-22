@@ -42,6 +42,7 @@ namespace Application.Converters
             userAccount.Id = userAccountDto.Id;
             userAccount.Name = userAccountDto.Name;
             userAccount.Description = userAccountDto.Description;
+            userAccount.UserName = userAccountDto.Login;
 
             return userAccount;
 

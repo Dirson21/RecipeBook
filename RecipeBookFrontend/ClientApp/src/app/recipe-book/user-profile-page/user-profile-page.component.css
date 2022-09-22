@@ -230,3 +230,39 @@
     color: #25292D;
 
 }
+
+
+.add-recipe-block-title {
+    z-index: 1;
+    position: relative;
+    display: flex;
+}
+
+.add-recipe-title {
+    z-index: 1;
+    width: 811px;
+    height: 62px;
+
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 62px;
+
+    color: #25292D;
+}
+
+.add-recipe-button {
+    position: relative;
+    margin-left: 80px;
+    margin-top: 10px;
+    height: 40px;
+    
+    background: #FDB100;
+    border-radius: 16px;
+
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 28px;
+    /* identical to box height, or 156% */
+    color: #FFFFFF;
+}
+

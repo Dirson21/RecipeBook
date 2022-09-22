@@ -40,4 +40,8 @@ export class RecipeInfoPageComponent implements OnInit {
       }});
   }
 
+  public inputTag(name:string) {
+    this.router.navigate(["/recipe"], {queryParams: {search: name}})
+  }
+
 }
