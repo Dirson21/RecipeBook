@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, AbstractControlOptions, ValidationErrors, ValidatorFn, AbstractControlDirective, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { ErrorResponse } from '../../shared/error-response.intefrace';
 import { IRegistrationForm } from '../../shared/forms/registrationForm.interface';
 import { UserAccountService } from '../../shared/user-account.service';
 
@@ -71,8 +72,10 @@ export class RegistrationDialogComponent implements OnInit {
         console.log(result)
         this.dialogRef.close(RegistrationDialogExitStatus.SuccessRegistrtation);
       },
-      error: error => {
-        if (error.error == "DuplicateUserName") {
+      error: (error) => {
+
+        console.log(error);
+        if (error.status == 415) {
          this.loginControl.setErrors({
             notUnique: true
           })

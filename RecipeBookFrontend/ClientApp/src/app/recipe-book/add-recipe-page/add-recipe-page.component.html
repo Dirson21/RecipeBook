@@ -4,13 +4,13 @@
 
     <form [formGroup]="form">
 
-        <div *ngIf="!update" class="add-recipe-block-title">
+        <div  *ngIf="!update" class="add-recipe-block-title">
             <mat-card-title class="add-recipe-title">Добавить новый рецепт</mat-card-title>
-            <button mat-raised-button class="add-recipe-button" (click)="addRecipe()">Опубликовать</button>
+            <button [disabled]="form.invalid || recipeFileImage == undefined" mat-raised-button class="add-recipe-button" (click)="addRecipe()">Опубликовать</button>
         </div>
         <div *ngIf="update" class="add-recipe-block-title">
             <mat-card-title class="add-recipe-title">Редактировать рецепт</mat-card-title>
-            <button mat-raised-button class="add-recipe-button" (click)="updateRecipe()">Принять изменения</button>
+            <button [disabled]="form.invalid || recipeFileImage == undefined" mat-raised-button class="add-recipe-button" (click)="updateRecipe()">Принять изменения</button>
         </div>
 
         <div class="recipe-info-block">

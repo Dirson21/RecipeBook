@@ -4,6 +4,7 @@ using Domain;
 using Domain.UoW;
 using Microsoft.AspNetCore.Identity;
 using Domain.Repository;
+using Domain.Exceptions;
 
 namespace Application
 {
@@ -40,7 +41,7 @@ namespace Application
             
             if (user == null)
             {
-                throw new Exception("Пользователя не существует");
+                throw new UserNotFoundException("UserNotFound");
             }
 
             return _userConverter.ConvertToUserAccountDto(user);
@@ -51,7 +52,7 @@ namespace Application
             UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
             if (user == null)
             {
-                throw new Exception("Пользователя не существует");
+                throw new UserNotFoundException("UserNotFound");
             }
 
             return _userRepository.GetUserFavoriteRecipes(user).ConvertAll(s => _recipeConverter.ConvertToRecipeDto(s,user.Id));
@@ -63,7 +64,7 @@ namespace Application
             UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
             if (user == null)
             {
-                throw new Exception("Пользователя не существует");
+                throw new UserNotFoundException("UserNotFound");
             }
 
             return _userRepository.GetUserFavoriteRecipesCount(user);
@@ -74,7 +75,7 @@ namespace Application
             UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
             if (user == null)
             {
-                throw new Exception("Пользователя не существует");
+                throw new UserNotFoundException("UserNotFound");
             }
 
             return _userRepository.GetUserLikesCount(user);
@@ -85,7 +86,7 @@ namespace Application
             UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
             if (user == null)
             {
-                throw new Exception("Пользователя не существует");
+                throw new UserNotFoundException("UserNotFound");
             }
 
             return _userRepository.GetUserRecipes(user).ConvertAll(s => _recipeConverter.ConvertToRecipeDto(s, user.Id));
@@ -99,14 +100,14 @@ namespace Application
             if (user == null)
             {
          
-                throw new Exception("Неверный логин или пароль");
+                throw new AuthorizationException("InvalidLoginOrPassword");
             }
            
             var authResult = _signInManager.CheckPasswordSignInAsync(user, loginForm.Password, false).GetAwaiter().GetResult();
             if (!authResult.Succeeded)
             {
                
-                throw new Exception("Неверный логин или пароль");
+                throw new AuthorizationException("InvalidLoginOrPassword");
             }
 
             TokenView tokenView = new TokenView
@@ -128,7 +129,7 @@ namespace Application
             var result = _userManager.CreateAsync(user, registrationForm.Password).GetAwaiter().GetResult();
             if (!result.Succeeded)
             {
-                throw new Exception(result.Errors.First().Code);
+                throw new RegistrationException(result.Errors.First().Code);
             }
 
             return user.Id;
@@ -139,24 +140,24 @@ namespace Application
             UserAccount user = _userManager.FindByIdAsync(userAccountDto.Id.ToString()).GetAwaiter().GetResult();
             if (user == null)
             {
-                throw new Exception("Пользователя не существует");
+                throw new UserNotFoundException("UserNotFound");
             }
             var result = _userManager.UpdateAsync(_userConverter.ConvertToUserAccount(userAccountDto, user)).GetAwaiter().GetResult();
 
             if (!result.Succeeded)
             {
-                throw new Exception(result.Errors.First().Code);
+                throw new InvalidLoginException(result.Errors.First().Code);
             }
 
-            if (userAccountDto.newPassword.Length > 0)
+            if (userAccountDto.NewPassword.Length > 0)
             {
                 var token = _userManager.GeneratePasswordResetTokenAsync(user).GetAwaiter().GetResult();
 
-                result = _userManager.ResetPasswordAsync(user, token, userAccountDto.newPassword).GetAwaiter().GetResult();
+                result = _userManager.ResetPasswordAsync(user, token, userAccountDto.NewPassword).GetAwaiter().GetResult();
 
                 if (!result.Succeeded)
                 {
-                    throw new Exception("InvalidPassword");
+                    throw new InvalidPasswordException(result.Errors.First().Code);
                 }
 
             }

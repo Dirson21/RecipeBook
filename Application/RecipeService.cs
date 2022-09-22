@@ -6,6 +6,7 @@ using Application.Converters;
 using Domain.Repositoy;
 using Domain.UoW;
 using Microsoft.AspNetCore.Identity;
+using Domain.Exceptions;
 
 namespace Application
 {
@@ -42,7 +43,7 @@ namespace Application
             Recipe recipe = _recipeRepository.GetById(recipeId);
             if (recipe == null)
             {
-                throw new Exception("Данного рецепта не существует");
+                throw new RecipeNotFoundException("RecipeNotFound");
             }
 
 
@@ -57,7 +58,7 @@ namespace Application
             Recipe recipe = _recipeRepository.GetById(id);
             if (recipe == null)
             {
-                throw new Exception("Данного рецепта не существует");
+                throw new RecipeNotFoundException("RecipeNotFound");
             }
             return _recipeConverter.ConvertToRecipeDto(recipe, useAccountId);
 
@@ -68,7 +69,7 @@ namespace Application
             Recipe recipe = _recipeRepository.GetByName(name);
             if (recipe == null)
             {
-                throw new Exception("Данного рецепта не существует");
+                throw new RecipeNotFoundException("RecipeNotFound");
             }
 
             return _recipeConverter.ConvertToRecipeDto(recipe, userAccount);
@@ -89,7 +90,7 @@ namespace Application
             Recipe recipeData = _recipeRepository.GetById(recipeDto.Id);
             if (recipeData == null)
             {
-                throw new Exception("Данного рецепта не существует");
+                throw new RecipeNotFoundException("RecipeNotFound");
             }
 
             Recipe recipe = _recipeConverter.ConvertToRecipe(recipeDto, recipeData);
@@ -105,12 +106,12 @@ namespace Application
             Recipe recipe = _recipeRepository.GetById(recipeId);
             if (recipe == null)
             {
-                throw new Exception("Данного рецепта не существует");
+                throw new RecipeNotFoundException("RecipeNotFound");
             }
             UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
             if (user == null)
             {
-                throw new Exception("Данного пользователя не существует");
+                throw new UserNotFoundException("UserNotFound");
             }
 
             _recipeRepository.Like(recipe, user);
@@ -122,12 +123,12 @@ namespace Application
             Recipe recipe = _recipeRepository.GetById(recipeId);
             if (recipe == null)
             {
-                throw new Exception("Данного рецепта не существует");
+                throw new RecipeNotFoundException("RecipeNotFound");
             }
             UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
             if (user == null)
             {
-                throw new Exception("Данного пользователя не существует");
+                throw new UserNotFoundException("UserNotFound");
             }
 
             _recipeRepository.Favorite(recipe, user);
@@ -139,12 +140,12 @@ namespace Application
             Recipe recipe = _recipeRepository.GetById(recipeId);
             if (recipe == null)
             {
-                throw new Exception("Данного рецепта не существует");
+                throw new RecipeNotFoundException("RecipeNotFound");
             }
             UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
             if (user == null)
             {
-                throw new Exception("Данного пользователя не существует");
+                throw new UserNotFoundException("UserNotFound");
             }
 
             _recipeRepository.RemoveLike(recipe, user);
@@ -156,12 +157,12 @@ namespace Application
             Recipe recipe = _recipeRepository.GetById(recipeId);
             if (recipe == null)
             {
-                throw new Exception("Данного рецепта не существует");
+                throw new RecipeNotFoundException("RecipeNotFound");
             }
             UserAccount user = _userManager.FindByIdAsync(userAccountId.ToString()).GetAwaiter().GetResult();
             if (user == null)
             {
-                throw new Exception("Данного пользователя не существует");
+                throw new UserNotFoundException("UserNotFound");
             }
 
             _recipeRepository.RemoveFavorite(recipe, user);

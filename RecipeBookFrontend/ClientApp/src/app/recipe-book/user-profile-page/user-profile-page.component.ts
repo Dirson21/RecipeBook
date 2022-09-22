@@ -92,6 +92,8 @@ export class UserProfilePageComponent implements OnInit {
 
     let newPassword: string|undefined = this.passwordControl.value
 
+   
+
     console.log(user);
 
     this.userAccountService.updateUser(user).subscribe({
@@ -100,22 +102,17 @@ export class UserProfilePageComponent implements OnInit {
         this.userAccount = user;
         this.authService.updateName(user.name);
 
-        this.passwordControl.reset();
+        this.passwordControl.setValue("");
         this.changeFormState();
 
       },
       error: (err) => {
-        if (err.error == "DuplicateUserName") {
+        if (err.status == 410) {
           this.loginControl.setErrors({
             duplicateLogin: true
-          })
-        }
-        else if (err.error == "InvalidUserName") {
-          this.loginControl.setErrors({
-            duplicateLogin: true
-          })
-        }
-        else if (err.err == "InvalidPassword") {
+          }) }
+
+        else if (err.status == 411) {
           this.passwordControl.setErrors({invalidPassword: true});
         }
       }})

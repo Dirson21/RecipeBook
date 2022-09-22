@@ -1,8 +1,8 @@
 ﻿using Application;
 using Application.Dto;
+using Domain.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using RecipeBookBackend.Filters;
 using System.Security.Claims;
 
 namespace RecipeBookBackend.Controllers
@@ -19,17 +19,10 @@ namespace RecipeBookBackend.Controllers
         }
 
         [HttpPost]
-       
+
         public IActionResult Registration([FromBody] RegistrationFormDto registrationForm)
         {
-            try
-            {
-                return Ok(_userService.Registration(registrationForm));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_userService.Registration(registrationForm));
         }
 
 
@@ -37,15 +30,7 @@ namespace RecipeBookBackend.Controllers
         [Route("login")]
         public IActionResult Login([FromBody] LoginFormDto loginForm)
         {
-
-            try
-            {
-                return Ok(_userService.Login(loginForm));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_userService.Login(loginForm));
         }
 
         [HttpGet]
@@ -53,14 +38,7 @@ namespace RecipeBookBackend.Controllers
         [Authorize]
         public IActionResult GetUser(string userId)
         {
-            try
-            {
-                return Ok(_userService.GetUserById(userId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_userService.GetUserById(userId));
         }
 
         [HttpGet]
@@ -68,14 +46,7 @@ namespace RecipeBookBackend.Controllers
         [Route("{userId}/recipe")]
         public IActionResult GetUserRecipes(string userId)
         {
-            try
-            {
-                return Ok(_userService.GetUserRecipes(Guid.Parse(userId)));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_userService.GetUserRecipes(Guid.Parse(userId)));
         }
 
         [HttpGet]
@@ -83,14 +54,7 @@ namespace RecipeBookBackend.Controllers
         [Authorize]
         public IActionResult GetUserFavoriteRecipe(string userId)
         {
-            try
-            {
-                return Ok(_userService.GetUserFavoriteRecipes(Guid.Parse(userId)));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_userService.GetUserFavoriteRecipes(Guid.Parse(userId)));
         }
 
         [HttpGet]
@@ -98,14 +62,7 @@ namespace RecipeBookBackend.Controllers
         [Authorize]
         public IActionResult GetUserFavoriteRecipeCount(string userId)
         {
-            try
-            {
-                return Ok(_userService.GetUserFavoriteRecipesCount(Guid.Parse(userId)));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_userService.GetUserFavoriteRecipesCount(Guid.Parse(userId)));
         }
 
 
@@ -114,39 +71,22 @@ namespace RecipeBookBackend.Controllers
         [Authorize]
         public IActionResult GetUserLikesCount(string userId)
         {
-            try
-            {
-                return Ok(_userService.GetUserLikesCount(Guid.Parse(userId)));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_userService.GetUserLikesCount(Guid.Parse(userId)));
+
         }
         [HttpPut]
         [Route("{userId}")]
         [Authorize]
         public IActionResult UpdateUser([FromBody] UserAccountDto userAccountDto)
         {
-            try
+            Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
+            Guid userId = Guid.Parse(nameIdentifier.Value);
+            if (userAccountDto.Id != userId)
             {
-                Claim nameIdentifier = Request.HttpContext.User.Claims.First(x => x.Type == ClaimTypes.NameIdentifier);
-                Guid userId = Guid.Parse(nameIdentifier.Value);
-                if (userAccountDto.Id != userId)
-                {
-                    throw new Exception("Неверный пользователь");
-                }
-
-                return Ok(_userService.UpdateUser(userAccountDto));
-
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
+                throw new OwnerException("InvalidUser");
             }
 
+            return Ok(_userService.UpdateUser(userAccountDto));
         }
-
-
     }
 }
