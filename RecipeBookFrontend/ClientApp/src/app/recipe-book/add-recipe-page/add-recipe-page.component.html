@@ -10,7 +10,7 @@
         </div>
         <div *ngIf="update" class="add-recipe-block-title">
             <mat-card-title class="add-recipe-title">Редактировать рецепт</mat-card-title>
-            <button [disabled]="form.invalid || recipeFileImage == undefined" mat-raised-button class="add-recipe-button" (click)="updateRecipe()">Принять изменения</button>
+            <button [disabled]="form.invalid" mat-raised-button class="add-recipe-button" (click)="updateRecipe()">Принять изменения</button>
         </div>
 
         <div class="recipe-info-block">

@@ -159,7 +159,7 @@ namespace Infrastructure.Data.Models
                     .ToDictionary(pair => pair.Key, pair => pair.Sum(x => x.Value));
 
 
-            if (recipeRating == null)
+            if (recipeRating == null || recipeRating.Count() < 1)
             {
                 return null;
             }
@@ -167,7 +167,7 @@ namespace Infrastructure.Data.Models
             int maxRating = recipeRating.Max(x => x.Value);
             int recipeDayId = recipeRating.First(x => x.Value == maxRating).Key;
 
-            return _recipe.IncludeAllTables()
+            return _recipe.AsSplitQuery().IncludeAllTables()
                 .SingleOrDefault(x=> x.Id == recipeDayId);
 
         }
