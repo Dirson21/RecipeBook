@@ -164,7 +164,7 @@ namespace Infrastructure.Data.Models
                     .ToDictionary(pair => pair.Key, pair => pair.Sum(x => x.Value));
 
 
-            if (recipeRating.Any())
+            if (!recipeRating.Any())
             {
                 return null;
             }
