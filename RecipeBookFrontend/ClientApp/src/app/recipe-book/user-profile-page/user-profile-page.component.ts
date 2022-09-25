@@ -7,6 +7,7 @@ import { UserAccountService } from '../shared/user-account.service';
 import { switchMap } from 'rxjs';
 import { IRecipe } from '../shared/recipe.interface';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ErrorResponse } from '../shared/error-response.intefrace';
 
 @Component({
   selector: 'app-user-profile',
@@ -107,12 +108,14 @@ export class UserProfilePageComponent implements OnInit {
 
       },
       error: (err) => {
-        if (err.status == 410) {
+        const errorResponse: ErrorResponse = err.error;
+
+        if (errorResponse.type == "InvalidLoginException") {
           this.loginControl.setErrors({
             duplicateLogin: true
           }) }
 
-        else if (err.status == 411) {
+        else if (errorResponse.type == "InvalidPasswordException") {
           this.passwordControl.setErrors({invalidPassword: true});
         }
       }})

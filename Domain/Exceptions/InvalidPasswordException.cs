@@ -12,7 +12,7 @@ namespace Domain.Exceptions
 
 
         public InvalidPasswordException(string message) :
-            base(411, message)
+            base(462, message)
         {
         }
        

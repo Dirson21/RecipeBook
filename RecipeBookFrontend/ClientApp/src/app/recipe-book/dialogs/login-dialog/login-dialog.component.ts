@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../shared/auth.service';
+import { ErrorResponse } from '../../shared/error-response.intefrace';
 import { ILoginForm } from '../../shared/forms/loginForm.interface';
 import { UserAccountService } from '../../shared/user-account.service';
 
@@ -53,16 +54,25 @@ export class LoginDialogComponent implements OnInit {
 
     this.userAccountService.login(loginForm).subscribe({
       next: result => {
+
         console.log(result);
         this.authService.setSession(result);
         console.log(this.authService.isLoggedIn());
         this.dialogRef.close(LoginDialogExitState.successLogin)
+
       },
       error: (error) => {
-        Object.keys(this.form.controls).forEach(key => {
-          this.form.controls[key].setErrors({'invalidLoginOrPassword': true});
-        })
+
+        const errorResponse: ErrorResponse = error.error;
+        if (errorResponse.type == "AuthorizationException") {
+
+          Object.keys(this.form.controls).forEach(key => {
+            this.form.controls[key].setErrors({'invalidLoginOrPassword': true});
+          })
+        }
+
       }
+      
     })
 
   }

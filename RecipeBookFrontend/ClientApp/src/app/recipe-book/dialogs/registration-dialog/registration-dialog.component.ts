@@ -73,12 +73,20 @@ export class RegistrationDialogComponent implements OnInit {
         this.dialogRef.close(RegistrationDialogExitStatus.SuccessRegistrtation);
       },
       error: (error) => {
-
+        const errorResponse: ErrorResponse = error.error;
         console.log(error);
-        if (error.status == 415) {
-         this.loginControl.setErrors({
-            notUnique: true
-          })
+        if (errorResponse.type == "RegistrationException") {
+
+          if (errorResponse.message == "InvalidPassword") {
+            this.passwordCOntrol.setErrors({
+              invalidPassword: true
+            })
+          }
+          else {
+            this.loginControl.setErrors({
+              notUnique: true
+            })
+          }
         }
         
 
@@ -97,6 +105,10 @@ export class RegistrationDialogComponent implements OnInit {
 
   get loginControl(): AbstractControl {
     return this.form.get("login")!;
+  }
+
+  get passwordCOntrol(): AbstractControl {
+    return this.form.get("password")!;
   }
 
 }
