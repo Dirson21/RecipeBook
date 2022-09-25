@@ -10,7 +10,7 @@ import { PreloadService } from "../preload.service";
 export class PreloadInterceptor implements HttpInterceptor
 {
     whiteList: string[] = [
-        "http://localhost:4200/api/",
+        "http://localhost:5220/api/",
     ]
 
 

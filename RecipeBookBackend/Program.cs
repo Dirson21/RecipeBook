@@ -43,6 +43,18 @@ builder.Services.AddDbContext<IUnitOfWork,RecipeBookDbContext>(c =>
 
 });
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("http://localhost:4200")
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                      });
+});
 
 
 builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
@@ -119,10 +131,16 @@ var app = builder.Build();
 app.UseExceptionHandler("/error");
 //app.UseEndpoints(endpoints => endpoints.MapControllers());
 
-app.UseAuthentication();
-app.UseAuthorization();
+
 
 app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseCors(MyAllowSpecificOrigins);
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

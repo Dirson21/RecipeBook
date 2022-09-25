@@ -12,7 +12,7 @@ import { IUserAccount } from "./user-account.interface";
 
 @Injectable()
 export class UserAccountService {
-    private readonly apiUrl:string = "http://localhost:4200/api/user"
+    private readonly apiUrl:string = "http://localhost:5220/api/user"
 
     jwtHelper!:JwtHelperService;
 
