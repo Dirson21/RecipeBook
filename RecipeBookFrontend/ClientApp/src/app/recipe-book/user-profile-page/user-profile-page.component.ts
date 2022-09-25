@@ -67,7 +67,7 @@ export class UserProfilePageComponent implements OnInit {
     this.form = this.fb.group({
       login: [user.login, [Validators.required]],
       name: [user.name, [Validators.required]],
-      password: ['', [Validators.minLength(8)]],
+      newPassword: ['', [Validators.minLength(8)]],
       description: [user.description]
 
     })
@@ -92,6 +92,8 @@ export class UserProfilePageComponent implements OnInit {
 
     let newPassword: string|undefined = this.passwordControl.value
 
+   
+
     console.log(user);
 
     this.userAccountService.updateUser(user).subscribe({
@@ -100,32 +102,21 @@ export class UserProfilePageComponent implements OnInit {
         this.userAccount = user;
         this.authService.updateName(user.name);
 
+        this.passwordControl.setValue("");
+        this.changeFormState();
+
       },
       error: (err) => {
-        if (err.error == "DuplicateUserName") {
+        if (err.status == 410) {
           this.loginControl.setErrors({
             duplicateLogin: true
-          })
+          }) }
+
+        else if (err.status == 411) {
+          this.passwordControl.setErrors({invalidPassword: true});
         }
-      },
-      complete: () => {
-        if (newPassword && newPassword.length > 0) {
-          this.userAccountService.changePassword(user, newPassword).subscribe({
-            next: () => {
-              this.passwordControl.reset();
-              this.changeFormState();
-            },
-            error: (error) => {
-              this.passwordControl.setErrors({invalidPassword: true});
-            }
-          })
-        }
-        else {
-          this.changeFormState();
-        }
-      }
-    }
-    )
+      }})
+    
 
   }
 
@@ -135,7 +126,7 @@ export class UserProfilePageComponent implements OnInit {
   }
 
   get passwordControl(): AbstractControl {
-    return this.form.get("password")!
+    return this.form.get("newPassword")!
   }
 
   get loginControl(): AbstractControl {

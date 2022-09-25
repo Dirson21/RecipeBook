@@ -36,29 +36,21 @@ namespace Infrastructure.Data.Models
 
         public List<Recipe> GetAll()
         {
-            return _recipe.AsSplitQuery().OrderBy(x => x.Id).Include(x => x.CookingSteps)
-                .Include(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
-                .Include(x => x.UserFavorites).Include(x => x.UserLikes).ToList();
+            return _recipe.AsSplitQuery().OrderBy(x => x.Id).Include(x => x.CookingSteps).IncludeAllTables().ToList();
         }
         public List<Recipe> GetAll(int start, int count)
         {
-            return _recipe.AsSplitQuery().OrderBy(x => x.Id).Skip(start).Take(count).Include(x => x.CookingSteps)
-                .Include(x => x.IngredientHeaders).ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
-                .Include(x => x.UserFavorites).Include(x => x.UserLikes).ToList();
+            return _recipe.AsSplitQuery().OrderBy(x => x.Id).Skip(start).Take(count).IncludeAllTables().ToList();
         }
 
         public Recipe GetById(int id)
         {
-            return _recipe.AsSplitQuery().Include(x => x.CookingSteps).Include(x => x.IngredientHeaders)
-                .ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
-                .Include(x => x.UserFavorites).Include(x => x.UserLikes).FirstOrDefault(x => x.Id == id);
+            return _recipe.AsSplitQuery().IncludeAllTables().FirstOrDefault(x => x.Id == id);
         }
 
         public Recipe GetByName(string name)
         {
-            return _recipe.AsSplitQuery().Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
-                 ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
-                 .Include(x => x.UserFavorites).Include(x => x.UserLikes).FirstOrDefault(x => x.Name == name);
+            return _recipe.AsSplitQuery().IncludeAllTables().FirstOrDefault(x => x.Name == name);
         }
 
         public Recipe Update(Recipe recipe)
@@ -109,11 +101,27 @@ namespace Infrastructure.Data.Models
             return _recipe.AsSplitQuery().Include(r => r.UserFavorites).Single(r => r.Id == recipe.Id).UserFavorites.FindIndex(u => u.Id == userAccount.Id) > -1;
         }
 
-        public List<Recipe> SearchByName(string name)
+        public List<Recipe> SearchByName(string name, int start, int count)
         {
-           return _recipe.AsSplitQuery().Where(r => r.Name.Contains(name)).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
-                 ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
-                 .Include(x => x.UserFavorites).Include(x => x.UserLikes).ToList();
+          
+
+           return _recipe.AsSplitQuery().Where(r => r.Name.Contains(name)).IncludeAllTables().ToList();
+        }
+
+        public List<Recipe> SearchByNameTag(string name, Tag tag, int start, int count)
+        {
+            return _recipe.Where(r => r.Tags.Contains(tag))
+                .Union(_recipe.Where(x => x.Name.Contains(name)))
+                .OrderBy(x => x.Id)
+                .Skip(start).Take(count)
+                .AsSplitQuery()
+                .IncludeAllTables()
+                .ToList();
+        }
+
+        public List<Recipe> GetByTag(Tag tag, int start, int count)
+        {
+            return _recipe.AsSplitQuery().IncludeAllTables().Where(x => x.Tags.Contains(tag)).Skip(start).Take(count).ToList();
         }
 
 
@@ -122,9 +130,7 @@ namespace Infrastructure.Data.Models
             int skip = new Random().Next(0, _recipe.Count() - 1);
 
 
-            return _recipe.Skip(skip).Take(1).Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
-                 ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
-                 .Include(x => x.UserFavorites).Include(x => x.UserLikes).FirstOrDefault();
+            return _recipe.Skip(skip).Take(1).IncludeAllTables().FirstOrDefault();
         }
 
         public RecipeDay CreateRecipeDay(Recipe recipe)
@@ -137,72 +143,49 @@ namespace Infrastructure.Data.Models
 
         public Recipe GetRecipeDay(DateTime date)
         {
-            var likesOfDay = _recipeLike.Include(x => x.Recipe).Where(x => x.Date.Date == date.Date);
-            Dictionary<Recipe, int> recipeLikeCount = CountRecipeFromAction(likesOfDay);
 
-            var favoriteOfDay = _recipeFavorite.Include(x => x.Recipe).Where(x => x.Date.Date == date.Date);
-            Dictionary<Recipe, int> recipeFavoriteCount = CountRecipeFromAction(favoriteOfDay);
+            var likesOfDay = _recipeLike.Where(x => x.Date.Date == date.Date)
+                .GroupBy(x => x.RecipeId)
+                .Select(x => new { x.Key, Count = x.Count() })
+                .ToDictionary(x => x.Key, x=> x.Count);
 
-        
+            var favoriteOfDay = _recipeFavorite.Where(x => x.Date.Date == date.Date)
+                .GroupBy(x => x.RecipeId)
+                .Select(x => new { x.Key, Count = x.Count() })
+                .ToDictionary(x => x.Key, x => x.Count * 2);
 
-            Dictionary<Recipe, int> recipeRating = RecipeDayRating(recipeLikeCount, recipeFavoriteCount);
-            int maxRating = recipeRating.Count > 0? recipeRating.Max(x => x.Value): 0;
+            var recipeRating = likesOfDay.Union(favoriteOfDay)
+                    .GroupBy(g => g.Key)
+                    .ToDictionary(pair => pair.Key, pair => pair.Sum(x => x.Value));
 
 
-            Recipe recipeDay = recipeRating.FirstOrDefault(x => x.Value == maxRating).Key;
-            if (recipeDay != null)
+            if (recipeRating == null || recipeRating.Count() < 1)
             {
-                return _recipe.AsSplitQuery().Include(x => x.CookingSteps).Include(x => x.IngredientHeaders)
-                .ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
-                .Include(x => x.UserFavorites).Include(x => x.UserLikes)
-                .FirstOrDefault(x => x.Id == recipeDay.Id);
+                return null;
             }
 
-            return null;
+            int maxRating = recipeRating.Max(x => x.Value);
+            int recipeDayId = recipeRating.First(x => x.Value == maxRating).Key;
 
+            return _recipe.AsSplitQuery().IncludeAllTables()
+                .SingleOrDefault(x=> x.Id == recipeDayId);
 
         }
 
+    }
 
-        private Dictionary<Recipe, int> CountRecipeFromAction(IQueryable<RecipeLike> recipeLike)
+    internal static class RecipeExtensions
+    {
+        public static IQueryable<Recipe> IncludeAllTables(this IQueryable<Recipe> recipes)
         {
-            Dictionary<Recipe, int> actionCount = new Dictionary<Recipe, int>();
-
-            foreach (var item in recipeLike)
-            {
-                actionCount[item.Recipe] = actionCount.GetValueOrDefault(item.Recipe, 0) + 1;
-            }
-            return actionCount;
-
-        }
-        private Dictionary<Recipe, int> CountRecipeFromAction(IQueryable<RecipeFavorite> recipeLike)
-        {
-            Dictionary<Recipe, int> actionCount = new Dictionary<Recipe, int>();
-
-            foreach (var item in recipeLike)
-            {
-                actionCount[item.Recipe] = actionCount.GetValueOrDefault(item.Recipe, 0) + 1;
-            }
-            return actionCount;
-
-        }
-
-        private Dictionary<Recipe, int> RecipeDayRating(Dictionary<Recipe, int> recipeLikeCount, Dictionary<Recipe, int> recipeFavoriteCount)
-        {
-            Dictionary<Recipe, int> res = recipeLikeCount;
-
-            foreach (var item in recipeFavoriteCount)
-            {
-                res[item.Key] = res.GetValueOrDefault(item.Key, 0) + 2;
-            }
-
-
-            return res;
+            return recipes.Include(x => x.CookingSteps).Include(x => x.IngredientHeaders).
+                ThenInclude(x => x.Ingredients).Include(x => x.Tags).Include(x => x.UserAccount)
+                .Include(x => x.UserFavorites).Include(x => x.UserLikes);
         }
     }
 
 
-   
+
 
 
 

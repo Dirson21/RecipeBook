@@ -5,6 +5,7 @@ using Application;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using RecipeBookBackend.Filters;
+using Domain.Exceptions;
 
 namespace RecipeBookBackend.Controllers
 {
@@ -26,91 +27,62 @@ namespace RecipeBookBackend.Controllers
         [HttpGet]
         public IActionResult GetRecipes()
         {
-            try
-            {
-                Guid userId = GetUserId();
 
-                return Ok(_recipeService.GetRecipes(userId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            Guid userId = GetUserId();
+
+            return Ok(_recipeService.GetRecipes(userId));
         }
 
         [HttpGet]
         [Route("{recipeId}")]
         public IActionResult GetRecipe(int recipeId)
         {
-            try
-            {
-                Guid userId = GetUserId();
-                return Ok(_recipeService.GetRecipeById(recipeId, userId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            Guid userId = GetUserId();
+            return Ok(_recipeService.GetRecipeById(recipeId, userId));
+
         }
 
         [HttpGet]
         [Route("range")]
         public IActionResult GetRecipeRange([FromQuery] int start, [FromQuery] int count)
         {
-            try
-            {
-                Guid userId = GetUserId();
-                return Ok(_recipeService.GetRecipes(start, count, userId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            Guid userId = GetUserId();
+            return Ok(_recipeService.GetRecipes(start, count, userId));
+
         }
 
         [HttpGet]
         [Route("search")]
         public IActionResult SearchRecipes([FromQuery] string search, [FromQuery] int start, [FromQuery] int count)
         {
-            try
-            {
-                Guid userId = GetUserId();
-                return Ok(_recipeService.SearchRecipe(search, userId, start, count));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            Guid userId = GetUserId();
+            return Ok(_recipeService.SearchRecipe(search, userId, start, count));
+
+
         }
 
         [HttpGet]
         [Route("recipeDay")]
         public IActionResult GetRecipeDay()
         {
-            try
-            {
-                Guid userId = GetUserId();
-                return Ok(_recipeService.GetRecipeDay(userId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            Guid userId = GetUserId();
+            return Ok(_recipeService.GetRecipeDay(userId));
+
+
         }
 
         [HttpPost]
         [Authorize]
         public IActionResult AddRecipe([FromBody] RecipeDto recipeDto)
         {
-            try
-            {
-                Guid userId = GetUserId();
-                return Ok(_recipeService.CreateRecipe(recipeDto, userId));
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            Guid userId = GetUserId();
+            return Ok(_recipeService.CreateRecipe(recipeDto, userId));
+
         }
 
         [HttpDelete]
@@ -118,23 +90,19 @@ namespace RecipeBookBackend.Controllers
         [Authorize]
         public IActionResult DeleteRecipe(int recipeId)
         {
-            try
-            {
-                Guid userId = GetUserId();
-                RecipeDto recipeDto = _recipeService.GetRecipeById(recipeId, userId);
 
-                if (recipeDto.UserAccount.Id != userId)
-                {
-                    throw new Exception("Неверный пользователь");
-                }
+            Guid userId = GetUserId();
+            RecipeDto recipeDto = _recipeService.GetRecipeById(recipeId, userId);
 
-                _recipeService.DeleteRecipe(recipeId);
-                return Ok();
-            }
-            catch (Exception ex)
+            if (recipeDto.UserAccount.Id != userId)
             {
-                return BadRequest(ex.Message);
+                throw new OwnerException("InvalidUser");
             }
+
+            _recipeService.DeleteRecipe(recipeId);
+            return Ok();
+
+
         }
 
         [HttpPut]
@@ -143,24 +111,20 @@ namespace RecipeBookBackend.Controllers
 
         public IActionResult AddRecipeImage([FromForm] int recipeId, [FromForm] IFormFile image)
         {
-            try
+
+            Guid userId = GetUserId();
+            RecipeDto recipeDto = _recipeService.GetRecipeById(recipeId, userId);
+
+            if (recipeDto.UserAccount.Id != userId)
             {
-                Guid userId = GetUserId();
-                RecipeDto recipeDto = _recipeService.GetRecipeById(recipeId, userId);
-
-                if (recipeDto.UserAccount.Id != userId)
-                {
-                    throw new Exception("Неверный пользователь");
-                }
-
-                _imageService.addRecipeImage(recipeId, image);
-
-                return Ok();
+                throw new OwnerException("InvalidUser");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            _imageService.addRecipeImage(recipeId, image);
+
+            return Ok();
+
+
         }
 
         [HttpPut]
@@ -169,20 +133,15 @@ namespace RecipeBookBackend.Controllers
         [Route("{recipeId}")]
         public IActionResult UpdateRecipe([FromBody] RecipeDto recipeDto)
         {
-            try
-            {
-                Guid userId = GetUserId();
-                if ( recipeDto.UserAccount.Id != userId)
-                {
-                    throw new Exception("Неверный пользователь");
-                }
 
-                return Ok(_recipeService.UpdateRecipe(recipeDto));
-            }
-            catch(Exception ex)
+            Guid userId = GetUserId();
+            if (recipeDto.UserAccount.Id != userId)
             {
-                return BadRequest(ex);
+                throw new OwnerException("InvalidUser");
             }
+
+            return Ok(_recipeService.UpdateRecipe(recipeDto));
+
         }
 
         [HttpPost]
@@ -191,16 +150,12 @@ namespace RecipeBookBackend.Controllers
 
         public IActionResult LikeRecipe(int recipeId)
         {
-            try
-            {
-                Guid userId = GetUserId();
-                _recipeService.LikeRecipe(recipeId, userId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            Guid userId = GetUserId();
+            _recipeService.LikeRecipe(recipeId, userId);
+            return Ok();
+
+
         }
 
         [HttpDelete]
@@ -209,16 +164,11 @@ namespace RecipeBookBackend.Controllers
 
         public IActionResult RemoveLikeRecipe(int recipeId)
         {
-            try
-            {
-                Guid userId = GetUserId();
-                _recipeService.RemoveLikeRecipe(recipeId, userId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            Guid userId = GetUserId();
+            _recipeService.RemoveLikeRecipe(recipeId, userId);
+            return Ok();
+
         }
 
         [HttpPost]
@@ -227,16 +177,12 @@ namespace RecipeBookBackend.Controllers
 
         public IActionResult FavoriteRecipe(int recipeId)
         {
-            try
-            {
-                Guid userId = GetUserId();
-                _recipeService.FavoriteRecipe(recipeId, userId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            Guid userId = GetUserId();
+            _recipeService.FavoriteRecipe(recipeId, userId);
+            return Ok();
+
+
         }
 
         [HttpDelete]
@@ -244,16 +190,11 @@ namespace RecipeBookBackend.Controllers
         [Route("favorite/{recipeId}")]
         public IActionResult RemoveFavoriteRecipe(int recipeId)
         {
-            try
-            {
-                Guid userId = GetUserId();
-                _recipeService.RemoveFavoriteRecipe(recipeId, userId);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            Guid userId = GetUserId();
+            _recipeService.RemoveFavoriteRecipe(recipeId, userId);
+            return Ok();
+
         }
 
         private Guid GetUserId()
@@ -270,5 +211,5 @@ namespace RecipeBookBackend.Controllers
     }
 
 
-  
+
 }

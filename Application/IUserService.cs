@@ -26,7 +26,5 @@ namespace Application
 
         public Guid UpdateUser(UserAccountDto userAccountDto);
 
-        public Guid ChangePassword(Guid userId, string newPassword);
-
     }
 }
