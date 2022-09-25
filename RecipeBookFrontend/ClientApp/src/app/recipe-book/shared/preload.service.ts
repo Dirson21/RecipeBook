@@ -14,7 +14,7 @@ export class PreloadService {
 
   public show() {
     this._loading.next(true);
-  
+
   }
 
   public hide() {

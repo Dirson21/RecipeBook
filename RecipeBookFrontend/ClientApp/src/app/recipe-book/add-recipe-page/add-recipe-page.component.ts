@@ -1,7 +1,5 @@
 import { Component, Input, IterableDiffers, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatChipEvent } from '@angular/material/chips';
-import { filter, Observable, Observer } from 'rxjs';
 import { ICookingStep } from '../shared/cooking-step.interface';
 import { IIngredientHeader } from '../shared/ingredient-header.interface';
 import { IIngredient } from '../shared/ingredient.interface';
@@ -31,24 +29,24 @@ export class AddRecipePageComponent implements OnInit {
   ];
 
   readonly separatorKeysCodes = [ENTER] as const;
-  readonly imgUrl = `http://localhost:4200/data/recipe`;
+  readonly imgUrl = `http://localhost:5220/data/recipe`;
 
-  recipeFileImage:File|undefined;
+  recipeFileImage: File | undefined;
 
   mySubscription;
-  
+
   constructor(private fb: FormBuilder, private recipeService: RecipeService, private route: ActivatedRoute, private router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.mySubscription = this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-         // Trick the Router into believing it's last link wasn't previously loaded
-         this.router.navigated = false;
+        // Trick the Router into believing it's last link wasn't previously loaded
+        this.router.navigated = false;
       }
-    }); 
+    });
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     if (this.mySubscription) {
       this.mySubscription.unsubscribe();
     }
@@ -73,7 +71,7 @@ export class AddRecipePageComponent implements OnInit {
             next: recipe => {
               this.recipe = Object.assign({}, recipe);
               this.initForm(recipe)
-              
+
 
             },
             complete: () => {
@@ -90,9 +88,9 @@ export class AddRecipePageComponent implements OnInit {
     this.recipe = emptyRecipe();
     this.recipe.cookingSteps.push({ id: 0, stepNumber: 0, description: "", recipeId: 0 })
     this.recipe.ingredientHeaders.push({ id: 0, name: "", ingredients: [] })
-   
+
     this.initForm(this.recipe);
-   
+
 
   }
 
@@ -222,13 +220,13 @@ export class AddRecipePageComponent implements OnInit {
     let files: FileList = event.target.files;
     console.log(files)
 
-    if (files.length == 0){
+    if (files.length == 0) {
       return;
     }
 
     if (files[0].type.match(/image\/*/) == null) {
-			return;
-		}
+      return;
+    }
 
     this.recipeFileImage = files[0]
     let recipeImage: HTMLImageElement = document.getElementById("recipeImg") as HTMLImageElement;
@@ -299,10 +297,12 @@ export class AddRecipePageComponent implements OnInit {
 
     this.recipeService.addRecipe(recipe).subscribe((id) => {
 
-      this.recipeService.addRecipeImage(id, image).subscribe({complete : () => {
-        console.log(id);
-        this.router.navigate(["/recipe", id]);
-      }});
+      this.recipeService.addRecipeImage(id, image).subscribe({
+        complete: () => {
+          console.log(id);
+          this.router.navigate(["/recipe", id]);
+        }
+      });
 
     })
   }
@@ -336,7 +336,7 @@ export class AddRecipePageComponent implements OnInit {
           this.initForm(this.recipe);
         }
       },
-      error: ()=> {
+      error: () => {
         this.initForm(this.recipe);
       }
     }

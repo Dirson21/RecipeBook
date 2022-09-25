@@ -1,38 +1,40 @@
 <mat-card-header>
-   
+
     <div class="logo">Recipes</div>
-   
+
 
     <mat-nav-list class="menu-list">
-    
-        <a routerLink="/recipe-book"  routerLinkActive="active-link" class="list-item"> 
-            <mat-list-item >
+
+        <a routerLink="/recipe-book" routerLinkActive="active-link" class="list-item">
+            <mat-list-item>
                 Главная
             </mat-list-item>
         </a>
-        <a class="list-item" routerLink="/recipe"  routerLinkActive="active-link">
+        <a class="list-item" routerLink="/recipe" routerLinkActive="active-link">
             <mat-list-item>
                 Рецепты
             </mat-list-item>
         </a>
-        <a class="list-item" routerLink="/user/{{authService.getUserId()}}/favorite"  routerLinkActive="active-link">
+        <a class="list-item" routerLink="/user/{{authService.getUserId()}}/favorite" routerLinkActive="active-link">
             <mat-list-item>
                 Избранное
             </mat-list-item>
         </a>
     </mat-nav-list>
 
-    <div  *ngIf="!authService.isLoggedIn()"  class="login" (click)="login()"> 
+    <div *ngIf="!authService.isLoggedIn()" class="login" (click)="login()">
         <svg-icon src="assets\img\login.svg" class="login-svg"></svg-icon>
-        <div class="text-login">Войти</div>   
+        <div class="text-login">Войти</div>
     </div>
 
-    <div [routerLink]="['/user', authService.getUserId()]" *ngIf="authService.isLoggedIn()" class="entered-login"> 
+    <div [routerLink]="['/user', authService.getUserId()]" *ngIf="authService.isLoggedIn()" class="entered-login">
         <svg-icon src="assets\img\login.svg" class="login-svg"></svg-icon>
         <div class="text-login">Привет, {{authService.getName()}}</div>
         <div class="line"></div>
-        <button (click)="logout()" class="exit-button" mat-icon-button>  <svg-icon src="assets\img\exit_to_app.svg"></svg-icon>  </button> 
+        <button (click)="logout()" class="exit-button" mat-icon-button>
+            <svg-icon src="assets\img\exit_to_app.svg"></svg-icon>
+        </button>
     </div>
 
-   
+
 </mat-card-header>

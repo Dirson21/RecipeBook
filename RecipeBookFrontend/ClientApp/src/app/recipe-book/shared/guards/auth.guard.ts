@@ -8,13 +8,12 @@ import { DialogHelper } from "../dialog-helper";
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {
 
-    constructor(private authService:AuthService, private router:Router, private dialogHelper: DialogHelper) {
+    constructor(private authService: AuthService, private router: Router, private dialogHelper: DialogHelper) {
 
     }
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        if (this.authService.isLoggedIn())
-        {
+        if (this.authService.isLoggedIn()) {
             return true;
         }
         this.dialogHelper.showLoginProfileDialog();

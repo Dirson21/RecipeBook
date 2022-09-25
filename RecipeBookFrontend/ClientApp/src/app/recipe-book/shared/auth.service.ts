@@ -34,7 +34,7 @@ export class AuthService {
         return localStorage.getItem("name");
     }
 
-    public updateName(name:string) {
+    public updateName(name: string) {
         localStorage.setItem("name", name);
     }
 
@@ -62,7 +62,7 @@ export class AuthService {
 
     public isLoggedUser(userId: string) {
         const jwtToken = localStorage.getItem("id_token");
-        
+
         if (jwtToken && this.isLoggedIn()) {
             const jwtDecode = this.jwtHelper.decodeToken(jwtToken)
             return jwtDecode["nameid"] == userId;
@@ -73,10 +73,9 @@ export class AuthService {
 
     public getUserId(): string {
         const userId = localStorage.getItem("id_user");
-        if (userId)
-        {
+        if (userId) {
             return userId
-        } 
+        }
         return "";
 
     }

@@ -1,11 +1,6 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Data.Models.EntityConfigurations
 {
@@ -41,7 +36,7 @@ namespace Infrastructure.Data.Models.EntityConfigurations
                                               j.HasKey(t => new { t.RecipeId, t.UserAccountId });
                                               j.ToTable("RecipeLike");
                                           });
-                                        
+
 
             builder.HasMany(x => x.UserFavorites).WithMany(x => x.RecipeFavorites)
                 .UsingEntity<RecipeFavorite>(j => j.HasOne(x => x.UserAccount).WithMany().OnDelete(DeleteBehavior.Restrict).HasForeignKey(x => x.UserAccountId),
@@ -54,8 +49,6 @@ namespace Infrastructure.Data.Models.EntityConfigurations
                                               j.HasKey(t => new { t.RecipeId, t.UserAccountId });
                                               j.ToTable("RecipeFavorite");
                                           });
-
-
 
         }
     }

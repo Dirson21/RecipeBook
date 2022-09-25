@@ -2,11 +2,6 @@
 using Application.Dto;
 using Domain;
 using Domain.Repositoy;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Builders
 {
@@ -22,7 +17,7 @@ namespace Application.Builders
         public List<Tag> BuildFromTagDto(List<TagDto> tags)
         {
             var result = new List<Tag>();
-            
+
             if (tags != null)
             {
                 var uniqueTags = tags.Distinct();

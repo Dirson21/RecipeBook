@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain
+﻿namespace Domain
 {
     public class RecipeLike
     {
-        public int RecipeId { get;  set; }
-        public Guid UserAccountId { get;  set; }
+        public int RecipeId { get; set; }
+        public Guid UserAccountId { get; set; }
 
-        public DateTime Date { get;  set; }
+        public DateTime Date { get; set; }
 
-        public Recipe Recipe { get;  set; }
+        public Recipe Recipe { get; set; }
 
-        public UserAccount UserAccount { get;  set; }
+        public UserAccount UserAccount { get; set; }
 
     }
 }

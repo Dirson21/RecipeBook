@@ -55,7 +55,7 @@ import { NavigationService } from './recipe-book/shared/navigation.service';
       multi: true
     },
     NavigationService
-    
+
   ],
   bootstrap: [AppComponent]
 })

@@ -40,7 +40,7 @@ export class LoginDialogComponent implements OnInit {
 
     Object.keys(this.form.controls).forEach(key => {
       if (this.form.controls[key].hasError('invalidLoginOrPassword')) {
-        this.form.controls[key].setErrors({invalidLoginOrPassword: null});
+        this.form.controls[key].setErrors({ invalidLoginOrPassword: null });
         this.form.controls[key].updateValueAndValidity();
       }
     })
@@ -67,14 +67,11 @@ export class LoginDialogComponent implements OnInit {
         if (errorResponse.type == "AuthorizationException") {
 
           Object.keys(this.form.controls).forEach(key => {
-            this.form.controls[key].setErrors({'invalidLoginOrPassword': true});
+            this.form.controls[key].setErrors({ 'invalidLoginOrPassword': true });
           })
         }
-
       }
-      
     })
-
   }
 
   public cancel() {

@@ -14,8 +14,8 @@ export class DialogHelper {
     this.dialogConfig.disableClose = true;
     this.dialogConfig.autoFocus = false;
     this.dialogConfig.restoreFocus = false;
-    
-    
+
+
 
   }
 

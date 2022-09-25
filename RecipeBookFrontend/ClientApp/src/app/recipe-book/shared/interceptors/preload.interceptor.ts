@@ -7,14 +7,13 @@ import { PreloadService } from "../preload.service";
 
 
 @Injectable()
-export class PreloadInterceptor implements HttpInterceptor
-{
+export class PreloadInterceptor implements HttpInterceptor {
     whiteList: string[] = [
         "http://localhost:5220/api/",
     ]
 
 
-    constructor(private loader:PreloadService) {
+    constructor(private loader: PreloadService) {
 
     }
 
@@ -23,20 +22,19 @@ export class PreloadInterceptor implements HttpInterceptor
 
         if (!this.whiteList.find((value: string) => req.url.includes(value))) {
             return next.handle(req);
-            
+
         }
 
         console.log(req)
         this.loader.show();
         return next.handle(req).pipe(
             finalize(() => {
-                if (this.loader.loading)
-                {
+                if (this.loader.loading) {
                     this.loader.hide();
                 }
-    
+
             })
         )
     }
-    
+
 }

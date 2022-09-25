@@ -21,8 +21,8 @@ export class UserProfilePageComponent implements OnInit {
   favoriteCount!: number
   likeCount!: number
 
-  isShowPassword:boolean = false;
-  isReadOnly:boolean = true;
+  isShowPassword: boolean = false;
+  isReadOnly: boolean = true;
 
   form!: FormGroup
 
@@ -91,9 +91,9 @@ export class UserProfilePageComponent implements OnInit {
 
     let user: IUserAccount = Object.assign(this.userAccount, this.form.value);
 
-    let newPassword: string|undefined = this.passwordControl.value
+    let newPassword: string | undefined = this.passwordControl.value
 
-   
+
 
     console.log(user);
 
@@ -113,18 +113,19 @@ export class UserProfilePageComponent implements OnInit {
         if (errorResponse.type == "InvalidLoginException") {
           this.loginControl.setErrors({
             duplicateLogin: true
-          }) }
+          })
+        }
 
         else if (errorResponse.type == "InvalidPasswordException") {
-          this.passwordControl.setErrors({invalidPassword: true});
+          this.passwordControl.setErrors({ invalidPassword: true });
         }
-      }})
-    
+      }
+    })
+
 
   }
 
-  changePasswordType()
-  {
+  changePasswordType() {
     this.isShowPassword = !this.isShowPassword;
   }
 

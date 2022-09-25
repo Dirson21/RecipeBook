@@ -1,13 +1,5 @@
-﻿using Domain;
+﻿using Application.Converters;
 using Application.Dto;
-using Infrastructure.Data;
-using Infrastructure.Data.Models;
-using Application.Converters;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Domain.Repositoy;
 using Domain.UoW;
 
@@ -28,11 +20,6 @@ namespace Application
         public TagDto GetTagByName(string name)
         {
             return _tagRepository.GetByName(name).ConvertToTagDto();
-        }
-
-        public List<TagDto> GetTags()
-        {
-            return _tagRepository.GetAll().ConvertAll(x => x.ConvertToTagDto());
         }
     }
 }

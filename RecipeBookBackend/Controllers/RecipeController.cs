@@ -1,11 +1,9 @@
-﻿using Application.Dto;
-
-using Microsoft.AspNetCore.Mvc;
-using Application;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
-using RecipeBookBackend.Filters;
+﻿using Application;
+using Application.Dto;
 using Domain.Exceptions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace RecipeBookBackend.Controllers
 {
@@ -129,7 +127,6 @@ namespace RecipeBookBackend.Controllers
 
         [HttpPut]
         [Authorize]
-        [ValidateOwnerRecipe]
         [Route("{recipeId}")]
         public IActionResult UpdateRecipe([FromBody] RecipeDto recipeDto)
         {

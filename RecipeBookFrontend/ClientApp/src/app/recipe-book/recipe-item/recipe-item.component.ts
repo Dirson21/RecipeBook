@@ -23,18 +23,20 @@ export class RecipeItemComponent implements OnInit {
   }
 
 
-  public favorite () {
+  public favorite() {
     if (!this.authService.isLoggedIn()) {
       this.dialogHelper.showLoginDialog()
       return
     }
 
-    this.recipeService.favoriteRecipe(this.recipe).subscribe({next: ()=> {
-      this.recipe.countFavorite += 1;
-      this.recipe.isFavorite = true;
-      this.favoriteEvent.emit(this.recipe.isFavorite);
-    }})
-    
+    this.recipeService.favoriteRecipe(this.recipe).subscribe({
+      next: () => {
+        this.recipe.countFavorite += 1;
+        this.recipe.isFavorite = true;
+        this.favoriteEvent.emit(this.recipe.isFavorite);
+      }
+    })
+
   }
 
   public removeFavorite() {
@@ -43,45 +45,51 @@ export class RecipeItemComponent implements OnInit {
       return
     }
 
-    this.recipeService.removeFavoriteRecipe(this.recipe).subscribe({next: ()=> {
-      this.recipe.countFavorite -= 1;
-      this.recipe.isFavorite = false;
-      this.favoriteEvent.emit(this.recipe.isFavorite);
-    }})
-    
+    this.recipeService.removeFavoriteRecipe(this.recipe).subscribe({
+      next: () => {
+        this.recipe.countFavorite -= 1;
+        this.recipe.isFavorite = false;
+        this.favoriteEvent.emit(this.recipe.isFavorite);
+      }
+    })
+
   }
 
-  public like () {
+  public like() {
     if (!this.authService.isLoggedIn()) {
       this.dialogHelper.showLoginDialog()
       return
     }
 
-    this.recipeService.likeRecipe(this.recipe).subscribe({next: () => {
-      this.recipe.countLike += 1;
-      this.recipe.isLike = true;
-      this.likeEvent.emit(this.recipe.isLike);
-    }});
+    this.recipeService.likeRecipe(this.recipe).subscribe({
+      next: () => {
+        this.recipe.countLike += 1;
+        this.recipe.isLike = true;
+        this.likeEvent.emit(this.recipe.isLike);
+      }
+    });
   }
 
-  public removeLike () {
+  public removeLike() {
     if (!this.authService.isLoggedIn()) {
       this.dialogHelper.showLoginDialog()
       return
     }
 
-    this.recipeService.removeLikeRecipe(this.recipe).subscribe({next: () => {
-      this.recipe.countLike -= 1;
-      this.recipe.isLike = false;
-      this.likeEvent.emit(this.recipe.isLike);
-    }});
+    this.recipeService.removeLikeRecipe(this.recipe).subscribe({
+      next: () => {
+        this.recipe.countLike -= 1;
+        this.recipe.isLike = false;
+        this.likeEvent.emit(this.recipe.isLike);
+      }
+    });
   }
 
-  public clickTag(tag:string) {
+  public clickTag(tag: string) {
     this.clickTagEvent.emit(tag);
   }
 
 
-  
+
 
 }

@@ -64,7 +64,7 @@ export class RegistrationDialogComponent implements OnInit {
 
     registrationForm = Object.assign({}, this.form.value);
 
-    
+
 
     console.log(registrationForm);
     this.userAccountService.registration(registrationForm).subscribe({
@@ -88,7 +88,7 @@ export class RegistrationDialogComponent implements OnInit {
             })
           }
         }
-        
+
 
       }
     })

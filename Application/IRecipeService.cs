@@ -19,11 +19,11 @@ namespace Application
         void FavoriteRecipe(int recipeId, Guid userAccountId);
         void RemoveFavoriteRecipe(int recipeId, Guid userAccountId);
 
-        List<RecipeDto> SearchRecipe(string search,Guid userAccountId , int start, int count);
+        List<RecipeDto> SearchRecipe(string search, Guid userAccountId, int start, int count);
 
         RecipeDto GetRecipeDay(Guid _userAccountId);
 
-        
+
 
 
 

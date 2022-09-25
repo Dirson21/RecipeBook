@@ -10,10 +10,11 @@
             <div class="update-button-field">
                 <svg-icon class="update-button-svg" src="assets\img\edit.svg"></svg-icon>
                 <span class="update-button-text">Редактировать</span>
-            </div>  
+            </div>
         </button>
     </div>
-    <app-recipe-item class="recipe-item" (clickTagEvent)="inputTag($event)" [isRecipeTitle]="false" [recipe]="recipe"></app-recipe-item>
+    <app-recipe-item class="recipe-item" (clickTagEvent)="inputTag($event)" [isRecipeTitle]="false" [recipe]="recipe">
+    </app-recipe-item>
 
     <div class="block-flex-row block-ingredient-step">
         <div class="ingridients-block">

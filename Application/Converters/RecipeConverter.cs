@@ -1,17 +1,10 @@
-﻿using Domain;
-using Domain.Repositoy;
-using Infrastructure.Data.Models;
+﻿using Application.Builders;
 using Application.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Builders;
+using Domain;
 
 namespace Application.Converters
 {
-    public class RecipeConverter: IRecipeConverter
+    public class RecipeConverter : IRecipeConverter
     {
         private readonly IUserAccountConverter _userAccountConverter;
         private readonly ITagBuilder _tagBuilder;
@@ -39,7 +32,7 @@ namespace Application.Converters
             return recipe;
         }
 
-        public  RecipeDto ConvertToRecipeDto(Recipe recipe, Guid recipeOwnerId = new Guid())
+        public RecipeDto ConvertToRecipeDto(Recipe recipe, Guid recipeOwnerId = new Guid())
         {
             RecipeDto recipeDto = _recipeActionBuilder.BuildActionRecipe(recipe, recipeOwnerId);
 
@@ -53,7 +46,7 @@ namespace Application.Converters
             recipeDto.IngredientHeaders = recipe.IngredientHeaders?.ConvertAll(c => c.ConvertToIngridientHeaderDto());
             recipeDto.Tags = recipe.Tags?.ConvertAll(c => c.ConvertToTagDto());
             recipeDto.UserAccount = _userAccountConverter.ConvertToUserAccountDto(recipe.UserAccount);
-          
+
             return recipeDto;
         }
     }

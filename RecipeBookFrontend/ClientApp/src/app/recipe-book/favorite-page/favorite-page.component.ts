@@ -12,21 +12,21 @@ import { UserAccountService } from '../shared/user-account.service';
 })
 export class FavoritePageComponent implements OnInit {
 
-  constructor(private userAccountService: UserAccountService, private route:ActivatedRoute) { }
+  constructor(private userAccountService: UserAccountService, private route: ActivatedRoute) { }
 
-  recipes:IRecipe[] = []
+  recipes: IRecipe[] = []
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
       switchMap(params => params.getAll('id'))
     ).subscribe(id => {
       this.userAccountService.getUserFavoriteRecipes(id).subscribe({
-        next: (recipes)=> {
+        next: (recipes) => {
           this.recipes = Object.assign([], recipes);
         }
       })
     })
   }
-  
+
 
 }

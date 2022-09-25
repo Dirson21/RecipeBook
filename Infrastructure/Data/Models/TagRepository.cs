@@ -1,11 +1,6 @@
 ﻿using Domain;
 using Domain.Repositoy;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Data.Models
 {
@@ -16,12 +11,6 @@ namespace Infrastructure.Data.Models
         public TagRepository(RecipeBookDbContext dbContext)
         {
             _tag = dbContext.Set<Tag>();
-        }
-
-        public List<Tag> GetAll()
-        {
-            return _tag.OrderBy(x => x.Id).Include(x => x.Recipes).ThenInclude(x => x.IngredientHeaders)
-                    .Include(x => x.Recipes).ThenInclude(x => x.CookingSteps).ToList();
         }
 
         public Tag GetById(int tagId)

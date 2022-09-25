@@ -1,18 +1,13 @@
-﻿using Domain;
-using Application.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Dto;
+using Domain;
 
 namespace Application.Converters
 {
     public static class TagExtention
     {
-        public static TagDto ConvertToTagDto (this Tag tag)
+        public static TagDto ConvertToTagDto(this Tag tag)
         {
-            
+
             return new TagDto
             {
                 Id = tag.Id,

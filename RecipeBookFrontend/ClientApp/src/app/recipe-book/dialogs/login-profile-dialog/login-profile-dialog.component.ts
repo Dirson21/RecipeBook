@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 
-export enum LoginProfileDialogExitStatus  {
+export enum LoginProfileDialogExitStatus {
   login = 1,
   registration,
   close
@@ -15,13 +15,12 @@ export enum LoginProfileDialogExitStatus  {
 })
 export class LoginProfileDialogComponent implements OnInit {
 
-  constructor( private dialogRef: MatDialogRef<LoginProfileDialogComponent>) { }
+  constructor(private dialogRef: MatDialogRef<LoginProfileDialogComponent>) { }
 
   ngOnInit(): void {
   }
 
-  public closeDialog()
-  {
+  public closeDialog() {
     this.dialogRef.close(LoginProfileDialogExitStatus.close)
   }
 

@@ -176,7 +176,7 @@
 
 :host ::ng-deep .mat-chip-list-wrapper mat-chip {
     padding: 0 8px;
-  }
+}
 
 .recipe-info-input-block {
     display: flex;
@@ -400,14 +400,14 @@ mat-list-item.step-item {
 }
 
 ::ng-deep .mat-select-arrow-wrapper .mat-select-arrow {
-    
+
     background: url(src\assets\img\keyboard_arrow_down.svg), white;
     width: 24px;
     height: 24px;
-    border-left: 0px solid ;
-    border-right: 0px solid ;
-    border-top: 0px solid;   
+    border-left: 0px solid;
+    border-right: 0px solid;
+    border-top: 0px solid;
     position: relative;
     left: 30px;
-    
+
 }

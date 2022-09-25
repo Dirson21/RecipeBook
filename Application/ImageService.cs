@@ -1,4 +1,5 @@
 ﻿using Domain;
+using Domain.Exceptions;
 using Domain.Repositoy;
 using Domain.UoW;
 using Microsoft.AspNetCore.Http;
@@ -20,10 +21,14 @@ namespace Application
 
         public void addRecipeImage(int recipeId, IFormFile image)
         {
+            if (!image.ContentType.Contains("image"))
+            {
+                throw new AddRecipeException("InvalidImage");
+            }
             Recipe recipe = _recipeRepository.GetById(recipeId);
             if (recipe == null)
             {
-                throw new Exception("Данного рецепта не существует");
+                throw new RecipeNotFoundException("Данного рецепта не существует");
             }
             int year = DateTime.Now.Year;
             int month = DateTime.Now.Month;
@@ -47,7 +52,7 @@ namespace Application
             }
             if (!isfilename)
             {
-                throw new Exception("Что-то пошло не так :(");
+                throw new AddRecipeException("Что-то пошло не так :(");
             }
 
 

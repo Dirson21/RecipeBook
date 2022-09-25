@@ -22,7 +22,7 @@ export class NavigationService {
         this.history.pop()
         console.log(this.history)
         if (this.history.length > 0) {
-            this.router.navigateByUrl(this.history[this.history.length-1])
+            this.router.navigateByUrl(this.history[this.history.length - 1])
         } else {
             this.router.navigateByUrl('/')
         }

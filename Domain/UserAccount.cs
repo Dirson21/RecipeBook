@@ -1,10 +1,5 @@
 ﻿
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain
 {
@@ -15,7 +10,7 @@ namespace Domain
 
         public List<Recipe> UserRecipes { get; set; } = new List<Recipe>();
 
-        public virtual List<Recipe> RecipeLikes {  get; set; } = new List<Recipe>();
+        public virtual List<Recipe> RecipeLikes { get; set; } = new List<Recipe>();
 
         public virtual List<Recipe> RecipeFavorites { get; set; } = new List<Recipe>();
     }
