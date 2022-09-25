@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../shared/auth.service';
-import { ErrorResponse } from '../../shared/error-response.intefrace';
-import { ILoginForm } from '../../shared/forms/loginForm.interface';
+import { ErrorResponse } from '../../shared/interfaces/error-response.intefrace';
+import { ILoginForm } from '../../shared/interfaces/loginForm.interface';
 import { UserAccountService } from '../../shared/user-account.service';
 
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators, AbstractControlOptions, ValidationErrors, ValidatorFn, AbstractControlDirective, FormControl } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ErrorResponse } from '../../shared/error-response.intefrace';
-import { IRegistrationForm } from '../../shared/forms/registrationForm.interface';
+import { ErrorResponse } from '../../shared/interfaces/error-response.intefrace';
+import { IRegistrationForm } from '../../shared/interfaces/registrationForm.interface';
 import { UserAccountService } from '../../shared/user-account.service';
 
 

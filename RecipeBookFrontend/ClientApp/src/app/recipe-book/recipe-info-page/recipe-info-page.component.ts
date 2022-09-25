@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
 import { AuthService } from '../shared/auth.service';
-import { IRecipe } from '../shared/recipe.interface';
+import { IRecipe } from '../shared/interfaces/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 
 @Component({

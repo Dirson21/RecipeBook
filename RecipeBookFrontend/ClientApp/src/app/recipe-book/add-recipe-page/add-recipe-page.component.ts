@@ -1,11 +1,11 @@
 import { Component, Input, IterableDiffers, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ICookingStep } from '../shared/cooking-step.interface';
-import { IIngredientHeader } from '../shared/ingredient-header.interface';
-import { IIngredient } from '../shared/ingredient.interface';
-import { emptyRecipe, IRecipe } from '../shared/recipe.interface';
+import { ICookingStep } from '../shared/interfaces/cooking-step.interface';
+import { IIngredientHeader } from '../shared/interfaces/ingredient-header.interface';
+import { IIngredient } from '../shared/interfaces/ingredient.interface';
+import { emptyRecipe, IRecipe } from '../shared/interfaces/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
-import { ITag } from '../shared/tag.interface';
+import { ITag } from '../shared/interfaces/tag.interface';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ICON_REGISTRY_PROVIDER } from '@angular/material/icon';

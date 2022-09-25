@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { DialogHelper } from '../shared/dialog-helper';
-import { IUserAccount } from '../shared/user-account.interface';
+import { IUserAccount } from '../shared/interfaces/user-account.interface';
 import { UserAccountService } from '../shared/user-account.service';
 
 

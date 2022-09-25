@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { RecipeService } from '../shared/recipe.service';
-import { IUserAccount } from '../shared/user-account.interface';
+import { IUserAccount } from '../shared/interfaces/user-account.interface';
 import { UserAccountService } from '../shared/user-account.service';
 import { switchMap } from 'rxjs';
-import { IRecipe } from '../shared/recipe.interface';
+import { IRecipe } from '../shared/interfaces/recipe.interface';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ErrorResponse } from '../shared/error-response.intefrace';
+import { ErrorResponse } from '../shared/interfaces/error-response.intefrace';
 
 @Component({
   selector: 'app-user-profile',

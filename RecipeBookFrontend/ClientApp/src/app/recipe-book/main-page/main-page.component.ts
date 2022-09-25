@@ -9,7 +9,7 @@ import { AuthService } from '../shared/auth.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { RecipeService } from '../shared/recipe.service';
-import { IRecipe } from '../shared/recipe.interface';
+import { IRecipe } from '../shared/interfaces/recipe.interface';
 
 
 @Component({

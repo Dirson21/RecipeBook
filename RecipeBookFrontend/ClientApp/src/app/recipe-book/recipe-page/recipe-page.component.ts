@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { PreloadService } from '../shared/preload.service';
-import { IRecipe } from '../shared/recipe.interface';
+import { IRecipe } from '../shared/interfaces/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 
 @Component({

@@ -1,10 +1,10 @@
-import { IRecipe } from "./recipe.interface";
+import { IRecipe } from "./interfaces/recipe.interface";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { IRegistrationForm } from "./forms/registrationForm.interface";
-import { ILoginForm } from "./forms/loginForm.interface";
-import { ITokenView } from "./forms/token-view.interface";
+import { IRegistrationForm } from "./interfaces/registrationForm.interface";
+import { ILoginForm } from "./interfaces/loginForm.interface";
+import { ITokenView } from "./interfaces/token-view.interface";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import * as moment from "moment";
 

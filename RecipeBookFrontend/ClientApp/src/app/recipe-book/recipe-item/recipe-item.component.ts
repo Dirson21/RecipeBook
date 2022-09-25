@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 import { DialogHelper } from '../shared/dialog-helper';
-import { IRecipe } from '../shared/recipe.interface';
+import { IRecipe } from '../shared/interfaces/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 
 @Component({
