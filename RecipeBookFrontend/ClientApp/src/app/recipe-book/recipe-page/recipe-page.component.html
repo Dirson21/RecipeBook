@@ -1,0 +1,76 @@
+<div class="main-content">
+
+    <div class="recipe-header">
+
+        <mat-card-title class="recipe-header-title">Рецепты</mat-card-title>
+        <button mat-raised-button class="btn-started" routerLink="add-recipe">
+            <img src="assets\img\add.png" class="plus-add">
+            <div class="btn-add-text">Добавить рецепт</div>
+        </button>
+
+        <mat-list class="recipe-header-tags-list">
+            <mat-list-item (click)="searchRecipeClick('Простые блюда')" class="recipe-header-tags-item">
+                <div class="recipe-header-tags-item-ico">
+                    <svg-icon src="assets\img\tags-ico\ic-menu.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
+                </div>
+                <mat-card-title class="recipe-header-tags-item-title">Простые блюда</mat-card-title>
+            </mat-list-item>
+
+            <mat-list-item (click)="searchRecipeClick('Детское')" class="recipe-header-tags-item">
+                <div class="recipe-header-tags-item-ico">
+                    <svg-icon src="assets\img\tags-ico\ic-cook.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
+                </div>
+                <mat-card-title class="recipe-header-tags-item-title">Детское</mat-card-title>
+            </mat-list-item>
+
+            <mat-list-item (click)="searchRecipeClick('От шеф-поваров')" class="recipe-header-tags-item">
+                <div class="recipe-header-tags-item-ico">
+                    <svg-icon src="assets\img\tags-ico\ic-chef.svg" class="recipe-header-tags-item-ico-svg"> </svg-icon>
+                </div>
+                <mat-card-title class="recipe-header-tags-item-title">От шеф-поваров</mat-card-title>
+            </mat-list-item>
+
+            <mat-list-item (click)="searchRecipeClick('На праздник')" class="recipe-header-tags-item">
+                <div class="recipe-header-tags-item-ico">
+                    <svg-icon src="assets\img\tags-ico\ic-party.svg" class="recipe-header-tags-item-ico-svg">
+                    </svg-icon>
+                </div>
+                <mat-card-title class="recipe-header-tags-item-title">На праздник</mat-card-title>
+            </mat-list-item>
+        </mat-list>
+    </div>
+</div>
+
+
+
+<div class="search-recipe">
+
+    <mat-card-title class="search-recipe-title">Поиск рецепта</mat-card-title>
+    <mat-card-actions>
+        <form [formGroup]="form">
+            <mat-form-field class="search-recipe-input">
+                <input formControlName="search" matInput placeholder="Название Блюда...">
+            </mat-form-field>
+
+            <button (click)="searchRecipeClick()" mat-raised-button class="search-recipe-btn">Поиск</button>
+        </form>
+        <mat-list class="search-recipe-tag-list">
+            <mat-list-item (click)="searchRecipeClick('Мясо')" class="search-recipe-tag-item">Мясо</mat-list-item>
+            <mat-list-item (click)="searchRecipeClick('Деликатесы')" class="search-recipe-tag-item">Деликатесы
+            </mat-list-item>
+            <mat-list-item (click)="searchRecipeClick('Пироги')" class="search-recipe-tag-item">Пироги</mat-list-item>
+            <mat-list-item (click)="searchRecipeClick('Рыба')" class="search-recipe-tag-item">Рыба</mat-list-item>
+
+        </mat-list>
+    </mat-card-actions>
+</div>
+
+<div class="recipe-view">
+    <mat-list *ngIf="recipes.length > 0" class="recipe-list">
+        <mat-list-item class="recipe-list-item" *ngFor="let recipe of recipes">
+            <app-recipe-item (clickTagEvent)="searchRecipeClick($event)" [recipe]="recipe"></app-recipe-item>
+        </mat-list-item>
+    </mat-list>
+
+    <button mat-raised-button class="recipe-load-btn" (click)="getNextRecipes(4)">Загрузить еще</button>
+</div>

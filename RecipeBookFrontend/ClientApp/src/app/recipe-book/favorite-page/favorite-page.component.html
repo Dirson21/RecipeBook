@@ -1,0 +1,16 @@
+<div class="main-content">
+    <mat-card-title class="favorite-title">Избранное</mat-card-title>
+
+    <div class="recipe-view">
+
+        <mat-list *ngIf="recipes.length > 0" class="recipe-list">
+            <mat-list-item class="recipe-list-item" *ngFor="let recipe of recipes">
+                <app-recipe-item [recipe]="recipe"></app-recipe-item>
+            </mat-list-item>
+        </mat-list>
+
+        <div *ngIf="recipes.length == 0" class="empty-list">Ваш список пуст</div>
+
+    </div>
+
+</div>

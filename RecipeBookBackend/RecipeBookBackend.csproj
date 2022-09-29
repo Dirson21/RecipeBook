@@ -1,9 +1,72 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>6260a9b0-8106-48ae-a294-a7067c841e86</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\**" />
+    <Compile Remove="Dto\**" />
+    <Compile Remove="Infrastructure\**" />
+    <Compile Remove="Infrastucture\**" />
+    <Compile Remove="Services\**" />
+    <Content Remove="Domain\**" />
+    <Content Remove="Dto\**" />
+    <Content Remove="Infrastructure\**" />
+    <Content Remove="Infrastucture\**" />
+    <Content Remove="Services\**" />
+    <EmbeddedResource Remove="Domain\**" />
+    <EmbeddedResource Remove="Dto\**" />
+    <EmbeddedResource Remove="Infrastructure\**" />
+    <EmbeddedResource Remove="Infrastucture\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Domain\**" />
+    <None Remove="Dto\**" />
+    <None Remove="Infrastructure\**" />
+    <None Remove="Infrastucture\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+   
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Data\Recipe\10\" />
+    <Folder Include="wwwroot\Data\Recipe\11\" />
+    <Folder Include="wwwroot\Data\Recipe\12\" />
+    <Folder Include="wwwroot\Data\Recipe\1\" />
+    <Folder Include="wwwroot\Data\Recipe\2\" />
+    <Folder Include="wwwroot\Data\Recipe\3\" />
+    <Folder Include="wwwroot\Data\Recipe\4\" />
+    <Folder Include="wwwroot\Data\Recipe\5\" />
+    <Folder Include="wwwroot\Data\Recipe\6\" />
+    <Folder Include="wwwroot\Data\Recipe\7\" />
+    <Folder Include="wwwroot\Data\Recipe\9\" />
+    <Folder Include="wwwroot\Data\Tag\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.9" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
 
 </Project>

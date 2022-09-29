@@ -1,93 +1,117 @@
-.header {
-    position: absolute;
-    width: 1200px;
-    height: 38px;
-    left: 120px;
-    top: 40px;
-   
+mat-card-header {
+    position: relative;
 }
+
+::ng-deep .mat-card-header-text {
+    /* CSS styles go here */
+    margin: 0px; 
+}
+
 .logo {
-    position: absolute;
-    width: 99px;
-    height: 29px;
-    left: 120px;
-    top: 44px;
+    position: relative;
+    min-width: 99px;
+    min-height: 29px;
+    margin-left: 120px;
+    margin-top: 44px;
     
-    font-family: 'Montserrat';
-    font-style: normal;
     font-weight: 700;
     font-size: 24px;
     line-height: 29px;
 
     color: #FDB100;
-
 }
-.menu-list {
-    position: absolute;
-    width: 344px;
-    height: 22px;
-    left: 299px;
-    top: 44px;
 
+.menu-list {
+    position: relative;
+    width: 344px;
+    padding: 0;
+    height: 22px;
+    margin-left: 80px;
+    margin-top: 48px;
     display: flex;
     flex-direction: row;
+
+}
+
+.mat-nav-list .active-link .mat-list-item  {
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    color: #3A3C41;
+    padding: 0;
 }
 
 .mat-nav-list .mat-list-item {
     height: 22px;
-  }
-
-.list-item {
-
-    margin-right: 40px;
-    font-family: 'Montserrat';
-    font-style: normal;
+    
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     color: #9196A1;
 }
-.main-item {
-    margin-right: 40px;
 
-    font-family: 'Montserrat';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 22px;
-    color: #3A3C41;
+:host /deep/ .mat-list-item-content {
+    padding: 0!important;
+}
+
+.list-item {
+    position: relative;
+    margin-right: 40px;
+}
+
+.list-item:last-child {
+    margin-right: 0px;
 }
 
 .login {
-    position: absolute;
-    width: 112px;
+    cursor: pointer;
+    position: relative;
+    margin-left: 565px;
+    margin-top: 40px;
+    width: 280px;
     height: 38px;
-    left: 1208px;
-    top: 48px;
+}
 
-    font-family: 'Montserrat';
-    font-style: normal;
+.entered-login {
+    cursor: pointer;
+    margin-top: 40px;
+    margin-left: 398px;
+    position: relative;
+    /* width: 280px; */
+    height: 38px;
+
+}
+
+.login-svg {
+    position: relative;
+}
+.text-login {
+    position: relative;
+    display: inline-block;
+    bottom:10px;
+    margin-left: 14px;
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
     color: #FDB100;
 }
 
+.line {
+    display: inline-block;
+    position: relative;
+    width: 19px;
+    bottom:15px;
+    margin-left: 10px;
+    margin-right: 10px;
 
-.vector {
-    position: absolute;
-    height: 16px;
-    top: 11px;
-    left: 11px;
-    
+    border: 1px solid rgba(253, 177, 0, 0.72);
+    transform: rotate(90deg);
 }
-.elipse {
-    position: absolute;
-    width: 38px;
-}
-.text-login {
-    position: absolute;
-    left: 52px;
-    top: 8px;
 
+.exit-button {
+    display: inline-block;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    bottom: 5px;
 }

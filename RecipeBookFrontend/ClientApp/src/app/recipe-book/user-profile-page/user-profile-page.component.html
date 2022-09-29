@@ -1,0 +1,111 @@
+<app-back-item class="back"></app-back-item>
+
+<div *ngIf="userAccount" class="profile-block">
+    <mat-card-title class="profile-title">Мой профиль</mat-card-title>
+
+    <form [formGroup]="form">
+        <div class="user-info-block">
+            <button (click)="changeFormState()" mat-icon-button class="edit-button">
+                <svg-icon class="edit-svg" src="assets\img\edit-black.svg"></svg-icon>
+            </button>
+
+            <div class="info-flex">
+                <div class="user-main-info">
+                    <mat-form-field class="info-input">
+                        <input [readonly]="isReadOnly" matInput placeholder="Имя" formControlName="name">
+                    </mat-form-field>
+
+                    <mat-form-field class="info-input">
+                        <input [readonly]="isReadOnly" matInput placeholder="Логин" formControlName="login">
+                    </mat-form-field>
+
+                    <mat-form-field class="info-input">
+                        <input [readonly]="isReadOnly" matInput placeholder="Новый пароль"
+                            [type]="isShowPassword ? 'text' : 'password'" formControlName="newPassword">
+                        <button mat-icon-button class="show-password" (click)="changePasswordType()">
+                            <svg-icon class="show-svg" src="assets\img\visibility_off.svg"></svg-icon>
+                        </button>
+                    </mat-form-field>
+
+                </div>
+                <div class="user-description-info">
+                    <mat-form-field class="description-input">
+                        <textarea [readonly]="isReadOnly" matInput class="description-text"
+                            placeholder="Напишите немного о себе" formControlName="description"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div *ngIf="!isReadOnly" class="add-recipe-block-title">
+                <button (click)="updateUser()" mat-raised-button class="add-recipe-button">Обновить</button>
+            </div>
+        </div>
+    </form>
+
+    <mat-list class="stat-list">
+
+        <mat-list-item class="stat-mat-item">
+            <div class="stat-item">
+                <div class="stat-title">
+
+                    <div class="svg-block">
+                        <svg-icon class="stat-svg" src="assets\img\tags-ico\ic-menu.svg"></svg-icon>
+                    </div>
+
+                    <mat-card-title class="stat-title-text">Всего рецептов </mat-card-title>
+                </div>
+
+                <div class="stat-count">
+                    {{recipes.length}}
+                </div>
+            </div>
+        </mat-list-item>
+
+        <mat-list-item class="stat-mat-item">
+            <div class="stat-item">
+                <div class="stat-title">
+
+                    <div class="svg-block">
+                        <svg-icon class="stat-svg" src="assets\img\tags-ico\ic-menu.svg"></svg-icon>
+                    </div>
+
+                    <mat-card-title class="stat-title-text">Всего лайков</mat-card-title>
+                </div>
+
+                <div class="stat-count">
+                    {{likeCount}}
+                </div>
+            </div>
+        </mat-list-item>
+
+        <mat-list-item class="stat-mat-item stat-pointer">
+            <div class="stat-item">
+                <div class="stat-title">
+
+                    <div class="svg-block">
+                        <svg-icon class="stat-svg" src="assets\img\tags-ico\ic-menu.svg"></svg-icon>
+                    </div>
+
+                    <mat-card-title class="stat-title-text">В избранных</mat-card-title>
+                </div>
+
+                <div class="stat-count">
+                    {{favoriteCount}}
+                </div>
+            </div>
+        </mat-list-item>
+
+    </mat-list>
+
+    <mat-card-title class="recipe-title">Мои рецепты</mat-card-title>
+
+    <div class="recipe-view">
+        <mat-list *ngIf="recipes.length > 0" class="recipe-list">
+            <mat-list-item class="recipe-list-item" *ngFor="let recipe of recipes">
+                <app-recipe-item (favoriteEvent)="favoriteAction($event)" (likeEvent)="likeAction($event)"
+                    [recipe]="recipe"></app-recipe-item>
+            </mat-list-item>
+        </mat-list>
+
+    </div>
+
+</div>

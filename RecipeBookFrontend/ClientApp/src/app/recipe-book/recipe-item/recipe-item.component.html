@@ -1,0 +1,60 @@
+<div class="recipe-block">
+
+    <div class="recipe-content">
+
+        <mat-list class="recipe-tag-list">
+            <mat-list-item class="recipe-tag-item" *ngFor="let tag of recipe.tags" (click)="clickTag(tag.name)">
+                {{tag.name}} </mat-list-item>
+
+        </mat-list>
+
+        <div class="recipe-action">
+
+            <button (click)="removeFavorite()" *ngIf="recipe.isFavorite" mat-raised-button class="favorite-btn">
+                <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\star.svg"></svg-icon>
+                <div class="favorite-btn-text">{{recipe.countFavorite}}</div>
+            </button>
+
+            <button (click)="favorite()" *ngIf="!recipe.isFavorite" mat-raised-button class="favorite-btn">
+                <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\empty-star.svg"></svg-icon>
+                <div class="favorite-btn-text">{{recipe.countFavorite}}</div>
+            </button>
+
+            <button (click)="removeLike()" *ngIf="recipe.isLike" mat-raised-button class="like-btn">
+                <svg-icon *ngIf="recipe.isLike" class="favorite-btn-svg" src="assets\img\recipe-item-ico\like.svg">
+                </svg-icon>
+                <div class="favorite-btn-text">{{recipe.countLike}}</div>
+            </button>
+
+            <button (click)="like()" *ngIf="!recipe.isLike" mat-raised-button class="like-btn">
+                <svg-icon class="favorite-btn-svg" src="assets\img\recipe-item-ico\empty-like.svg"></svg-icon>
+                <div class="favorite-btn-text">{{recipe.countLike}}</div>
+            </button>
+
+        </div>
+        <div [routerLink]="['/recipe', recipe.id]">
+            <mat-card-title *ngIf="isRecipeTitle" class="recipe-content-title">{{recipe.name}}</mat-card-title>
+            <mat-card-subtitle class="recipe-content-subtitle">{{recipe.description}}
+            </mat-card-subtitle>
+
+            <div class="recipe-content-additional-info">
+                <div class="cooking-time">
+                    <div class="additional-text">Время приготовления: </div>
+                    <div class="additional-number">{{recipe.cookingTime}} минут</div>
+                    <svg-icon src="assets\img\recipe-item-ico\timer.svg" class="additional-svg"></svg-icon>
+                </div>
+
+                <div class="count-person">
+                    <div class="additional-text">Рецепт на: </div>
+                    <div class="additional-number">{{recipe.countPerson}} персон</div>
+                    <svg-icon src="assets\img\recipe-item-ico\people_outline.svg" class="additional-svg"></svg-icon>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <img [routerLink]="['/recipe', recipe.id]" src="http://localhost:5220/data/recipe/{{recipe.image}}"
+        class="recipe-image">
+    <div class="recipe-author">@{{recipe.userAccount!.login}}</div>
+</div>

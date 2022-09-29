@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from '../shared/auth.service';
+import { DialogHelper } from '../shared/dialog-helper';
+import { IUserAccount } from '../shared/interfaces/user-account.interface';
+import { UserAccountService } from '../shared/user-account.service';
+
 
 @Component({
   selector: 'app-header',
@@ -7,9 +13,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+
+
+  constructor(private userAccountService: UserAccountService,
+    public authService: AuthService,
+    private dialogHelper: DialogHelper,
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+  }
+
+
+
+  public login() {
+    this.dialogHelper.showLoginDialog();
+  }
+
+  public logout() {
+
+    this.router.navigate(["/"]);
+    if (this.router.url == "/recipe-book") {
+      window.location.reload();
+    }
+    this.authService.logout();
   }
 
 }

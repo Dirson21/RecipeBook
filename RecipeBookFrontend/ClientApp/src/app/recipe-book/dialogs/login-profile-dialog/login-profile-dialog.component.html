@@ -1,0 +1,13 @@
+<button (click)="closeDialog()" class="close-icon" mat-icon-button>
+    <svg-icon src="assets\img\close.svg"></svg-icon>
+</button>
+
+<mat-card-title class="dialog-title">Войдите в профиль</mat-card-title>
+
+<mat-card-subtitle class="dialog-subtitle">Добавлять рецепты могут только зарегистрированные пользователи
+</mat-card-subtitle>
+
+<div class="button-field">
+    <button (click)="choiseLogin()" mat-raised-button class="login-button">Войти</button>
+    <button (click)="choiseReg()" mat-raised-button class="reg-button">Регистрация</button>
+</div>

@@ -1,0 +1,26 @@
+.back {
+    z-index: 1;
+    position: relative;
+    cursor: pointer;
+}
+
+.back-svg {
+    position: relative;
+    top: 5px;
+    width: 24px;
+    height: 24px;
+}
+
+.back a {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FDB100;
+
+    text-decoration: none;
+}
+
+:host {
+    display: block;
+    width: 87px;
+}

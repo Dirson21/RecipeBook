@@ -1,113 +1,116 @@
-<mat-card>
-    
-
 <div class="header">
     <div class="header-image"></div>
-    <app-header class="app-header">
-    </app-header>
+
 
     <div class="header-content">
         <mat-card-title class="header-title">Готовь и делись рецептами</mat-card-title>
-        <mat-card-subtitle class="header-subtitle">Никаких кулинарных книг и блокнотов! Храни все любимые рецепты в одном месте.</mat-card-subtitle>
-        <button mat-raised-button class="btn-started">
-            <img src="assets\img\add.png" class="plus-add"> <div class="btn-add-text">Добавить рецепт</div>
+        <mat-card-subtitle class="header-subtitle">Никаких кулинарных книг и блокнотов! Храни все любимые рецепты в
+            одном месте.</mat-card-subtitle>
+        <button routerLink="/recipe/add-recipe" mat-raised-button class="btn-started">
+            <img src="assets\img\add.png" class="plus-add">
+            <div class="btn-add-text">Добавить рецепт</div>
         </button>
-        <button mat-raised-button class="btn-login">Войти</button>
+        <button *ngIf="!authService.isLoggedIn()" mat-raised-button class="btn-login"
+            (click)="onLoginButton()">Войти</button>
     </div>
 </div>
 
-    <div class="sort-tag">
-        <div class="headline">
+<div class="sort-tag">
+    <div class="headline">
         <mat-card-title class="headline-title">Умная сортировка по тегам</mat-card-title>
-        <mat-card-subtitle class="headline-subtitle">Добавляй рецепты и указывай наиболее популярные теги. Это позволит быстро находить любые категории.</mat-card-subtitle>
-        </div>
-
-        <mat-list class="list-tag">
-
-            <mat-list-item class="list-tag-item">
-                <div class="list-tag-item-ico"> <svg-icon src="assets\img\tags-ico\ic-menu.svg" class="item-svg"></svg-icon> </div>
-
-                <mat-card-title class="list-tag-title">Простые блюда</mat-card-title>
-                <mat-card-subtitle class="list-tag-subtitle">Время приготвления таких блюд не более 1 часа</mat-card-subtitle>
-            </mat-list-item>
-
-            <mat-list-item class="list-tag-item">
-                <div class="list-tag-item-ico"> <svg-icon src="assets\img\tags-ico\ic-cook.svg" class="item-svg"></svg-icon> </div>
-
-                <mat-card-title class="list-tag-title">Детское</mat-card-title>
-                <mat-card-subtitle class="list-tag-subtitle">Самые полезные блюда которые можно детям любого возраста</mat-card-subtitle>
-            </mat-list-item>
-
-            <mat-list-item class="list-tag-item">
-                <div class="list-tag-item-ico"> <svg-icon src="assets\img\tags-ico\ic-chef.svg" class="item-svg"></svg-icon> </div>
-
-                <mat-card-title class="list-tag-title">От шеф-поваров</mat-card-title>
-                <mat-card-subtitle class="list-tag-subtitle">Требуют умения, времени и терпения, зато как в ресторане</mat-card-subtitle>
-            </mat-list-item>
-
-            <mat-list-item class="list-tag-item">
-                <div class="list-tag-item-ico"> <svg-icon src="assets\img\tags-ico\ic-party.svg" class="item-svg"></svg-icon> </div>
-
-                <mat-card-title class="list-tag-title">На Праздник</mat-card-title>
-                <mat-card-subtitle class="list-tag-subtitle">Чем удивить гостей, чтобы все были сыты за праздничным столом</mat-card-subtitle>
-            </mat-list-item>
-
-        </mat-list>
+        <mat-card-subtitle class="headline-subtitle">Добавляй рецепты и указывай наиболее популярные теги. Это позволит
+            быстро находить любые категории.</mat-card-subtitle>
     </div>
 
-    <div class="recipe-day">
-        <img src="assets\img\recipe-day.png" class="recipe-day-img">
+    <mat-list class="list-tag">
 
-        <div class="recipe-day-content">
-    
-            <svg-icon src="assets\img\recipe-day-ico\text.svg" class="recipe-day-content-logo-text"></svg-icon>
-            <div class="recipe-day-content-logo-elips">
-                   
-                <svg-icon src="assets\img\recipe-day-ico\yummy.svg" class="recipe-day-content-logo-svg"></svg-icon> 
-                           
+        <mat-list-item (click)="inputTag('Простые блюда')" class="list-tag-item">
+            <div class="list-tag-item-ico">
+                <svg-icon src="assets\img\tags-ico\ic-menu.svg" class="item-svg"></svg-icon>
             </div>
+            <mat-card-title class="list-tag-title">Простые блюда</mat-card-title>
+            <mat-card-subtitle class="list-tag-subtitle">Время приготвления таких блюд не более 1 часа
+            </mat-card-subtitle>
+        </mat-list-item>
 
-            <mat-card-title class="recipe-day-content-title">Тыквенный супчик на кокосовом молоке</mat-card-title>
-            <mat-card-subtitle class="recipe-day-content-subtitle">Если у вас осталась тыква, и вы не знаете что с ней сделать, то это решение для вас! Ароматный, согревающий суп-пюре на кокосовом молоке. Можно даже в Пост! </mat-card-subtitle>
+        <mat-list-item (click)="inputTag('Детское')" class="list-tag-item">
+            <div class="list-tag-item-ico">
+                <svg-icon src="assets\img\tags-ico\ic-cook.svg" class="item-svg"></svg-icon>
+            </div>
+            <mat-card-title class="list-tag-title">Детское</mat-card-title>
+            <mat-card-subtitle class="list-tag-subtitle">Самые полезные блюда которые можно детям любого возраста
+            </mat-card-subtitle>
+        </mat-list-item>
+
+        <mat-list-item (click)="inputTag('От шеф-поваров')" class="list-tag-item">
+            <div class="list-tag-item-ico">
+                <svg-icon src="assets\img\tags-ico\ic-chef.svg" class="item-svg"></svg-icon>
+            </div>
+            <mat-card-title class="list-tag-title">От шеф-поваров</mat-card-title>
+            <mat-card-subtitle class="list-tag-subtitle">Требуют умения, времени и терпения, зато как в ресторане
+            </mat-card-subtitle>
+        </mat-list-item>
+
+        <mat-list-item (click)="inputTag('На праздник')" class="list-tag-item">
+            <div class="list-tag-item-ico">
+                <svg-icon src="assets\img\tags-ico\ic-party.svg" class="item-svg"></svg-icon>
+            </div>
+            <mat-card-title class="list-tag-title">На Праздник</mat-card-title>
+            <mat-card-subtitle class="list-tag-subtitle">Чем удивить гостей, чтобы все были сыты за праздничным столом
+            </mat-card-subtitle>
+        </mat-list-item>
+
+    </mat-list>
+</div>
+
+<div *ngIf="recipe" class="recipe-day">
+    <img [routerLink]="['/recipe', recipe.id]" src="http://localhost:5220/data/recipe/{{recipe.image}}"
+        class="recipe-day-img">
+    <div class="recipe-day-author">{{recipe.userAccount.login}}</div>
+
+    <div [routerLink]="['/recipe', recipe.id]" class="recipe-day-content">
+
+        <svg-icon src="assets\img\recipe-day-ico\text.svg" class="recipe-day-content-logo-text"></svg-icon>
+        <div class="recipe-day-content-logo-elips">
+            <svg-icon src="assets\img\recipe-day-ico\yummy.svg" class="recipe-day-content-logo-svg"></svg-icon>
         </div>
 
-        <div class="recipe-day-like">
-            <button  mat-icon-button  class="recipe-day-like-btn">          
-                <svg-icon src="assets\img\recipe-day-ico\favorite_border.svg" class="recipe-day-like-ico"></svg-icon>           
-            </button>
-            <div class="recipe-day-like-text" > 356</div>
-        </div>
-
-        <div class="recipe-day-time">          
-            <svg-icon src="assets\img\recipe-day-ico\timer.svg" class="recipe-day-time-ico"></svg-icon>           
-            <div class="recipe-day-time-text" > 35 минут</div>
-        </div>
+        <mat-card-title class="recipe-day-content-title">{{recipe.name}}</mat-card-title>
+        <mat-card-subtitle class="recipe-day-content-subtitle">{{recipe.description}}</mat-card-subtitle>
     </div>
 
-    <div class="search-recipe">
-        <mat-card-title class="search-recipe-title">Поиск рецептов</mat-card-title>
-        <mat-card-subtitle class="search-recipe-subtitle">Введите примерное название блюда, а мы по тегам найдем его</mat-card-subtitle>
-        <mat-card-actions>
-            <form>
-                <mat-form-field class="search-recipe-input">
-                    <input matInput placeholder="Название Блюда...">
-                </mat-form-field>
-            </form>
-            <button mat-raised-button class="search-recipe-btn">Поиск</button>
-            <mat-list class="search-recipe-tag-list">
-                <mat-list-item class="search-recipe-tag-item">Мясо</mat-list-item>
-                <mat-list-item class="search-recipe-tag-item">Деликатесы</mat-list-item>
-                <mat-list-item class="search-recipe-tag-item">Пироги</mat-list-item>
-                <mat-list-item class="search-recipe-tag-item">Рыба</mat-list-item>
-
-            </mat-list>
-        </mat-card-actions>
+    <div class="recipe-day-like">
+        <button (click)="like()" *ngIf="!recipe.isLike" mat-icon-button class="recipe-day-like-btn">
+            <svg-icon src="assets\img\recipe-day-ico\favorite_border.svg" class="recipe-day-like-ico"></svg-icon>
+        </button>
+        <button (click)="removeLike()" *ngIf="recipe.isLike" mat-icon-button class="recipe-day-like-btn">
+            <svg-icon src="assets\img\recipe-item-ico\like.svg" class="recipe-day-like-ico"></svg-icon>
+        </button>
+        <div class="recipe-day-like-text"> {{recipe.countLike}}</div>
     </div>
 
-    <svg-icon src="assets\img\waves\wave1.svg" class="wave1"></svg-icon>
+    <div class="recipe-day-time">
+        <svg-icon src="assets\img\recipe-day-ico\timer.svg" class="recipe-day-time-ico"></svg-icon>
+        <div class="recipe-day-time-text"> {{recipe.cookingTime}} минут</div>
+    </div>
+</div>
 
-    <svg-icon src="assets\img\waves\wave2.svg" class="wave2"></svg-icon>
-
-    <app-footer></app-footer>
-</mat-card>
-
+<div class="search-recipe">
+    <mat-card-title class="search-recipe-title">Поиск рецептов</mat-card-title>
+    <mat-card-subtitle class="search-recipe-subtitle">Введите примерное название блюда, а мы по тегам найдем его
+    </mat-card-subtitle>
+    <mat-card-actions>
+        <form [formGroup]="form">
+            <mat-form-field class="search-recipe-input">
+                <input formControlName="search" matInput placeholder="Название Блюда...">
+            </mat-form-field>
+            <button (click)="searchRecipe()" mat-raised-button class="search-recipe-btn">Поиск</button>
+        </form>
+        <mat-list class="search-recipe-tag-list">
+            <mat-list-item (click)="inputTag('Мясо')" class="search-recipe-tag-item">Мясо</mat-list-item>
+            <mat-list-item (click)="inputTag('Деликатесы')" class="search-recipe-tag-item">Деликатесы</mat-list-item>
+            <mat-list-item (click)="inputTag('Пироги')" class="search-recipe-tag-item">Пироги</mat-list-item>
+            <mat-list-item (click)="inputTag('Рыба')" class="search-recipe-tag-item">Рыба</mat-list-item>
+        </mat-list>
+    </mat-card-actions>
+</div>
