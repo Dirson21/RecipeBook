@@ -25,7 +25,7 @@ mat-card {
     width: 688px;
     height: 350px;
     top: 211px;
-  
+
 }
 
 .header-title {
@@ -40,12 +40,12 @@ mat-card {
     color: #25292D;
 }
 
-.header-subtitle{
+.header-subtitle {
     position: absolute;
     width: 500px;
     height: 56px;
     top: 192px;
-    
+
     font-weight: 400;
     font-size: 18px;
     line-height: 28px;
@@ -53,7 +53,7 @@ mat-card {
 }
 
 .btn-started {
-  
+
     position: absolute;
     left: 0px;
     top: 290px;
@@ -77,7 +77,7 @@ mat-card {
     font-weight: 600;
     font-size: 18px;
     line-height: 28px;
-/* identical to box height, or 156% */
+    /* identical to box height, or 156% */
     color: #FFFFFF;
 }
 
@@ -98,7 +98,7 @@ mat-card {
     height: 800px;
     left: 718px;
     top: 0px;
-    
+
     background: url(src\assets\img\RecipeExample.png), #F0F0F0;
     border-radius: 0px 0px 0px 200px;
 }
@@ -149,7 +149,7 @@ mat-card {
     position: absolute;
     display: flex;
     flex-direction: row;
-    top:188px;
+    top: 188px;
     width: 1200px;
 }
 
@@ -169,7 +169,7 @@ mat-list-item.list-tag-item {
     position: absolute;
     width: 50px;
     height: 50px;
-    top:24px;
+    top: 24px;
     left: 24px;
 
     background: #FFEFCC;
@@ -226,9 +226,9 @@ mat-list-item.list-tag-item {
     width: 543px;
     height: 543px;
     cursor: pointer;
-    background:  #F0F0F0;
+    background: #F0F0F0;
     border-radius: 72px 0px;
-} 
+}
 
 .recipe-day-author {
     position: absolute;
@@ -245,7 +245,7 @@ mat-list-item.list-tag-item {
     line-height: 28px;
     color: #FDB100;
     text-align: center;
-    
+
 }
 
 .recipe-day-content {
@@ -322,7 +322,7 @@ mat-list-item.list-tag-item {
 .recipe-day-like-btn {
     height: 24px;
     opacity: 1;
-    width: 24px; 
+    width: 24px;
 }
 
 .recipe-day-like-text {
@@ -457,10 +457,10 @@ mat-list-item.search-recipe-tag-item {
     font-size: 16px;
     line-height: 18px;
     /* identical to box height, or 112% */
-    
+
     display: flex;
     align-items: center;
-    
+
     color: #808080;
 }
 
@@ -469,8 +469,3 @@ app-footer {
     left: 0px;
     bottom: 210px;
 }
-
-
-
-
-

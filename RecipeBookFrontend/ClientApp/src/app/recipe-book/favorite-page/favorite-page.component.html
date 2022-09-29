@@ -5,8 +5,7 @@
 
         <mat-list *ngIf="recipes.length > 0" class="recipe-list">
             <mat-list-item class="recipe-list-item" *ngFor="let recipe of recipes">
-                <app-recipe-item 
-                    [recipe]="recipe"></app-recipe-item>
+                <app-recipe-item [recipe]="recipe"></app-recipe-item>
             </mat-list-item>
         </mat-list>
 

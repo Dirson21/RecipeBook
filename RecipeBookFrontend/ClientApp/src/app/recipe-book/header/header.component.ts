@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { DialogHelper } from '../shared/dialog-helper';
-import { IUserAccount } from '../shared/user-account.interface';
+import { IUserAccount } from '../shared/interfaces/user-account.interface';
 import { UserAccountService } from '../shared/user-account.service';
 
 
@@ -13,12 +13,12 @@ import { UserAccountService } from '../shared/user-account.service';
 })
 export class HeaderComponent implements OnInit {
 
-  
 
-  constructor(private userAccountService:UserAccountService,
-     public authService: AuthService,
-      private dialogHelper: DialogHelper,
-      private router: Router, private route: ActivatedRoute) { }
+
+  constructor(private userAccountService: UserAccountService,
+    public authService: AuthService,
+    private dialogHelper: DialogHelper,
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   public logout() {
 
     this.router.navigate(["/"]);
-    if (this.router.url == "/recipe-book"){
+    if (this.router.url == "/recipe-book") {
       window.location.reload();
     }
     this.authService.logout();

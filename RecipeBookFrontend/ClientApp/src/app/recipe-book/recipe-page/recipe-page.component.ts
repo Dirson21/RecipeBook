@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { PreloadService } from '../shared/preload.service';
-import { IRecipe } from '../shared/recipe.interface';
+import { IRecipe } from '../shared/interfaces/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class RecipePageComponent implements OnInit {
 
   constructor(private recipeService: RecipeService,
     public loader: PreloadService,
-    private fb: FormBuilder, private route: ActivatedRoute, private router:Router) {
+    private fb: FormBuilder, private route: ActivatedRoute, private router: Router) {
 
   }
 
@@ -99,26 +99,30 @@ export class RecipePageComponent implements OnInit {
     return this.form.get("search")!
   }
 
-  public searchRecipeClick(search:string='') {
+  public searchRecipeClick(search: string = '') {
 
     if (search == '') {
 
       let name: string = this.searchControl.value;
       if (name != '') {
-        this.router.navigate(["/recipe"], {queryParams: {
-          search: name
-        }})
+        this.router.navigate(["/recipe"], {
+          queryParams: {
+            search: name
+          }
+        })
       }
       else {
         this.router.navigate(["/recipe"]);
       }
-      
+
       return;
     }
 
-    this.router.navigate(["/recipe"], {queryParams: {
-      search: search
-    }})
+    this.router.navigate(["/recipe"], {
+      queryParams: {
+        search: search
+      }
+    })
 
 
   }

@@ -1,4 +1,4 @@
-﻿namespace  Domain
+﻿namespace Domain
 {
 
     public class Recipe
@@ -15,16 +15,11 @@
         public UserAccount UserAccount { get; set; }
 
         public List<IngredientHeader> IngredientHeaders { get; set; }
-        public  List<Tag> Tags { get; set; } = new List<Tag>();
+        public List<Tag> Tags { get; set; } = new List<Tag>();
         public List<CookingStep> CookingSteps { get; set; }
 
         public virtual List<UserAccount> UserLikes { get; set; } = new List<UserAccount> { };
         public virtual List<UserAccount> UserFavorites { get; set; } = new List<UserAccount> { };
-
-
-       
-
-
 
     }
 }

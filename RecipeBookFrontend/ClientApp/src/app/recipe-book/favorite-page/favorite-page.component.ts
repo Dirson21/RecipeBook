@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
-import { IRecipe } from '../shared/recipe.interface';
+import { IRecipe } from '../shared/interfaces/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 import { UserAccountService } from '../shared/user-account.service';
 
@@ -12,21 +12,21 @@ import { UserAccountService } from '../shared/user-account.service';
 })
 export class FavoritePageComponent implements OnInit {
 
-  constructor(private userAccountService: UserAccountService, private route:ActivatedRoute) { }
+  constructor(private userAccountService: UserAccountService, private route: ActivatedRoute) { }
 
-  recipes:IRecipe[] = []
+  recipes: IRecipe[] = []
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
       switchMap(params => params.getAll('id'))
     ).subscribe(id => {
       this.userAccountService.getUserFavoriteRecipes(id).subscribe({
-        next: (recipes)=> {
+        next: (recipes) => {
           this.recipes = Object.assign([], recipes);
         }
       })
     })
   }
-  
+
 
 }

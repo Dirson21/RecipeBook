@@ -1,132 +1,137 @@
 <app-back-item class="back"></app-back-item>
 
-<div  class="add-recipe"> 
+<div class="add-recipe">
 
     <form [formGroup]="form">
 
-        <div  *ngIf="!update" class="add-recipe-block-title">
+        <div *ngIf="!update" class="add-recipe-block-title">
             <mat-card-title class="add-recipe-title">Добавить новый рецепт</mat-card-title>
-            <button [disabled]="form.invalid || recipeFileImage == undefined" mat-raised-button class="add-recipe-button" (click)="addRecipe()">Опубликовать</button>
+            <button [disabled]="form.invalid || recipeFileImage == undefined" mat-raised-button
+                class="add-recipe-button" (click)="addRecipe()">Опубликовать</button>
         </div>
         <div *ngIf="update" class="add-recipe-block-title">
             <mat-card-title class="add-recipe-title">Редактировать рецепт</mat-card-title>
-            <button [disabled]="form.invalid" mat-raised-button class="add-recipe-button" (click)="updateRecipe()">Принять изменения</button>
+            <button [disabled]="form.invalid" mat-raised-button class="add-recipe-button"
+                (click)="updateRecipe()">Принять изменения</button>
         </div>
 
         <div class="recipe-info-block">
             <div class="recipe-info-image-drop">
-                <input  accept="image/png, image/jpeg" type="file"  (change)="onFileChanged($event)" id="imagePreview" class="image-upload" >
+                <input accept="image/png, image/jpeg" type="file" (change)="onFileChanged($event)" id="imagePreview"
+                    class="image-upload">
                 <div class="recipe-info-image-drop-zone">
                     <svg-icon class="upload-svg" src="assets\img\bi_cloud-download.svg"></svg-icon>
                     <p class="upload-text">Загрузите фото готового блюда</p>
                 </div>
-                <label for="imagePreview"><img  class="" id="recipeImg"  ></label>
+                <label for="imagePreview"><img class="" id="recipeImg"></label>
             </div>
-            
+
             <div class="recipe-info">
-                <mat-form-field  class="recipe-info-input">
+                <mat-form-field class="recipe-info-input">
                     <input matInput placeholder="Название рецепта" formControlName="name">
                 </mat-form-field>
 
                 <mat-form-field class="recipe-info-description">
-                    <textarea #message  formControlName="description" class="recipe-description-text" matInput placeholder="Краткое описание рецепта (150 символов)"></textarea> 
+                    <textarea #message formControlName="description" class="recipe-description-text" matInput
+                        placeholder="Краткое описание рецепта (150 символов)"></textarea>
                 </mat-form-field>
-                
+
                 <mat-form-field class="recipe-info-input">
 
                     <mat-chip-list class="tag-chip-list" #chipList formArrayName="tags">
-                        <mat-chip  *ngFor="let tagForm of tagForms.controls; let i = index" (removed)="removeTag(i)" [formGroup]="getTagForm(i)">
+                        <mat-chip *ngFor="let tagForm of tagForms.controls; let i = index" (removed)="removeTag(i)"
+                            [formGroup]="getTagForm(i)">
                             {{tagForm.get("name")?.value}}
                             <button matChipRemove>
                                 <mat-icon>cancel</mat-icon>
                             </button>
                         </mat-chip>
-                    
-                        <input placeholder="Добавить теги"
-                        [matChipInputFor]="chipList"
-                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                        [matChipInputAddOnBlur]="true"
-                        (matChipInputTokenEnd)="addTag($event)">
-                       
+
+                        <input placeholder="Добавить теги" [matChipInputFor]="chipList"
+                            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true"
+                            (matChipInputTokenEnd)="addTag($event)">
+
 
                     </mat-chip-list>
-                    
-                    </mat-form-field>
 
-                    <div class="recipe-info-input-block">
-                        <div class="recipe-info-block-info">
-                            <mat-form-field  class="recipe-info-block-info-select">
-                                <mat-label>Время готовки</mat-label>
-                                <mat-select formControlName="cookingTime" >
-                                    <mat-option *ngFor="let num of minutesSelect" [value]="num">{{num}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            Минут
-                        </div> 
+                </mat-form-field>
 
-                        <div class="recipe-info-block-info">
-                            <mat-form-field  class="recipe-info-block-info-select">
-                                <mat-label>Порций в блюде</mat-label>
-                                <mat-select formControlName="countPerson">
-                                    <mat-option *ngFor="let num of countPersonSelect" [value]="num">{{num}}</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                            Персон
-                        </div>
+                <div class="recipe-info-input-block">
+                    <div class="recipe-info-block-info">
+                        <mat-form-field class="recipe-info-block-info-select">
+                            <mat-label>Время готовки</mat-label>
+                            <mat-select formControlName="cookingTime">
+                                <mat-option *ngFor="let num of minutesSelect" [value]="num">{{num}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        Минут
                     </div>
-                </div>          
+
+                    <div class="recipe-info-block-info">
+                        <mat-form-field class="recipe-info-block-info-select">
+                            <mat-label>Порций в блюде</mat-label>
+                            <mat-select formControlName="countPerson">
+                                <mat-option *ngFor="let num of countPersonSelect" [value]="num">{{num}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        Персон
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <div class="flex-ingridient-step">
+        <div class="flex-ingridient-step">
 
-                <div class="ingridient-block" formArrayName="ingredientHeaders">
-                    <mat-card-title class="ingridient-block-title">Ингридиенты</mat-card-title>
-                
-                    <div *ngFor="let ingridientForm  of ingredientForms.controls; let i = index">
-                        <button *ngIf="i > 0" mat-icon-button class="close-btn" (click)="removeIngridientHeader(i)">  <svg-icon class="close-btn-svg" src="assets\img\close.svg"></svg-icon></button>
+            <div class="ingridient-block" formArrayName="ingredientHeaders">
+                <mat-card-title class="ingridient-block-title">Ингридиенты</mat-card-title>
 
-                        <div class="ingridient-block-info" [formGroup]="getIngredientForm(i)">
-                            <mat-form-field class="ingridient-input-header">
-                                <input matInput placeholder="Заголовок для ингридиентов" formControlName="name">
-                            </mat-form-field>
-                            <mat-form-field class="ingridient-input-product">
-                                <textarea class="ingridient-input-product-text" matInput placeholder="Список продуктов для категории" formControlName="ingredients"></textarea>
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                
-                    <button mat-raised-button class="ingridient-add-header" (click)="addIngredientHeader()">
-                        <svg-icon class="ingridient-add-header-svg" src="assets\img\add.svg"></svg-icon>
-                        <div class="ingridient-add-header-text">Добавить заголовок</div>
+                <div *ngFor="let ingridientForm  of ingredientForms.controls; let i = index">
+                    <button *ngIf="i > 0" mat-icon-button class="close-btn" (click)="removeIngridientHeader(i)">
+                        <svg-icon class="close-btn-svg" src="assets\img\close.svg"></svg-icon>
                     </button>
 
+                    <div class="ingridient-block-info" [formGroup]="getIngredientForm(i)">
+                        <mat-form-field class="ingridient-input-header">
+                            <input matInput placeholder="Заголовок для ингридиентов" formControlName="name">
+                        </mat-form-field>
+                        <mat-form-field class="ingridient-input-product">
+                            <textarea class="ingridient-input-product-text" matInput
+                                placeholder="Список продуктов для категории" formControlName="ingredients"></textarea>
+                        </mat-form-field>
+                    </div>
                 </div>
 
-                <div class="step-block">
 
-                    <mat-list class="step-list" formArrayName="cookingSteps">
-                        <mat-list-item  class="step-item" *ngFor="let step of stepForms.controls; let i = index">
+                <button mat-raised-button class="ingridient-add-header" (click)="addIngredientHeader()">
+                    <svg-icon class="ingridient-add-header-svg" src="assets\img\add.svg"></svg-icon>
+                    <div class="ingridient-add-header-text">Добавить заголовок</div>
+                </button>
+
+            </div>
+
+            <div class="step-block">
+
+                <mat-list class="step-list" formArrayName="cookingSteps">
+                    <mat-list-item class="step-item" *ngFor="let step of stepForms.controls; let i = index">
                         <div [formGroup]="getStepForm(i)">
                             <mat-card-title class="step-block-title">Шаг {{i+1}}</mat-card-title>
-                            <button *ngIf="i > 0" mat-icon-button class="close-step-btn" (click)="removeStep(i)">  <svg-icon class="close-btn-svg" src="assets\img\close.svg"></svg-icon></button>
-                            
+                            <button *ngIf="i > 0" mat-icon-button class="close-step-btn" (click)="removeStep(i)">
+                                <svg-icon class="close-btn-svg" src="assets\img\close.svg"></svg-icon>
+                            </button>
+
                             <mat-form-field class="step-input">
-                                <textarea matInput class="step-input-text" placeholder="Описание шага" formControlName="description"></textarea>
+                                <textarea matInput class="step-input-text" placeholder="Описание шага"
+                                    formControlName="description"></textarea>
                             </mat-form-field>
                         </div>
-                        </mat-list-item>
-                    </mat-list>
+                    </mat-list-item>
+                </mat-list>
 
-                    <button mat-raised-button class="step-add" (click)="addStep()">
-                        <svg-icon class="ingridient-add-header-svg" src="assets\img\add.svg"></svg-icon>
-                        <div class="ingridient-add-header-text">Добавить шаг</div>
-                    </button>
-                </div>
+                <button mat-raised-button class="step-add" (click)="addStep()">
+                    <svg-icon class="ingridient-add-header-svg" src="assets\img\add.svg"></svg-icon>
+                    <div class="ingridient-add-header-text">Добавить шаг</div>
+                </button>
             </div>
-        </form>
-    </div>
-
- 
-
-
+        </div>
+    </form>
+</div>

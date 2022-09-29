@@ -28,7 +28,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard]
   },
-  
+
   {
     path: "recipe/:id",
     component: RecipeInfoPageComponent
@@ -64,7 +64,7 @@ const routes: Routes = [
 
   ],
   imports: [
-    RouterModule.forRoot(routes, {scrollPositionRestoration: 'enabled'})
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })
   ],
   exports: [
     RouterModule

@@ -9,7 +9,7 @@ import { AuthService } from '../shared/auth.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { RecipeService } from '../shared/recipe.service';
-import { IRecipe } from '../shared/recipe.interface';
+import { IRecipe } from '../shared/interfaces/recipe.interface';
 
 
 @Component({
@@ -19,12 +19,11 @@ import { IRecipe } from '../shared/recipe.interface';
 })
 export class MainPageComponent implements OnInit {
 
- 
-  constructor(public dialogHelper: DialogHelper, public authService: AuthService, private router:Router, private fb: FormBuilder,
-    private recipeService: RecipeService) { 
+
+  constructor(public dialogHelper: DialogHelper, public authService: AuthService, private router: Router, private fb: FormBuilder,
+    private recipeService: RecipeService) {
 
   }
-
 
   form!: FormGroup;
 
@@ -35,13 +34,15 @@ export class MainPageComponent implements OnInit {
       search: ['']
     })
 
-    this.recipeService.getRecipeDay().subscribe({next: (value)=>{
-      if (value.id != 0) {
-        this.recipe = Object.assign({}, value);
+    this.recipeService.getRecipeDay().subscribe({
+      next: (value) => {
+        if (value.id != 0) {
+          this.recipe = Object.assign({}, value);
+        }
       }
-    }})
+    })
 
-   
+
   }
 
   get searchControl(): AbstractControl {
@@ -52,17 +53,17 @@ export class MainPageComponent implements OnInit {
     this.dialogHelper.showLoginDialog();
   }
 
-  public inputTag(name:string) {
-    this.router.navigate(["/recipe"], {queryParams: {search: name}})
+  public inputTag(name: string) {
+    this.router.navigate(["/recipe"], { queryParams: { search: name } })
   }
 
   public searchRecipe() {
     if (this.form.invalid) return;
 
-    let name:string = this.searchControl.value;
+    let name: string = this.searchControl.value;
 
     if (name != '') {
-      this.router.navigate(["/recipe"], {queryParams: {search: name}});
+      this.router.navigate(["/recipe"], { queryParams: { search: name } });
       return;
     }
 
@@ -70,28 +71,32 @@ export class MainPageComponent implements OnInit {
 
   }
 
-  public like () {
+  public like() {
     if (!this.authService.isLoggedIn()) {
       this.dialogHelper.showLoginDialog()
       return
     }
 
-    this.recipeService.likeRecipe(this.recipe).subscribe({next: () => {
-      this.recipe.countLike += 1;
-      this.recipe.isLike = true;
-    }});
+    this.recipeService.likeRecipe(this.recipe).subscribe({
+      next: () => {
+        this.recipe.countLike += 1;
+        this.recipe.isLike = true;
+      }
+    });
   }
 
-  public removeLike () {
+  public removeLike() {
     if (!this.authService.isLoggedIn()) {
       this.dialogHelper.showLoginDialog()
       return
     }
 
-    this.recipeService.removeLikeRecipe(this.recipe).subscribe({next: () => {
-      this.recipe.countLike -= 1;
-      this.recipe.isLike = false;
-    }});
+    this.recipeService.removeLikeRecipe(this.recipe).subscribe({
+      next: () => {
+        this.recipe.countLike -= 1;
+        this.recipe.isLike = false;
+      }
+    });
   }
 
 }

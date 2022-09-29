@@ -1,12 +1,10 @@
-﻿using Application.Dto;
-using Infrastructure.Data;
-using Infrastructure.Data.Models;
+﻿using Application.Converters;
+using Application.Dto;
 using Domain;
-using Application.Converters;
+using Domain.Exceptions;
 using Domain.Repositoy;
 using Domain.UoW;
 using Microsoft.AspNetCore.Identity;
-using Domain.Exceptions;
 
 namespace Application
 {
@@ -18,7 +16,7 @@ namespace Application
         private readonly ITagRepository _tagRepository;
         private readonly UserManager<UserAccount> _userManager;
 
-        public RecipeService(IUnitOfWork unitOfWork, IRecipeRepository recipeRepository,  IRecipeConverter recipeConverter, IJwtGenerator jwtGenerator, UserManager<UserAccount> userManager, ITagRepository tagRepository)
+        public RecipeService(IUnitOfWork unitOfWork, IRecipeRepository recipeRepository, IRecipeConverter recipeConverter, IJwtGenerator jwtGenerator, UserManager<UserAccount> userManager, ITagRepository tagRepository)
         {
             _unitOfWork = unitOfWork;
             _recipeRepository = recipeRepository;
@@ -30,7 +28,7 @@ namespace Application
         public int CreateRecipe(RecipeDto recipeDto, Guid recipeId)
         {
 
-            Recipe recipe = _recipeConverter.ConvertToRecipe(recipeDto, new Recipe { Id = recipeDto.Id});
+            Recipe recipe = _recipeConverter.ConvertToRecipe(recipeDto, new Recipe { Id = recipeDto.Id });
             recipe.UserAccountId = recipeId;
             recipe = _recipeRepository.Create(recipe);
             _unitOfWork.Commit();
@@ -171,7 +169,7 @@ namespace Application
 
         public List<RecipeDto> SearchRecipe(string search, Guid userAccountId, int start, int count)
         {
-           
+
             Tag tag = _tagRepository.GetByName(search);
 
             List<Recipe> recipe = _recipeRepository.SearchByNameTag(search, tag, start, count);
@@ -190,7 +188,7 @@ namespace Application
             }
 
 
-            return _recipeConverter.ConvertToRecipeDto(recipeDay, userAccountId); 
+            return _recipeConverter.ConvertToRecipeDto(recipeDay, userAccountId);
 
         }
     }

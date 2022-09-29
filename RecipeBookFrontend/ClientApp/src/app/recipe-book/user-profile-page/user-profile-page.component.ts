@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../shared/auth.service';
 import { RecipeService } from '../shared/recipe.service';
-import { IUserAccount } from '../shared/user-account.interface';
+import { IUserAccount } from '../shared/interfaces/user-account.interface';
 import { UserAccountService } from '../shared/user-account.service';
 import { switchMap } from 'rxjs';
-import { IRecipe } from '../shared/recipe.interface';
+import { IRecipe } from '../shared/interfaces/recipe.interface';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ErrorResponse } from '../shared/interfaces/error-response.intefrace';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,8 +21,8 @@ export class UserProfilePageComponent implements OnInit {
   favoriteCount!: number
   likeCount!: number
 
-  isShowPassword:boolean = false;
-  isReadOnly:boolean = true;
+  isShowPassword: boolean = false;
+  isReadOnly: boolean = true;
 
   form!: FormGroup
 
@@ -90,9 +91,9 @@ export class UserProfilePageComponent implements OnInit {
 
     let user: IUserAccount = Object.assign(this.userAccount, this.form.value);
 
-    let newPassword: string|undefined = this.passwordControl.value
+    let newPassword: string | undefined = this.passwordControl.value
 
-   
+
 
     console.log(user);
 
@@ -107,21 +108,24 @@ export class UserProfilePageComponent implements OnInit {
 
       },
       error: (err) => {
-        if (err.status == 410) {
+        const errorResponse: ErrorResponse = err.error;
+
+        if (errorResponse.type == "InvalidLoginException") {
           this.loginControl.setErrors({
             duplicateLogin: true
-          }) }
-
-        else if (err.status == 411) {
-          this.passwordControl.setErrors({invalidPassword: true});
+          })
         }
-      }})
-    
+
+        else if (errorResponse.type == "InvalidPasswordException") {
+          this.passwordControl.setErrors({ invalidPassword: true });
+        }
+      }
+    })
+
 
   }
 
-  changePasswordType()
-  {
+  changePasswordType() {
     this.isShowPassword = !this.isShowPassword;
   }
 

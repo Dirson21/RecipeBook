@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../shared/auth.service';
-import { ILoginForm } from '../../shared/forms/loginForm.interface';
+import { ErrorResponse } from '../../shared/interfaces/error-response.intefrace';
+import { ILoginForm } from '../../shared/interfaces/loginForm.interface';
 import { UserAccountService } from '../../shared/user-account.service';
 
 
@@ -39,7 +40,7 @@ export class LoginDialogComponent implements OnInit {
 
     Object.keys(this.form.controls).forEach(key => {
       if (this.form.controls[key].hasError('invalidLoginOrPassword')) {
-        this.form.controls[key].setErrors({invalidLoginOrPassword: null});
+        this.form.controls[key].setErrors({ invalidLoginOrPassword: null });
         this.form.controls[key].updateValueAndValidity();
       }
     })
@@ -53,18 +54,24 @@ export class LoginDialogComponent implements OnInit {
 
     this.userAccountService.login(loginForm).subscribe({
       next: result => {
+
         console.log(result);
         this.authService.setSession(result);
         console.log(this.authService.isLoggedIn());
         this.dialogRef.close(LoginDialogExitState.successLogin)
+
       },
       error: (error) => {
-        Object.keys(this.form.controls).forEach(key => {
-          this.form.controls[key].setErrors({'invalidLoginOrPassword': true});
-        })
+
+        const errorResponse: ErrorResponse = error.error;
+        if (errorResponse.type == "AuthorizationException") {
+
+          Object.keys(this.form.controls).forEach(key => {
+            this.form.controls[key].setErrors({ 'invalidLoginOrPassword': true });
+          })
+        }
       }
     })
-
   }
 
   public cancel() {

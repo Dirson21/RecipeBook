@@ -30,8 +30,8 @@ import { DialogHelper } from './shared/dialog-helper';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { RecipeInfoPageComponent } from './recipe-info-page/recipe-info-page.component';
 import { PreloadService } from './shared/preload.service';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { UserProfilePageComponent } from './user-profile-page/user-profile-page.component';
 import { UserOwnerGuard } from './shared/guards/user-owner-guard';
 import { FavoritePageComponent } from './favorite-page/favorite-page.component';
@@ -80,7 +80,7 @@ import { BackItemComponent } from './back-item/back-item.component';
     AuthGuard,
     PreloadService,
     UserOwnerGuard,
-    
+
   ]
 })
 export class RecipeBookModule { }

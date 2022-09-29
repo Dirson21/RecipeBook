@@ -25,7 +25,7 @@ namespace Application.Dto
 
         public UserAccountDto UserAccount { get; set; } = new UserAccountDto();
 
-       
+
 
     }
 }

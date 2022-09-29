@@ -1,6 +1,6 @@
- <button (click)="cancel()"  class="close-icon" mat-icon-button>
+<button (click)="cancel()" class="close-icon" mat-icon-button>
     <svg-icon src="assets\img\close.svg"></svg-icon>
- </button>
+</button>
 
 <mat-card-title class="dialog-title">Войти</mat-card-title>
 
@@ -9,7 +9,7 @@
         <input matInput placeholder="Логин" formControlName="login">
     </mat-form-field>
 
-    <mat-form-field class="dialog-input" >
+    <mat-form-field class="dialog-input">
         <input matInput type="password" placeholder="Пароль" formControlName="password">
     </mat-form-field>
 
@@ -17,6 +17,6 @@
         <button (click)="login()" mat-raised-button class="login-button">Войти</button>
         <button (click)="cancel()" mat-raised-button class="cancel-button">Отмена</button>
     </div>
-    <a  (click)="choiceReg()" class="login-link">У меня еще нет аккаунта</a>
+    <a (click)="choiceReg()" class="login-link">У меня еще нет аккаунта</a>
 
 </form>

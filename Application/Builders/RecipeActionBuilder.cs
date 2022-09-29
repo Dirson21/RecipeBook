@@ -1,17 +1,11 @@
 ﻿using Application.Dto;
 using Domain;
 using Domain.Repositoy;
-using Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Builders
 {
-    public class RecipeActionBuilder: IRecipeActionBuilder
+    public class RecipeActionBuilder : IRecipeActionBuilder
     {
         private readonly IRecipeRepository _recipeRepository;
         private readonly UserManager<UserAccount> _userManager;

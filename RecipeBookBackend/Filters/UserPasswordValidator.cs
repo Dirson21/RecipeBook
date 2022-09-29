@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Microsoft.AspNetCore.Identity;
+using System.Text.RegularExpressions;
 
 namespace RecipeBookBackend.Filters
 {
@@ -21,10 +22,22 @@ namespace RecipeBookBackend.Filters
                 errors.Add(new IdentityError
                 {
                     Description = $"Минимальная длина пароля равна {RequiredLength}",
-                    Code = "PasswordToShort"
-                    
+                    Code = "InvalidPassword"
+
                 });
             }
+
+            string pattern = "^[a-zA-Z0-9!#$%&?]+$";
+
+            if (!Regex.IsMatch(password, pattern))
+            {
+                errors.Add(new IdentityError
+                {
+                    Description = "",
+                    Code = "InvalidPassword"
+                });
+            }
+
             return Task.FromResult(errors.Count == 0 ?
                 IdentityResult.Success : IdentityResult.Failed(errors.ToArray()));
         }

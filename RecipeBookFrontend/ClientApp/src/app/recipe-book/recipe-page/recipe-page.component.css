@@ -7,19 +7,19 @@ mat-card {
     background: #FEFEFB;
 }
 
-.main-content{
+.main-content {
 
     margin-left: 120px;
     position: relative;
     margin-top: 82px;
- }
+}
 
 .recipe-header {
-    position: relative;  
+    position: relative;
     width: 1202px;
     height: 280px;
-  
-} 
+
+}
 
 .recipe-header-title {
     position: absolute;
@@ -91,7 +91,7 @@ mat-list-item.recipe-header-tags-item {
     height: 50px;
     left: 24px;
     top: 24px;
-    
+
     background: #FFEFCC;
     border-radius: 12px;
 }
@@ -113,7 +113,7 @@ mat-list-item.recipe-header-tags-item {
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
-  
+
     color: #25292D;
 }
 
@@ -122,7 +122,7 @@ mat-list-item.recipe-header-tags-item {
     width: 1200px;
     height: 101px;
     left: 120px;
-    margin-top:50px;
+    margin-top: 50px;
 }
 
 .search-recipe-input {
@@ -177,10 +177,10 @@ mat-list-item.search-recipe-tag-item {
     font-weight: 400;
     font-size: 16px;
     line-height: 18px;
-   
+
     display: flex;
     align-items: center;
-    
+
     color: #808080;
 }
 
@@ -194,7 +194,7 @@ mat-list-item.search-recipe-tag-item {
     font-weight: 700;
     font-size: 24px;
     line-height: 30px;
-   
+
     color: #25292D;
 }
 
@@ -224,7 +224,7 @@ mat-list-item.search-recipe-tag-item {
 .recipe-load-btn {
     box-sizing: border-box;
     z-index: 2;
-    
+
     position: relative;
     margin-top: 65px;
     margin-bottom: 108px;
@@ -233,14 +233,14 @@ mat-list-item.search-recipe-tag-item {
     left: 446px;
     right: 565px;
     top: 0px;
-    
+
     border: 1px solid #FDB100;
     border-radius: 16px;
 
     font-weight: 600;
     font-size: 18px;
     line-height: 22px;
-   
+
     align-items: center;
     text-align: center;
 

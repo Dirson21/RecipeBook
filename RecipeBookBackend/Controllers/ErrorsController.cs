@@ -8,23 +8,23 @@ namespace RecipeBookBackend.Controllers
 
 
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class ErrorsController: ControllerBase
+    public class ErrorsController : ControllerBase
     {
         [Route("error")]
         public ErrorResponse Error()
         {
             var context = HttpContext.Features.Get<IExceptionHandlerFeature>();
             var exception = context.Error; // Your exception
-            var code = 500; 
+            var code = 500;
 
             if (exception is HttpStatusException statusException)
             {
                 code = statusException.Status;
             }
 
-            Response.StatusCode = code; 
+            Response.StatusCode = code;
 
-            return new ErrorResponse(exception); 
+            return new ErrorResponse(exception);
         }
     }
 }

@@ -1,11 +1,10 @@
- 
-  <button (click)="closeDialog()"  class="close-icon" mat-icon-button>
+<button (click)="closeDialog()" class="close-icon" mat-icon-button>
     <svg-icon src="assets\img\close.svg"></svg-icon>
- </button>
+</button>
 
 
 
-<mat-card-title  class="reg-title">Регистрация</mat-card-title>
+<mat-card-title class="reg-title">Регистрация</mat-card-title>
 
 <form [formGroup]="form">
 
@@ -15,29 +14,29 @@
 
     <mat-form-field class="login-input">
         <input matInput placeholder="Логин" formControlName="login">
-        <mat-hint class="error-message" *ngIf="loginControl.hasError('notUnique')" align="start">Данный логин уже существует</mat-hint>
     </mat-form-field>
 
     <div class="password-field">
         <div class="password-form">
-            <mat-form-field  class="password-input">
-                <input  #message type="password" class matInput placeholder="Пароль" formControlName="password"> 
-            </mat-form-field>   
+            <mat-form-field class="password-input">
+                <input #message type="password" class matInput placeholder="Пароль" formControlName="password">
+            </mat-form-field>
             <div class="hint">
                 Минимум 8 символов
             </div>
-        </div> 
+        </div>
         <mat-form-field class="password-input">
-            <input  class="input-font" type="password" matInput placeholder="Повторите пароль" formControlName="confirmPassword">
+            <input class="input-font" type="password" matInput placeholder="Повторите пароль"
+                formControlName="confirmPassword">
         </mat-form-field>
     </div>
-    
+
 
     <div class="button-field">
-        <button mat-raised-button (click)="registrationUser()" [disabled]="form.invalid" class="reg-button">Зарегистрироваться</button>
+        <button mat-raised-button (click)="registrationUser()" [disabled]="form.invalid"
+            class="reg-button">Зарегистрироваться</button>
         <button mat-raised-button (click)="closeDialog()" class="cansel-button">Отмена</button>
     </div>
 
-     <a (click)="choiseLogin()" class="login-link">У меня уже есть аккаунт</a>
+    <a (click)="choiseLogin()" class="login-link">У меня уже есть аккаунт</a>
 </form>
-

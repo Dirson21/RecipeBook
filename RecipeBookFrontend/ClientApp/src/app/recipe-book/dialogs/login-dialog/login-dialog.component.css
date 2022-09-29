@@ -9,14 +9,14 @@
 
 .login-button {
     position: relative;
-  
+
     width: 278px;
     height: 60px;
-   
+
     margin-right: 22px;
     background: #FDB100;
     border-radius: 16px;
-  
+
     font-weight: 600;
     font-size: 18px;
     line-height: 28px;
@@ -48,7 +48,7 @@
     position: relative;
     width: 515px;
     height: 30px;
-    margin-bottom:49px;
+    margin-bottom: 49px;
     margin-left: 62px;
     margin-top: 16px;
     font-weight: 700;
@@ -74,13 +74,14 @@
 
 .login-link {
     position: relative;
-    margin-left:231px;
+    margin-left: 231px;
     text-decoration: none;
     cursor: pointer;
 
     width: 237px;
     height: 26px;
-    border-bottom: 1px dashed #FDB100;;
+    border-bottom: 1px dashed #FDB100;
+    ;
 
     font-weight: 600;
     font-size: 18px;
@@ -96,6 +97,3 @@
     margin-left: 650px;
     margin-top: 22px;
 }
-
-
-

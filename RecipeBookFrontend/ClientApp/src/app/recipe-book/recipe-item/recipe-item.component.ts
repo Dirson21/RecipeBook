@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AuthService } from '../shared/auth.service';
 import { DialogHelper } from '../shared/dialog-helper';
-import { IRecipe } from '../shared/recipe.interface';
+import { IRecipe } from '../shared/interfaces/recipe.interface';
 import { RecipeService } from '../shared/recipe.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class RecipeItemComponent implements OnInit {
   }
 
 
-  public favorite () {
+  public favorite() {
     if (!this.authService.isLoggedIn()) {
 
       this.dialogHelper.showLoginDialog()
@@ -32,11 +32,14 @@ export class RecipeItemComponent implements OnInit {
 
     }
 
-    this.recipeService.favoriteRecipe(this.recipe).subscribe({next: ()=> {
-      this.recipe.countFavorite += 1;
-      this.recipe.isFavorite = true;
-      this.favoriteEvent.emit(this.recipe.isFavorite);
-    }})
+
+    this.recipeService.favoriteRecipe(this.recipe).subscribe({
+      next: () => {
+        this.recipe.countFavorite += 1;
+        this.recipe.isFavorite = true;
+        this.favoriteEvent.emit(this.recipe.isFavorite);
+      }
+    })
 
   }
 
@@ -48,30 +51,36 @@ export class RecipeItemComponent implements OnInit {
 
     }
 
-    this.recipeService.removeFavoriteRecipe(this.recipe).subscribe({next: ()=> {
-      this.recipe.countFavorite -= 1;
-      this.recipe.isFavorite = false;
-      this.favoriteEvent.emit(this.recipe.isFavorite);
-    }})
+
+    this.recipeService.removeFavoriteRecipe(this.recipe).subscribe({
+      next: () => {
+        this.recipe.countFavorite -= 1;
+        this.recipe.isFavorite = false;
+        this.favoriteEvent.emit(this.recipe.isFavorite);
+      }
+    })
 
   }
 
-  public like () {
+  public like() {
     if (!this.authService.isLoggedIn()) {
 
       this.dialogHelper.showLoginDialog()
       return
     }
 
-    this.recipeService.likeRecipe(this.recipe).subscribe({next: () => {
-      this.recipe.countLike += 1;
-      this.recipe.isLike = true;
-      this.likeEvent.emit(this.recipe.isLike);
-    }});
+
+    this.recipeService.likeRecipe(this.recipe).subscribe({
+      next: () => {
+        this.recipe.countLike += 1;
+        this.recipe.isLike = true;
+        this.likeEvent.emit(this.recipe.isLike);
+      }
+    });
 
   }
 
-  public removeLike () {
+  public removeLike() {
     if (!this.authService.isLoggedIn()) {
 
       this.dialogHelper.showLoginDialog()
@@ -79,20 +88,18 @@ export class RecipeItemComponent implements OnInit {
 
     }
 
-    this.recipeService.removeLikeRecipe(this.recipe).subscribe({next: () => {
-      this.recipe.countLike -= 1;
-      this.recipe.isLike = false;
-      this.likeEvent.emit(this.recipe.isLike);
-    }});
-
+    this.recipeService.removeLikeRecipe(this.recipe).subscribe({
+      next: () => {
+        this.recipe.countLike -= 1;
+        this.recipe.isLike = false;
+        this.likeEvent.emit(this.recipe.isLike);
+      }
+    });
   }
 
-  public clickTag(tag:string) {
+  public clickTag(tag: string) {
     this.clickTagEvent.emit(tag);
 
   }
-
-
-  
 
 }

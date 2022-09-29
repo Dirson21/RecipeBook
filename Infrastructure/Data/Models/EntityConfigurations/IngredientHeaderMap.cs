@@ -1,11 +1,6 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Data.Models.EntityConfigurations
 {
@@ -19,7 +14,8 @@ namespace Infrastructure.Data.Models.EntityConfigurations
             builder.Property(x => x.Name);
 
             builder.Property(x => x.RecipeId);
-            builder.HasOne(x => x.Recipe).WithMany(x => x.IngredientHeaders).OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.RecipeId);
+            builder.HasOne(x => x.Recipe).WithMany(x => x.IngredientHeaders).
+                OnDelete(DeleteBehavior.Cascade).HasForeignKey(x => x.RecipeId);
         }
     }
 }

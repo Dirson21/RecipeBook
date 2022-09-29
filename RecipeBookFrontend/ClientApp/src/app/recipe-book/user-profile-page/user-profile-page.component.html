@@ -16,11 +16,12 @@
                     </mat-form-field>
 
                     <mat-form-field class="info-input">
-                        <input [readonly]="isReadOnly"   matInput placeholder="Логин" formControlName="login">
+                        <input [readonly]="isReadOnly" matInput placeholder="Логин" formControlName="login">
                     </mat-form-field>
 
                     <mat-form-field class="info-input">
-                        <input [readonly]="isReadOnly"   matInput placeholder="Новый пароль" [type]="isShowPassword ? 'text' : 'password'" formControlName="newPassword">
+                        <input [readonly]="isReadOnly" matInput placeholder="Новый пароль"
+                            [type]="isShowPassword ? 'text' : 'password'" formControlName="newPassword">
                         <button mat-icon-button class="show-password" (click)="changePasswordType()">
                             <svg-icon class="show-svg" src="assets\img\visibility_off.svg"></svg-icon>
                         </button>
@@ -29,17 +30,18 @@
                 </div>
                 <div class="user-description-info">
                     <mat-form-field class="description-input">
-                        <textarea [readonly]="isReadOnly"  matInput class="description-text" placeholder="Напишите немного о себе" formControlName="description"></textarea>
+                        <textarea [readonly]="isReadOnly" matInput class="description-text"
+                            placeholder="Напишите немного о себе" formControlName="description"></textarea>
                     </mat-form-field>
                 </div>
             </div>
-            <div *ngIf="!isReadOnly"  class="add-recipe-block-title">
+            <div *ngIf="!isReadOnly" class="add-recipe-block-title">
                 <button (click)="updateUser()" mat-raised-button class="add-recipe-button">Обновить</button>
             </div>
         </div>
     </form>
 
-    <mat-list  class="stat-list">
+    <mat-list class="stat-list">
 
         <mat-list-item class="stat-mat-item">
             <div class="stat-item">
@@ -98,9 +100,10 @@
 
     <div class="recipe-view">
         <mat-list *ngIf="recipes.length > 0" class="recipe-list">
-            <mat-list-item class="recipe-list-item"  *ngFor="let recipe of recipes" >
-          <app-recipe-item (favoriteEvent)="favoriteAction($event)" (likeEvent)="likeAction($event)" [recipe]="recipe"></app-recipe-item>
-        </mat-list-item>
+            <mat-list-item class="recipe-list-item" *ngFor="let recipe of recipes">
+                <app-recipe-item (favoriteEvent)="favoriteAction($event)" (likeEvent)="likeAction($event)"
+                    [recipe]="recipe"></app-recipe-item>
+            </mat-list-item>
         </mat-list>
 
     </div>

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Domain
+﻿namespace Domain
 {
     public class IngredientHeader
     {
@@ -14,7 +8,7 @@ namespace Domain
         public int RecipeId { get; set; }
 
         public Recipe Recipe { get; set; }
-        public  List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+        public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
 
 
     }

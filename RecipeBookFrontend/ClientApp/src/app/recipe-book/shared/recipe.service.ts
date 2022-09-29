@@ -1,11 +1,11 @@
-import { IRecipe } from "./recipe.interface";
+import { IRecipe } from "./interfaces/recipe.interface";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 
 @Injectable()
 export class RecipeService {
-    private readonly apiUrl: string = "http://localhost:4200/api/recipe"
+    private readonly apiUrl: string = "http://localhost:5220/api/recipe"
 
     constructor(private readonly httpClient: HttpClient) {
 
